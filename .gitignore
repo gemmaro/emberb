@@ -1,2 +1,4 @@
-_includes/*.out
-_site
+/.jekyll-cache/
+/_includes/*.out
+/_posts/*.ja.md
+/_site
