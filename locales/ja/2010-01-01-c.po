@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2022-02-10 09:01+0900\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2022-02-10 23:54+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -20,7 +20,7 @@ msgstr ""
 #: _posts/2010-01-01-c.markdown:1
 #, no-wrap
 msgid "---\n"
-msgstr ""
+msgstr "---\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:4
@@ -30,18 +30,21 @@ msgid ""
 "title: The Ruby C API\n"
 "---\n"
 msgstr ""
+"layout: chapter\n"
+"title: RubyのC API\n"
+"---\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:7
 msgid "## Before You Start ##"
-msgstr ""
+msgstr "## 始める前に"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:10
 msgid ""
 "For the greatest chance of success with this guide, I recommend being fairly "
 "comfortable with C and _very_ comfortable with Ruby."
-msgstr ""
+msgstr "このガイドを完全に理解するためには、C言語はそこそこ、Rubyは _かなり_ 慣れ親しんでいるとよいでしょう。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:16
@@ -53,6 +56,12 @@ msgid ""
 "uses some fairly sophisticated C, so you should at least feel comfortable "
 "reading it."
 msgstr ""
+"RubyのC APIを使うのに発展的なC言語の概念は要りませんが、\n"
+"APIは**膨大**で大半が**文書化されていません**。\n"
+"APIを使い始めだすと、いつの日にか、\n"
+"はっきりしない関数やマクロの振舞いを見つけるためにRubyのソースコードを探ることになるでしょう。\n"
+"Rubyのソースはそこそこ洗練されたC言語で書かれているので、\n"
+"すいすい読めはするでしょうけれども。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:22
@@ -63,11 +72,15 @@ msgid ""
 "intuition for Ruby's internal logic and the ideas behind its design will go "
 "a long way toward steering you toward the correct API functions."
 msgstr ""
+"C APIは、普通のRubyのコードよりもデカくてゴチャっとした書き方だと見なせます。\n"
+"とはいえ、簡素で明快なRubyの様式は、ひとたびAPIの言葉に翻訳されるとかなり非直感的になることがあります。\n"
+"Rubyの内部論理と設計の背後にある思想に裏打ちされたしっかりとした直感があれば、\n"
+"長い旅路のさなかでも正しいAPI関数へと進み続けられるでしょう。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:24
 msgid "## The Two Paths ##"
-msgstr ""
+msgstr "## 分岐点"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:28
@@ -76,6 +89,10 @@ msgid ""
 "you can do in Ruby, you can also do using function calls to Ruby's C "
 "API. Why in the world would you do this? There are two good reasons:"
 msgstr ""
+"公式のRubyインタプリタはC言語で書かれています。\n"
+"Rubyでできるあらゆることは、RubyのC APIを呼び出す関数を使ってもできます。\n"
+"いったいなぜそんなことをするのでしょうか？\n"
+"もっともな理由が2つあります："
 
 #. type: Bullet: '1. '
 #: _posts/2010-01-01-c.markdown:37
@@ -86,6 +103,11 @@ msgid ""
 "interpreter inside of your application and use the API to retrieve the "
 "results of Ruby code."
 msgstr ""
+"意匠を凝らしたC言語ないしC++のアプリケーションを書いている最中で、\n"
+"Rubyの動的な柔軟性をコードのいくつかの箇所に使って、\n"
+"効果を引き出そうとするとき。\n"
+"アプリケーションの内部でRubyインタプリタを実行でき、\n"
+"Rubyのコードの結果をAPIで受け取ることができます。"
 
 #. type: Bullet: '2. '
 #: _posts/2010-01-01-c.markdown:37
@@ -96,6 +118,12 @@ msgid ""
 "library). You can expose C code to Ruby using the API and compile a special "
 "library that Ruby can `require`."
 msgstr ""
+"意匠を凝らしたRubyのアプリケーションを書いている最中で、\n"
+"C言語（もしくは既にあるC言語のライブラリ）の速度と能力を\n"
+"コードのいくつかの箇所に使って、\n"
+"効果を引き出そうとするとき。\n"
+"APIを使えば、RubyにC言語のコードをさらけ出すことができます。\n"
+"そうしてできた特別なライブラリをコンパイルするとRubyから `require` できます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:42
@@ -106,6 +134,12 @@ msgid ""
 "in Ruby](../extend).  After you finish that, come back here to learn about "
 "the API."
 msgstr ""
+"目標によってC言語のコードの組み立てかたは変わってきます。\n"
+"C言語にRubyインタプリタを組込みたければ、\n"
+"[C言語でRubyを実行する](../embed.ja)をお読みください。\n"
+"コンパイルされたC言語のライブラリを `require` したければ、\n"
+"[RubyでC言語を実行する](../extend.ja)をお読みください。\n"
+"どちらかを読み終えたら、ここに戻ってきてAPIについて学びましょう。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:44
