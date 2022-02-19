@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "POT-Creation-Date: 2022-02-19 12:57+0900\n"
-"PO-Revision-Date: 2022-02-19 12:57+0900\n"
+"PO-Revision-Date: 2022-02-19 14:32+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -20,19 +20,19 @@ msgstr ""
 #: _posts/2013-01-01-extend.markdown:1 _posts/2014-01-01-examples.markdown:1
 #, no-wrap
 msgid "chapter"
-msgstr ""
+msgstr "chapter"
 
 #. type: YAML Front Matter: title
 #: _posts/2010-01-01-c.markdown:1
 #, no-wrap
 msgid "The Ruby C API"
-msgstr ""
+msgstr "RubyのC API"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:6
 #, no-wrap
 msgid "Before You Start"
-msgstr ""
+msgstr "始める前に"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:10
@@ -2224,7 +2224,7 @@ msgstr ""
 #: _posts/2013-01-01-extend.markdown:128
 #, no-wrap
 msgid "Footnotes"
-msgstr ""
+msgstr "脚註"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:958
@@ -2353,13 +2353,13 @@ msgstr ""
 #: _posts/2012-01-01-embed.markdown:1 _posts/2014-01-01-examples.markdown:6
 #, no-wrap
 msgid "Running Ruby in C"
-msgstr ""
+msgstr "CでRubyを実行する"
 
 #. type: Title ##
 #: _posts/2012-01-01-embed.markdown:6 _posts/2013-01-01-extend.markdown:6
 #, no-wrap
 msgid "Compiling"
-msgstr ""
+msgstr "コンパイルする"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:12
@@ -2370,6 +2370,11 @@ msgid ""
 "include paths for these headers. You will also need to link with the Ruby lib.\n"
 "On my machine, my minimal compiler options are\n"
 msgstr ""
+"Rubyを組込むには `ruby.h` という1つのヘッダファイルが必要です。\n"
+"このファイルはプラットフォーム固有のヘッダである `ruby/config.h` を含めます。\n"
+"場合によってはコンパイラにヘッダファイルの含めるファイルパスを指定する必要があります。\n"
+"Rubyライブラリと接続する必要もあります。\n"
+"私の環境では、最小のコンパイラオプションは以下のようになります。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:16
@@ -2379,6 +2384,9 @@ msgid ""
 "$ gcc -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight shell_session %}\n"
+"$ gcc -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:19
@@ -2387,6 +2395,8 @@ msgid ""
 "Though, if available, you should really use `pkg-config` to get the appropriate\n"
 "options for your distribution:\n"
 msgstr ""
+"しかしもし可能であれば、ぜひとも `pkg-config` を使って、\n"
+"各々のディストリビューションに適したオプションが得られるようにするべきです。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:23
@@ -2401,7 +2411,7 @@ msgstr ""
 #: _posts/2012-01-01-embed.markdown:24
 #, no-wrap
 msgid "Startup, Teardown"
-msgstr ""
+msgstr "起動と終了"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:29
@@ -2411,6 +2421,10 @@ msgid ""
 "include the header, call a startup function in `main` before you use the API,\n"
 "and a cleanup function after you're done:\n"
 msgstr ""
+"RubyインタプリタをCやC++のプログラムに含めることはとても簡単です。\n"
+"ヘッダーを含めて、\n"
+"APIを使用する前にインタプリタを立ち上げるための関数を `main` で呼び、\n"
+"そして完了後に後片付けをする関数を呼べばよいのです。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:33
@@ -2420,6 +2434,9 @@ msgid ""
 "{% include embed/simple.c %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include embed/simple.c %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:38
@@ -2430,6 +2447,12 @@ msgid ""
 "`ruby_setup()` which returns a nonzero value if a failure occurred\n"
 "(unfortunately it is not clear how to get a message for the error[^err]).\n"
 msgstr ""
+"`ruby_init()` の最中にVMが実行に失敗したら、\n"
+"エラーを表示してプログラムが終了してしまいます！\n"
+"もっと柔軟にエラーを出したいときは、\n"
+"代わりに失敗したときにゼロではない値を返す\n"
+"`ruby_setup()` を使いましょう（運が悪いことに、\n"
+"この場合のエラーメッセージの出しかたはよくわかっていません[^err]）。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:43
@@ -2440,6 +2463,10 @@ msgid ""
 "little shortcut for returning an error status if the cleanup fails (as\n"
 "demonstrated in the previous example).\n"
 msgstr ""
+"`rb_cleanup()` のさなかにエラーが発生したときは、\n"
+"ゼロではない値を返します。\n"
+"もしエラーが発生しなければ、渡した引数が返ります。\n"
+"この仕様により、後片付けに失敗したときのエラーステータスを返す部分が少し短く書けます（先の例のように）。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:52
@@ -2454,6 +2481,14 @@ msgid ""
 "Ruby code.\n"
 "{: .alert .alert-danger}\n"
 msgstr ""
+"_技術的には_ `main` で `ruby_init` や `ruby_setup` を呼ぶ必要はありません。\n"
+"しかし、RubyのVMは以降全てのRubyのコードが同じかこれより低層のスタックフレームから\n"
+"実行されることを仮定しています（ガベージコレクションのためです）。\n"
+"他の方法でも動くにせよ、\n"
+"このことを確証する最も簡単な方法がプログラムのトップレベルで立ち上げを行うことなのです。\n"
+"例えば深く入れ子になった関数でRubyを初期化して、沢山のスタックフレームを立ち上げ、\n"
+"そして沢山のRubyのコードを実行するようなことはよくありません。\n"
+"{: .alert .alert-danger}\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:58
@@ -2465,12 +2500,18 @@ msgid ""
 "call `ruby_finalize()` they will be raised normally (see the section on\n"
 "[Exceptions](../c#rescue) for how to handle them).\n"
 msgstr ""
+"後片付けをするときにも、VMはRubyのコードを評価するかもしれません（`at_exit` にブロックを渡したときなど）。\n"
+"そしてそのときに例外が発生する可能性があります。\n"
+"`ruby_cleanup()` はこのような例外が発生したときに、\n"
+"ゼロではない値を返してエラーメッセージを表示することで制御します。\n"
+"代わりに `ruby_finalize()` を呼ぶと、通常通り例外を発生させます。\n"
+"（制御方法については[Exceptions](../c#rescue)節を参照）\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:60
 #, no-wrap
 msgid "Here's an alternative example:\n"
-msgstr ""
+msgstr "別の例はこちらです。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:64
@@ -2480,12 +2521,15 @@ msgid ""
 "{% include embed/advanced.c %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include embed/advanced.c %}\n"
+"{% endhighlight %}\n"
 
 #. type: Title ###
 #: _posts/2012-01-01-embed.markdown:65
 #, no-wrap
 msgid "Limitations"
-msgstr ""
+msgstr "制約"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:73
@@ -2498,6 +2542,12 @@ msgid ""
 "It doesn't fully clean up the VM state such that it is ready to be\n"
 "re-initialized: if you call `ruby_init` again, it will fail.\n"
 msgstr ""
+"上記のスタックフレームの警告以外にも制約があります。\n"
+"1つのプロセスに1つだけRubyのVMを動かせます。\n"
+"起動と終了の方法を見ると、何度でもVMの破壊と創造を繰り返せるような気がしてくるかもしれませんが、\n"
+"`ruby_cleanup` はRubyのコードが全ての後片付けが完了したことだけを確認します。\n"
+"VMの状態を再度初期化できるような状態までは後片付けしません。\n"
+"もう一度 `ruby_init` を呼び出すと、実行に失敗してしまうでしょう。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:76
@@ -2506,12 +2556,14 @@ msgid ""
 "If for some reason you need multiple Ruby VMs in your program, you will need to\n"
 "spin them off in multiple processes to bypass this limitation.\n"
 msgstr ""
+"何かかの理由があってプログラムで複数のRubyのVMが必要になったら、\n"
+"この制約を回避するために複数のプロセスに小分けにしなければいけません。\n"
 
 #. type: Title ##
 #: _posts/2012-01-01-embed.markdown:77
 #, no-wrap
 msgid "Tweaking the VM"
-msgstr ""
+msgstr "VMを設定する"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:82
@@ -2521,6 +2573,10 @@ msgid ""
 "more stuff before you start running Ruby code. To set the name of the Ruby\n"
 "script (e.g. `$0`) for error messages and such, use\n"
 msgstr ""
+"これでRubyのVMの実行の骨子を会得しました。\n"
+"でも、Rubyのコードの実行に先駆けてもう少し設定したいことがあるかもしれません。\n"
+"エラーメッセージとかのためにRubyのスクリプトの名前（例：`$0`）を設定したいときは、\n"
+"以下のようにします。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:86
@@ -2530,12 +2586,17 @@ msgid ""
 "ruby_script(\"new name\")\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"ruby_script(\"new name\")\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:88
 #, no-wrap
 msgid "To set up the load path so that gems can be loaded with `require`, use\n"
 msgstr ""
+"gemが `require` で呼び出せるようにするためにロードパスを設定するには、\n"
+"次のようにします。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:92
@@ -2545,6 +2606,9 @@ msgid ""
 "ruby_init_loadpath()\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"ruby_init_loadpath()\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:96
@@ -2554,6 +2618,8 @@ msgid ""
 "line. This is handy for stuff like setting the warning level or verbose\n"
 "mode[^opt].\n"
 msgstr ""
+"VMにはコマンドラインで `ruby` するときと同じオプションを渡せます。\n"
+"警告水準や冗長モード[^opt]の設定に手頃です。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:100
@@ -2563,6 +2629,9 @@ msgid ""
 "{% include embed/options.c %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include embed/options.c %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:106
@@ -2574,6 +2643,14 @@ msgid ""
 "code to run with `-e`, it will try to read from `stdin`. If you want to set\n"
 "options but _not_ run any Ruby code, you can pass it an empty line: `\"-e \"`.\n"
 msgstr ""
+"`ruby_options` への引数は main 関数と同じ `argc` と `argv` です。\n"
+"そして、 `ruby` プログラムの main と同じように、\n"
+"呼び出したときはVMは何らかのRubyのコードがあるものとしています。\n"
+"ロードするスクリプトのファイル名を与えていなかったり、\n"
+"`-e` で実行するコードがないときは、\n"
+"`stdin` から読み込もうとします。\n"
+"オプションを設定したいけれども、Rubyのコードを実行したく _ない_ ときには、\n"
+"`\"-e \"` のように空行を渡せばよいです。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:115
@@ -2588,6 +2665,14 @@ msgid ""
 "yourself](../c#rescue), or just pass `state` to `ruby_cleanup()` and it will\n"
 "print an appropriate error message.\n"
 msgstr ""
+"`ruby_options()` はコンパイルされたRubyのコードを表現する \"node\" を返します。\n"
+"場合によっては（文法エラーとか）nodeが不正で実行すべきでないときがあります。\n"
+"`ruby_executable_node()` はこのnodeを検査します。\n"
+"nodeが妥当であれば、 `ruby_exec_node()` で実行できます。\n"
+"`ruby_executable_node()` で（ポインタを介して）返る状態は、\n"
+"コンパイルの最中やコードの実行時に例外が発生したら、ゼロではない値になります。\n"
+"[例外を自前で読む](../c#rescue)こともできますし、\n"
+"`ruby_cleanup()` に `state` を渡して適切なエラーメッセージを表示させることもできます。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:118
@@ -2595,19 +2680,21 @@ msgstr ""
 msgid ""
 "Ruby currently doesn't support any other way of compiling and running code\n"
 "separately[^load].\n"
-msgstr ""
+msgstr "Rubyは現状ではコードの他のコンパイル・実行方法を提供していません[^load]。\n"
 
 #. type: Title ##
 #: _posts/2012-01-01-embed.markdown:119 _posts/2013-01-01-extend.markdown:105
 #, no-wrap
 msgid "Success"
-msgstr ""
+msgstr "やったね"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:122
 #, no-wrap
 msgid "Now you're ready to interact with Ruby! Go back to the [C API](../c).\n"
 msgstr ""
+"これでRubyとやりとりすることができました！\n"
+"[C API](../c)に戻りましょう。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:127
@@ -2616,6 +2703,10 @@ msgid ""
 "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this\n"
 "        function isn't exposed to the API. Is this a normal exception?\n"
 msgstr ""
+"[^err]: `ruby_init()` はエラーメッセージを取得するために\n"
+"        `error_print()` を使います。\n"
+"        しかし、この関数はAPIとして出されていません。\n"
+"        これはよくあることなのでしょうか。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:131
@@ -2625,6 +2716,9 @@ msgid ""
 "        could be related to `ruby_prog_init()`. And really it should be possible\n"
 "        to do this without parsing command line options.\n"
 msgstr ""
+"[^opt]: 筆者の実験では、フラグ `-w` や `-v` で何もできませんでした。\n"
+"        `ruby_prog_init()` がするのかもしれません。\n"
+"        きっとそれでコマンドラインオプションをパースすることなしに実現できるはずです。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:133
@@ -2633,12 +2727,14 @@ msgid ""
 "[^load]: It looks like the function `rb_load_file()` should do this, but I\n"
 "         haven't had any luck getting it to work.\n"
 msgstr ""
+"[^load]: `rb_load_file()` 関数でこれができそうですが、\n"
+"         動かせた試しがありません。\n"
 
 #. type: Title ##
 #: _posts/2013-01-01-extend.markdown:1 _posts/2014-01-01-examples.markdown:35
 #, no-wrap
 msgid "Running C in Ruby"
-msgstr ""
+msgstr "RubyでCを実行する"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:11
