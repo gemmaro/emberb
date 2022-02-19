@@ -1,0 +1,78 @@
+---
+layout: chapter
+title: Examples
+---
+
+## Running Ruby in C ##
+
+This example is a simple little game of tag. In the game there are two squares:
+the blue square is controlled using the arrow keys on the keyboard while the red
+square is controlled by a Ruby script. To make this work, we'll use the C API to
+define a little Ruby API that the script can access, and every couple of frames
+we'll call a method defined in the Ruby script and pass objects encapsulating
+the data for the two squares.
+
+The Ruby script can look something like this:
+
+{% highlight ruby %}
+{% include examples/ai.rb %}
+{% endhighlight %}
+
+The C code uses SDL2 for graphics and input and uses `stat()` (which may not be
+very portable) to hot-reload the AI script whenever the file is changed . Here's
+`tag.c`:
+
+{% highlight c %}
+{% include examples/tag.c %}
+{% endhighlight %}
+
+The Makefile is nothing special:
+
+{% highlight make %}
+{% include examples/Makefile %}
+{% endhighlight %}
+
+## Running C in Ruby ##
+
+This example is a Ruby C extension that wraps the [GMP][gmp] C library for
+arbitrary precision arithmetic. This is far from a complete example: it only
+wraps the integer functions, implements only the basic functionality of the
+library, and doesn't bother nicely integrating with Ruby's existing numeric
+types. If you want a _really_ full example, check out the [GMP gem][gem].
+
+[gmp]: https://gmplib.org/
+[gem]: https://github.com/srawlins/gmp
+
+Everything is in `gmp.c` where we define our `GMP::Integer` class:
+
+{% highlight c %}
+{% include examples/ext/gmp.c %}
+{% endhighlight %}
+
+The `extconf.rb` is really simple.
+
+{% highlight ruby %}
+{% include examples/ext/extconf.rb %}
+{% endhighlight %}
+
+And now you can finally find out what your name means in base 62:
+
+{% highlight ruby %}
+{% include examples/gmp_ex.rb %}
+{% endhighlight %}
+
+For this example I tried to do everything in C, but practically that isn't
+necessary (or desirable). If one of your C methods just calls a bunch of API
+functions (like `to_i` and `==` in the example), you're probably only saving
+yourself a couple CPU cycles compared to implementing the method in Ruby. And of
+course that comes at the cost of needing to spend more time writing C and less
+time writing Ruby. ð
+
+A common convention when writing extensions is to only implement the "meat" of
+the extension in C and to do everything else in a regular Ruby script that pulls
+in the compiled library. For example, we could have written a `gmp.rb` script to
+significantly simplify our extension:
+
+{% highlight ruby %}
+{% include examples/gmp.rb %}
+{% endhighlight %}

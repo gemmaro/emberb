@@ -1,0 +1,133 @@
+---
+layout: chapter
+title: 'Running Ruby in C'
+---
+
+## Compiling ##
+
+Embedding Ruby requires one header `ruby.h`, which includes a platform-specific
+header `ruby/config.h`. You will probably need to tell your compiler about the
+include paths for these headers. You will also need to link with the Ruby lib.
+On my machine, my minimal compiler options are
+
+{% highlight shell_session %}
+$ gcc -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby
+{% endhighlight %}
+
+Though, if available, you should really use `pkg-config` to get the appropriate
+options for your distribution:
+
+{% highlight shell_session %}
+$ pkg-config --cflags --libs ruby-{{ site.rbversion }}
+{% endhighlight %}
+
+## Startup, Teardown ##
+
+Including the Ruby interpreter in your C/C++ program is pretty simple. Just
+include the header, call a startup function in `main` before you use the API,
+and a cleanup function after you're done:
+
+{% highlight c %}
+{% include embed/simple.c %}
+{% endhighlight %}
+
+If the VM fails to start during `ruby_init()` it will print an error and exit
+your program! If you would rather have a softer error, you can instead call
+`ruby_setup()` which returns a nonzero value if a failure occurred
+(unfortunately it is not clear how to get a message for the error[^err]).
+
+If an error occurs during `rb_cleanup()`, it returns a nonzero
+value&mdash;otherwise it returns the argument you passed it. This allows a
+little shortcut for returning an error status if the cleanup fails (as
+demonstrated in the previous example).
+
+_Technically_ you don't have to call `ruby_init`/`ruby_setup` in `main`, but the
+Ruby VM assumes that all future Ruby code will be run from the same stack frame
+or a lower one (for garbage collection purposes). The easiest way to ensure this
+is to do set up at the top-level of your program, though other approaches could
+work. But it would be a bad idea, for example, to init Ruby in some
+deeply-nested function, pop a bunch of stack frames, and then run a bunch of
+Ruby code.
+{: .alert .alert-danger}
+
+During cleanup, the VM might evaluate more Ruby code (if you passed a block to
+`at_exit`, for example) which could raise an exception. `ruby_cleanup()` handles
+these by returning a nonzero value and printing an error message. If you instead
+call `ruby_finalize()` they will be raised normally (see the section on
+[Exceptions](../c#rescue) for how to handle them).
+
+Here's an alternative example:
+
+{% highlight c %}
+{% include embed/advanced.c %}
+{% endhighlight %}
+
+### Limitations ###
+
+Other than the stack frame warning above, there is another limitation: you only
+get one Ruby VM per process. The startup/teardown might make it look like you
+can keep on destroying and rebuilding the VM over and over again, but
+`ruby_cleanup` only makes sure that your Ruby code is all cleaned up and done.
+It doesn't fully clean up the VM state such that it is ready to be
+re-initialized: if you call `ruby_init` again, it will fail.
+
+If for some reason you need multiple Ruby VMs in your program, you will need to
+spin them off in multiple processes to bypass this limitation.
+
+## Tweaking the VM ##
+
+You now have a bare-bones Ruby VM running, but you may want to set up a little
+more stuff before you start running Ruby code. To set the name of the Ruby
+script (e.g. `$0`) for error messages and such, use
+
+{% highlight c %}
+ruby_script("new name")
+{% endhighlight %}
+
+To set up the load path so that gems can be loaded with `require`, use
+
+{% highlight c %}
+ruby_init_loadpath()
+{% endhighlight %}
+
+You can also pass options to the VM just like you would to `ruby` on the command
+line. This is handy for stuff like setting the warning level or verbose
+mode[^opt].
+
+{% highlight c %}
+{% include embed/options.c %}
+{% endhighlight %}
+
+The arguments to `ruby_options` are `argc` and `argv` just like a main function.
+And just like the main of the `ruby` program, the VM expects to get some Ruby
+code when you call it. If you don't give it the filename of a script to load or
+code to run with `-e`, it will try to read from `stdin`. If you want to set
+options but _not_ run any Ruby code, you can pass it an empty line: `"-e "`.
+
+`ruby_options()` returns a "node" that represents the compiled Ruby code. In some
+cases (such as a syntax error) the node will be invalid and you shouldn't run
+it. `ruby_executable_node()` checks for this. If the node is valid, you can run it
+with `ruby_exec_node()`. The state returned by `ruby_executable_node()` (through
+the pointer) and by `ruby_exec_node()` will be nonzero if an exception was
+raised while compiling or running the code. You can [read the exception
+yourself](../c#rescue), or just pass `state` to `ruby_cleanup()` and it will
+print an appropriate error message.
+
+Ruby currently doesn't support any other way of compiling and running code
+separately[^load].
+
+## Success ##
+
+Now you're ready to interact with Ruby! Go back to the [C API](../c).
+
+## Footnotes ##
+
+[^err]: `ruby_init()` uses `error_print()` to get an error message, but this
+        function isn't exposed to the API. Is this a normal exception?
+
+[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This
+        could be related to `ruby_prog_init()`. And really it should be possible
+        to do this without parsing command line options.
+
+[^load]: It looks like the function `rb_load_file()` should do this, but I
+         haven't had any luck getting it to work.
