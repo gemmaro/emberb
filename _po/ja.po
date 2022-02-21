@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "POT-Creation-Date: 2022-02-19 20:33+0900\n"
-"PO-Revision-Date: 2022-02-21 00:38+0900\n"
+"PO-Revision-Date: 2022-02-23 11:39+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -228,7 +228,7 @@ msgstr ""
 #: _posts/2010-01-01-c.markdown:70
 #, no-wrap
 msgid "VALUE"
-msgstr ""
+msgstr "VALUE"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:79
@@ -242,6 +242,14 @@ msgid ""
 "access and manipulate the Ruby objects. `VALUE` is the API-defined C type for\n"
 "these pointers.\n"
 msgstr ""
+"先に進む前に、\n"
+"`VALUE` について理解しなければいけません。\n"
+"VMの内部をめちゃくちゃにしてしまう危険があるので、\n"
+"APIからは直接Rubyのオブジェクトを扱えません[^intern]。\n"
+"その代わり、CのコードはRubyのオブジェクトへの _ポインタ_ を保持したり受け渡したりします（Rubyの変数がオブジェクトへのポインタを持つのと同じです）。\n"
+"ポインタはさまざまなAPIの関数やマクロに渡すことができ、\n"
+"そのためRubyのオブジェクトに安全にアクセスしたり操作したりできます。\n"
+"`VALUE` はAPIで定義されたCの型で、このポインタを扱います。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:84
@@ -252,12 +260,18 @@ msgid ""
 "[`T_` constant][datatypes] corresponding to the Ruby class you're\n"
 "testing for e.g. `T_STRING`, `T_ARRAY`, etc.\n"
 msgstr ""
+"おそらく最も頻繁に湧いてくる疑問は次のようなものでしょう。\n"
+"「この `VALUE` は正しい型なのだろうか？」\n"
+"この疑問に答えるマクロは2つあり、\n"
+"そのどちらも[`T_` 定数](datatypes)を引数に取ります。\n"
+"この定数は比較したい型に対応するRubyのクラスです。\n"
+"例えば `T_STRING` や `T_ARRAY` などです。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:86
 #, no-wrap
 msgid "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types\n"
-msgstr ""
+msgstr "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:90
@@ -267,6 +281,9 @@ msgid ""
 "{% include c/checktype.h %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include c/checktype.h %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:96
@@ -278,6 +295,13 @@ msgid ""
 "even though everything in Ruby `is_a? Object`, testing against `T_OBJECT` will\n"
 "only return true for objects for which there is no better fitting constant.\n"
 msgstr ""
+"この検査はサブクラスでも同様にはたらきます。\n"
+"`Array` のサブクラスであることを確認したいときは `T_ARRAY` を使いますし、\n"
+"`Object` のサブクラスであることを確認したいときには `T_OBJECT` を使います[^tdata]。\n"
+"つまり、この検査は _`is_a?` と同じではない_ ということでもあります。\n"
+"Rubyのありとあらゆるものについて `is_a? Object` であるにせよ、\n"
+"`T_OBJECT` に対する検査は、\n"
+"他にもっと適した定数がないときにのみ真となります。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:99
@@ -285,7 +309,7 @@ msgstr ""
 msgid ""
 "For certain classes, there are specialized macros that are a little more\n"
 "efficient than the previous:\n"
-msgstr ""
+msgstr "特定のクラスには、前述したものより少し効率的なマクロが使えます。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:103
@@ -295,6 +319,9 @@ msgid ""
 "{% include c/check_p.h %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include c/check_p.h %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:107
@@ -304,6 +331,10 @@ msgid ""
 "previous macros can be a little clumsy. In that case you can use the `TYPE()`\n"
 "macro to get the `T_` constant and handle your logic in a `switch`:\n"
 msgstr ""
+"いくつかの型を取りうる `VALUE` を扱いたいときは、\n"
+"前述のマクロはちょっと不恰好です。\n"
+"そんな場合は `TYPE()` マクロを使って `T_` 定数を取得し、\n"
+"`switch` 文で制御できます。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:111
@@ -313,12 +344,15 @@ msgid ""
 "{% include c/type.h %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include c/type.h %}\n"
+"{% endhighlight %}\n"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:112
 #, no-wrap
 msgid "Constants"
-msgstr ""
+msgstr "定数"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:121
@@ -332,12 +366,25 @@ msgid ""
 "`false`, and `true` are prefixed with `Q` e.g. `Qnil`.[^undef] As a convenience,\n"
 "`Qfalse` is also false in C (`0`).\n"
 msgstr ""
+"ほとんどの標準的なRubyの定数はAPIで大域的な `VALUE` が定義されています。\n"
+"したがってそれらの定数を使うのにAPIの呼び出しは要りません。\n"
+"モジュールは `rb_m` で前置されます。\n"
+"たとえば `rb_mKernel` です。\n"
+"クラスは `rb_c` で前置されます。\n"
+"たとえば `rb_cObject` です。\n"
+"`Exception` のサブクラスは `rb_e` で前置されます。\n"
+"たとえば `rb_eRubtimeError` です。\n"
+"標準的なIOストリームは `rb_` で前置されます。\n"
+"たとえば `rb_stderr` です。\n"
+"`nil`, `false`, `true` は `Q` で前置されます。\n"
+"例えば `Qnil` です。\n"
+"[^undef] 便宜上、 `Qfalse` はCの偽値 (`0`) でもあります。\n"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:122
 #, no-wrap
 msgid "Translation"
-msgstr ""
+msgstr "変換"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:126
@@ -346,12 +393,14 @@ msgid ""
 "A few Ruby classes are analogous to C types. These classes will be your primary\n"
 "means of transferring data between C and Ruby.\n"
 msgstr ""
+"いくつかのRubyのクラスはCの型に対応します。\n"
+"この対応する組み合わせは、CとRubyの間のデータのやりとりをするには一番です。\n"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:127
 #, no-wrap
 msgid "Fixnum"
-msgstr ""
+msgstr "Fixnum"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:133
@@ -362,6 +411,11 @@ msgid ""
 "and `FIX2SHORT()`, but these will raise a `RangeError` if the number wouldn't\n"
 "fit.\n"
 msgstr ""
+"Rubyの `Fixnum` はCの `long` に対応します。\n"
+"`FIX2LONG()` マクロにより、 `long` を `Fixnum` に変換できます。\n"
+"より小さいCの型については、\n"
+"`FIX2UINT()`, `FIX2INT()`, `FIX2SHORT()` があります。\n"
+"しかし、これらのマクロは変換時に数値が大きすぎて収まらない場合は `RangeError` を生じます。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:136
@@ -370,12 +424,14 @@ msgid ""
 "In the other direction, `LONG2FIX()` works for `long` **and** every smaller\n"
 "integer C type[^chr].\n"
 msgstr ""
+"逆向きの変換もできて、\n"
+"`LONG2FIX()` は `long` *に加えて* `long` より小さい全てのCの整数型からの変換に使えます。\n"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:137
 #, no-wrap
 msgid "Bignum"
-msgstr ""
+msgstr "Bignum"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:143
@@ -386,18 +442,23 @@ msgid ""
 "you `long long` and `unsigned long long` from a `Bignum` (or raise a\n"
 "`RangeError` if appropriate).\n"
 msgstr ""
+"Rubyの `Bignum` は `Fixnum` より大きいあらゆる整数に使えます。\n"
+"例えば `long long` が必要なときとかです。\n"
+"`rb_big2()` と `rb_big2u()` を使えば、 `Bignum` から\n"
+"それぞれ `long long` や `unsigned long long` に直せます。\n"
+"（もしくは `RangeError` が発生します。）\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:145 _posts/2010-01-01-c.markdown:152
 #, no-wrap
 msgid "See [Numeric](#numeric) for the reverse direction.\n"
-msgstr ""
+msgstr "逆向きの変換については [数値](#numeric) を参照してください。\n"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:146
 #, no-wrap
 msgid "Float"
-msgstr ""
+msgstr "Float"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:150
@@ -406,12 +467,14 @@ msgid ""
 "Ruby's `Float` corresponds to C's `double`. The `RFLOAT_VALUE()` macro gives you the\n"
 "`double` for a `Float`.\n"
 msgstr ""
+"Rubyの `Float` はCの `double` に対応します。\n"
+"`RFLOAT_VALUE()` マクロを使えば、 `Float` から `double` が得られます。\n"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:153
 #, no-wrap
 msgid "Numeric"
-msgstr ""
+msgstr "Numeric"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:158
@@ -421,48 +484,51 @@ msgid ""
 "These will convert their C types to whatever Ruby `Numeric` subclass seems\n"
 "appropriate:\n"
 msgstr ""
+"たくさんの \"NUM\" マクロがあり、\n"
+"ダックタイピングっぽい使いかたをしています。\n"
+"これらのマクロはCの型を適切と思われるRubyの `Numeric` のサブクラス（のインスタンス）に変換します。\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:166
 #, no-wrap
 msgid "`INT2NUM()` for `int`\n"
-msgstr ""
+msgstr "`INT2NUM()` は `int` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:166
 #, no-wrap
 msgid "`UINT2NUM()` for `unsigned int`\n"
-msgstr ""
+msgstr "`UINT2NUM()` は `unsigned int` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:166
 #, no-wrap
 msgid "`LONG2NUM()` for `long`\n"
-msgstr ""
+msgstr "`LONG2NUM()` は `long` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:166
 #, no-wrap
 msgid "`ULONG2NUM()` for `unsigned long`\n"
-msgstr ""
+msgstr "`ULONG2NUM()` は `unsigned long` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:166
 #, no-wrap
 msgid "`LL2NUM()` for `long long`\n"
-msgstr ""
+msgstr "`LL2NUM()` は `long long` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:166
 #, no-wrap
 msgid "`ULL2NUM()` for `unsigned long long`\n"
-msgstr ""
+msgstr "`ULL2NUM()` は `unsigned long long` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:166
 #, no-wrap
 msgid "`DBL2NUM()` for `double`\n"
-msgstr ""
+msgstr "`DBL2NUM()` は `double` からの変換用\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:171
@@ -473,66 +539,71 @@ msgid ""
 "the value wouldn't fit or `TypeError` if there is no implicit numeric conversion\n"
 "(so you can safely pass non-`Numeric` objects).\n"
 msgstr ""
+"そして、逆方向のマクロもあります。\n"
+"これらのマクロは、あらゆる `Numeric` な数値から欲しいCの型の値への変換を試みるものです。\n"
+"値が範囲に収まらなかったときは `RangeError` を発生させますし、\n"
+"暗黙の数値の変換ができなかったときは `TypeError` が発生します。\n"
+"（なので `Numeric` ではないオブジェクトを渡しても大丈夫です。）\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2CHR()` for `char` (works for `unsigned char` too)\n"
-msgstr ""
+msgstr "`NUM2CHR()` は `char` からの変換用（`unsigned char` からでも変換できます）\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2SHORT()` for `short`\n"
-msgstr ""
+msgstr "`NUM2SHORT()` は `short` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2USHORT()` for `unsigned short`\n"
-msgstr ""
+msgstr "`NUM2USHORT()` は `unsigned short` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2INT()` for `int`\n"
-msgstr ""
+msgstr "`NUM2INT()` は `int` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2UINT()` for `unsigned int`\n"
-msgstr ""
+msgstr "`NUM2UINT()` は `unsigned int` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2LONG()` for `long`\n"
-msgstr ""
+msgstr "`NUM2LONG()` は `long` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2ULONG()` for `unsigned long`\n"
-msgstr ""
+msgstr "`NUM2ULONG()` は `unsigned long` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2LL()` for `long long`\n"
-msgstr ""
+msgstr "`NUM2LL()` は `long long` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2ULL()` for `unsigned long long`\n"
-msgstr ""
+msgstr "`NUM2ULL()` は `unsigned long long` からの変換用\n"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
 #, no-wrap
 msgid "`NUM2DBL()` for `double`\n"
-msgstr ""
+msgstr "`NUM2DBL()` は `double` からの変換用\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:189
@@ -545,6 +616,12 @@ msgid ""
 "string it returns the numeric value of the first character rather than raising a\n"
 "`TypeError`.\n"
 msgstr ""
+"これらのマクロについて **特に** 注意すべき点は、\n"
+"符号なしの型に変換に変換する *どの* マクロも、負値を渡したときに例外が発生しないということです。\n"
+"（驚くべきことに[バグではありません][bug]。）\n"
+"`NUM2CHR()` にはもう2つ妙なところがあります。\n"
+"変換前の値が _int_ には大きすぎるときに `RangeError` のみ生じることと、\n"
+"文字列を渡したときに `TypeError` を発生させず最初の文字の数値を返すということです。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:192
@@ -553,18 +630,21 @@ msgid ""
 "If you know that the conversion is safe, you should prefer the macros from the\n"
 "previous sections as they skip the range checks.\n"
 msgstr ""
+"変換が安全だとわかっていれば、\n"
+"前の節のマクロのほうを使うべきです。\n"
+"なぜなら範囲の確認を省けるためです。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:194
 #, no-wrap
 msgid "[bug]: https://bugs.ruby-lang.org/issues/9089\n"
-msgstr ""
+msgstr "[bug]: https://bugs.ruby-lang.org/issues/9089\n"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:195
 #, no-wrap
 msgid "String"
-msgstr ""
+msgstr "String"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:203
@@ -577,6 +657,13 @@ msgid ""
 "macros `StringValuePtr()` and `RSTRING_LEN()` to get a (possibly unterminated)\n"
 "`char*` and the string's length as a `long`.\n"
 msgstr ""
+"Rubyの `String` はだいたいCの `char*` に対応します。\n"
+"もっとも簡素なマクロは `StringValueCStr()` です。\n"
+"このマクロは `String` からnull終端付きの `char*` を返します。\n"
+"ただしこれには問題があって、Rubyの `String` が *nullを含むかもしれません*。\n"
+"そのような場合には `StringValueCStr()` は `ArgumentError` を発生させます！\n"
+"その代わりに `StringValuePtr()` マクロと `RSTRING_LEN()` マクロを使えば、それぞれ\n"
+"（終端が付いていない可能性がある） `char*` とその長さの `long` 値を取得できます。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:211
@@ -590,6 +677,15 @@ msgid ""
 "`rb_str_export_locale()` to get a new `VALUE` with your locale's\n"
 "encoding[^wchar].\n"
 msgstr ""
+"逆に、null終端付きの `char*` からRubyの `String` への変換には、\n"
+"`rb_str_new_cstr()` が使えます。\n"
+"そして、もし `String` にnullを含めたいときは、\n"
+"`rb_str_new()` を使います。\n"
+"`rb_str_new()` は `char*` と文字列の長さ（型は `long`）を引数に取ります。\n"
+"これらの文字列のエンコーディングは `ASCII-8BIT` なのですが、\n"
+"Ruby側のコードで望んだものではないこともあります。\n"
+"そんなときは文字列の `VALUE` を `rb_str_export_locale()` に渡して、\n"
+"自分のロケールのエンコーディングでの `VALUE` を取得することができます。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:218
@@ -602,6 +698,13 @@ msgid ""
 "by sending the object `to_s`. You can substitute the result of `inspect` instead\n"
 "by adding the `+` flag.\n"
 msgstr ""
+"もっと複雑な文字列を構築したければ、\n"
+"`printf` のような関数 `rb_sprintf()` でできます。\n"
+"この関数では通常の変換での全ての指定子だけではなく、\n"
+"APIで定義された指定子 `PRIsVALUE` も使えます。\n"
+"`PRIsVALUE` は対応する `VALUE` を引数に取ります。\n"
+"この変換指定子はオブジェクトに `to_s` メッセージを送って文字列にに置き換えます。\n"
+"`+` フラグを加えることで `inspect` を使った結果の文字列に置き換えることもできます。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:222
@@ -611,6 +714,9 @@ msgid ""
 "{% include c/printf.h %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include c/printf.h %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:227
@@ -621,12 +727,16 @@ msgid ""
 "an `int` you should use `d` to ensure that Ruby doesn't think it's actually a\n"
 "`VALUE`.\n"
 msgstr ""
+"この自前の指定子はAPIにあるあらゆる `printf` っぽい関数で使えるでしょう。\n"
+"`PRIsVALUE` は `i` 変換指定子を乗っ取ることで実現されているので、\n"
+"`int` を文字列にするときは `d` を使って、\n"
+"Rubyに「それって実は `VALUE` なんじゃないか」と勘違いさせないようにするべきです。\n"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:228
 #, no-wrap
 msgid "Symbol"
-msgstr ""
+msgstr "Symbol"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:236
@@ -639,6 +749,13 @@ msgid ""
 "may want to convert to/from a `char*` C string. To get an `ID` from a `char*`\n"
 "use `rb_intern()` and for the reverse use `rb_id2name()`.\n"
 msgstr ""
+"APIではRubyの `Symbol` に対応するCの型 `ID` が定義されています。\n"
+"Rubyが `Symbol` をメソッドや変数名として受け渡しするように、\n"
+"多くのAPI呼び出しでメソッドや変数の名前を `ID` を使うようにしています。\n"
+"`Symbol` と `ID` を変換するには、 `SYM2ID()` と `ID2SYM()` マクロを使います。\n"
+"`Symbol` ではなくCの文字列 `char*` との双方向に変換したいときもあるでしょう。\n"
+"`char*` から `ID` を取得するためには `rb_intern()` を、\n"
+"その逆向きでは `rb_id2name()` を使います。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:246
@@ -654,6 +771,15 @@ msgid ""
 "and using the `ID` versions of the functions (though you'll have to look these\n"
 "up yourself in the Ruby headers).\n"
 msgstr ""
+"多くのAPI関数が `ID` を必要としていますが、\n"
+"適切な `ID` が手元にないことも沢山あるでしょう。\n"
+"そのため、代わりに `char*` を引数に取って自動で `rb_intern()` してくれる関数も沢山あります。\n"
+"これらの関数はより読みやすく、 `rb_intern()` の呼び出しでのオーバーヘッドは無視できる程度なので、\n"
+"この導入記事では可能な限り `char*` バージョンのAPI関数が使われる傾向にあります。\n"
+"特定のCの文字列をAPIの呼出しで頻繁に使う場合は、\n"
+"`ID` に変換して保管しておき、\n"
+"`ID` バージョンの関数を使うことでいくらかのパフォーマンス向上を確かめられるかもしれません。\n"
+"（Rubyのヘッダから自分で見つける必要がありますが。）\n"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:247

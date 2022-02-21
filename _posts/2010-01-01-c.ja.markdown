@@ -82,18 +82,21 @@ Rubyのメソッドを呼びたいだけであれば、
 
 ## VALUE ##
 
-Before we go any further, we need to understand `VALUE`s. Due to the danger of
-monkeying around inside the VM, the API never lets you directly access Ruby's
-objects[^intern]. Instead, your C code will store and pass around _pointers_ to
-Ruby objects (like how variables in Ruby contain pointers to objects). These
-pointers can be passed to various API functions and macros that will safely
-access and manipulate the Ruby objects. `VALUE` is the API-defined C type for
-these pointers.
+先に進む前に、
+`VALUE` について理解しなければいけません。
+VMの内部をめちゃくちゃにしてしまう危険があるので、
+APIからは直接Rubyのオブジェクトを扱えません[^intern]。
+その代わり、CのコードはRubyのオブジェクトへの _ポインタ_ を保持したり受け渡したりします（Rubyの変数がオブジェクトへのポインタを持つのと同じです）。
+ポインタはさまざまなAPIの関数やマクロに渡すことができ、
+そのためRubyのオブジェクトに安全にアクセスしたり操作したりできます。
+`VALUE` はAPIで定義されたCの型で、このポインタを扱います。
 
-Probably the most frequent question you'll have is: "is this `VALUE` the right
-type?". There are a couple macros for performing this test, and both take a
-[`T_` constant][datatypes] corresponding to the Ruby class you're
-testing for e.g. `T_STRING`, `T_ARRAY`, etc.
+おそらく最も頻繁に湧いてくる疑問は次のようなものでしょう。
+「この `VALUE` は正しい型なのだろうか？」
+この疑問に答えるマクロは2つあり、
+そのどちらも[`T_` 定数](datatypes)を引数に取ります。
+この定数は比較したい型に対応するRubyのクラスです。
+例えば `T_STRING` や `T_ARRAY` などです。
 
 [datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types
 
@@ -101,178 +104,195 @@ testing for e.g. `T_STRING`, `T_ARRAY`, etc.
 {% include c/checktype.h %}
 {% endhighlight %}
 
-These tests work for subclasses too: if you're testing for a subclass of `Array`
-use `T_ARRAY`, if you're testing for a subclass of `Object` use
-`T_OBJECT`[^tdata]. That being said, these tests _do not work like `is_a?`_;
-even though everything in Ruby `is_a? Object`, testing against `T_OBJECT` will
-only return true for objects for which there is no better fitting constant.
+この検査はサブクラスでも同様にはたらきます。
+`Array` のサブクラスであることを確認したいときは `T_ARRAY` を使いますし、
+`Object` のサブクラスであることを確認したいときには `T_OBJECT` を使います[^tdata]。
+つまり、この検査は _`is_a?` と同じではない_ ということでもあります。
+Rubyのありとあらゆるものについて `is_a? Object` であるにせよ、
+`T_OBJECT` に対する検査は、
+他にもっと適した定数がないときにのみ真となります。
 
-For certain classes, there are specialized macros that are a little more
-efficient than the previous:
+特定のクラスには、前述したものより少し効率的なマクロが使えます。
 
 {% highlight c %}
 {% include c/check_p.h %}
 {% endhighlight %}
 
-If you want to handle a `VALUE` that could be one of a variety of types, the
-previous macros can be a little clumsy. In that case you can use the `TYPE()`
-macro to get the `T_` constant and handle your logic in a `switch`:
+いくつかの型を取りうる `VALUE` を扱いたいときは、
+前述のマクロはちょっと不恰好です。
+そんな場合は `TYPE()` マクロを使って `T_` 定数を取得し、
+`switch` 文で制御できます。
 
 {% highlight c %}
 {% include c/type.h %}
 {% endhighlight %}
 
-### Constants ###
+### 定数 ###
 
-Most of the standard Ruby constants have global `VALUE`s defined for them in the
-API so you don't need an API call to access them. Modules are prefixed with
-`rb_m` e.g. `rb_mKernel`; classes are prefixed with `rb_c` e.g. `rb_cObject`;
-subclasses of `Exception` are prefixed with `rb_e` e.g. `rb_eRuntimeError`; and
-the standard IO streams are prefixed with `rb_` e.g. `rb_stderr`. `nil`,
-`false`, and `true` are prefixed with `Q` e.g. `Qnil`.[^undef] As a convenience,
-`Qfalse` is also false in C (`0`).
+ほとんどの標準的なRubyの定数はAPIで大域的な `VALUE` が定義されています。
+したがってそれらの定数を使うのにAPIの呼び出しは要りません。
+モジュールは `rb_m` で前置されます。
+たとえば `rb_mKernel` です。
+クラスは `rb_c` で前置されます。
+たとえば `rb_cObject` です。
+`Exception` のサブクラスは `rb_e` で前置されます。
+たとえば `rb_eRubtimeError` です。
+標準的なIOストリームは `rb_` で前置されます。
+たとえば `rb_stderr` です。
+`nil`, `false`, `true` は `Q` で前置されます。
+例えば `Qnil` です。
+[^undef] 便宜上、 `Qfalse` はCの偽値 (`0`) でもあります。
 
-### Translation ###
+### 変換 ###
 
-A few Ruby classes are analogous to C types. These classes will be your primary
-means of transferring data between C and Ruby.
+いくつかのRubyのクラスはCの型に対応します。
+この対応する組み合わせは、CとRubyの間のデータのやりとりをするには一番です。
 
 #### Fixnum ####
 
-Ruby's `Fixnum` corresponds to C's `long`. The `FIX2LONG()` macro gives you the
-`long` for a `Fixnum`. For smaller C types there's `FIX2UINT()`, `FIX2INT()`,
-and `FIX2SHORT()`, but these will raise a `RangeError` if the number wouldn't
-fit.
+Rubyの `Fixnum` はCの `long` に対応します。
+`FIX2LONG()` マクロにより、 `long` を `Fixnum` に変換できます。
+より小さいCの型については、
+`FIX2UINT()`, `FIX2INT()`, `FIX2SHORT()` があります。
+しかし、これらのマクロは変換時に数値が大きすぎて収まらない場合は `RangeError` を生じます。
 
-In the other direction, `LONG2FIX()` works for `long` **and** every smaller
-integer C type[^chr].
+逆向きの変換もできて、
+`LONG2FIX()` は `long` *に加えて* `long` より小さい全てのCの整数型からの変換に使えます。
 
 #### Bignum ####
 
-Ruby's `Bignum` is for anything bigger than a `Fixnum`, so it works if you need
-to work with `long long`, for example. `rb_big2ll()` and `rb_big2ull()` will get
-you `long long` and `unsigned long long` from a `Bignum` (or raise a
-`RangeError` if appropriate).
+Rubyの `Bignum` は `Fixnum` より大きいあらゆる整数に使えます。
+例えば `long long` が必要なときとかです。
+`rb_big2()` と `rb_big2u()` を使えば、 `Bignum` から
+それぞれ `long long` や `unsigned long long` に直せます。
+（もしくは `RangeError` が発生します。）
 
-See [Numeric](#numeric) for the reverse direction.
+逆向きの変換については [数値](#numeric) を参照してください。
 
 #### Float ####
 
-Ruby's `Float` corresponds to C's `double`. The `RFLOAT_VALUE()` macro gives you the
-`double` for a `Float`.
+Rubyの `Float` はCの `double` に対応します。
+`RFLOAT_VALUE()` マクロを使えば、 `Float` から `double` が得られます。
 
-See [Numeric](#numeric) for the reverse direction.
+逆向きの変換については [数値](#numeric) を参照してください。
 
 #### Numeric ####
 
-There are a host of "NUM" macros that try to be more duck-typish about things.
-These will convert their C types to whatever Ruby `Numeric` subclass seems
-appropriate:
+たくさんの "NUM" マクロがあり、
+ダックタイピングっぽい使いかたをしています。
+これらのマクロはCの型を適切と思われるRubyの `Numeric` のサブクラス（のインスタンス）に変換します。
 
-* `INT2NUM()` for `int`
+* `INT2NUM()` は `int` からの変換用
 
-* `UINT2NUM()` for `unsigned int`
+* `UINT2NUM()` は `unsigned int` からの変換用
 
-* `LONG2NUM()` for `long`
+* `LONG2NUM()` は `long` からの変換用
 
-* `ULONG2NUM()` for `unsigned long`
+* `ULONG2NUM()` は `unsigned long` からの変換用
 
-* `LL2NUM()` for `long long`
+* `LL2NUM()` は `long long` からの変換用
 
-* `ULL2NUM()` for `unsigned long long`
+* `ULL2NUM()` は `unsigned long long` からの変換用
 
-* `DBL2NUM()` for `double`
-
-
-And there are macros for the opposite direction, which will try to convert
-whatever `Numeric` to the desired C type. These will raise a `RangeError` if
-the value wouldn't fit or `TypeError` if there is no implicit numeric conversion
-(so you can safely pass non-`Numeric` objects).
-
-* `NUM2CHR()` for `char` (works for `unsigned char` too)
-
-* `NUM2SHORT()` for `short`
-
-* `NUM2USHORT()` for `unsigned short`
-
-* `NUM2INT()` for `int`
-
-* `NUM2UINT()` for `unsigned int`
-
-* `NUM2LONG()` for `long`
-
-* `NUM2ULONG()` for `unsigned long`
-
-* `NUM2LL()` for `long long`
-
-* `NUM2ULL()` for `unsigned long long`
-
-* `NUM2DBL()` for `double`
+* `DBL2NUM()` は `double` からの変換用
 
 
-A **major** gotcha with these is that _none_ of the macros for converting to
-unsigned types raise an exception if you pass a negative value (surprisingly
-this [isn't a bug][bug]). `NUM2CHR()` also has a couple quirks: it will only
-raise a `RangeError` if the value is too big for an _int_ and when passed a
-string it returns the numeric value of the first character rather than raising a
-`TypeError`.
+そして、逆方向のマクロもあります。
+これらのマクロは、あらゆる `Numeric` な数値から欲しいCの型の値への変換を試みるものです。
+値が範囲に収まらなかったときは `RangeError` を発生させますし、
+暗黙の数値の変換ができなかったときは `TypeError` が発生します。
+（なので `Numeric` ではないオブジェクトを渡しても大丈夫です。）
 
-If you know that the conversion is safe, you should prefer the macros from the
-previous sections as they skip the range checks.
+* `NUM2CHR()` は `char` からの変換用（`unsigned char` からでも変換できます）
+
+* `NUM2SHORT()` は `short` からの変換用
+
+* `NUM2USHORT()` は `unsigned short` からの変換用
+
+* `NUM2INT()` は `int` からの変換用
+
+* `NUM2UINT()` は `unsigned int` からの変換用
+
+* `NUM2LONG()` は `long` からの変換用
+
+* `NUM2ULONG()` は `unsigned long` からの変換用
+
+* `NUM2LL()` は `long long` からの変換用
+
+* `NUM2ULL()` は `unsigned long long` からの変換用
+
+* `NUM2DBL()` は `double` からの変換用
+
+
+これらのマクロについて **特に** 注意すべき点は、
+符号なしの型に変換に変換する *どの* マクロも、負値を渡したときに例外が発生しないということです。
+（驚くべきことに[バグではありません][bug]。）
+`NUM2CHR()` にはもう2つ妙なところがあります。
+変換前の値が _int_ には大きすぎるときに `RangeError` のみ生じることと、
+文字列を渡したときに `TypeError` を発生させず最初の文字の数値を返すということです。
+
+変換が安全だとわかっていれば、
+前の節のマクロのほうを使うべきです。
+なぜなら範囲の確認を省けるためです。
 
 [bug]: https://bugs.ruby-lang.org/issues/9089
 
 #### String ####
 
-Ruby's `String` kinda corresponds to C's `char*`. The simplest macro is
-`StringValueCStr()` which returns a null-terminated `char*` for a `String`. The
-problem here is that a Ruby `String` _might contain nulls_ - in which case
-`StringValueCStr()` will raise an `ArgumentError`! Instead you can use the
-macros `StringValuePtr()` and `RSTRING_LEN()` to get a (possibly unterminated)
-`char*` and the string's length as a `long`.
+Rubyの `String` はだいたいCの `char*` に対応します。
+もっとも簡素なマクロは `StringValueCStr()` です。
+このマクロは `String` からnull終端付きの `char*` を返します。
+ただしこれには問題があって、Rubyの `String` が *nullを含むかもしれません*。
+そのような場合には `StringValueCStr()` は `ArgumentError` を発生させます！
+その代わりに `StringValuePtr()` マクロと `RSTRING_LEN()` マクロを使えば、それぞれ
+（終端が付いていない可能性がある） `char*` とその長さの `long` 値を取得できます。
 
-Conversely, if you have a null-terminated `char*`, you can use
-`rb_str_new_cstr()` to create a Ruby `String`. And if you want your `String` to
-contain nulls, use `rb_str_new()` which takes a `char*` and the string's length
-(as a `long`). The encodings of these strings will be `ASCII-8BIT`, which is
-often undesirable in Ruby. You can pass the string `VALUE` to
-`rb_str_export_locale()` to get a new `VALUE` with your locale's
-encoding[^wchar].
+逆に、null終端付きの `char*` からRubyの `String` への変換には、
+`rb_str_new_cstr()` が使えます。
+そして、もし `String` にnullを含めたいときは、
+`rb_str_new()` を使います。
+`rb_str_new()` は `char*` と文字列の長さ（型は `long`）を引数に取ります。
+これらの文字列のエンコーディングは `ASCII-8BIT` なのですが、
+Ruby側のコードで望んだものではないこともあります。
+そんなときは文字列の `VALUE` を `rb_str_export_locale()` に渡して、
+自分のロケールのエンコーディングでの `VALUE` を取得することができます。
 
-If you want to build more complex strings, you can do so using the `printf`-like
-function `rb_sprintf()`. This accepts all of the usual conversion specifiers,
-but also accepts an API-defined specifier `PRIsVALUE` which takes a
-corresponding `VALUE` argument. This conversion specifier substitutes a string
-by sending the object `to_s`. You can substitute the result of `inspect` instead
-by adding the `+` flag.
+もっと複雑な文字列を構築したければ、
+`printf` のような関数 `rb_sprintf()` でできます。
+この関数では通常の変換での全ての指定子だけではなく、
+APIで定義された指定子 `PRIsVALUE` も使えます。
+`PRIsVALUE` は対応する `VALUE` を引数に取ります。
+この変換指定子はオブジェクトに `to_s` メッセージを送って文字列にに置き換えます。
+`+` フラグを加えることで `inspect` を使った結果の文字列に置き換えることもできます。
 
 {% highlight c %}
 {% include c/printf.h %}
 {% endhighlight %}
 
-This custom specifier should work for any `printf`-like function in the API.
-`PRIsVALUE` works by hijacking the `i` conversion specifier, so when printing
-an `int` you should use `d` to ensure that Ruby doesn't think it's actually a
-`VALUE`.
+この自前の指定子はAPIにあるあらゆる `printf` っぽい関数で使えるでしょう。
+`PRIsVALUE` は `i` 変換指定子を乗っ取ることで実現されているので、
+`int` を文字列にするときは `d` を使って、
+Rubyに「それって実は `VALUE` なんじゃないか」と勘違いさせないようにするべきです。
 
 #### Symbol ####
 
-The API defines a C type `ID` which corresponds to Ruby's `Symbol`. Just like
-how Ruby passes around `Symbol`s as method or variable names, many API calls
-that need a method or variable name use an `ID`. To convert between a `Symbol`
-and an `ID` use the `SYM2ID()` and `ID2SYM()` macros. Instead of a `Symbol` you
-may want to convert to/from a `char*` C string. To get an `ID` from a `char*`
-use `rb_intern()` and for the reverse use `rb_id2name()`.
+APIではRubyの `Symbol` に対応するCの型 `ID` が定義されています。
+Rubyが `Symbol` をメソッドや変数名として受け渡しするように、
+多くのAPI呼び出しでメソッドや変数の名前を `ID` を使うようにしています。
+`Symbol` と `ID` を変換するには、 `SYM2ID()` と `ID2SYM()` マクロを使います。
+`Symbol` ではなくCの文字列 `char*` との双方向に変換したいときもあるでしょう。
+`char*` から `ID` を取得するためには `rb_intern()` を、
+その逆向きでは `rb_id2name()` を使います。
 
-Since many API functions require an `ID` and in many cases you will not have the
-appropriate `ID` at hand, the API also defines a slew of functions that instead
-take a `char*` and which do the `rb_intern()` call for you. Since these
-functions are often more readable and the overhead of the `rb_intern()` call is
-negligible, I have opted to use the `char*` versions of the API functions
-wherever possible in this guide. If you find yourself frequently using a certain
-C string in API calls, you may see some performance benefit by storing the `ID`
-and using the `ID` versions of the functions (though you'll have to look these
-up yourself in the Ruby headers).
+多くのAPI関数が `ID` を必要としていますが、
+適切な `ID` が手元にないことも沢山あるでしょう。
+そのため、代わりに `char*` を引数に取って自動で `rb_intern()` してくれる関数も沢山あります。
+これらの関数はより読みやすく、 `rb_intern()` の呼び出しでのオーバーヘッドは無視できる程度なので、
+この導入記事では可能な限り `char*` バージョンのAPI関数が使われる傾向にあります。
+特定のCの文字列をAPIの呼出しで頻繁に使う場合は、
+`ID` に変換して保管しておき、
+`ID` バージョンの関数を使うことでいくらかのパフォーマンス向上を確かめられるかもしれません。
+（Rubyのヘッダから自分で見つける必要がありますが。）
 
 ## Send ##
 
