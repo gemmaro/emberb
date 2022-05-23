@@ -17,7 +17,7 @@ Pathname.glob('_posts/*.markdown').each do |markdown_file_path|
     [type: text] \\
       _posts/#{markdown_base_name} \\
       $lang:_posts/#{markdown_stem_name}.$lang.markdown \\
-      opt:"--option markdown --option neverwrap --keep 0"
+      opt:"--option markdown --keep 0"
   END_OF_CFG
 end
 
