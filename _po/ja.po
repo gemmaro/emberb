@@ -5,8 +5,9 @@
 #
 msgid ""
 msgstr ""
+"Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2022-05-23 23:00+0900\n"
-"PO-Revision-Date: 2022-02-23 11:39+0900\n"
+"PO-Revision-Date: 2023-01-01 22:29+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
