@@ -14,17 +14,23 @@ and pass objects encapsulating the data for the two squares.
 
 The Ruby script can look something like this:
 
-{% highlight ruby %} {% include examples/ai.rb %} {% endhighlight %}
+{% highlight ruby %}
+{% include examples/ai.rb %}
+{% endhighlight %}
 
 The C code uses SDL2 for graphics and input and uses `stat()` (which may not
 be very portable) to hot-reload the AI script whenever the file is changed
 . Here's `tag.c`:
 
-{% highlight c %} {% include examples/tag.c %} {% endhighlight %}
+{% highlight c %}
+{% include examples/tag.c %}
+{% endhighlight %}
 
 The Makefile is nothing special:
 
-{% highlight make %} {% include examples/Makefile %} {% endhighlight %}
+{% highlight make %}
+{% include examples/Makefile %}
+{% endhighlight %}
 
 ## RubyでCを実行する ##
 
@@ -38,16 +44,21 @@ types. If you want a _really_ full example, check out the [GMP gem][gem].
 
 Everything is in `gmp.c` where we define our `GMP::Integer` class:
 
-{% highlight c %} {% include examples/ext/gmp.c %} {% endhighlight %}
+{% highlight c %}
+{% include examples/ext/gmp.c %}
+{% endhighlight %}
 
 The `extconf.rb` is really simple.
 
-{% highlight ruby %} {% include examples/ext/extconf.rb %} {% endhighlight
-%}
+{% highlight ruby %}
+{% include examples/ext/extconf.rb %}
+{% endhighlight %}
 
 And now you can finally find out what your name means in base 62:
 
-{% highlight ruby %} {% include examples/gmp_ex.rb %} {% endhighlight %}
+{% highlight ruby %}
+{% include examples/gmp_ex.rb %}
+{% endhighlight %}
 
 For this example I tried to do everything in C, but practically that isn't
 necessary (or desirable). If one of your C methods just calls a bunch of API
@@ -61,4 +72,6 @@ of the extension in C and to do everything else in a regular Ruby script
 that pulls in the compiled library. For example, we could have written a
 `gmp.rb` script to significantly simplify our extension:
 
-{% highlight ruby %} {% include examples/gmp.rb %} {% endhighlight %}
+{% highlight ruby %}
+{% include examples/gmp.rb %}
+{% endhighlight %}

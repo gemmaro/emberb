@@ -5,109 +5,130 @@ title: CでRubyを実行する
 
 ## コンパイルする ##
 
-Embedding Ruby requires one header `ruby.h`, which includes a
-platform-specific header `ruby/config.h`. You will probably need to tell
-your compiler about the include paths for these headers. You will also need
-to link with the Ruby lib.  On my machine, my minimal compiler options are
+Rubyを組込むには `ruby.h` という1つのヘッダファイルが必要です。
+このファイルはプラットフォーム固有のヘッダである `ruby/config.h` を含めます。
+場合によってはコンパイラにヘッダファイルの含めるファイルパスを指定する必要があります。
+Rubyライブラリと接続する必要もあります。
+私の環境では、最小のコンパイラオプションは以下のようになります。
 
-{% highlight shell_session %} $ gcc -I/usr/include/ruby-{{ site.rbversion
-}}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby {%
-endhighlight %}
+{% highlight shell_session %}
+$ gcc -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{
+site.rbversion }}.0/x86_64-linux -lruby
+{% endhighlight %}
 
-Though, if available, you should really use `pkg-config` to get the
-appropriate options for your distribution:
+しかしもし可能であれば、ぜひとも `pkg-config` を使って、
+各々のディストリビューションに適したオプションが得られるようにするべきです。
 
-{% highlight shell_session %} $ pkg-config --cflags --libs ruby-{{
-site.rbversion }} {% endhighlight %}
+{% highlight shell_session %}
+$ pkg-config --cflags --libs ruby-{{ site.rbversion }}
+{% endhighlight %}
 
 ## 起動と終了 ##
 
-Including the Ruby interpreter in your C/C++ program is pretty simple. Just
-include the header, call a startup function in `main` before you use the
-API, and a cleanup function after you're done:
+RubyインタプリタをCやC++のプログラムに含めることはとても簡単です。
+ヘッダーを含めて、
+APIを使用する前にインタプリタを立ち上げるための関数を `main` で呼び、
+そして完了後に後片付けをする関数を呼べばよいのです。
 
-{% highlight c %} {% include embed/simple.c %} {% endhighlight %}
+{% highlight c %}
+{% include embed/simple.c %}
+{% endhighlight %}
 
-If the VM fails to start during `ruby_init()` it will print an error and
-exit your program! If you would rather have a softer error, you can instead
-call `ruby_setup()` which returns a nonzero value if a failure occurred
-(unfortunately it is not clear how to get a message for the error[^err]).
+`ruby_init()` の最中にVMが実行に失敗したら、
+エラーを表示してプログラムが終了してしまいます！
+もっと柔軟にエラーを出したいときは、
+代わりに失敗したときにゼロではない値を返す
+`ruby_setup()` を使いましょう（運が悪いことに、
+この場合のエラーメッセージの出しかたはよくわかっていません[^err]）。
 
-If an error occurs during `rb_cleanup()`, it returns a nonzero
-value&mdash;otherwise it returns the argument you passed it. This allows a
-little shortcut for returning an error status if the cleanup fails (as
-demonstrated in the previous example).
+`rb_cleanup()` のさなかにエラーが発生したときは、
+ゼロではない値を返します。
+もしエラーが発生しなければ、渡した引数が返ります。
+この仕様により、後片付けに失敗したときのエラーステータスを返す部分が少し短く書けます（先の例のように）。
 
-_Technically_ you don't have to call `ruby_init`/`ruby_setup` in `main`, but
-the Ruby VM assumes that all future Ruby code will be run from the same
-stack frame or a lower one (for garbage collection purposes). The easiest
-way to ensure this is to do set up at the top-level of your program, though
-other approaches could work. But it would be a bad idea, for example, to
-init Ruby in some deeply-nested function, pop a bunch of stack frames, and
-then run a bunch of Ruby code.  {: .alert .alert-danger}
+_技術的には_ `main` で `ruby_init` や `ruby_setup` を呼ぶ必要はありません。
+しかし、RubyのVMは以降全てのRubyのコードが同じかこれより低層のスタックフレームから
+実行されることを仮定しています（ガベージコレクションのためです）。
+他の方法でも動くにせよ、
+このことを確証する最も簡単な方法がプログラムのトップレベルで立ち上げを行うことなのです。
+例えば深く入れ子になった関数でRubyを初期化して、沢山のスタックフレームを立ち上げ、
+そして沢山のRubyのコードを実行するようなことはよくありません。
+{: .alert .alert-danger}
 
-During cleanup, the VM might evaluate more Ruby code (if you passed a block
-to `at_exit`, for example) which could raise an exception. `ruby_cleanup()`
-handles these by returning a nonzero value and printing an error message. If
-you instead call `ruby_finalize()` they will be raised normally (see the
-section on [Exceptions](../c#rescue) for how to handle them).
+後片付けをするときにも、VMはRubyのコードを評価するかもしれません（`at_exit` にブロックを渡したときなど）。
+そしてそのときに例外が発生する可能性があります。
+`ruby_cleanup()` はこのような例外が発生したときに、
+ゼロではない値を返してエラーメッセージを表示することで制御します。
+代わりに `ruby_finalize()` を呼ぶと、通常通り例外を発生させます。
+（制御方法については[Exceptions](../c#rescue)節を参照）
 
-Here's an alternative example:
+別の例はこちらです。
 
-{% highlight c %} {% include embed/advanced.c %} {% endhighlight %}
+{% highlight c %}
+{% include embed/advanced.c %}
+{% endhighlight %}
 
 ### 制約 ###
 
-Other than the stack frame warning above, there is another limitation: you
-only get one Ruby VM per process. The startup/teardown might make it look
-like you can keep on destroying and rebuilding the VM over and over again,
-but `ruby_cleanup` only makes sure that your Ruby code is all cleaned up and
-done.  It doesn't fully clean up the VM state such that it is ready to be
-re-initialized: if you call `ruby_init` again, it will fail.
+上記のスタックフレームの警告以外にも制約があります。
+1つのプロセスに1つだけRubyのVMを動かせます。
+起動と終了の方法を見ると、何度でもVMの破壊と創造を繰り返せるような気がしてくるかもしれませんが、
+`ruby_cleanup` はRubyのコードが全ての後片付けが完了したことだけを確認します。
+VMの状態を再度初期化できるような状態までは後片付けしません。
+もう一度 `ruby_init` を呼び出すと、実行に失敗してしまうでしょう。
 
-If for some reason you need multiple Ruby VMs in your program, you will need
-to spin them off in multiple processes to bypass this limitation.
+何かかの理由があってプログラムで複数のRubyのVMが必要になったら、
+この制約を回避するために複数のプロセスに小分けにしなければいけません。
 
 ## VMを設定する ##
 
-You now have a bare-bones Ruby VM running, but you may want to set up a
-little more stuff before you start running Ruby code. To set the name of the
-Ruby script (e.g. `$0`) for error messages and such, use
+これでRubyのVMの実行の骨子を会得しました。
+でも、Rubyのコードの実行に先駆けてもう少し設定したいことがあるかもしれません。
+エラーメッセージとかのためにRubyのスクリプトの名前（例：`$0`）を設定したいときは、
+以下のようにします。
 
-{% highlight c %} ruby_script("new name")  {% endhighlight %}
+{% highlight c %}
+ruby_script("new name")
+{% endhighlight %}
 
-To set up the load path so that gems can be loaded with `require`, use
+gemが `require` で呼び出せるようにするためにロードパスを設定するには、
+次のようにします。
 
-{% highlight c %} ruby_init_loadpath()  {% endhighlight %}
+{% highlight c %}
+ruby_init_loadpath()
+{% endhighlight %}
 
-You can also pass options to the VM just like you would to `ruby` on the
-command line. This is handy for stuff like setting the warning level or
-verbose mode[^opt].
+VMにはコマンドラインで `ruby` するときと同じオプションを渡せます。
+警告水準や冗長モード[^opt]の設定に手頃です。
 
-{% highlight c %} {% include embed/options.c %} {% endhighlight %}
+{% highlight c %}
+{% include embed/options.c %}
+{% endhighlight %}
 
-The arguments to `ruby_options` are `argc` and `argv` just like a main
-function.  And just like the main of the `ruby` program, the VM expects to
-get some Ruby code when you call it. If you don't give it the filename of a
-script to load or code to run with `-e`, it will try to read from
-`stdin`. If you want to set options but _not_ run any Ruby code, you can
-pass it an empty line: `"-e "`.
+`ruby_options` への引数は main 関数と同じ `argc` と `argv` です。
+そして、 `ruby` プログラムの main と同じように、
+呼び出したときはVMは何らかのRubyのコードがあるものとしています。
+ロードするスクリプトのファイル名を与えていなかったり、
+`-e` で実行するコードがないときは、
+`stdin` から読み込もうとします。
+オプションを設定したいけれども、Rubyのコードを実行したく _ない_ ときには、
+`"-e "` のように空行を渡せばよいです。
 
-`ruby_options()` returns a "node" that represents the compiled Ruby code. In
-some cases (such as a syntax error) the node will be invalid and you
-shouldn't run it. `ruby_executable_node()` checks for this. If the node is
-valid, you can run it with `ruby_exec_node()`. The state returned by
-`ruby_executable_node()` (through the pointer) and by `ruby_exec_node()`
-will be nonzero if an exception was raised while compiling or running the
-code. You can [read the exception yourself](../c#rescue), or just pass
-`state` to `ruby_cleanup()` and it will print an appropriate error message.
+`ruby_options()` はコンパイルされたRubyのコードを表現する "node" を返します。
+場合によっては（文法エラーとか）nodeが不正で実行すべきでないときがあります。
+`ruby_executable_node()` はこのnodeを検査します。
+nodeが妥当であれば、 `ruby_exec_node()` で実行できます。
+`ruby_executable_node()` で（ポインタを介して）返る状態は、
+コンパイルの最中やコードの実行時に例外が発生したら、ゼロではない値になります。
+[例外を自前で読む](../c#rescue)こともできますし、
+`ruby_cleanup()` に `state` を渡して適切なエラーメッセージを表示させることもできます。
 
-Ruby currently doesn't support any other way of compiling and running code
-separately[^load].
+Rubyは現状ではコードの他のコンパイル・実行を別々にする方法を提供していません[^load]。
 
 ## やったね ##
 
-Now you're ready to interact with Ruby! Go back to the [C API](../c).
+これでRubyとやりとりすることができました！
+[C API](../c.ja)に戻りましょう。
 
 ## 脚註 ##
 

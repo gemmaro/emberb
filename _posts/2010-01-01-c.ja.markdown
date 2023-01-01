@@ -5,278 +5,321 @@ title: 'RubyのC API'
 
 ## 始める前に ##
 
-For the greatest chance of success with this guide, I recommend being fairly
-comfortable with C and _very_ comfortable with Ruby.
+このガイドを完全に理解するためには、C言語はそこそこ、Rubyは _かなり_ 慣れ親しんでいるとよいでしょう。
 
-Using Ruby's C API does not require any advanced C concepts, however the API
-is **huge** and largely **undocumented**. After you start using it, you will
-likely find yourself delving through the Ruby source code at some point to
-figure out the behavior of some obscure function or macro. The Ruby source
-uses some fairly sophisticated C, so you should at least feel comfortable
-reading it.
+RubyのC APIを使うのに発展的なC言語の概念は要りませんが、
+APIは**膨大**で大半が**文書化されていません**。
+APIを使い始めだすと、いつの日にか、
+はっきりしない関数やマクロの振舞いを見つけるためにRubyのソースコードを探ることになるでしょう。
+Rubyのソースはそこそこ洗練されたC言語で書かれているので、
+すいすい読めはするでしょうけれども。
 
-You can think of the C API is being a big, clunky alternative to writing
-normal Ruby code. However the simple, elegant patterns of Ruby can be pretty
-unintuitive once translated into the language of the API. Having a strong
-intuition for Ruby's internal logic and the ideas behind its design will go
-a long way toward steering you toward the correct API functions.
+C APIは、普通のRubyのコードよりもデカくてゴチャっとした書き方だと見なせます。
+とはいえ、簡素で明快なRubyの様式は、ひとたびAPIの言葉に翻訳されるとかなり非直感的になることがあります。
+Rubyの内部論理と設計の背後にある思想に裏打ちされたしっかりとした直感があれば、
+長い旅路のさなかでも正しいAPI関数へと進み続けられるでしょう。
 
 ## 分岐点 ##
 
-The official Ruby interpreter is written in C. That means that everything
-you can do in Ruby, you can also do using function calls to Ruby's C
-API. Why in the world would you do this? There are two good reasons:
+公式のRubyインタプリタはC言語で書かれています。
+Rubyでできるあらゆることは、RubyのC APIを呼び出す関数を使ってもできます。
+いったいなぜそんなことをするのでしょうか？
+もっともな理由が2つあります。
 
-1. You're writing some fancy application in C or C++ and you want some parts
-   of your code to leverage the dynamic flexibility of Ruby. You can run the
-   Ruby interpreter inside of your application and use the API to retrieve
-   the results of Ruby code.
-2. You're writing some fancy application in Ruby and you want some parts of
-   your code to leverage the speed and power of C (or an existing C
-   library). You can expose C code to Ruby using the API and compile a
-   special library that Ruby can `require`.
+1. 意匠を凝らしたC言語ないしC++のアプリケーションを書いている最中で、
+   Rubyの動的な柔軟性をコードのいくつかの箇所に使って、
+   効果を引き出そうとするとき。
+   アプリケーションの内部でRubyインタプリタを実行でき、
+   Rubyのコードの結果をAPIで受け取ることができます。
+2. 意匠を凝らしたRubyのアプリケーションを書いている最中で、
+   C言語（もしくは既にあるC言語のライブラリ）の速度と能力を
+   コードのいくつかの箇所に使って、
+   効果を引き出そうとするとき。
+   APIを使えば、RubyにC言語のコードをさらけ出すことができます。
+   そうしてできた特別なライブラリをコンパイルするとRubyから `require` できます。
 
-You'll need to structure your C code differently depending on your goal. If
-you want to embed the Ruby interpreter in C, read [Running Ruby in
-C](../embed). If you want to `require` a compiled C library, read [Running C
-in Ruby](../extend).  After you finish that, come back here to learn about
-the API.
+目標によってC言語のコードの組み立てかたは変わってきます。
+C言語にRubyインタプリタを組込みたければ、
+[C言語でRubyを実行する](../embed.ja)をお読みください。
+コンパイルされたC言語のライブラリを `require` したければ、
+[RubyでC言語を実行する](../extend.ja)をお読みください。
+どちらかを読み終えたら、ここに戻ってきてAPIについて学びましょう。
 
 ## Eval ##
 
-The quick 'n' dirty way to run some Ruby code from C is to `eval` it
+ちゃちゃっと雑にCでRubyを動かすには、 `eval` します。
 
-{% highlight c %} {% include c/eval.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/eval.h %}
+{% endhighlight %}
 
-This is a good fallback if you can't find an API function for something that
-you want to do[^wrap]. `rb_eval_string_protect()` returns the result of the
-Ruby code and sets `state` to some nonzero value if any exception is
-raised. `VALUE` is the C data type for all Ruby objects, as explained in the
-next section.
+これはやりたいことのためのAPI関数が見つからないときは選択肢に入ります[^wrap]。
+`rb_eval_string_protect()` はRubyのコードの結果を返し、
+何か例外が発生したときはゼロではない値を `state` に設定します。
+`VALUE` はあらゆるRubyのオブジェクトのためのCのデータ型です。
+次の節で後述します。
 
-If `state` is nonzero, `result` will be a `VALUE` representing `nil` and you
-should handle the exception. Alternatively, you can use `rb_eval_string()`
-which doesn't take a `state` argument and instead raises any exceptions
-normally. See [Exceptions](#exceptions) for how to handle both of these
-cases.
+`state` がゼロではないとき、
+`result` は `nil` を表す `VALUE` になっているでしょうから、
+そのときは例外に対処しなければいけません。
+代わりに `rb_eval_string()` を使うこともできます。
+この関数は引数 `state` を取らず、通常の方法で例外を発生させます。
+これら2つの場合での制御方法については[例外](#exceptions)節を参照してください。
 
-Unlike `eval` in Ruby, these functions evaluate the string in an isolated
-binding&mdash;like when you `require` something. So local variables in the
-string will not be accessible from elsewhere and vice versa.
+Rubyでの `eval` とは異なり、
+これらの関数は独立の束縛状態で評価します。
+ちょうど何かを `require` するときと同じです。
+したがって文字列中のローカル変数は他の場所から参照できませんし、逆もまた然りです。
 
-However, like using `eval` in Ruby, using these functions is not a good
-practice. It's inefficient since the parser is invoked and it somewhat
-defeats the point of writing in C. If you just want to call some Ruby
-method, we'll go over a better way to do that [later on](#send).
+しかし、Rubyで `eval` するときのように、
+これらの関数を使うことはあまりよくありません。
+パーサが起動されなければいけないのが非効率ですし、
+Cで書くことの利点が失われています。
+Rubyのメソッドを呼びたいだけであれば、
+もっといい方法を[後述](#send)します。
 
 ## VALUE ##
 
-Before we go any further, we need to understand `VALUE`s. Due to the danger
-of monkeying around inside the VM, the API never lets you directly access
-Ruby's objects[^intern]. Instead, your C code will store and pass around
-_pointers_ to Ruby objects (like how variables in Ruby contain pointers to
-objects). These pointers can be passed to various API functions and macros
-that will safely access and manipulate the Ruby objects. `VALUE` is the
-API-defined C type for these pointers.
+先に進む前に、
+`VALUE` について理解しなければいけません。
+VMの内部をめちゃくちゃにしてしまう危険があるので、
+APIからは直接Rubyのオブジェクトを扱えません[^intern]。
+その代わり、CのコードはRubyのオブジェクトへの _ポインタ_
+を保持したり受け渡したりします（Rubyの変数がオブジェクトへのポインタを持つのと同じです）。
+ポインタはさまざまなAPIの関数やマクロに渡すことができ、
+そのためRubyのオブジェクトに安全にアクセスしたり操作したりできます。
+`VALUE` はAPIで定義されたCの型で、このポインタを扱います。
 
-Probably the most frequent question you'll have is: "is this `VALUE` the
-right type?". There are a couple macros for performing this test, and both
-take a [`T_` constant][datatypes] corresponding to the Ruby class you're
-testing for e.g. `T_STRING`, `T_ARRAY`, etc.
+おそらく最も頻繁に湧いてくる疑問は次のようなものでしょう。
+「この `VALUE` は正しい型なのだろうか？」
+この疑問に答えるマクロは2つあり、
+そのどちらも[`T_` 定数](datatypes)を引数に取ります。
+この定数は比較したい型に対応するRubyのクラスです。
+例えば `T_STRING` や `T_ARRAY` などです。
 
 [datatypes]:
 https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types
 
-{% highlight c %} {% include c/checktype.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/checktype.h %}
+{% endhighlight %}
 
-These tests work for subclasses too: if you're testing for a subclass of
-`Array` use `T_ARRAY`, if you're testing for a subclass of `Object` use
-`T_OBJECT`[^tdata]. That being said, these tests _do not work like `is_a?`_;
-even though everything in Ruby `is_a? Object`, testing against `T_OBJECT`
-will only return true for objects for which there is no better fitting
-constant.
+この検査はサブクラスでも同様にはたらきます。
+`Array` のサブクラスであることを確認したいときは `T_ARRAY` を使いますし、
+`Object` のサブクラスであることを確認したいときには `T_OBJECT` を使います[^tdata]。
+つまり、この検査は _`is_a?` と同じではない_ ということでもあります。
+Rubyのありとあらゆるものについて `is_a? Object` であるにせよ、
+`T_OBJECT` に対する検査は、
+他にもっと適した定数がないときにのみ真となります。
 
-For certain classes, there are specialized macros that are a little more
-efficient than the previous:
+特定のクラスには、前述したものより少し効率的なマクロが使えます。
 
-{% highlight c %} {% include c/check_p.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/check_p.h %}
+{% endhighlight %}
 
-If you want to handle a `VALUE` that could be one of a variety of types, the
-previous macros can be a little clumsy. In that case you can use the
-`TYPE()` macro to get the `T_` constant and handle your logic in a `switch`:
+いくつかの型を取りうる `VALUE` を扱いたいときは、
+前述のマクロはちょっと不恰好です。
+そんな場合は `TYPE()` マクロを使って `T_` 定数を取得し、
+`switch` 文で制御できます。
 
-{% highlight c %} {% include c/type.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/type.h %}
+{% endhighlight %}
 
 ### 定数 ###
 
-Most of the standard Ruby constants have global `VALUE`s defined for them in
-the API so you don't need an API call to access them. Modules are prefixed
-with `rb_m` e.g. `rb_mKernel`; classes are prefixed with `rb_c`
-e.g. `rb_cObject`; subclasses of `Exception` are prefixed with `rb_e`
-e.g. `rb_eRuntimeError`; and the standard IO streams are prefixed with `rb_`
-e.g. `rb_stderr`. `nil`, `false`, and `true` are prefixed with `Q`
-e.g. `Qnil`.[^undef] As a convenience, `Qfalse` is also false in C (`0`).
+ほとんどの標準的なRubyの定数はAPIで大域的な `VALUE` が定義されています。
+したがってそれらの定数を使うのにAPIの呼び出しは要りません。
+モジュールは `rb_m` で前置されます。
+たとえば `rb_mKernel` です。
+クラスは `rb_c` で前置されます。
+たとえば `rb_cObject` です。
+`Exception` のサブクラスは `rb_e` で前置されます。
+たとえば `rb_eRubtimeError` です。
+標準的なIOストリームは `rb_` で前置されます。
+たとえば `rb_stderr` です。
+`nil`, `false`, `true` は `Q` で前置されます。
+例えば `Qnil` です。
+[^undef] 便宜上、 `Qfalse` はCの偽値 (`0`) でもあります。
 
 ### 変換 ###
 
-A few Ruby classes are analogous to C types. These classes will be your
-primary means of transferring data between C and Ruby.
+いくつかのRubyのクラスはCの型に対応します。
+この対応する組み合わせは、CとRubyの間のデータのやりとりをするには一番です。
 
 #### Fixnum ####
 
-Ruby's `Fixnum` corresponds to C's `long`. The `FIX2LONG()` macro gives you
-the `long` for a `Fixnum`. For smaller C types there's `FIX2UINT()`,
-`FIX2INT()`, and `FIX2SHORT()`, but these will raise a `RangeError` if the
-number wouldn't fit.
+Rubyの `Fixnum` はCの `long` に対応します。
+`FIX2LONG()` マクロにより、 `long` を `Fixnum` に変換できます。
+より小さいCの型については、
+`FIX2UINT()`, `FIX2INT()`, `FIX2SHORT()` があります。
+しかし、これらのマクロは変換時に数値が大きすぎて収まらない場合は `RangeError` を生じます。
 
-In the other direction, `LONG2FIX()` works for `long` **and** every smaller
-integer C type[^chr].
+逆向きの変換もできて、
+`LONG2FIX()` は `long` *に加えて* `long` より小さい全てのCの整数型からの変換に使えます。
 
 #### Bignum ####
 
-Ruby's `Bignum` is for anything bigger than a `Fixnum`, so it works if you
-need to work with `long long`, for example. `rb_big2ll()` and `rb_big2ull()`
-will get you `long long` and `unsigned long long` from a `Bignum` (or raise
-a `RangeError` if appropriate).
+Rubyの `Bignum` は `Fixnum` より大きいあらゆる整数に使えます。
+例えば `long long` が必要なときとかです。
+`rb_big2()` と `rb_big2u()` を使えば、 `Bignum` から
+それぞれ `long long` や `unsigned long long` に直せます。
+（もしくは `RangeError` が発生します。）
 
-See [Numeric](#numeric) for the reverse direction.
+逆向きの変換については [数値](#numeric) を参照してください。
 
 #### Float ####
 
-Ruby's `Float` corresponds to C's `double`. The `RFLOAT_VALUE()` macro gives
-you the `double` for a `Float`.
+Rubyの `Float` はCの `double` に対応します。
+`RFLOAT_VALUE()` マクロを使えば、 `Float` から `double` が得られます。
 
-See [Numeric](#numeric) for the reverse direction.
+逆向きの変換については [数値](#numeric) を参照してください。
 
 #### Numeric ####
 
-There are a host of "NUM" macros that try to be more duck-typish about
-things.  These will convert their C types to whatever Ruby `Numeric`
-subclass seems appropriate:
+たくさんの "NUM" マクロがあり、
+ダックタイピングっぽい使いかたをしています。
+これらのマクロはCの型を適切と思われるRubyの `Numeric` のサブクラス（のインスタンス）に変換します。
 
-* `INT2NUM()` for `int`
-* `UINT2NUM()` for `unsigned int`
-* `LONG2NUM()` for `long`
-* `ULONG2NUM()` for `unsigned long`
-* `LL2NUM()` for `long long`
-* `ULL2NUM()` for `unsigned long long`
-* `DBL2NUM()` for `double`
+* `INT2NUM()` は `int` からの変換用
+* `UINT2NUM()` は `unsigned int` からの変換用
+* `LONG2NUM()` は `long` からの変換用
+* `ULONG2NUM()` は `unsigned long` からの変換用
+* `LL2NUM()` は `long long` からの変換用
+* `ULL2NUM()` は `unsigned long long` からの変換用
+* `DBL2NUM()` は `double` からの変換用
 
-And there are macros for the opposite direction, which will try to convert
-whatever `Numeric` to the desired C type. These will raise a `RangeError` if
-the value wouldn't fit or `TypeError` if there is no implicit numeric
-conversion (so you can safely pass non-`Numeric` objects).
+そして、逆方向のマクロもあります。
+これらのマクロは、あらゆる `Numeric` な数値から欲しいCの型の値への変換を試みるものです。
+値が範囲に収まらなかったときは `RangeError` を発生させますし、
+暗黙の数値の変換ができなかったときは `TypeError` が発生します。
+（なので `Numeric` ではないオブジェクトを渡しても大丈夫です。）
 
-* `NUM2CHR()` for `char` (works for `unsigned char` too)
-* `NUM2SHORT()` for `short`
-* `NUM2USHORT()` for `unsigned short`
-* `NUM2INT()` for `int`
-* `NUM2UINT()` for `unsigned int`
-* `NUM2LONG()` for `long`
-* `NUM2ULONG()` for `unsigned long`
-* `NUM2LL()` for `long long`
-* `NUM2ULL()` for `unsigned long long`
-* `NUM2DBL()` for `double`
+* `NUM2CHR()` は `char` からの変換用（`unsigned char` からでも変換できます）
+* `NUM2SHORT()` は `short` からの変換用
+* `NUM2USHORT()` は `unsigned short` からの変換用
+* `NUM2INT()` は `int` からの変換用
+* `NUM2UINT()` は `unsigned int` からの変換用
+* `NUM2LONG()` は `long` からの変換用
+* `NUM2ULONG()` は `unsigned long` からの変換用
+* `NUM2LL()` は `long long` からの変換用
+* `NUM2ULL()` は `unsigned long long` からの変換用
+* `NUM2DBL()` は `double` からの変換用
 
-A **major** gotcha with these is that _none_ of the macros for converting to
-unsigned types raise an exception if you pass a negative value (surprisingly
-this [isn't a bug][bug]). `NUM2CHR()` also has a couple quirks: it will only
-raise a `RangeError` if the value is too big for an _int_ and when passed a
-string it returns the numeric value of the first character rather than
-raising a `TypeError`.
+これらのマクロについて **特に** 注意すべき点は、
+符号なしの型に変換に変換する *どの* マクロも、負値を渡したときに例外が発生しないということです。
+（驚くべきことに[バグではありません][bug]。）
+`NUM2CHR()` にはもう2つ妙なところがあります。
+変換前の値が _int_ には大きすぎるときに `RangeError` のみ生じることと、
+文字列を渡したときに `TypeError` を発生させず最初の文字の数値を返すということです。
 
-If you know that the conversion is safe, you should prefer the macros from
-the previous sections as they skip the range checks.
+変換が安全だとわかっていれば、
+前の節のマクロのほうを使うべきです。
+なぜなら範囲の確認を省けるためです。
 
 [bug]: https://bugs.ruby-lang.org/issues/9089
 
 #### String ####
 
-Ruby's `String` kinda corresponds to C's `char*`. The simplest macro is
-`StringValueCStr()` which returns a null-terminated `char*` for a
-`String`. The problem here is that a Ruby `String` _might contain nulls_ -
-in which case `StringValueCStr()` will raise an `ArgumentError`! Instead you
-can use the macros `StringValuePtr()` and `RSTRING_LEN()` to get a (possibly
-unterminated)  `char*` and the string's length as a `long`.
+Rubyの `String` はだいたいCの `char*` に対応します。
+もっとも簡素なマクロは `StringValueCStr()` です。
+このマクロは `String` からnull終端付きの `char*` を返します。
+ただしこれには問題があって、Rubyの `String` が *nullを含むかもしれません*。
+そのような場合には `StringValueCStr()` は `ArgumentError` を発生させます！
+その代わりに `StringValuePtr()` マクロと `RSTRING_LEN()` マクロを使えば、それぞれ
+（終端が付いていない可能性がある） `char*` とその長さの `long` 値を取得できます。
 
-Conversely, if you have a null-terminated `char*`, you can use
-`rb_str_new_cstr()` to create a Ruby `String`. And if you want your `String`
-to contain nulls, use `rb_str_new()` which takes a `char*` and the string's
-length (as a `long`). The encodings of these strings will be `ASCII-8BIT`,
-which is often undesirable in Ruby. You can pass the string `VALUE` to
-`rb_str_export_locale()` to get a new `VALUE` with your locale's
-encoding[^wchar].
+逆に、null終端付きの `char*` からRubyの `String` への変換には、
+`rb_str_new_cstr()` が使えます。
+そして、もし `String` にnullを含めたいときは、
+`rb_str_new()` を使います。
+`rb_str_new()` は `char*` と文字列の長さ（型は `long`）を引数に取ります。
+これらの文字列のエンコーディングは `ASCII-8BIT` なのですが、
+Ruby側のコードで望んだものではないこともあります。
+そんなときは文字列の `VALUE` を `rb_str_export_locale()` に渡して、
+自分のロケールのエンコーディングでの `VALUE` を取得することができます。
 
-If you want to build more complex strings, you can do so using the
-`printf`-like function `rb_sprintf()`. This accepts all of the usual
-conversion specifiers, but also accepts an API-defined specifier `PRIsVALUE`
-which takes a corresponding `VALUE` argument. This conversion specifier
-substitutes a string by sending the object `to_s`. You can substitute the
-result of `inspect` instead by adding the `+` flag.
+もっと複雑な文字列を構築したければ、
+`printf` のような関数 `rb_sprintf()` でできます。
+この関数では通常の変換での全ての指定子だけではなく、
+APIで定義された指定子 `PRIsVALUE` も使えます。
+`PRIsVALUE` は対応する `VALUE` を引数に取ります。
+この変換指定子はオブジェクトに `to_s` メッセージを送って文字列にに置き換えます。
+`+` フラグを加えることで `inspect` を使った結果の文字列に置き換えることもできます。
 
-{% highlight c %} {% include c/printf.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/printf.h %}
+{% endhighlight %}
 
-This custom specifier should work for any `printf`-like function in the
-API.  `PRIsVALUE` works by hijacking the `i` conversion specifier, so when
-printing an `int` you should use `d` to ensure that Ruby doesn't think it's
-actually a `VALUE`.
+この自前の指定子はAPIにあるあらゆる `printf` っぽい関数で使えるでしょう。
+`PRIsVALUE` は `i` 変換指定子を乗っ取ることで実現されているので、
+`int` を文字列にするときは `d` を使って、
+Rubyに「それって実は `VALUE` なんじゃないか」と勘違いさせないようにするべきです。
 
 #### Symbol ####
 
-The API defines a C type `ID` which corresponds to Ruby's `Symbol`. Just
-like how Ruby passes around `Symbol`s as method or variable names, many API
-calls that need a method or variable name use an `ID`. To convert between a
-`Symbol` and an `ID` use the `SYM2ID()` and `ID2SYM()` macros. Instead of a
-`Symbol` you may want to convert to/from a `char*` C string. To get an `ID`
-from a `char*` use `rb_intern()` and for the reverse use `rb_id2name()`.
+APIではRubyの `Symbol` に対応するCの型 `ID` が定義されています。
+Rubyが `Symbol` をメソッドや変数名として受け渡しするように、
+多くのAPI呼び出しでメソッドや変数の名前を `ID` を使うようにしています。
+`Symbol` と `ID` を変換するには、 `SYM2ID()` と `ID2SYM()` マクロを使います。
+`Symbol` ではなくCの文字列 `char*` との双方向に変換したいときもあるでしょう。
+`char*` から `ID` を取得するためには `rb_intern()` を、
+その逆向きでは `rb_id2name()` を使います。
 
-Since many API functions require an `ID` and in many cases you will not have
-the appropriate `ID` at hand, the API also defines a slew of functions that
-instead take a `char*` and which do the `rb_intern()` call for you. Since
-these functions are often more readable and the overhead of the
-`rb_intern()` call is negligible, I have opted to use the `char*` versions
-of the API functions wherever possible in this guide. If you find yourself
-frequently using a certain C string in API calls, you may see some
-performance benefit by storing the `ID` and using the `ID` versions of the
-functions (though you'll have to look these up yourself in the Ruby
-headers).
+多くのAPI関数が `ID` を必要としていますが、
+適切な `ID` が手元にないことも沢山あるでしょう。
+そのため、代わりに `char*` を引数に取って自動で `rb_intern()` してくれる関数も沢山あります。
+これらの関数はより読みやすく、 `rb_intern()` の呼び出しでのオーバーヘッドは無視できる程度なので、
+この導入記事では可能な限り `char*` バージョンのAPI関数が使われる傾向にあります。
+特定のCの文字列をAPIの呼出しで頻繁に使う場合は、
+`ID` に変換して保管しておき、
+`ID` バージョンの関数を使うことでいくらかのパフォーマンス向上を確かめられるかもしれません。
+（Rubyのヘッダから自分で見つける必要がありますが。）
 
-## Send ##
+## send ##
 
-This section contains API functions for directly calling Ruby methods. You
-should prefer these functions to `rb_eval_string()` and the like whenever
-possible. They are faster since they skip the parser and allow for some
-compile-time checks.
+この節には直接Rubyのメソッドを呼び出すAPI関数が含まれます。
+`rb_eval_string()`などよりも可能なときはいつでもこれらの関数を贔屓すべきです。
+これらの関数は構文解析の過程が飛ばされますしいくつかのコンパイル時検査が免除されるのでより速いのです。
 
-The easiest way to send an object a method looks like this:
+一番簡単な方法はオブジェクトにメソッドをこのように送ることです。
 
-{% highlight c %} {% include c/funcall.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/funcall.h %}
+{% endhighlight %}
 
-This is roughly equivalent to the Ruby code
+これは大雑把には次のRubyコードと同じです。
 
-{% highlight ruby %} {% include c/funcall.rb %} {% endhighlight %}
+{% highlight ruby %}
+{% include c/funcall.rb %}
+{% endhighlight %}
 
-The first argument is the receiver. The next is the [`ID`](#symbol) for the
-method name. The third argument is the number of method arguments, which is
-needed since `rb_funcall()` is a varargs function. Then come the actual
-method arguments.
+最初の引数はレシーバです。
+その次はメソッド名用の[`ID`](#symbol)です。
+3つ目の引数はメソッド引数の数です。
+これの引数は`rb_funcall()`がvarargs関数であることから必要になります。
+それから実際メソッド引数に行き着きます。
 
-Alternatively, you can use `rb_funcallv()` where the fourth argument is a
-`VALUE*` pointing to a C array of arguments. This also has the variant
-`rb_funcallv_public()` which is like `public_send` in Ruby.
+その代わりに、4つ目の引数が引数のCの配列を指す`VALUE*`であるような、`rb_funcallv()`を使うことができます。
+これにもRubyでの`public_send`のような派生`rb_funcallv_public()`があります。
 
 ### Passing Blocks ###
 
 If you want to pass a `Proc` as the block to a method, that's easy. The
 function is just like `rb_funcallv()` but with the proc on the end.
 
-{% highlight c %} {% include c/proc.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/proc.h %}
+{% endhighlight %}
 
 If you don't have a proc for the block, you'll need to define a certain kind
 of C function to represent the block. Then there's a different variant of
 `rb_funcallv()` but with a couple extra arguments for the block:
 
-{% highlight c %} {% include c/block.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/block.h %}
+{% endhighlight %}
 
 The last argument to `rb_block_call()` is helpful for passing in values
 outside the block function's scope, but in this example we don't need it
@@ -302,7 +345,9 @@ one `VALUE` argument (the receiver). E.g. `rb_ary_pop()` for `Array#pop`,
 The API can also load some Ruby code from a script. There's an equivalent to
 `require`:
 
-{% highlight c %} {% include c/require.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/require.h %}
+{% endhighlight %}
 
 As with `require`, these could raise exceptions. Read the [next
 section](#exceptions) for how to handle them.
@@ -310,7 +355,9 @@ section](#exceptions) for how to handle them.
 There are also functions for `load` if you want to load a script multiple
 times:
 
-{% highlight c %} {% include c/load.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/load.h %}
+{% endhighlight %}
 
 Just like [`load` in Ruby][rbload], these functions can wrap the loaded code
 in an anonymous module to protect the global namespace. Just pass a nonzero
@@ -324,7 +371,9 @@ value for the second argument.
 
 To raise an exception, use:
 
-{% highlight c %} {% include c/raise.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/raise.h %}
+{% endhighlight %}
 
 The first and second arguments are the exception class and
 message&mdash;like `raise` in Ruby. The big difference is that the message
@@ -344,14 +393,18 @@ There are several ways to rescue exceptions using the API. All of them
 require the code you're protecting to be in a function that takes and
 returns a single `VALUE`.
 
-{% highlight c %} {% include c/danger.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/danger.h %}
+{% endhighlight %}
 
 Unless you wanted to rescue a function of exactly this type, you will
 probably need to make a wrapper function in this format that runs the
 desired code. The way to access a rescued exception is also independent of
 the way it is rescued:
 
-{% highlight c %} {% include c/handle.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/handle.h %}
+{% endhighlight %}
 
 `rb_errinfo()` essentially gives you the `VALUE` of Ruby's `$!` (which will
 be `Qnil` if no exception occurred). Unlike in Ruby, you must manually clear
@@ -369,7 +422,9 @@ exceptions raised in the API can be rescued as usual in your Ruby code. If
 you want to rescue an exception in the API, you can use `rb_rescue2()` which
 is similar to Ruby's `rescue`.
 
-{% highlight c %} {% include c/rescue2.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/rescue2.h %}
+{% endhighlight %}
 
 The first two arguments are the function to protect and its argument, the
 next two are the function to call if an exception is raised and its
@@ -400,7 +455,9 @@ uncaught exception will segfault the VM and kill your program**. You could
 call `rb_rescue2()` with `rb_eException`, but there's another approach for
 rescuing all exceptions:
 
-{% highlight c %} {% include c/protect.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/protect.h %}
+{% endhighlight %}
 
 Like `rb_rescue2()`, the first two arguments are for calling the function to
 protect. However, like `rb_eval_string_protect()`, if an exception is raised
@@ -416,7 +473,9 @@ first.  That may sound simple enough, but that means that if you want the
 usual `begin; rescue; ensure; end` structure as in Ruby, you'll need another
 layer of wrapping:
 
-{% highlight c %} {% include c/ensure.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/ensure.h %}
+{% endhighlight %}
 
 Like `ensure` in Ruby, the return value of `ensure_func()` is never used. If
 no exception occurs, `rb_rescue()` will return the value of `begin_func()`
@@ -449,12 +508,16 @@ bar; end; end`, think `Foo = Class.new; Foo.define_method(:bar) {}`.
 
 The simplest way to deal with globals is:
 
-{% highlight c %} {% include c/global.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/global.h %}
+{% endhighlight %}
 
 If you're frequently accessing Ruby's globals, you can set up a `VALUE`
 which will be automatically synchronized with one.
 
-{% highlight c %} {% include c/global2.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/global2.h %}
+{% endhighlight %}
 
 The `VALUE` should be initialized before you create the global in Ruby and
 it should be global in C as well&mdash;you don't want it to go out of scope
@@ -468,14 +531,18 @@ If you ever create a global `VALUE` in C which is _not_ exposed to Ruby, you
 must tell the garbage collector about it to prevent it from being
 prematurely cleaned up:
 
-{% highlight c %} {% include c/gc.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/gc.h %}
+{% endhighlight %}
 
 ### Class and Instance Variables ###
 
 Getting/setting instance variables is similar to the simple way of accessing
 globals, but of course you need an object to get the variable from.
 
-{% highlight c %} {% include c/ivar.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/ivar.h %}
+{% endhighlight %}
 
 There isn't an automatic way to synchronize instance variables like you can
 with globals.
@@ -489,13 +556,17 @@ course the first argument should be a class object.
 
 Constants are defined similarly, but with the module to define them under:
 
-{% highlight c %} {% include c/constant.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/constant.h %}
+{% endhighlight %}
 
 You undefine a constant by setting it to `Qundef`. Getting a constant's
 `VALUE` is a little nuanced. The API function you call depends on what you
 want to happen if the constant is _not_ defined in the module you specify:
 
-{% highlight c %} {% include c/const_get.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/const_get.h %}
+{% endhighlight %}
 
 All of these API calls will get private constants too.
 
@@ -503,11 +574,15 @@ All of these API calls will get private constants too.
 
 Defining modules is super easy.
 
-{% highlight c %} {% include c/module.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/module.h %}
+{% endhighlight %}
 
 Classes work the same way but they also need a superclass.
 
-{% highlight c %} {% include c/class.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/class.h %}
+{% endhighlight %}
 
 ### Methods ###
 
@@ -517,7 +592,9 @@ that the method calls. The function must return a `VALUE` and have one
 `VALUE` argument for the receiver of the method. There are three ways you
 can define its other arguments:
 
-{% highlight c %} {% include c/methodc.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/methodc.h %}
+{% endhighlight %}
 
 So really the API only lets you define two types of methods: ones that take
 a fixed number of arguments, and ones that slurp up all of their
@@ -532,7 +609,9 @@ fancier method definition in Ruby. Thankfully, the API has a shortcut for
 doing exactly that.  To use it, you should use the C array function
 definition, then you can pass `argc` and `argv` along to:
 
-{% highlight c %} {% include c/scan.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/scan.h %}
+{% endhighlight %}
 
 Here `fmt` is a format string describing how the method arguments would look
 in Ruby. The string can have at most 6 characters, where each character
@@ -559,7 +638,9 @@ splatted, 1 block).
 `rb_scan_args()` unpacks `argv` using the `VALUE*`s you pass it and will
 raise a fitting exception if the wrong number of arguments were passed.
 
-{% highlight c %} {% include c/methodex.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/methodex.h %}
+{% endhighlight %}
 
 You can also use the return value of `rb_scan_args()` to determine how the
 function was called. It returns the number of arguments that were passed in
@@ -569,7 +650,9 @@ Ruby.
 
 There are two ways to check if your C method has been called with a block:
 
-{% highlight c %} {% include c/checkblock.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/checkblock.h %}
+{% endhighlight %}
 
 There are two ways to capture the block as a proc. If you're using
 `rb_scan_args()` for your method arguments, just include `&` in your format
@@ -581,7 +664,9 @@ equivalent to `Proc.new` which converts the method's block to a proc:
 
 If you don't want to capture the block, there are a few ways to yield to it:
 
-{% highlight c %} {% include c/yield.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/yield.h %}
+{% endhighlight %}
 
 There's also `rb_yield_values2()` which is like `rb_yield_values()` but
 instead of varargs the second argument is a `VALUE*`[^yield].
@@ -590,7 +675,9 @@ instead of varargs the second argument is a `VALUE*`[^yield].
 
 You might want to call `super` in your method.
 
-{% highlight c %} {% include c/super.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/super.h %}
+{% endhighlight %}
 
 Unlike in Ruby `rb_call_super()` will **not** implicitly pass along the
 method arguments to the super if you give it no arguments. You must
@@ -612,19 +699,25 @@ arguments.  `argc` should be:
 
 Everything is pretty self-explanatory from there:
 
-{% highlight c %} {% include c/methodr.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/methodr.h %}
+{% endhighlight %}
 
 There's also a shortcut for defining a method in a module _and_ its
 singleton class. This is used a lot in `Math`, for example, letting you
 `include Math` to avoid typing `Math.` before every method call.
 
-{% highlight c %} {% include c/modulefunc.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/modulefunc.h %}
+{% endhighlight %}
 
 ### Other Stuff ###
 
 Some simple API functions for class/method definitions:
 
-{% highlight c %} {% include c/etc.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/etc.h %}
+{% endhighlight %}
 
 ## Data ##
 
@@ -641,7 +734,9 @@ pointer and cast it back to the correct type. But where does this
 encapsulation occur? Let's answer that question with a question: what
 happens when you tell Ruby to create an object using `new`? Basically this:
 
-{% highlight ruby %} {% include c/new.rb %} {% endhighlight %}
+{% highlight ruby %}
+{% include c/new.rb %}
+{% endhighlight %}
 
 Before calling the _instance method_ `initialize` that we know so well,
 `new` first calls the _class method_ `allocate` to actually create the
@@ -649,7 +744,9 @@ object. That is the method you'll need to define if you want your objects to
 wrap C data. The following example creates a class `Foo` which wraps an
 `int` that can be set by `initialize`:
 
-{% highlight c %} {% include c/wrap.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/wrap.h %}
+{% endhighlight %}
 
 In most cases you'll probably be wrapping something more complicated (like a
 `struct`), but the principles will be the same. After allocating the C data,
@@ -709,7 +806,9 @@ if your allocation is just a `malloc()` as in the example, the macro
 `TypedData_Make_Struct()` does the allocation for you _and_ wraps it. We
 could shorten the previous example as such:
 
-{% highlight c %} {% include c/makestruct.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/makestruct.h %}
+{% endhighlight %}
 
 ### Marking ###
 
@@ -736,7 +835,9 @@ In the following example, we'll wrap a C `struct` which contains a
 `VALUE`. The mark function has the same signature as the free function and
 all it has to do is mark any `VALUE`s in the `struct`:
 
-{% highlight c %} {% include c/mark.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/mark.h %}
+{% endhighlight %}
 
 If your `struct` contains a pointer to a C array of `VALUE`s, you can
 instead use `rb_gc_mark_locations()` which takes two arguments: the pointers
@@ -760,7 +861,9 @@ If you just want to create normal Ruby `Thread`s using the API (and don't
 mind the GVL, as described in the next section), there's an easy way to do
 that:
 
-{% highlight c %} {% include c/thread.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/thread.h %}
+{% endhighlight %}
 
 Other `Thread` functions are in `ruby/intern.h` (but there's always
 `rb_funcall()` for everything else).
@@ -791,7 +894,9 @@ The code to do this is considered so fancy by the Ruby developers that you
 actually need to include another header to use it. First we'll look at the
 slightly simpler way to release the GVL:
 
-{% highlight c %} {% include c/gvl2.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/gvl2.h %}
+{% endhighlight %}
 
 Since the function that is run without the GVL gets and returns data using
 `void*`, you may want to define a `struct` for passing data via pointers.
@@ -801,7 +906,9 @@ in parallel, it can't be interrupted (by signals, `Thread.kill`, etc.)! To
 allow for that you must pass an unblocking function using the last two
 arguments:
 
-{% highlight c %} {% include c/gvl.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/gvl.h %}
+{% endhighlight %}
 
 The unblocking function is called in the event of an interrupt. To make it
 work, you will probably need to pass a pointer to both functions that can be
@@ -817,7 +924,9 @@ If you go through all of that effort to release the GVL only to find that
 you need to make an API call in your unlocked thread, there's a function to
 temporarily reacquire the GVL:
 
-{% highlight c %} {% include c/with_gvl.h %} {% endhighlight %}
+{% highlight c %}
+{% include c/with_gvl.h %}
+{% endhighlight %}
 
 ## See Also ##
 
@@ -861,7 +970,8 @@ another section to this guide going over them:
 If you find some function in the header that isn't documented anywhere, your
 next stop should be the Ruby source code.
 
-{% highlight shell_session %} $ git clone https://github.com/ruby/ruby.git
+{% highlight shell_session %}
+$ git clone https://github.com/ruby/ruby.git
 {% endhighlight %}
 
 When reading through the source code, always keep the headers at hand: there

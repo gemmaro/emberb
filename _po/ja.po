@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2022-05-23 23:00+0900\n"
-"PO-Revision-Date: 2023-01-01 23:08+0900\n"
+"PO-Revision-Date: 2023-01-01 23:18+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -720,7 +720,7 @@ msgstr ""
 #: _posts/2010-01-01-c.markdown:247
 #, no-wrap
 msgid "Send"
-msgstr ""
+msgstr "send"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:253
@@ -730,11 +730,14 @@ msgid ""
 "possible. They are faster since they skip the parser and allow for some "
 "compile-time checks."
 msgstr ""
+"この節には直接Rubyのメソッドを呼び出すAPI関数が含まれます。\n"
+"`rb_eval_string()`などよりも可能なときはいつでもこれらの関数を贔屓すべきです。\n"
+"これらの関数は構文解析の過程が飛ばされますしいくつかのコンパイル時検査が免除されるのでより速いのです。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:255
 msgid "The easiest way to send an object a method looks like this:"
-msgstr ""
+msgstr "一番簡単な方法はオブジェクトにメソッドをこのように送ることです。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:259
@@ -747,7 +750,7 @@ msgstr ""
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:261
 msgid "This is roughly equivalent to the Ruby code"
-msgstr ""
+msgstr "これは大雑把には次のRubyコードと同じです。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:265
@@ -765,6 +768,11 @@ msgid ""
 "needed since `rb_funcall()` is a varargs function. Then come the actual "
 "method arguments."
 msgstr ""
+"最初の引数はレシーバです。\n"
+"その次はメソッド名用の[`ID`](#symbol)です。\n"
+"3つ目の引数はメソッド引数の数です。\n"
+"これの引数は`rb_funcall()`がvarargs関数であることから必要になります。\n"
+"それから実際メソッド引数に行き着きます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:274
@@ -773,6 +781,8 @@ msgid ""
 "`VALUE*` pointing to a C array of arguments. This also has the variant "
 "`rb_funcallv_public()` which is like `public_send` in Ruby."
 msgstr ""
+"その代わりに、4つ目の引数が引数のCの配列を指す`VALUE*`であるような、`rb_funcallv()`を使うことができます。\n"
+"これにもRubyでの`public_send`のような派生`rb_funcallv_public()`があります。"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:275
