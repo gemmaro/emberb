@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2022-05-23 23:00+0900\n"
-"PO-Revision-Date: 2023-01-01 23:18+0900\n"
+"PO-Revision-Date: 2023-01-21 21:07+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -788,7 +788,7 @@ msgstr ""
 #: _posts/2010-01-01-c.markdown:275
 #, no-wrap
 msgid "Passing Blocks"
-msgstr ""
+msgstr "ブロックを渡す"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:279
@@ -796,6 +796,8 @@ msgid ""
 "If you want to pass a `Proc` as the block to a method, that's easy. The "
 "function is just like `rb_funcallv()` but with the proc on the end."
 msgstr ""
+"`Proc`をブロックとしてメソッドに渡したければ話は早いです。\n"
+"関数はほぼ`rb_funcallv()`と同じですが後ろにprocが付きます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:283
@@ -812,6 +814,8 @@ msgid ""
 "of C function to represent the block. Then there's a different variant of "
 "`rb_funcallv()` but with a couple extra arguments for the block:"
 msgstr ""
+"ブロック用のprocがなければ、ブロックを表現する何らかの類のC関数を定義する必要があります。\n"
+"それから`rb_funcallv()`の異なる派生でブロック用に2つ引数が追加されたものがあります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:291
@@ -831,6 +835,9 @@ msgid ""
 "can always get all the arguments from `argv`, so why not play it safe?"
 "[^break]"
 msgstr ""
+"`rb_block_call()`への最後の引数はブロック関数のスコープの外側にある値を渡すのに便利ですが、この例ではその必要はありません（なので`nil`にしています）。\n"
+"また、1つの値だけがyieldされることを**確信**していない限り、最初の引数を使うことはお勧めしません。\n"
+"いつでも全ての引数を`argv`から手に入れられるので、危うきに近寄らずともいいじゃないですか[^break]。"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:298
