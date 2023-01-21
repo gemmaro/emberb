@@ -304,29 +304,25 @@ Rubyが `Symbol` をメソッドや変数名として受け渡しするように
 その代わりに、4つ目の引数が引数のCの配列を指す`VALUE*`であるような、`rb_funcallv()`を使うことができます。
 これにもRubyでの`public_send`のような派生`rb_funcallv_public()`があります。
 
-### Passing Blocks ###
+### ブロックを渡す ###
 
-If you want to pass a `Proc` as the block to a method, that's easy. The
-function is just like `rb_funcallv()` but with the proc on the end.
+`Proc`をブロックとしてメソッドに渡したければ話は早いです。
+関数はほぼ`rb_funcallv()`と同じですが後ろにprocが付きます。
 
 {% highlight c %}
 {% include c/proc.h %}
 {% endhighlight %}
 
-If you don't have a proc for the block, you'll need to define a certain kind
-of C function to represent the block. Then there's a different variant of
-`rb_funcallv()` but with a couple extra arguments for the block:
+ブロック用のprocがなければ、ブロックを表現する何らかの類のC関数を定義する必要があります。
+それから`rb_funcallv()`の異なる派生でブロック用に2つ引数が追加されたものがあります。
 
 {% highlight c %}
 {% include c/block.h %}
 {% endhighlight %}
 
-The last argument to `rb_block_call()` is helpful for passing in values
-outside the block function's scope, but in this example we don't need it
-(thus `nil`). I also recommend against using the first argument to your
-block function unless you're **sure** that only one value was yielded. You
-can always get all the arguments from `argv`, so why not play it
-safe?[^break]
+`rb_block_call()`への最後の引数はブロック関数のスコープの外側にある値を渡すのに便利ですが、この例ではその必要はありません（なので`nil`にしています）。
+また、1つの値だけがyieldされることを**確信**していない限り、最初の引数を使うことはお勧めしません。
+いつでも全ての引数を`argv`から手に入れられるので、危うきに近寄らずともいいじゃないですか[^break]。
 
 ## Builtins ##
 
