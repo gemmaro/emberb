@@ -324,348 +324,287 @@ Rubyが `Symbol` をメソッドや変数名として受け渡しするように
 また、1つの値だけがyieldされることを**確信**していない限り、最初の引数を使うことはお勧めしません。
 いつでも全ての引数を`argv`から手に入れられるので、危うきに近寄らずともいいじゃないですか[^break]。
 
-## Builtins ##
+## 組み込みの機能 ##
 
-Many of Ruby's built-in classes have API functions defined for their most
-useful methods. Using them can save you from the verbosity of always using
-`rb_funcall()` and can provide more compile-time checks. There are far too
-many functions to list here, so I recommend checking them out in the header
-`ruby/intern.h`.
+多くのRubyの組み込みクラスには、その中でも飛びっきり便利なメソッド用に定義されたAPI関数があります。
+それらを使えば、`rb_funcall()`を使ってばかりで冗長になるのを避けられたり、より良いコンパイル時の検証がもたらされるかもしれません。
+関数があまりにも多すぎて一覧にするにはここは狭すぎるので、ヘッダファイル`ruby/intern.h`を眺めることを推奨します。
 
-Functions are generally named like `rb_(class)_(method)` and take at least
-one `VALUE` argument (the receiver). E.g. `rb_ary_pop()` for `Array#pop`,
-`rb_obj_dup()` for `Object#dup`, etc.
+関数はおおよそ`rb_（クラス）_（メソッド）`のように命名されていて少なくとも1つの`VALUE`引数（レシーバ）を取ります。
+例えば`rb_ary_pop()`は`Array#pop`用ですし、`rb_obj_dup()`は`Object#dup`用、といった具合です。
 
-## Require ##
+## require ##
 
-The API can also load some Ruby code from a script. There's an equivalent to
-`require`:
+APIでは何らかのRubyコードをスクリプトから読み込むこともできます。
+`require`と等価なものがあります。
 
 {% highlight c %}
 {% include c/require.h %}
 {% endhighlight %}
 
-As with `require`, these could raise exceptions. Read the [next
-section](#exceptions) for how to handle them.
+`require`するときは例外が発生し得ます。
+対処方法については[次節](#exceptions)を読んでください。
 
-There are also functions for `load` if you want to load a script multiple
-times:
+スクリプトを複数回読み込みたければ`load`用の関数もあります。
 
 {% highlight c %}
 {% include c/load.h %}
 {% endhighlight %}
 
-Just like [`load` in Ruby][rbload], these functions can wrap the loaded code
-in an anonymous module to protect the global namespace. Just pass a nonzero
-value for the second argument.
+ちょうど[Rubyの`load`](rbload)と同じように、こうした関数は読み込まれたコードを匿名のモジュールに包んで大域名前空間を保護するのに使えます。
+ただ非ゼロの値を2つ目の引数に渡せばよいです。
 
 [rbload]: http://www.ruby-doc.org/core/Kernel.html#method-i-load
 
-## Exceptions ##
+## 例外 ##
 
-### Raise ###
+### raise ###
 
-To raise an exception, use:
+例外を投げるには以下を使ってください。
 
 {% highlight c %}
 {% include c/raise.h %}
 {% endhighlight %}
 
-The first and second arguments are the exception class and
-message&mdash;like `raise` in Ruby. The big difference is that the message
-is a format string [just like in `rb_sprintf()`](#string), letting you more
-easily build a useful message.
+1つ目と2つ目の引数は例外クラスと文言で、Rubyの`raise`に見えます。
+大きな違いは文言が（ちょうど`rb_sprintf()`のような）書式文字列である点で、役立つ文言をより簡単に構築できます。
 
-You can also construct exception objects directly using `rb_exc_new_cstr`,
-`rb_exc_new`, and `rb_exc_new_str`. All of these accept an exception class
-as their first argument and then they work just like their [string](#string)
-counterparts, constructing an exception using a null-terminated string,
-non-null-terminated string, and a `String` object, resp. Then you can raise
-your exception object with `rb_exc_raise`.
+また`rb_exc_new_cstr`、`rb_exc_new`、`rb_exc_new_str`を直接使って例外オブジェクトを構築することもできます。
+これら全ては例外クラスを1つ目の引数に受け付けて、そうしてちょうど対応する[文字列](#string)にしたがってはたらきます。
+例外はそれぞれnull終端文字列、非null終端文字列、`String`オブジェクトを使って構築されます。
+それから`rb_exc_raise`で例外オブジェクトを投げられます。
 
-### Rescue ###
+### rescue ###
 
-There are several ways to rescue exceptions using the API. All of them
-require the code you're protecting to be in a function that takes and
-returns a single `VALUE`.
+APIを使って例外を補足するにはいくつか方法があります。
+全て保護しているコードが単一の`VALUE`を取って返す関数の中にある必要があります。
 
 {% highlight c %}
 {% include c/danger.h %}
 {% endhighlight %}
 
-Unless you wanted to rescue a function of exactly this type, you will
-probably need to make a wrapper function in this format that runs the
-desired code. The way to access a rescued exception is also independent of
-the way it is rescued:
+厳密にこの型の関数を救出したいのでない限り、恐らくこの形式で所望のコードを走らせる梱包関数を作る必要があるでしょう。
+救出された例外にアクセスする方法もまた救出される方法とは独立です。
 
 {% highlight c %}
 {% include c/handle.h %}
 {% endhighlight %}
 
-`rb_errinfo()` essentially gives you the `VALUE` of Ruby's `$!` (which will
-be `Qnil` if no exception occurred). Unlike in Ruby, you must manually clear
-the exception after reading it[^clear]. Otherwise later API calls might read
-the old value and think another exception has occurred.
+`rb_errinfo()`は欠かせないRubyの`$!`（1つも例外が起こらなければ`Qnil`になります）の`VALUE`を与えます。
+Rubyとは異なり読んだ後で例外を手動で消し去らなければなりません[^clear]。
+さもなくばその後のAPI呼び出しが古い値を読んで別の例外が起こったと考えるかもしれません。
 
-Next we will go over several methods of rescuing; you can use whichever you
-like, but I think that generally the right choice is determined by your
-[use-case](#the-two-paths) of the API.
+次に救出のいくつかの方法を眺めていきます。
+どれでも好きなものを使ってよいですが、一般的には正しい選択はAPIの[用途](#the-two-paths)により決定されると考えています。
 
 #### rb_rescue2 ####
 
-If you're compiling a library to be loaded by Ruby, you have it easy. Any
-exceptions raised in the API can be rescued as usual in your Ruby code. If
-you want to rescue an exception in the API, you can use `rb_rescue2()` which
-is similar to Ruby's `rescue`.
+Rubyによって読み込まれるライブラリをコンパイルしている場合、話は簡単です。
+APIで投げられるいかなる例外もいつも通りRubyのコードで救出できます。
+APIで例外を救出したければRubyの`rescue`と似ている`rb_rescue2()`を使うことができます。
 
 {% highlight c %}
 {% include c/rescue2.h %}
 {% endhighlight %}
 
-The first two arguments are the function to protect and its argument, the
-next two are the function to call if an exception is raised and its
-argument.  `rb_rescue2()` is a varargs function, so after that comes a list
-of the exception classes you want to rescue. The last argument should always
-be `0` to indicate the end of the class list. Like `rescue` in Ruby, any
-exceptions not in this list will not be rescued. If you just want to rescue
-`StandardError` (like a blank `rescue` in Ruby), you can use `rb_rescue()`
-which takes just the first four arguments of `rb_rescue2()`.
+始めから2つの引数は保護する関数とその引数です。
+その次の2つは例外が投げられた場合に呼ばれる関数とその引数です。
+`rb_rescue2()`はvarargs関数なのでその後には救出したい例外クラスのリストが来ます。
+最後の引数は常に`0`でクラスのリストの末尾を示します。
+Rubyの`rescue`のようにこのリストにないどんな例外も救出されることはありません。
+もし（Rubyでの空の`rescue`のように）`StandardError`を救出したいだけなら、`rb_rescue2()`の最初の4つの引数だけを取る`rb_rescue()`を使うことができます。
 
-The API does not provide an easy way to run different rescue code for
-different exception classes as Ruby does. You'll need to rescue all the
-classes you want at once and use some kind of switch to handle them
-separately.
+APIはRubyとは違ってそれぞれの例外クラス用に救出コードを走らせる簡単な方法を提供していません。
+一度に欲しい全てのクラスを救出してswitchの類を使って個別に取り扱う必要があります。
 
-The API also does not directly provide an equivalent to Ruby's `else`
-i.e. code to run when _no_ exception was raised. One way to do this is using
-the return value of `rb_rescue2()`. If no exception is raised, it returns
-the return value of the first (dangerous) function, otherwise the return
-value of the second (rescue) function. By having these return, say, `Qtrue`
-and `Qfalse` you can detect which case you are in.
+またAPIはRubyの`else`と等価なもの、つまり _何らの_ 例外も投げられなかったときに走るコード、を直接は提供していません。
+これをする1つの方法は`rb_rescue2()`の返り値を使うことです。
+もし1つも例外が投げられなければ最初の（危険な）関数の返り値を、さもなくば2つ目の（救出）関数の返り値を返します。
+これらが返すもの、ここでは`Qtrue`と`Qfalse`としましょう、を受け取ることによって、どちらの場合にあるのかを検出できます。
 
 #### rb_protect ####
 
-If you're embedding the Ruby interpreter in C, you need to be _extremely
-careful_ when calling API functions that could raise exceptions: **an
-uncaught exception will segfault the VM and kill your program**. You could
-call `rb_rescue2()` with `rb_eException`, but there's another approach for
-rescuing all exceptions:
+RubyインタプリタをCに埋め込みたい場合、例外を投げ得るAPI関数を呼ぶときは _極めて慎重_ にならねばなりません。
+**捕捉されない例外はVMをセグフォルトさせてプログラムをキルする**のです。
+`rb_eException`と共に`rb_rescue2()`を呼ぶようにできますが、全ての例外を救出する別の手法があります。
 
 {% highlight c %}
 {% include c/protect.h %}
 {% endhighlight %}
 
-Like `rb_rescue2()`, the first two arguments are for calling the function to
-protect. However, like `rb_eval_string_protect()`, if an exception is raised
-it returns `Qnil` and sets `state` to some nonzero value. If you want to
-re-raise the exception, pass `state` to `rb_jump_tag()` (this also works for
-the state from the other `*_protect()` functions).
+`rb_rescue2()`と同様、最初2つの引数は保護する関数を呼び出すためのものです。
+しかし、`rb_eval_string_protect()`のように、例外が投げられれば`Qnil`を返し`state`を非ゼロの値に設定します。
+例外を再度投げたければ`state`を`rb_jump_tag()`に渡してください（これは他の`*_protect()`関数からの状態についても動作します）。
 
-### Ensure ###
+### ensure ###
 
-`rb_ensure()` is similar to `rb_rescue()` except that it doesn't do anything
-about exceptions and the second function is _always_ called after the
-first.  That may sound simple enough, but that means that if you want the
-usual `begin; rescue; ensure; end` structure as in Ruby, you'll need another
-layer of wrapping:
+`rb_ensure()`は`rb_rescue()`に似ていますが例外を関知しないことと2つ目の関数が _常に_
+1つ目のものの後に呼ばれる点が例外です。
+充分に単純に思われるかもしれませんが、これが意味しているのは、もしRubyでするような通常の`begin; rescue;
+end`の構造が欲しければ、梱包に別の層が必要になってくるということです。
 
 {% highlight c %}
 {% include c/ensure.h %}
 {% endhighlight %}
 
-Like `ensure` in Ruby, the return value of `ensure_func()` is never used. If
-no exception occurs, `rb_rescue()` will return the value of `begin_func()`
-which returns the value of `dangerous_func()`. If an exception does occur,
-`rb_rescue()` returns the value of `rescue_func()`.
+Rubyでの`ensure`のように、`ensure_func()`の返り値は決して使われません。
+何も例外が起きなければ`rb_rescue()`は`begin_func()`の値を返します。
+ここで`begin_func()`は`dangerous_func()`の値を返します。
+もし例外が発生したら`rb_rescue()`は`rescue_func()`の値を返します。
 
-## Definitions, Declarations ##
+## 定義、宣言 ##
 
-So far we've been creating and modifying objects directly in the VM's
-memory, but none of our API calls have had a visible effect _within the Ruby
-code_: a `String` made with `rb_str_new_cstr()` can only be accessed from C
-by default.
+ここまでVMのメモリ内で直接オブジェクトを作ったり変更したりしてきましたが、どのAPI呼び出しも _Rubyのコードの内部_
+での目に見える効果はありませんでした。
+`rb_str_new_cstr()`で作られた`String`は、既定ではCからのみアクセスできます。
 
-There are a few ways to make things visible to Ruby but they all work the
-same general way: by defining some name that Ruby can access e.g. a variable
-name, a method name, etc. A general warning though: unlike Ruby, **the API
-lets you give things invalid names**. Ruby will raise a `SyntaxError` or
-`NameError` if you try to name a class `foo` (not constant) or an instance
-variable `bar` (no `@`), but the API will happily create them. The API
-handles this by **not exposing invalid names to Ruby**. Since that's
-probably not what you want, double check the names you choose!
+Rubyから見えるようにするにはいくつかの方法がありますが、全て同じ汎用的な仕組みではたらきます。
+その共通するところはRubyがアクセスできる何らかの名前を定義するという点です。
+例えば変数名やメソッド名などなどです。
+しかし注意を呼び掛けておきましょう。
+Rubyとは違い、**APIでは不正な名前を与えることができます**。
+クラスに`foo`（定数でない）やインスタンス変数に`bar`（`@`がない）を名付けようとするとRubyは`SyntaxError`や`NameError`を投げるでしょうが、APIは嬉々としてそうした名前で作ります。
+APIはこれを **不正な名前をRubyにさらけ出さない** ようにして扱います。
+恐らくそれはしたいことではないので、選ぶ名前は二重確認してくださいね。
 
-Most of the API functions in this section correspond closely to
-metaprogramming methods in Ruby. When you're trying to do something using
-the API, it can be helpful to think about how you would do it in Ruby using
-only metaprogramming method calls. For example, rather than `class Foo; def
-bar; end; end`, think `Foo = Class.new; Foo.define_method(:bar) {}`.
+この節のほとんどのAPI関数はRubyのメタプログラミングに近いです。
+APIを使って何かしようとするときは、Rubyでメタプログラミングのメソッド呼び出しだけを使ってするとしたらどうするだろうと考えると役立つことがあります。
+例えば`class Foo; def bar; end`とするより、`Foo = Class.new; Foo.define_method(:bar)
+{}`と考えるのです。
 
-### Global Variables ###
+### 大域変数 ###
 
-The simplest way to deal with globals is:
+大域変数を扱う一番簡単な方法は以下です。
 
 {% highlight c %}
 {% include c/global.h %}
 {% endhighlight %}
 
-If you're frequently accessing Ruby's globals, you can set up a `VALUE`
-which will be automatically synchronized with one.
+Rubyの大域変数に頻繁にアクセスするときは`VALUE`を準備しておけば自動的に同期が取られます。
 
 {% highlight c %}
 {% include c/global2.h %}
 {% endhighlight %}
 
-The `VALUE` should be initialized before you create the global in Ruby and
-it should be global in C as well&mdash;you don't want it to go out of scope
-while Ruby is using it! For `rb_define_hooked_variable()`, you can pass
-`NULL` for the getter/setter if you want to synchronize normally for that
-operation. Or you can throw out `global` entirely with
-`rb_define_virtual_variable()` though of course the getter and setter _must_
-be defined in that case.
+`VALUE`はRubyで大域変数を作る前に初期化するべきで、そうしておけばCでも大域変数になります。
+Rubyが使っている間はスコープを外れてほしくはないですからね。
+`rb_define_hooked_variable()`にすると、そうした操作で通常の同期をしたい場合にゲッターやセッターに`NULL`を渡すことができます。
+もしくは`rb_define_virtual_variable()`では完全に`global`を投げ出すこともできますが、もちろんゲッターとセッターはそうした場合で定義されている
+_必要_ があります。
 
-If you ever create a global `VALUE` in C which is _not_ exposed to Ruby, you
-must tell the garbage collector about it to prevent it from being
-prematurely cleaned up:
+Rubyに露出 _しない_
+大域変数`VALUE`をCで作ったならば、中途半端に掃除されてしまうのを防ぐためにガベージコレクタにそのことを伝えなければなりません。
 
 {% highlight c %}
 {% include c/gc.h %}
 {% endhighlight %}
 
-### Class and Instance Variables ###
+### クラスとインスタンス変数 ###
 
-Getting/setting instance variables is similar to the simple way of accessing
-globals, but of course you need an object to get the variable from.
+インスタンス変数の取得と設定は大域変数にアクセスする単純な方法と似ていますが、もちろん変数を取得してくるオブジェクトが必要です。
 
 {% highlight c %}
 {% include c/ivar.h %}
 {% endhighlight %}
 
-There isn't an automatic way to synchronize instance variables like you can
-with globals.
+大域変数でしたようにインスタンス変数を同期する自動化された方法はありません。
 
-To iterate over all instance variables, use `rb_ivar_foreach`.
+全てのインスタンス変数を巡回するには`rb_ivar_foreach`を使ってください。
 
-For class variables, the methods are `rb_cv_get()` and `rb_cv_set()` and of
-course the first argument should be a class object.
+クラス変数については、メソッドは`rb_cv_get()`と`rb_cv_set()`がありもちろん最初の引数はクラスオブジェクトです。
 
-### Constants ####
+### 定数
 
-Constants are defined similarly, but with the module to define them under:
+定数は似たように定義されていますが、それらを配下に置くためのモジュールを伴います。
 
 {% highlight c %}
 {% include c/constant.h %}
 {% endhighlight %}
 
-You undefine a constant by setting it to `Qundef`. Getting a constant's
-`VALUE` is a little nuanced. The API function you call depends on what you
-want to happen if the constant is _not_ defined in the module you specify:
+`Qundef`を設定すると定数は未定義にされます。
+定数の`VALUE`の取得は微妙に違ってきます。
+呼び出すべきAPI関数は、定数が指定されたモジュールで定義されて _いない_ ときに何が起こってほしいのかに依ります。
 
 {% highlight c %}
 {% include c/const_get.h %}
 {% endhighlight %}
 
-All of these API calls will get private constants too.
+これら全てのAPIはプライベート定数も取得します。
 
-### Modules and Classes ###
+### モジュールとクラス ###
 
-Defining modules is super easy.
+モジュールの定義は超簡単です。
 
 {% highlight c %}
 {% include c/module.h %}
 {% endhighlight %}
 
-Classes work the same way but they also need a superclass.
+クラスは同じやり方ですがスーパークラスも必要です。
 
 {% highlight c %}
 {% include c/class.h %}
 {% endhighlight %}
 
-### Methods ###
+### メソッド ###
 
-Here's where it gets interesting. There are many kinds of API calls for
-defining methods, but before you use any of them you'll need a C function
-that the method calls. The function must return a `VALUE` and have one
-`VALUE` argument for the receiver of the method. There are three ways you
-can define its other arguments:
+ここから面白くなってきます。メソッド定義のためのAPI呼び出しには多くの種類がありますが、どれかを使う前にそのメソッドを呼び出すC関数が必要です。その関数は`VALUE`を返しメソッドのレシーバ用の`VALUE`引数を1つ持たねばなりません。他の引数を定義するのには3つの方法があります。
 
 {% highlight c %}
 {% include c/methodc.h %}
 {% endhighlight %}
 
-So really the API only lets you define two types of methods: ones that take
-a fixed number of arguments, and ones that slurp up all of their
-arguments. What about all of Ruby's fancy argument features? Where are
-optional arguments, options hashes, blocks, and all the mixtures of those?
+なので本当のところAPIでは2つの種類のメソッドのみが定義できるのです。且つは固定数の引数を取り、且つは全ての引数を一飲みします。Rubyの素敵な引数の機能はどうなったのでしょうか。オプション引数、オプションハッシュ、ブロック、これらの混在はどこにあるのでしょうか。
 
-#### Parsing Arguments ####
+#### 引数を解析する ####
 
-Well, if you accept a variable number of arguments you could code all of
-that logic yourself in the method, and make it _behave_ like it has a
-fancier method definition in Ruby. Thankfully, the API has a shortcut for
-doing exactly that.  To use it, you should use the C array function
-definition, then you can pass `argc` and `argv` along to:
+さて、様々な個数の引数を受け付ける場合は全ての仕組みをメソッドで自力でコードにすることができ、Rubyで凝ったメソッド定義したような感じで _振る舞う_
+ようにできます。ありがたいことにAPIにはちょうどそういうことをするための早道があります。それを使うにはC配列関数の定義を使うとよく、それから`argc`と`argv`を以下の流れに沿って渡すことができます。
 
 {% highlight c %}
 {% include c/scan.h %}
 {% endhighlight %}
 
-Here `fmt` is a format string describing how the method arguments would look
-in Ruby. The string can have at most 6 characters, where each character
-describes a different section of the arguments. The six sections and their
-corresponding characters are (in order):
+ここで`fmt`はメソッド引数がRubyでどのような見た目をしているのかを記述する書式文字列です。文字列は最大6個の文字を持つことができ、そこではそれぞれの文字はそれぞれ異なる節の引数を記述するのです。6つの節と（順番通りに）対応する文字は以下の通りです。
 
-1. The number of leading mandatory arguments: a digit
-2. The number of optional arguments: a digit
-3. A splatted argument: `*`
-4. The number of trailing mandatory arguments: a digit
-5. Keyword arguments: `:`
-6. A block argument: `&`
+1. 先頭にある必須引数の数：数字
+2. オプション引数の数：数字
+3. 展開される引数：`*`
+4. 後ろに続く必須引数の数：数字
+5. キーワード引数：`:`
+6. ブロック引数：`&`
 
-Each section is optional, so you can leave out the characters for things you
-don't need. Be aware that the parsing of the format string is greedy: `1*`
-describes a method with one mandatory argument and a splat. If you want one
-_optional_ argument and a splat you must specify `01*`. Following the format
-string, you must pass a `VALUE*` for each _Ruby_ argument. The number of
-pointers passed should equal the "total" of the six sections, though you can
-pass `NULL` for an argument you don't care about. For example the format
-string `21*&` should have 5 `VALUE*`s passed (2 mandatory, 1 optional, 1
-splatted, 1 block).
+それぞれの節は省略できるので、必要ではないものについてはそのための文字を空けたままにできます。書式文字列の解析は貪欲に行われる点に注意してください。`1*`は必須引数と展開を持つメソッドを示しています。1つの
+_オプション_ 引数と展開であってほしければ`01*`と指定せねばなりません。書式文字列にしたがってそれぞれの _Ruby_
+の引数用に`VALUE*`を渡さなければなりません。渡されるポインタの数は6つの節の「合計」に等しいのですが、関心のない引数については`NULL`を渡すことができます。例えば書式文字列`21*&`には5つの`VALUE*`が渡されなければなりません（2つの必須引数、1つのオプション引数、1つの展開、1つのブロックです）。
 
-`rb_scan_args()` unpacks `argv` using the `VALUE*`s you pass it and will
-raise a fitting exception if the wrong number of arguments were passed.
+`rb_scan_args()`は渡した`VALUE*`を使って`argv`を開封し、もし誤った数の引数が渡されたときは符牒が合わない旨の例外を投げます。
 
 {% highlight c %}
 {% include c/methodex.h %}
 {% endhighlight %}
 
-You can also use the return value of `rb_scan_args()` to determine how the
-function was called. It returns the number of arguments that were passed in
-Ruby.
+`rb_scan_args()`の返り値を使って関数がどう呼ばれたのかを確定することもできます。そうすることでRubyで渡された引数の数が返ります。
 
-#### Handling Blocks ####
+#### ブロックの扱い ####
 
-There are two ways to check if your C method has been called with a block:
+Cのメソッドがブロック付きで呼ばれたかどうかを確認する方法は2つあります。
 
 {% highlight c %}
 {% include c/checkblock.h %}
 {% endhighlight %}
 
-There are two ways to capture the block as a proc. If you're using
-`rb_scan_args()` for your method arguments, just include `&` in your format
-string to get it. If you aren't using `rb_scan_args()`, there's an API call
-equivalent to `Proc.new` which converts the method's block to a proc:
+Procとしてブロックを捕捉する方法は2つあります。メソッド引数に`rb_scan_args()`を使っている場合、書式文字列に`&`を含めるだけで取得できます。`rb_scan_args()`を使っていなければメソッドのブロックをProcに変換する`Proc.new`と等価なAPI呼び出しがあります。
 
     VALUE block;
     block = rb_block_proc();
 
-If you don't want to capture the block, there are a few ways to yield to it:
+ブロックを捉えたくなければyieldする方法が2つあります。
 
 {% highlight c %}
 {% include c/yield.h %}
 {% endhighlight %}
 
-There's also `rb_yield_values2()` which is like `rb_yield_values()` but
-instead of varargs the second argument is a `VALUE*`[^yield].
+`rb_yield_values()`のような`rb_yield_values2()`もあり、varargs`の代わりに2つ目の引数が`VALUE*`になっています[^yield]。
 
 #### Super ####
 
