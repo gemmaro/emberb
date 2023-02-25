@@ -606,380 +606,234 @@ Procとしてブロックを捕捉する方法は2つあります。メソッド
 
 `rb_yield_values()`のような`rb_yield_values2()`もあり、varargs`の代わりに2つ目の引数が`VALUE*`になっています[^yield]。
 
-#### Super ####
+#### super ####
 
-You might want to call `super` in your method.
+メソッドで`super`を呼びたいことがあるかもしれません。
 
 {% highlight c %}
 {% include c/super.h %}
 {% endhighlight %}
 
-Unlike in Ruby `rb_call_super()` will **not** implicitly pass along the
-method arguments to the super if you give it no arguments. You must
-explicitly pass the correct `argc` and `argv` (it _does_ automatically pass
-`self`). For that reason I recommend using the C array style of method
-definition if you want to use `rb_call_super()`.
+Rubyとは異なり、引数を1つも与えなければ`rb_call_super()`はメソッドの引数をsuperに暗黙に渡すことは**ありません**。明示的に正しい`argc`及び`argv`を渡さなければならないのです（`self`を自動的に渡し
+_ます_ ）。そういった理由から`rb_call_super()`を使いたければCの配列スタイルのメソッド定義を使うことをお勧めします。
 
-#### Definition ####
+#### 定義 ####
 
-Setting up the C function is the hard part, now it's easy to define the
-method in Ruby. Every API call to create a method takes at least the method
-name (`char*`), a pointer to your C function, and an `argc` describing its
-arguments.  `argc` should be:
+Cの関数を立ち上げるのは大変ですが、Rubyでメソッドを定義するのは簡単です。メソッドをつくるAPI呼び出しは全て最低でもメソッド名
+(`char*`)、Cの関数へのポインタ、引数を表す`argc`を取ります。`argc`は以下のようなものです。
 
-1. For a fixed number of arguments, the number of arguments (not counting
-   the receiver)
-2. For a variable number of arguments in a C array, `-1`
-3. For a variable number of arguments in a Ruby Array, `-2`
+1. 引数が一定数のときは、その引数の数（レシーバは数えません）
+2. Cの配列中の引数の数が可変なときは、`-1`
+3. Rubyの配列中の引数の数が可変なときは、`-2`
 
-Everything is pretty self-explanatory from there:
+これ以降の全てはかなりそれ自体が分かりやすいものです。
 
 {% highlight c %}
 {% include c/methodr.h %}
 {% endhighlight %}
 
-There's also a shortcut for defining a method in a module _and_ its
-singleton class. This is used a lot in `Math`, for example, letting you
-`include Math` to avoid typing `Math.` before every method call.
+モジュール _と_ そのシングルトンクラス中でメソッドを定義する早道もあります。例えば`Math`で多用されており、例えば`include
+Math`とすることで一々メソッド呼び出しで`Math.`と打つのを避けられます。
 
 {% highlight c %}
 {% include c/modulefunc.h %}
 {% endhighlight %}
 
-### Other Stuff ###
+### その他のもの ###
 
-Some simple API functions for class/method definitions:
+クラスやメソッドの定義のための単純なAPI関数があります。
 
 {% highlight c %}
 {% include c/etc.h %}
 {% endhighlight %}
 
-## Data ##
+## データ ##
 
-By now you should be able to create and manipulate Ruby classes using the
-API, but how can you create a Ruby class that encapsulates data from the C
-world? If your data can be naturally translated into `VALUE`s it's easy:
-convert and assign to instance variables as usual. But what if your data
-have no Ruby analog (e.g. data structures defined by some C library)?
+今となってはAPIを使ってRubyのクラスを作ったり操作したりできるでしょう。しかしCの世界でデータを内蔵化するRubyのクラスを作るにはどうすればよいのでしょうか。データが自然に`VALUE`に翻訳できるのであれば簡単です。いつも通り変換してインスタンス変数に代入すればよいです。でもデータに、Rubyでいうところのこれ、といったものがないとしたらどうでしょうか（例：何らかのCのライブラリで定義されたデータ構造）。
 
-The API lets you encapsulate C data by creating a `VALUE` of the desired
-class and then storing a `void*` pointing to the C data inside the Ruby
-object. Then whenever you need access to the C data, you can unpack the
-pointer and cast it back to the correct type. But where does this
-encapsulation occur? Let's answer that question with a question: what
-happens when you tell Ruby to create an object using `new`? Basically this:
+APIを使うと、所望の`VALUE`を作り、Rubyのオブジェクトの中にCのデータを指す`void*`を格納することで、Cのデータを内蔵化できます。そうしてCのデータにアクセスする必要が生じたら、ポインタを開封して正しい型に変換し戻せばよいのです。しかしどの時点でこの内蔵化は起こるのでしょうか。その質問へは次の質問でもって答えましょう。`new`を使ってオブジェクトを作るようRubyに伝えたとき何が起こるでしょうか。基本的にはこうです。
 
 {% highlight ruby %}
 {% include c/new.rb %}
 {% endhighlight %}
 
-Before calling the _instance method_ `initialize` that we know so well,
-`new` first calls the _class method_ `allocate` to actually create the
-object. That is the method you'll need to define if you want your objects to
-wrap C data. The following example creates a class `Foo` which wraps an
-`int` that can be set by `initialize`:
+私達がよく知っている _インスタンスメソッド_ `initialize`を呼ぶ前に、`new`は最初に _クラスメソッド_
+`allocate`を呼んで実際にオブジェクトを作るのです。これこそが、Cのデータを包み込むオブジェクトが欲しい場合に定義する必要のあるメソッドです。以下の例は`initialize`によって設定できる`int`を包むクラス`Foo`を作っています。
 
 {% highlight c %}
 {% include c/wrap.h %}
 {% endhighlight %}
 
-In most cases you'll probably be wrapping something more complicated (like a
-`struct`), but the principles will be the same. After allocating the C data,
-we use the `TypedData_Wrap_Struct()`[^oldwrap] macro to wrap the pointer in
-a `VALUE`. This wrapping takes three arguments: the class of the object
-(`self` because we're in a class method), a pointer to a struct, and the
-data pointer to be wrapped. The tricky part is the struct pointer; it
-provides additional information for internal use by Ruby:
+ほとんどの場合（`struct`のような）もっと複雑なものを包むことになりそうですが、基本は変わりません。Cのデータをアロケートした後は、`TypedData_Wrap_Struct()`[^oldwrap]マクロを使って`VALUE`中のポインタを包みます。この梱包には3引数要ります。オブジェクトのクラス（クラスメソッドにいるので`self`です）、構造体へのポインタ、そして梱包されるデータのポインタです。引っ掛かりやすいところは構造体ポインタにあります。このポインタはRubyが内部的に使う追加情報を提供するものです。
 
-* `wrap_struct_name` is a string used by Ruby to identify your type. It
-  doesn't really matter what it is as long as it's sensible and unique
-* `function` is a struct containing several function pointers for use by the
-  garbage collector
-* `dmark` will be described later, but as long your C data doesn't point to
-  any Ruby objects you don't need it
-* `dfree` will be called when your object is destroyed and should free all
-  memory allocated by the object
-* `dsize` is called by Ruby to check how much memory your object is taking
-  up.  It _can_ be omitted, but it's polite to include it
-* `data` can point to arbitrary data. Think of it as wrapping C data at a
-  class level. Also not manadatory
-* `flags` lets you enable additional optimizations when your objects are
-  garbage collected. As long as your `dfree` function doesn't unlock the
-  [GVL](#c-in-ruby-threads) (why would you do that???) you can safely set it
-  to `RUBY_TYPED_FREE_IMMEDIATELY` for a slight performance improvement
+* `wrap_struct_name`はRubyによって使われる文字列で、型を識別するために使われます。意味が通っていて一意である限り本当に何でも構いません。
+* `function`はガベージコレクタによって使われるいくつかの関数ポインタを含む構造体です。
+* `dmark`は後述しますが、CのデータがRubyのオブジェクトを指さない限り不要です
+* `dfree`が呼ばれるのは、オブジェクトが破棄されオブジェクトによってアロケートされた全てのメモリが解放されるときに呼ばれます。
+* `dsize`はがRubyから呼ばれるのはオブジェクトがどの位メモリを取っているのか確認するときです。省略も _可能_
+  ですが、含めておくのが誠実というものです。
+* `data`は任意のデータを指すことができます。Cのデータをクラス水準で包んだものと考えてください。こちらも必須ではありません。
+* `flags`を使うとオブジェクトがガベージコレクトされたときの追加の最適化を有効にします。`dfree`関数が[GVL](#c-in-ruby-threads)を開錠しない限り（一体どうしてそうしたいのでしょうか）、`RUBY_TYPED_FREE_IMMEDIATELY`を安全に設定することで僅かに効率性の向上が得られます。
 
-If you don't set some of these members, you should zero them out so that
-Ruby doesn't accidentally read garbage data. That's why I used C99's
-[designated initializer][desinit] syntax in the example above: any members
-you omit will be safely cleared by the compiler.
+これらの要素を設定しない場合はRubyがうっかりゴミデータを読まないようにゼロにしてしまうべきです。上の例でC99の[明示初期化子](desinit)構文を使っているのはそのためです。どの要素を省いてもコンパイラによって安全に掃除された状態になっています。
 
 [desinit]: https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html
 
-`VALUE`s that wrap C data will have type `T_DATA` with respect to the
-[`TYPE()` macro](#value). This helps ensure a clear separation between
-native Ruby objects and those wrapping C data.
+Cのデータを包む`VALUE`は、[`TYPE()`マクロ](#value)に関しては型`T_DATA`を持ちます。これはRuby固有のオブジェクトとCのデータを包んでいるオブジェクトとの間の区別を明確にする助けになります。
 
-Once you've done all of that work to wrap up the C data, getting it back out
-is easy: `TypedData_Get_Struct()` takes the object to unwrap, the C type of
-the underlying data, the same struct pointer as before, and the pointer to
-assign the data to.
+一旦Cのデータを包み込む作業が全部終わったら、元に戻すのは簡単です。`TypedData_Get_Struct()`は開封するオブジェクト、通底するデータのCの型、前と同じ構造体ポインタ、そしてデータを代入するポインタを取ります。
 
-This separation of allocation and initialization doesn't jive with
-[RAII][raii], so if you're using C++ you will probably want to use
-[placement new][place] when wrapping data. If you're having trouble
-splitting up allocation and initialization, you can just wrap your data in a
-`struct` and do the _actual_ allocation in `initialize`.
+このアロケーションと初期化は[RAII](raii)を誤魔化すことはないので、C++を使っているなら恐らくデーアを開封するときに[配置new][place]を使うことになるでしょう。アロケーションと初期化を分離するのが難しければデータを`struct`に包み
+_実際の_ アロケーションを`initialize`ですることもできます。
 
 [raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
 [place]: http://en.cppreference.com/w/cpp/language/new#Allocation
 
-In simple cases (like the previous example) you can make your code a little
-less verbose. If the function to free your data just calls `free()` as in
-the example, you can pass `RUBY_DEFAULT_FREE` for `dfree` and Ruby will free
-it for you (**don't** use `NULL` unless you like memory leaks). Similarly,
-if your allocation is just a `malloc()` as in the example, the macro
-`TypedData_Make_Struct()` does the allocation for you _and_ wraps it. We
-could shorten the previous example as such:
+（前の例のような）単純な場合ではコードをもっと冗長にならないようにできます。例にあるようにデータを解放するのに`free()`を呼ぶだけなら、`dfree`に`RUBY_DEFAULT_FREE`を渡すことでRubyが代わりに解放してくれます（メモリリークがお好みでなければ`NULL`を使わ
+*ない*
+でください）。同様にアロケーションで上の例のように単に`malloc()`だけでいいなら、`TypedData_Make_Struct()`がアロケーションをやってくれて、
+_且つ_ 梱包もしてくれます。以前の例を以下のように短くすることができます。
 
 {% highlight c %}
 {% include c/makestruct.h %}
 {% endhighlight %}
 
-### Marking ###
+### マークする ###
 
-That `dmark` pointer in the type structure above is the pointer to your
-object's "mark function". This is so named because of the garbage
-collector's "mark and sweep" algorithm. The basic idea behind mark and sweep
-is that when the garbage collector needs to free up memory, it performs two
-passes: the first (mark) pass iterates through every _referenced_ Ruby
-object and marks it as active, then the second (sweep) pass iterates through
-every _allocated_ Ruby object and frees the ones that haven't been marked
-active.
+上の型構造体中の`dmark`ポインタはオブジェクトの「マーク関数」へのポインタです。これはガベージコレクタの「マーク・アンド・スイープ」アルゴリズムに因んでいます。マーク・アンド・スイープの背景にある基本的な考え方において、ガベージコレクタがメモリを解放する必要があるときに2つの工程を実施します。最初の工程（マーク）では全ての
+_参照されている_ Rubyのオブジェクトを巡回し活性と印を付けます。それから2つ目の工程（スイープ）では全ての _アロケートされた_
+Rubyのオブジェクトを巡回し、活性と印が付けられていないものを解放します。
 
-This is relevant to wrapping C data because it's possible that you might
-wrap a C `struct` which contains a Ruby `VALUE`&mdash;which the garbage
-collector is responsible for cleaning up. Since the garbage collector is
-only aware of `VALUE`s referenced _by Ruby_ (not by C pointers), it won't be
-able to mark the referenced `VALUE` as active. The result is that as soon as
-the garbage collector needs to free up some memory, your C data is going to
-end up with a reference to a nonexistent Ruby object. Note that this kind of
-wrapping of Ruby data inside C data is a really bad idea, precisely because
-of this kind of issue. But if you really must...
+このことはCのデータを包むことに関係してきます。なぜかというとRubyの`VALUE`を含むCの`struct`を包む可能性があるからです。ガベージコレクタはこの`VALUE`を消し去る使命があります。ガベージコレクタは（Cのポインタではなく）*Rubyで*参照された`VALUE`だけはそれと気付きますが、この場合は`VALUE`を活性だと印を付けられません。結果として、ガベージコレクタがメモリを解放する必要が生じるやいなや、Cのデータは不在のRubyのオブジェクトを参照することになってしまうでしょう。なおこういった類の、Cのデータの中にRubyのデータを包むことは本当に悪い考え方で、正にこれに類する問題が理由です。でももし本当にそうしなければならないとすれば……。
 
-In the following example, we'll wrap a C `struct` which contains a
-`VALUE`. The mark function has the same signature as the free function and
-all it has to do is mark any `VALUE`s in the `struct`:
+以下の例では`VALUE`を含むCの`struct`を包みます。マーク関数は解放関数と同じシグネチャを持っており、`struct`中の`VALUE`に印を付けて回ることだけに関するものです。
 
 {% highlight c %}
 {% include c/mark.h %}
 {% endhighlight %}
 
-If your `struct` contains a pointer to a C array of `VALUE`s, you can
-instead use `rb_gc_mark_locations()` which takes two arguments: the pointers
-to the start and end of the array (the end being equal to the starting
-pointer plus the array length).[^maybe]
+`struct`が`VALUE`のCの配列へのポインタを含む場合は、代わりに2つの引数を取る`rb_gc_mark_locations()`を使うことができます。この2引数は配列の先頭と末尾へのポインタです（末尾は先頭のポインタに配列の長さを足したものと等しいです）[^maybe]。
 
-## Threading ##
+## スレッド ##
 
-### Ruby in C Threads ###
+### Cのスレッドの中のRuby ###
 
-If you're making a lot of API calls and running a lot of Ruby code from C,
-at some point you might catch yourself thinking, "I'm running all of these
-slow Ruby methods using the API. Maybe I can thread things to keep my code
-fast!" That's a reasonable thought, but when you act on it keep in mind that
-**the Ruby VM is not at all thread safe**. Ideally, all of your API code
-should run in a single thread. If not, you'll probably need to wrap every
-API call with a locked mutex to make sure that you never ever have multiple
-threads interacting with the API at the same time.
+沢山のAPI呼び出しをしたり沢山のRubyのコードをCから走らせたりする場合、ある時点でふと我に返って、「APIを使ってこの遅いRubyのコードを全部走らせているな。スレッドっぽいものでコードを速く保てるかもしれないぞ」と思うかもしれません。なるほど理に適った考えですが、**Ruby
+VMは全くもってスレッド安全ではない**と気に留めておくことに目をつぶればの話です。理想的にはAPIのコード全部は単一スレッドで走らせるべきです。そうでなければ恐らく全てのAPI呼び出しをロックされたミューテックスに包む必要があるでしょう。同時に複数のスレッドがAPIとやり取りすることがないようにするためです。
 
-If you just want to create normal Ruby `Thread`s using the API (and don't
-mind the GVL, as described in the next section), there's an easy way to do
-that:
+単にAPIを使う普通のRubyの`Thread`を作りたいだけなら（そして次節で述べるGVLが気にならなければ）、簡単な方法があります。
 
 {% highlight c %}
 {% include c/thread.h %}
 {% endhighlight %}
 
-Other `Thread` functions are in `ruby/intern.h` (but there's always
-`rb_funcall()` for everything else).
+他の`Thread`の関数は`ruby/intern.h`にあります（しかしどんなものであれいつでも`rb_funcall()`があります）。
 
-### C in Ruby Threads ###
+### Rubyのスレッドの中の ###
 
-On the other hand, if you expose some heavy C code to Ruby with the API (if
-you're writing an extension that wraps a C library, for example), you should
-spend some time thinking about a nasty thing called the global VM lock
-(GVL).  Because most of the API is not `Thread` safe, the GVL locks down
-almost all Ruby code so that only a single `Thread` can run at a time. This
-is the reason why you'll often hear people say that `Thread` does not allow
-true parallelism.
+他方で重いCのコードをAPIでRubyにさらけ出す場合（例えばCのライブラリを包む格闘を書いている場合など）、大域的VMロック (GVL)
+と呼ばれる頭痛の種に時間を取って考えてみることです。ほとんどのAPIは`Thread`安全ではないですから、一度に単一の`Thread`だけが走るように、GVLはほぼ全てのRubyのコードをロックしてしまいます。これが俗に`Thread`では真の並列性がないと言われる所以です。
 
-The VM also applies the GVL to any C code you expose to Ruby. That's why you
-can use the API without worrying about it exploding when someone calls your
-C code from inside a `Thread`. The downside of this is that if your C code
-takes a while to run, you won't see any performance benefit from calling it
-in a `Thread` because **it will block all other threads** while it runs. But
-the GVL is only needed to protect API calls. If you have some C code that
-doesn't use the API, you can tell the VM to release the GVL before running
-your code in a thread and to reacquire it when it completes, allowing for
-true parallelism.  Locking and unlocking the GVL does carry a performance
-hit, so only resort to this if you notice that you're having significant
-problems due to blocked threads.
+またVMはRubyにさらけ出すCのコードには漏れなくGVLを適用します。Cのコードを`Thread`の中から呼ぶときに暴発を心配せずAPIを使えるのはそのためです。このことの欠点はCのコードを走らせるのに時間が掛かることで、`Thread`で呼ぶことによる効率性の利点が見られないということです。なぜならそのスレッドが走っているときは**他の全てのスレッドをブロックしている**からです。しかしGVLはAPI呼び出しを保護するためだけに必要なものです。APIを使わないCのコードがあるとき、スレッド中でコードを走らせる前にGVLを免除してほしいとVMに伝え、処理が完了したあとにGVLを再装填することができます。こうすれば真の並列性が得られます。GVLを封鎖したり解除したりすると効率性への影響はあるので、ブロックされたスレッドによる顕著な問題を抱えていると気付いたときだけこの方法に頼るようにしてください。
 
-The code to do this is considered so fancy by the Ruby developers that you
-actually need to include another header to use it. First we'll look at the
-slightly simpler way to release the GVL:
+こういったことをするコードはRubyで開発する人にとっては酷だと思われるので、実際には使用する別のヘッダを含める必要があるでしょう。まずGVLを解除する少しだけ単純なやり方を見ていきます。
 
 {% highlight c %}
 {% include c/gvl2.h %}
 {% endhighlight %}
 
-Since the function that is run without the GVL gets and returns data using
-`void*`, you may want to define a `struct` for passing data via pointers.
+GVLなしに走る関数が`void*`を使うデータを取得したり返したりしているので、ポインタを介してデータを渡すために`struct`を定義したいところでしょう。
 
-If you unlock the GVL as above you will find that while your code does run
-in parallel, it can't be interrupted (by signals, `Thread.kill`, etc.)! To
-allow for that you must pass an unblocking function using the last two
-arguments:
+上のようにGVLを解除するとコードは確かに並列で走るものの、（スグナルや`Thread.kill`などによって）中断できないことに気付かれるでしょう。中断できるようにするには末尾の2引数を使ってブロック解除関数を渡さなければいけません。
 
 {% highlight c %}
 {% include c/gvl.h %}
 {% endhighlight %}
 
-The unblocking function is called in the event of an interrupt. To make it
-work, you will probably need to pass a pointer to both functions that can be
-used to communicate an interrupt from one to the other. The interrupted
-function should perform any necessary cleanup before returning early.
+ブロック解除関数は中断の事象中に呼ばれます。動作させるためには恐らくポインタを両方の関数に渡して、中断が一方から他方へと伝わるようにするために使う必要があるでしょう。中断された関数は早期に返る前に必要な片付けを実施します。
 
-Alternatively, if the interrupted function doesn't _need_ to perform any
-special cleanup, you can use the built in unblocking function
-`RUBY_UBF_IO`[^ubf] (which ignores the unblocking argument). That simply
-forwards the interrupt to the running thread.[^int]
+代えて中断された関数が特別な片付けをする _必要_
+がないならば、（ブロック解除引数を無視する）組み込みのブロック解除関数`RUBY_UBF_IO`[^ubf]が使えます。これは単純に中断を走っているスレッドに転送します[^int]。
 
-If you go through all of that effort to release the GVL only to find that
-you need to make an API call in your unlocked thread, there's a function to
-temporarily reacquire the GVL:
+GVLを解除するためにこうした骨折りの全てをした後で、ブロックが解除されたスレッドでAPI呼び出しをする必要があるとわかった場合のみ、一時的にGVLを再装填する関数があります。
 
 {% highlight c %}
 {% include c/with_gvl.h %}
 {% endhighlight %}
 
-## See Also ##
+## 参考文献 ##
 
 ### extension.rdoc ###
 
-Ruby does have [official API documentation][readme]. It's a bit spotty and
-has some poor recommendations (in my opinion), but it is also a little more
-exhaustive on certain topics. In many cases this is because I intentionally
-skipped something that I either found not useful or better documented
-elsewhere.
+Rubyには確かに[公式のAPIドキュメント][readme]があります。（私の感想としては）少々むらがあってお勧めしにくいのですが、特定の話題についてはもう少しつまびらかにされていたりもします。筆者が意図的に書かずにおいたところは沢山ありますが、それは有益と思われなかったりもっと良いドキュメントがどこかにあったりするからなのです。
 
 [readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc
 
-### Headers ###
+### ヘッダ ###
 
-I think some of the handiest resources are the Ruby headers themselves. The
-full API (i.e. everything you get by including `ruby.h`) easily consists of
-a thousand functions, macros, constants, and globals&mdash;most of which
-have never been documented. However _most_ things are reasonably named and
-you should be able to figure out what they do from the header. Most
-everything you need should be in the headers `ruby/ruby.h` and
-`ruby/intern.h`. The former has all of the VM and metaprogramming functions,
-the latter has all of the functions for interacting with Ruby's built in
-classes.
+最も敷居の高い資料はRubyのヘッダ自体だと思っています。完全なAPI（すなわち`ruby.h`を含めることで手に入る全てのもの）はゆうに千を越える関数、マクロ、定数、大域変数からなります。そのほとんどは全くドキュメントがありません。しかし
+_ほとんど_
+のものは理に適った命名でヘッダから何をするものなのかを調べることができるでしょう。必要になるもののほとんどは`ruby/ruby.h`と`ruby/intern.h`にあります。前者は全部のVMとメタプログラミング関数があり、後者にはRubyに組み込みクラスとやり取りする関数全てがあります。
 
-There are also some headers _not_ pulled in by `ruby.h` which you can
-include to get additional API functionality. Maybe one day I'll write
-another section to this guide going over them:
+`ruby.h`では取り込まれ _ない_
+ヘッダもあり、含めることで追加のAPI機能が得られるものがあります。いつの日かこのガイドで節を改めることがあるかもしれません。
 
-* `ruby/debug.h` (experimental) functions for profiling and tracing code
-* `ruby/encoding.h` functions for working with string encodings
-* `ruby/io.h` additional functions for Ruby's IO class
-* `ruby/re.h` additional functions for Ruby's Regexp class
-* `ruby/thread.h` functions for working with the [GVL](#c-in-ruby-threads)
-* `ruby/version.h` functions for version introspection. Do not use this as
-  feature-detection code!
-* `ruby/vm.h` (experimental) functions for VM control
+* `ruby/debug.h`（実験的）プロファイリングとコードの追跡用の関数
+* `ruby/encoding.h` 文字列エンコーディングを扱う関数
+* `ruby/io.h` RubyのIOクラス用の追加の関数
+* `ruby/re.h` RubyのRegexpクラス用の追加の関数
+* `ruby/thread.h` [GVL](#c-in-ruby-threads)を扱うための関数
+* `ruby/version.h` バージョンを調べる関数。これを機能を検出するコードに使わないように。
+* `ruby/vm.h`（実験的）VM制御用の関数
 
-### Source ###
+### ソース ###
 
-If you find some function in the header that isn't documented anywhere, your
-next stop should be the Ruby source code.
+どこにもドキュメント化されていないヘッダ中の関数を見付けたら、次なる一手はRubyのソースコードです。
 
 {% highlight shell_session %}
 $ git clone https://github.com/ruby/ruby.git
 {% endhighlight %}
 
-When reading through the source code, always keep the headers at hand: there
-are lots of really useful functions in there that _look_ like they should be
-in the API, but actually aren't. In most cases there should be an API
-function elsewhere that wraps the call to the useful function.
+ソースコードを一読する際は常にヘッダを控えておきましょう。ソースコードには本当に役立ちそうでいてAPIにありそうに _見える_
+関数が沢山あります。ほとんどの場合その役に立つ関数を呼び出すために梱包するAPI関数があることでしょう。
 
-### Examples ###
+### 例 ###
 
-Head over to the [Examples](../examples) page for short, compilable examples
-of the API in action.
+[例](../examples)のページには短くてコンパイルできる、実際のAPIの例があるので読んでみてください。
 
-### Contribute ###
+### 貢献する ###
 
-Now that you've finished reading my guide, did you notice something
-significant that I left out? Did I make some stupid mistake? Check out the
-[source][gh] for this site on Github and you can report issues, submit pull
-requests, and download all of the code examples.
+これでこの指南を読み終わりましたが、何か著しく書き漏らしたものがあるでしょうか。粗忽な誤りがなかったでしょうか。このサイトの[ソース][gh]をGithubで確認してイシューを報告したりプルリクエストを送ってください。またGithubから全てのコード例をダウンロードできます。
 
 [gh]: https://github.com/silverhammermba/emberb
 
 ## 脚註 ##
 
-[^intern]: That's a blatant lie. The API _definitely_ lets you mess around
-           with the internal data structures of objects (look for things with
-           names starting with capital R). But it's generally not a good idea
-           and not necessary.
+[^intern]: 完膚なきまでの嘘です。APIは _確実に_ オブジェクトの内部データ構造を滅茶苦茶にすることができます（名前が大文字Rで始まるものを探してください）。しかし一般には名案にはなりませんし必要でもないのです。
 
-[^undef]: There's also `Qundef` representing an undefined value, but
-          this has no Ruby equivalent and is [rarely](#handling-blocks)
-          [used](#constants-1). In fact, outside of those rare occassions,
-          `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.
+[^undef]: 未定義値を表す`Qundef`もありますがRubyで等価なものはなく[滅多に](#handling-blocks)[使われ](#constants-1)ないものです。実際、こうした稀な出現はさておき、Rubyで通常の`VALUE`が期待するところで`Qundef`があるとVMはセグフォします。
 
-[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is
-         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].
+[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _でしょう_ が、実は[バグ][bug2]のために`rb_eval_string_protect()`と同じものになっています。
 
-[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave
-        unexpected results. `LONG2FIX()` should work.
+[^chr]: `CHR2FIX()`マクロもありますが、筆者が試したところ時々思いがけない結果になりました。`LONG2FIX()`はうまくいきます。
 
-[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had
-          some success just treating them as `char`s, but I think that may have
-          been a happy accident, and could certainly fail on different platforms.
+[^wchar]: `wchar_t`を扱う一番の方法はわかりません。試したところ単なる`char`として扱うことに成功したことがありますが、それはたまたま運が良かっただけで、違うプラットフォームではきっと失敗することでしょう。
 
-[^clear]: The documentation [states][control] that "You have to clear the error
-          info [when] ignoring the caught exception" during `rb_protect`. But I
-          can't find any documentation of when it would be cleared for
-          you&mdash;it seems like you _always_ have to clear it.
+[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。しかしいつ消去してくれるのかについてのドキュメントは見付けられていません。 _常に_ 消去しなければいけないように思われます。
 
-[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is
-          never called by anything in Ruby. Odd.
+[^yield]: そして`rb_yield_block()`という2つの使われない引数を取るものがあり、Rubyではどこからも呼ばれないのです。妙です。
 
-[^break]: The documentation [mentions][control] `rb_iter_break()` and
-          `rb_iter_break_value()` for breaking out of a block, but can't you
-          just return early? I can't think of a use-case for these.
+[^break]: ドキュメントは`rb_iter_block()`とブロックを突破する用の`rb_iter_break_value()`について[言及][control]していますが、単に早期の返値はできないのでしょうか。筆者はこれらの使い途が思い付きません。
 
-[^int]: There is also the function `rb_thread_call_without_gvl2()`. The
-        documentation in `thread.c` says that if it "detects interrupt, it
-        returns immediately," but I'm not sure what this means. If the
-        unblocking function doesn't kill the thread, it still waits for the
-        thread to finish on its own before returning.
+[^int]: 関数`rb_thread_call_without_gvl2()`もあります。`thread.c`のドキュメントには「中断を検知すると直ちに返る」とありますが、どういう意味なのかよく分かりません。ブロック解除関数がスレッドをキルしなければ、返る前にひとりでにスレッドが終わるまで待ちぼうけるでしょうから。
 
-[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover
-        from deprecated code and has the exact same effect.
+[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅れのコードの残滓のようなのでちょうど同じ効果があります。
 
-[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since
-            Ruby 1.9.2. If you're using an older version of Ruby you can check
-            out an older version of this guide on Github to see how it used to
-            be done.
+[^oldwrap]: `TypedData*`マクロはRuby 1.9.2以降データを包む好ましいやり方です。古いバージョンのRubyを使っているならGithubでこの指南の古いバージョンを確認すればかつてどのように使われていたのかがわかります。
 
-[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not
-          sure when it is needed.
+[^maybe]: 謎めいた名前の`rb_gc_mark_maybe()`もありますが、いつ必要になるのかよくわかりません。
 
-[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data).
+[^tdata]: あるいはオブジェクトが[Cのポインタを包む][#data]のなら`T_DATA`を使ってください。
 
 [control]:
 https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure

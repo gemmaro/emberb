@@ -1,32 +1,27 @@
 ---
 layout: chapter
-title: Examples
+title: 例
 ---
 
 ## CでRubyを実行する ##
 
-This example is a simple little game of tag. In the game there are two
-squares: the blue square is controlled using the arrow keys on the keyboard
-while the red square is controlled by a Ruby script. To make this work,
-we'll use the C API to define a little Ruby API that the script can access,
-and every couple of frames we'll call a method defined in the Ruby script
-and pass objects encapsulating the data for the two squares.
+この例はtagという単純で小さなゲームです。このゲームには2升あります。青升はキーボード上の矢印キーを使って操作しますが赤升はRubyのスクリプトで操作します。動かすためにC
+APIを使ってスクリプトがアクセスできる小さなRuby
+APIを定義し、全てのフレーム毎にRubyスクリプトで定義されているメソッドを呼び出し2升用のデータをカプセル化するオブジェクトを渡します。
 
-The Ruby script can look something like this:
+Rubyスクリプトは以下のような見た目をしています。
 
 {% highlight ruby %}
 {% include examples/ai.rb %}
 {% endhighlight %}
 
-The C code uses SDL2 for graphics and input and uses `stat()` (which may not
-be very portable) to hot-reload the AI script whenever the file is changed
-. Here's `tag.c`:
+CのコードはグラフィックにSDL2と入力を使い、ファイルの変更に合わせてAIスクリプトが即座に再読み込みされるよう`stat()`（あまり可搬性は高くなさそうですが）を使います。以下は`tag.c`です。
 
 {% highlight c %}
 {% include examples/tag.c %}
 {% endhighlight %}
 
-The Makefile is nothing special:
+Makefileは何ということはありません。
 
 {% highlight make %}
 {% include examples/Makefile %}
@@ -34,43 +29,34 @@ The Makefile is nothing special:
 
 ## RubyでCを実行する ##
 
-This example is a Ruby C extension that wraps the [GMP][gmp] C library for
-arbitrary precision arithmetic. This is far from a complete example: it only
-wraps the integer functions, implements only the basic functionality of the
-library, and doesn't bother nicely integrating with Ruby's existing numeric
-types. If you want a _really_ full example, check out the [GMP gem][gem].
+この例は任意精度計算用の[GMP][gmp]
+Cライブラリを包むRubyのC拡張です。これは完全な例からはほど遠いものです。整数関数のみを包み、ライブラリの基本的な機能のみを実装しています。またRubyの既存の数値型といい感じに統合することに心を砕いてはいません。もし
+_本当の_ 完全な例が欲しければ [GMP gem][gem]をご確認ください。
 
-[gmp]: https://gmplib.org/ [gem]: https://github.com/srawlins/gmp
+[gmp]: https://gmplib.org/
+[gem]: https://github.com/srawlins/gmp
 
-Everything is in `gmp.c` where we define our `GMP::Integer` class:
+全ては`GMP::Integer`クラスを定義している`gmp.c`にあります。
 
 {% highlight c %}
 {% include examples/ext/gmp.c %}
 {% endhighlight %}
 
-The `extconf.rb` is really simple.
+`extconf.rb`は本当に単純です。
 
 {% highlight ruby %}
 {% include examples/ext/extconf.rb %}
 {% endhighlight %}
 
-And now you can finally find out what your name means in base 62:
+そしてこれで遂に基数62で自分の名前が何になるのかがわかります。
 
 {% highlight ruby %}
 {% include examples/gmp_ex.rb %}
 {% endhighlight %}
 
-For this example I tried to do everything in C, but practically that isn't
-necessary (or desirable). If one of your C methods just calls a bunch of API
-functions (like `to_i` and `==` in the example), you're probably only saving
-yourself a couple CPU cycles compared to implementing the method in
-Ruby. And of course that comes at the cost of needing to spend more time
-writing C and less time writing Ruby. ð
+この例ではCにおける全てを試そうとしましたが、実際は必要ではないです（し望ましくもないです）。Cのメソッドの中に（例にある`to_i`や`==`のような）単に有象無象のAPI関数を呼ぶだけのものがあるなら、恐らくRubyでメソッドを実装することに比較して数CPUサイクル分しか稼いでいないでしょう。そしてもちろんCを書く時間が増えてRubyを書く時間が減ってしまうツケを払うことになります。😀
 
-A common convention when writing extensions is to only implement the "meat"
-of the extension in C and to do everything else in a regular Ruby script
-that pulls in the compiled library. For example, we could have written a
-`gmp.rb` script to significantly simplify our extension:
+拡張を書くときの共通する慣習はCでは拡張の「肝」だけを実装し、残りを通常のRubyスクリプトでやってコンパイルされたライブラリに取り込むことです。例えば`gmp.rb`スクリプトを書いて拡張を著しく単純にすることができます。
 
 {% highlight ruby %}
 {% include examples/gmp.rb %}
