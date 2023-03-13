@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2023-03-13 20:27+0900\n"
-"PO-Revision-Date: 2023-03-13 20:36+0900\n"
+"PO-Revision-Date: 2023-03-13 20:56+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -2708,14 +2708,17 @@ msgstr ""
 "[^tdata]: あるいはオブジェクトが[Cのポインタを包む][#data]のなら`T_DATA`を"
 "使ってください。"
 
+# "[control]:"の直後で空白を入れていないのは意図的です。
+# これがないとここで改行が入ってしまうので正しいMarkdownの解釈になりません。
+# 解消するにはpo4aが正しくリンクの参照を構文解析できるようにする必要があります。
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:1006
+#, no-wrap
 msgid ""
 "[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
 "Control+Structure [bug2]: https://bugs.ruby-lang.org/issues/10466"
 msgstr ""
-"[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
-"Control+Structure\n"
+"[control]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure\n"
 "[bug2]: https://bugs.ruby-lang.org/issues/10466"
 
 #. type: Title ##
@@ -3432,15 +3435,15 @@ msgid ""
 "         anywhere.\n"
 msgstr "[^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化されていないように見えます。\n"
 
+# 空白を入れていないのは意図的です
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:137
 msgid ""
 "[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides."
 "rubygems.org/gems-with-extensions/)"
-msgstr ""
-"[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides."
-"rubygems.org/gems-with-extensions/)"
+msgstr "[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
 
+# 空白を入れていないのは意図的です。
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:139
 msgid ""
@@ -3448,10 +3451,8 @@ msgid ""
 "Prepare+extconf.rb [makefile]: https://github.com/ruby/ruby/blob/master/doc/"
 "extension.rdoc#label-Generate+Makefile"
 msgstr ""
-"[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
-"Prepare+extconf.rb\n"
-"[makefile]: https://github.com/ruby/ruby/blob/master/doc/extension."
-"rdoc#label-Generate+Makefile"
+"[globals]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb\n"
+"[makefile]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile"
 
 #. type: Plain text
 #: _posts/2014-01-01-examples.markdown:14

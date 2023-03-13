@@ -835,6 +835,5 @@ $ git clone https://github.com/ruby/ruby.git
 
 [^tdata]: あるいはオブジェクトが[Cのポインタを包む][#data]のなら`T_DATA`を使ってください。
 
-[control]:
-https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure
+[control]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure
 [bug2]: https://bugs.ruby-lang.org/issues/10466

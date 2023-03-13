@@ -140,10 +140,7 @@ specに各々の `extconf.rb` を記します。
 
 [^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化されていないように見えます。
 
-[^rbg]:
-[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)
+[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)
 
-[globals]:
-https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb
-[makefile]:
-https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile
+[globals]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb
+[makefile]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile
