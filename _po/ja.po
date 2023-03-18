@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2023-03-13 20:27+0900\n"
-"PO-Revision-Date: 2023-03-18 14:47+0900\n"
+"PO-Revision-Date: 2023-03-18 14:59+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -373,7 +373,7 @@ msgid ""
 "need to work with `long long`, for example. `rb_big2ll()` and `rb_big2ull()` "
 "will get you `long long` and `unsigned long long` from a `Bignum` (or raise "
 "a `RangeError` if appropriate)."
-msgstr "Rubyの `Bignum` は `Fixnum` より大きいあらゆる整数に使えます。例えば `long long` が必要なときとかです。`rb_big2()` と `rb_big2u()` を使えば、 `Bignum` からそれぞれ `long long` や `unsigned long long` に直せます（直せなければ`RangeError` が発生します。）。"
+msgstr "Rubyの `Bignum` は `Fixnum` より大きいあらゆる整数に使えます。例えば `long long` が必要なときとかです。`rb_big2()` と `rb_big2u()` を使えば、 `Bignum` からそれぞれ `long long` や `unsigned long long` に直せます（直せなければ`RangeError` が発生します）。"
 
 # Numericは節の名前なので訳しません。
 #. type: Plain text
@@ -458,11 +458,9 @@ msgid ""
 "conversion (so you can safely pass non-`Numeric` objects)."
 msgstr ""
 "そして、逆方向のマクロもあります。\n"
-"これらのマクロは、あらゆる `Numeric` な数値から欲しいCの型の値への変換を試み"
-"るものです。\n"
+"これらのマクロは、あらゆる `Numeric` な数値から欲しいCの型の値への変換を試みるものです。\n"
 "値が範囲に収まらなかったときは `RangeError` を発生させますし、\n"
-"暗黙の数値の変換ができなかったときは `TypeError` が発生します。\n"
-"（なので `Numeric` ではないオブジェクトを渡しても大丈夫です。）"
+"暗黙の数値の変換ができなかったときは `TypeError` が発生します（なので `Numeric` ではないオブジェクトを渡しても大丈夫です）。"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
@@ -524,15 +522,7 @@ msgid ""
 "raise a `RangeError` if the value is too big for an _int_ and when passed a "
 "string it returns the numeric value of the first character rather than "
 "raising a `TypeError`."
-msgstr ""
-"これらのマクロについて **特に** 注意すべき点は、\n"
-"符号なしの型に変換に変換する *どの* マクロも、負値を渡したときに例外が発生し"
-"ないということです。\n"
-"（驚くべきことに[バグではありません][bug]。）\n"
-"`NUM2CHR()` にはもう2つ妙なところがあります。\n"
-"変換前の値が _int_ には大きすぎるときに `RangeError` のみ生じることと、\n"
-"文字列を渡したときに `TypeError` を発生させず最初の文字の数値を返すということ"
-"です。"
+msgstr "これらのマクロについて **特に** 注意すべき点は、符号なしの型に変換に変換する *どの* マクロも、負値を渡したときに例外が発生しないということです（驚くべきことに[バグではありません][bug]）。`NUM2CHR()` にはもう2つ妙なところがあります。変換前の値が _int_ には大きすぎるときに `RangeError` のみ生じることと、文字列を渡したときに `TypeError` を発生させず最初の文字の数値を返すということです。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:192
@@ -564,16 +554,7 @@ msgid ""
 "case `StringValueCStr()` will raise an `ArgumentError`! Instead you can use "
 "the macros `StringValuePtr()` and `RSTRING_LEN()` to get a (possibly "
 "unterminated)  `char*` and the string's length as a `long`."
-msgstr ""
-"Rubyの `String` はだいたいCの `char*` に対応します。\n"
-"もっとも簡素なマクロは `StringValueCStr()` です。\n"
-"このマクロは `String` からnull終端付きの `char*` を返します。\n"
-"ただしこれには問題があって、Rubyの `String` が *nullを含むかもしれません*。\n"
-"そのような場合には `StringValueCStr()` は `ArgumentError` を発生させます！\n"
-"その代わりに `StringValuePtr()` マクロと `RSTRING_LEN()` マクロを使えば、それ"
-"ぞれ\n"
-"（終端が付いていない可能性がある） `char*` とその長さの `long` 値を取得できま"
-"す。"
+msgstr "Rubyの `String` はだいたいCの `char*` に対応します。もっとも簡素なマクロは `StringValueCStr()` です。このマクロは `String` からnull終端付きの `char*` を返します。ただしこれには問題があって、Rubyの `String` が *nullを含むかもしれません*。そのような場合には `StringValueCStr()` は `ArgumentError` を発生させます！その代わりに `StringValuePtr()` マクロと `RSTRING_LEN()` マクロを使えば、それぞれ（終端が付いていない可能性がある）`char*` とその長さの `long` 値を取得できます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:211
@@ -1564,12 +1545,7 @@ msgid ""
 "explicitly pass the correct `argc` and `argv` (it _does_ automatically pass "
 "`self`). For that reason I recommend using the C array style of method "
 "definition if you want to use `rb_call_super()`."
-msgstr ""
-"Rubyとは異なり、引数を1つも与えなければ`rb_call_super()`はメソッドの引数を"
-"superに暗黙に渡すことは**ありません**。明示的に正しい`argc`及び`argv`を渡さな"
-"ければならないのです（`self`を自動的に渡し _ます_ ）。そういった理由から"
-"`rb_call_super()`を使いたければCの配列スタイルのメソッド定義を使うことをお勧"
-"めします。"
+msgstr "Rubyとは異なり、引数を1つも与えなければ`rb_call_super()`はメソッドの引数をsuperに暗黙に渡すことは**ありません**。明示的に正しい`argc`及び`argv`を渡さなければならないのです（`self`を自動的に渡し*ます*）。そういった理由から`rb_call_super()`を使いたければCの配列スタイルのメソッド定義を使うことをお勧めします。"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:649
@@ -2377,7 +2353,7 @@ msgid ""
 "          info [when] ignoring the caught exception\" during `rb_protect`. But I\n"
 "          can't find any documentation of when it would be cleared for\n"
 "          you&mdash;it seems like you _always_ have to clear it.\n"
-msgstr "[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。しかしいつ消去してくれるのかについてのドキュメントは見付けられていません。 _常に_ 消去しなければいけないように思われます。\n"
+msgstr "[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。しかしいつ消去してくれるのかについてのドキュメントは見付かっていません。 _常に_ 消去しなければいけないように思われます。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:981
