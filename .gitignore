@@ -1,3 +1,4 @@
 /.jekyll-cache/
 /_includes/*.out
 /_site
+/node_modules/

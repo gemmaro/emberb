@@ -1,3 +1,4 @@
-(use-modules (gnu packages gettext))
+(use-modules (gnu packages gettext)
+             (gnu packages node))
 
-(packages->manifest (list po4a))
+(packages->manifest (list po4a node-lts))
