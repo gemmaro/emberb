@@ -1,5 +1,7 @@
 {
     "rules": {
-        "preset-jtf-style": true
+        "preset-jtf-style": {
+            "4.3.2.大かっこ［］": false
+        }
     }
 }
