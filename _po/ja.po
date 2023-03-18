@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2023-03-13 20:27+0900\n"
-"PO-Revision-Date: 2023-03-18 14:59+0900\n"
+"PO-Revision-Date: 2023-03-18 15:15+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -1709,18 +1709,14 @@ msgstr ""
 msgid ""
 "`wrap_struct_name` is a string used by Ruby to identify your type. It "
 "doesn't really matter what it is as long as it's sensible and unique"
-msgstr ""
-"`wrap_struct_name`はRubyによって使われる文字列で、型を識別するために使われま"
-"す。意味が通っていて一意である限り本当に何でも構いません。"
+msgstr "`wrap_struct_name`はRubyによって使われる文字列で、型を識別するために使われます。意味が通っていて一意である限り本当に何でも構いません"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
 msgid ""
 "`function` is a struct containing several function pointers for use by the "
 "garbage collector"
-msgstr ""
-"`function`はガベージコレクタによって使われるいくつかの関数ポインタを含む構造"
-"体です。"
+msgstr "`function`はガベージコレクタによって使われるいくつかの関数ポインタを含む構造体です"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
@@ -1741,18 +1737,14 @@ msgstr "`dfree`が呼ばれるのは、オブジェクトが破棄されオブ�
 msgid ""
 "`dsize` is called by Ruby to check how much memory your object is taking "
 "up.  It _can_ be omitted, but it's polite to include it"
-msgstr ""
-"`dsize`はがRubyから呼ばれるのはオブジェクトがどの位メモリを取っているのか確認"
-"するときです。省略も _可能_ ですが、含めておくのが誠実というものです。"
+msgstr "`dsize`はがRubyから呼ばれるのはオブジェクトがどの位メモリを取っているのか確認するときです。省略も _可能_ ですが、含めておくのが誠実というものです"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
 msgid ""
 "`data` can point to arbitrary data. Think of it as wrapping C data at a "
 "class level. Also not manadatory"
-msgstr ""
-"`data`は任意のデータを指すことができます。Cのデータをクラス水準で包んだものと"
-"考えてください。こちらも必須ではありません。"
+msgstr "`data`は任意のデータを指すことができます。Cのデータをクラス水準で包んだものと考えてください。こちらも必須ではありません"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
@@ -1761,7 +1753,7 @@ msgid ""
 "garbage collected. As long as your `dfree` function doesn't unlock the [GVL]"
 "(#c-in-ruby-threads) (why would you do that???) you can safely set it to "
 "`RUBY_TYPED_FREE_IMMEDIATELY` for a slight performance improvement"
-msgstr "`flags`を使うとオブジェクトがガベージコレクトされたときの追加の最適化を有効にします。`dfree`関数が[GVL](#c-in-ruby-threads)を解放しない限り（そうしたいことなんてあるのでしょうか）、`RUBY_TYPED_FREE_IMMEDIATELY`を安全に設定することで僅かに効率性の向上が得られます。"
+msgstr "`flags`を使うとオブジェクトがガベージコレクトされたときの追加の最適化を有効にします。`dfree`関数が[GVL](#c-in-ruby-threads)を解放しない限り（そうしたいことなんてあるのでしょうか）、`RUBY_TYPED_FREE_IMMEDIATELY`を安全に設定することで僅かに効率性の向上が得られます"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:741
@@ -1770,7 +1762,7 @@ msgid ""
 "Ruby doesn't accidentally read garbage data. That's why I used C99's "
 "[designated initializer][desinit] syntax in the example above: any members "
 "you omit will be safely cleared by the compiler."
-msgstr "これらの要素を設定しない場合はRubyがうっかりゴミデータを読まないようにゼロにしてしまうべきです。上の例でC99の[明示初期化子][desinit]構文を使っているのはそのためです。どの要素を省いてもコンパイラによって安全に掃除された状態になっています。"
+msgstr "これらの要素を設定しない場合はRubyがうっかりゴミデータを読まないようにゼロにしてしまうべきです。上の例でC99の[明示初期化子][desinit]構文を使っているのはそのためです。どの要素を省いてもコンパイラによって安全に掃除された状態になっています"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:743
@@ -2212,9 +2204,7 @@ msgstr "`ruby/thread.h` [GVL](#c-in-ruby-threads)を扱うための関数"
 msgid ""
 "`ruby/version.h` functions for version introspection. Do not use this as "
 "feature-detection code!"
-msgstr ""
-"`ruby/version.h` バージョンを調べる関数。これを機能を検出するコードに使わない"
-"ように。"
+msgstr "`ruby/version.h` バージョンを調べる関数。これを機能を検出するコードに使わないように"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:923
@@ -2680,15 +2670,7 @@ msgid ""
 "script to load or code to run with `-e`, it will try to read from `stdin`. "
 "If you want to set options but _not_ run any Ruby code, you can pass it an "
 "empty line: `\"-e \"`."
-msgstr ""
-"`ruby_options` への引数は main 関数と同じ `argc` と `argv` です。\n"
-"そして、 `ruby` プログラムの main と同じように、\n"
-"呼び出したときはVMは何らかのRubyのコードがあるものとしています。\n"
-"ロードするスクリプトのファイル名を与えていなかったり、\n"
-"`-e` で実行するコードがないときは、\n"
-"`stdin` から読み込もうとします。\n"
-"オプションを設定したいけれども、Rubyのコードを実行したく _ない_ ときには、\n"
-"`\"-e \"` のように空行を渡せばよいです。"
+msgstr "`ruby_options`への引数はmain関数と同じ`argc`と`argv`です。そして、`ruby`プログラムのmainと同じように、呼び出したときはVMは何らかのRubyのコードがあるものとしています。ロードするスクリプトのファイル名を与えていなかったり、`-e`で実行するコードがないときは、`stdin`から読み込もうとします。オプションを設定したいけれども、Rubyのコードを実行したく _ない_ ときには、`\"-e \"`のように空行を渡せばよいです。"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:115
@@ -3054,13 +3036,7 @@ msgid ""
 "`require` in Ruby. You can fill in your `Init` function with plain C code, "
 "but you'll probably want to go back and learn about the [C API](../c) to do "
 "more interesting stuff."
-msgstr ""
-"これにて make で `.so` （またはその他のライブラリ）にコンパイルして、\n"
-"Rubyで `require` できるようになりました。\n"
-"純粋なC言語のコードで `Init` 関数を実装していくこともできますが、\n"
-"たぶんいったん戻って、\n"
-"もっと面白いことをするために [C API](../c.ja) を学ばれるのではないでしょう"
-"か。"
+msgstr "これにてmakeで`.so`（またはその他のライブラリ）にコンパイルして、Rubyで`require`できるようになりました。純粋なC言語のコードで`Init`関数を実装していくこともできますが、たぶんいったん戻って、もっと面白いことをするために[C API](../c.ja)を学ばれるのではないでしょうか。"
 
 #. type: Title ##
 #: _posts/2013-01-01-extend.markdown:112
@@ -3075,11 +3051,7 @@ msgid ""
 "as an easily distributable Ruby gem. rubygems.org has a [detailed guide]"
 "[rbg] on creating gems, but as far as C extensions go you just need to tell "
 "the spec about `extconf.rb`[^rbg]:"
-msgstr ""
-"いい感じに拡張が動くようになったら、\n"
-"簡単に配布できるRubyのgemとしてまとめたいはずです。\n"
-"rubygems.org にはgemをつくる上での[詳細なガイド][rbg]がありますが、\n"
-"C拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
+msgstr "いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたいはずです。rubygems.orgにはgemをつくる上での[詳細なガイド][rbg]がありますが、C拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:122
