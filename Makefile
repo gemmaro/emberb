@@ -22,7 +22,3 @@ po4a := po4a.cfg
 .PHONEY: translate
 translate: $(po4a)
 	po4a po4a.cfg
-
-$(po4a): generate_po4a_config_file.rb *.md
-	./$< > $@
-
