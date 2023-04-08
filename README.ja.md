@@ -1,31 +1,24 @@
-This is the source for my online guide to Ruby's C API. Visit the live site
-[here][io].
+これはRubyのC APIのオンラインの手引きのソースです。実際のサイトは[こちら][io]をご覧ください。
 
 [io]: http://silverhammermba.github.io/emberb
 
-# Why I'm Making This Guide #
+# なぜこの手引きを作ったか #
 
-Oh my god there are so [many][g] [freaking][f] [guides][e] [to][d]
-[Ruby's][c] [C][b] [API][a]. Why make another one? Because from what I've
-seen of the others:
+なんということでしょう、[Rubyの][c]、[Cの][b]、[API][a]、[についての][d]、[多くの][g]、[興味を唆られる][f]、[手引き][e]が、こんなにもあります。なぜ別のものを作るのでしょうか。それは筆者が次のようなことに直面してきたからです。
 
-* Most of them are outdated
-* Most fail to cover different approaches when they are available
-* Many cover only very specific use-cases
-* Many have bad recommendations
-* Many fail to explain _when_ and _why_ things are needed
-* Many try to be exhaustive rather getting the reader up and running quickly
+* ほとんどが時代遅れである
+* ほとんどが、別の解決策が利用できるときも、それらを押さえられていない
+* 多くのものがかなり限定的な用例のみを押さえている
+* 多くのものにあまりお勧めできない点がある
+* 多くが _いつ_ そして _なぜ_ それが必要なのかを説明できていない
+* 多くが網羅的であろうとするがあまり、読者が手早く始められるようになっていない
 
-And it struck me that all of these problems come from these guides largely
-being on media that do not promote community-driven updates. So I'm writing
-a new guide that doesn't suck and is on Github so you too can help make it
-not suck.
+そして筆者が衝撃を受けたのはこれらの手引きによるこうした問題の全ては、コミュニティ駆動の更新を推進しないメディアから出ていることが多いということでした。そのためこうした詰まらないことにが起きない新しい手引きを書き、Githubに置くことで、詰まらないことにならないよう読者のあなたが手助けできるようにしてあるのです。
 
-[a]:
-http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1.html
-[b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc
-[c]: http://blog.jacius.info/ruby-c-extension-cheat-sheet/ [d]:
-http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-application.html
-[e]: https://gist.github.com/jefftrull/1305431 [f]:
-http://metaeditor.sourceforge.net/embed/ [g]:
-http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html
+[a]:http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1.html
+[b]:https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc
+[c]:http://blog.jacius.info/ruby-c-extension-cheat-sheet/
+[d]:http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-application.html
+[e]:https://gist.github.com/jefftrull/1305431
+[f]:http://metaeditor.sourceforge.net/embed/
+[g]:http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html

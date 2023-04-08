@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2023-04-08 13:32+0900\n"
-"PO-Revision-Date: 2023-03-18 15:15+0900\n"
+"PO-Revision-Date: 2023-04-08 13:55+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -3565,19 +3565,19 @@ msgid ""
 "This is the source for my online guide to Ruby's C API. Visit the live site "
 "[here][io]."
 msgstr ""
+"これはRubyのC APIのオンラインの手引きのソースです。実際のサイトは[こちら][io]"
+"をご覧ください。"
 
 #. type: Plain text
 #: README.md:5
-#, fuzzy
-#| msgid "[gh]: https://github.com/silverhammermba/emberb"
 msgid "[io]: http://silverhammermba.github.io/emberb"
-msgstr "[gh]: https://github.com/silverhammermba/emberb"
+msgstr "[io]: http://silverhammermba.github.io/emberb"
 
 #. type: Title #
 #: README.md:6
 #, no-wrap
 msgid "Why I'm Making This Guide"
-msgstr ""
+msgstr "なぜこの手引きを作ったか"
 
 #. type: Plain text
 #: README.md:11
@@ -3586,37 +3586,41 @@ msgid ""
 "[c] [C][b] [API][a]. Why make another one? Because from what I've seen of "
 "the others:"
 msgstr ""
+"なんということでしょう、[Rubyの][c]、[Cの][b]、[API][a]、[についての][d]、[多"
+"くの][g]、[興味を唆られる][f]、[手引き][e]が、こんなにもあります。なぜ別のも"
+"のを作るのでしょうか。それは筆者が次のようなことに直面してきたからです。"
 
 #. type: Bullet: '* '
 #: README.md:18
 msgid "Most of them are outdated"
-msgstr ""
+msgstr "ほとんどが時代遅れである"
 
 #. type: Bullet: '* '
 #: README.md:18
 msgid "Most fail to cover different approaches when they are available"
-msgstr ""
+msgstr "ほとんどが、別の解決策が利用できるときも、それらを押さえられていない"
 
 #. type: Bullet: '* '
 #: README.md:18
 msgid "Many cover only very specific use-cases"
-msgstr ""
+msgstr "多くのものがかなり限定的な用例のみを押さえている"
 
 #. type: Bullet: '* '
 #: README.md:18
 msgid "Many have bad recommendations"
-msgstr ""
+msgstr "多くのものにあまりお勧めできない点がある"
 
 #. type: Bullet: '* '
 #: README.md:18
 msgid "Many fail to explain _when_ and _why_ things are needed"
-msgstr ""
+msgstr "多くが _いつ_ そして _なぜ_ それが必要なのかを説明できていない"
 
 #. type: Bullet: '* '
 #: README.md:18
 msgid ""
 "Many try to be exhaustive rather getting the reader up and running quickly"
 msgstr ""
+"多くが網羅的であろうとするがあまり、読者が手早く始められるようになっていない"
 
 #. type: Plain text
 #: README.md:22
@@ -3626,6 +3630,11 @@ msgid ""
 "a new guide that doesn't suck and is on Github so you too can help make it "
 "not suck."
 msgstr ""
+"そして筆者が衝撃を受けたのはこれらの手引きによるこうした問題の全ては、コミュ"
+"ニティ駆動の更新を推進しないメディアから出ていることが多いということでした。"
+"そのためこうした詰まらないことにが起きない新しい手引きを書き、Githubに置くこ"
+"とで、詰まらないことにならないよう読者のあなたが手助けできるようにしてあるの"
+"です。"
 
 #. type: Plain text
 #: README.md:29
@@ -3638,3 +3647,12 @@ msgid ""
 "metaeditor.sourceforge.net/embed/ [g]: http://ruby-doc.com/docs/"
 "ProgrammingRuby/html/ext_ruby.html"
 msgstr ""
+"[a]:http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1."
+"html\n"
+"[b]:https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc\n"
+"[c]:http://blog.jacius.info/ruby-c-extension-cheat-sheet/\n"
+"[d]:http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-"
+"application.html\n"
+"[e]:https://gist.github.com/jefftrull/1305431\n"
+"[f]:http://metaeditor.sourceforge.net/embed/\n"
+"[g]:http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
