@@ -3,15 +3,15 @@ default: translate build
 
 .PHONEY: watch
 watch:
-	bundle exec guard
+	guard
 
 .PHONEY: serve
 serve: translate
-	bundle exec jekyll serve --watch --baseurl= --livereload
+	jekyll serve --watch --baseurl= --livereload
 
 .PHONEY: build
 build:
-	bundle exec jekyll build
+	jekyll build
 
 .PHONEY: test
 test:

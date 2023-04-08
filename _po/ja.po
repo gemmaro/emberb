@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
-"POT-Creation-Date: 2023-03-13 20:27+0900\n"
+"POT-Creation-Date: 2023-04-08 13:32+0900\n"
 "PO-Revision-Date: 2023-03-18 15:15+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
@@ -53,7 +53,12 @@ msgid ""
 "figure out the behavior of some obscure function or macro. The Ruby source "
 "uses some fairly sophisticated C, so you should at least feel comfortable "
 "reading it."
-msgstr "RubyのC APIを使うのに発展的なC言語の概念は要りませんが、APIは**膨大**で大半が**文書化されていません**。APIを使い始めだすと、いつの日にか、はっきりしない関数やマクロの挙動を調べるためにRubyのソースコードを探ることになるでしょう。Rubyのソースはそこそこ洗練されたC言語で書かれているので、すいすい読めはするでしょうけれども。"
+msgstr ""
+"RubyのC APIを使うのに発展的なC言語の概念は要りませんが、APIは**膨大**で大半が"
+"**文書化されていません**。APIを使い始めだすと、いつの日にか、はっきりしない関"
+"数やマクロの挙動を調べるためにRubyのソースコードを探ることになるでしょう。"
+"Rubyのソースはそこそこ洗練されたC言語で書かれているので、すいすい読めはするで"
+"しょうけれども。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:22
@@ -63,7 +68,12 @@ msgid ""
 "unintuitive once translated into the language of the API. Having a strong "
 "intuition for Ruby's internal logic and the ideas behind its design will go "
 "a long way toward steering you toward the correct API functions."
-msgstr "C APIは、普通のRubyのコードよりもデカくてゴチャっとした書き方だと見なせます。とはいえ、簡素で明快なRubyの様式は、ひとたびAPIの言葉に翻訳されるとかなり非直感的になることがあります。Rubyの内部的な仕組みと設計の背景にある思想に裏打ちされたしっかりとした直感があれば、長い旅路のさなかでも正しいAPI関数へと進み続けられるでしょう。"
+msgstr ""
+"C APIは、普通のRubyのコードよりもデカくてゴチャっとした書き方だと見なせます。"
+"とはいえ、簡素で明快なRubyの様式は、ひとたびAPIの言葉に翻訳されるとかなり非直"
+"感的になることがあります。Rubyの内部的な仕組みと設計の背景にある思想に裏打ち"
+"されたしっかりとした直感があれば、長い旅路のさなかでも正しいAPI関数へと進み続"
+"けられるでしょう。"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:23
@@ -155,7 +165,11 @@ msgid ""
 "Ruby code and sets `state` to some nonzero value if any exception is raised. "
 "`VALUE` is the C data type for all Ruby objects, as explained in the next "
 "section."
-msgstr "これはやりたいことをするためのAPI関数が見つからないときは選択肢に入ります[^wrap]。`rb_eval_string_protect()` はRubyのコードの結果を返し、何か例外が発生したときはゼロではない値を `state` に設定します。`VALUE` はあらゆるRubyのオブジェクトのためのCのデータ型です。次の節で後述します。"
+msgstr ""
+"これはやりたいことをするためのAPI関数が見つからないときは選択肢に入ります"
+"[^wrap]。`rb_eval_string_protect()` はRubyのコードの結果を返し、何か例外が発"
+"生したときはゼロではない値を `state` に設定します。`VALUE` はあらゆるRubyのオ"
+"ブジェクトのためのCのデータ型です。次の節で後述します。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:60
@@ -165,7 +179,12 @@ msgid ""
 "which doesn't take a `state` argument and instead raises any exceptions "
 "normally. See [Exceptions](#exceptions) for how to handle both of these "
 "cases."
-msgstr "`state` がゼロではないとき、`result` は `nil` を表す `VALUE` になっているでしょうから、そのときは例外に対処しなければいけません。代わりに `rb_eval_string()` を使うこともできます。この関数は引数 `state` を取らず、通常の方法で例外を発生させます。これら2つの場合での制御方法については[例外](#exceptions)の節を参照してください。"
+msgstr ""
+"`state` がゼロではないとき、`result` は `nil` を表す `VALUE` になっているで"
+"しょうから、そのときは例外に対処しなければいけません。代わりに "
+"`rb_eval_string()` を使うこともできます。この関数は引数 `state` を取らず、通"
+"常の方法で例外を発生させます。これら2つの場合での制御方法については[例外]"
+"(#exceptions)の節を参照してください。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:64
@@ -173,7 +192,10 @@ msgid ""
 "Unlike `eval` in Ruby, these functions evaluate the string in an isolated "
 "binding&mdash;like when you `require` something. So local variables in the "
 "string will not be accessible from elsewhere and vice versa."
-msgstr "Rubyでの `eval` とは異なり、これらの関数は独立したbindingの状態で評価します。ちょうど何かを `require` するときと同じです。したがって文字列中のローカル変数は他の場所から参照できませんし、逆もまた然りです。"
+msgstr ""
+"Rubyでの `eval` とは異なり、これらの関数は独立したbindingの状態で評価します。"
+"ちょうど何かを `require` するときと同じです。したがって文字列中のローカル変数"
+"は他の場所から参照できませんし、逆もまた然りです。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:69
@@ -238,7 +260,9 @@ msgstr ""
 msgid ""
 "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension."
 "rdoc#label-Data+Types"
-msgstr "[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+msgstr ""
+"[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension."
+"rdoc#label-Data+Types"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:90
@@ -288,7 +312,10 @@ msgid ""
 "If you want to handle a `VALUE` that could be one of a variety of types, the "
 "previous macros can be a little clumsy. In that case you can use the "
 "`TYPE()` macro to get the `T_` constant and handle your logic in a `switch`:"
-msgstr "いくつかの型を取りうる `VALUE` を扱いたいときは、前述のマクロはちょっと不恰好です。そんな場合は `TYPE()` マクロを使って `T_` 定数を取得し、`switch` 文で制御できます。"
+msgstr ""
+"いくつかの型を取りうる `VALUE` を扱いたいときは、前述のマクロはちょっと不恰好"
+"です。そんな場合は `TYPE()` マクロを使って `T_` 定数を取得し、`switch` 文で制"
+"御できます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:111
@@ -314,7 +341,14 @@ msgid ""
 "`rb_eRuntimeError`; and the standard IO streams are prefixed with `rb_` e.g. "
 "`rb_stderr`. `nil`, `false`, and `true` are prefixed with `Q` e.g. `Qnil`."
 "[^undef] As a convenience, `Qfalse` is also false in C (`0`)."
-msgstr "ほとんどの標準的なRubyの定数はAPIで大域的な `VALUE` が定義されています。したがってそうした定数を使うのにAPIの呼び出しは要りません。モジュールは `rb_m` で前置されます。例えば`rb_mKernel` です。クラスは `rb_c` で前置されます。例えば`rb_cObject` です。`Exception` のサブクラスは `rb_e` で前置されます。例えば`rb_eRubtimeError` です。標準的なIOストリームは `rb_` で前置されます。例えば`rb_stderr` です。`nil`, `false`, `true` は `Q` で前置されます。例えば `Qnil` です[^undef]。便宜上、 `Qfalse` はCの偽値 (`0`) でもあります。"
+msgstr ""
+"ほとんどの標準的なRubyの定数はAPIで大域的な `VALUE` が定義されています。した"
+"がってそうした定数を使うのにAPIの呼び出しは要りません。モジュールは `rb_m` で"
+"前置されます。例えば`rb_mKernel` です。クラスは `rb_c` で前置されます。例えば"
+"`rb_cObject` です。`Exception` のサブクラスは `rb_e` で前置されます。例えば"
+"`rb_eRubtimeError` です。標準的なIOストリームは `rb_` で前置されます。例えば"
+"`rb_stderr` です。`nil`, `false`, `true` は `Q` で前置されます。例えば "
+"`Qnil` です[^undef]。便宜上、 `Qfalse` はCの偽値 (`0`) でもあります。"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:122
@@ -327,7 +361,9 @@ msgstr "変換"
 msgid ""
 "A few Ruby classes are analogous to C types. These classes will be your "
 "primary means of transferring data between C and Ruby."
-msgstr "いくつかのRubyのクラスはCの型に対応します。この対応する組み合わせは、CとRubyの間のデータのやりとりをするのに一番です。"
+msgstr ""
+"いくつかのRubyのクラスはCの型に対応します。この対応する組み合わせは、CとRuby"
+"の間のデータのやりとりをするのに一番です。"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:127
@@ -373,7 +409,11 @@ msgid ""
 "need to work with `long long`, for example. `rb_big2ll()` and `rb_big2ull()` "
 "will get you `long long` and `unsigned long long` from a `Bignum` (or raise "
 "a `RangeError` if appropriate)."
-msgstr "Rubyの `Bignum` は `Fixnum` より大きいあらゆる整数に使えます。例えば `long long` が必要なときとかです。`rb_big2()` と `rb_big2u()` を使えば、 `Bignum` からそれぞれ `long long` や `unsigned long long` に直せます（直せなければ`RangeError` が発生します）。"
+msgstr ""
+"Rubyの `Bignum` は `Fixnum` より大きいあらゆる整数に使えます。例えば `long "
+"long` が必要なときとかです。`rb_big2()` と `rb_big2u()` を使えば、 `Bignum` "
+"からそれぞれ `long long` や `unsigned long long` に直せます（直せなければ"
+"`RangeError` が発生します）。"
 
 # Numericは節の名前なので訳しません。
 #. type: Plain text
@@ -458,9 +498,11 @@ msgid ""
 "conversion (so you can safely pass non-`Numeric` objects)."
 msgstr ""
 "そして、逆方向のマクロもあります。\n"
-"これらのマクロは、あらゆる `Numeric` な数値から欲しいCの型の値への変換を試みるものです。\n"
+"これらのマクロは、あらゆる `Numeric` な数値から欲しいCの型の値への変換を試み"
+"るものです。\n"
 "値が範囲に収まらなかったときは `RangeError` を発生させますし、\n"
-"暗黙の数値の変換ができなかったときは `TypeError` が発生します（なので `Numeric` ではないオブジェクトを渡しても大丈夫です）。"
+"暗黙の数値の変換ができなかったときは `TypeError` が発生します（なので "
+"`Numeric` ではないオブジェクトを渡しても大丈夫です）。"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:182
@@ -522,7 +564,13 @@ msgid ""
 "raise a `RangeError` if the value is too big for an _int_ and when passed a "
 "string it returns the numeric value of the first character rather than "
 "raising a `TypeError`."
-msgstr "これらのマクロについて **特に** 注意すべき点は、符号なしの型に変換に変換する *どの* マクロも、負値を渡したときに例外が発生しないということです（驚くべきことに[バグではありません][bug]）。`NUM2CHR()` にはもう2つ妙なところがあります。変換前の値が _int_ には大きすぎるときに `RangeError` のみ生じることと、文字列を渡したときに `TypeError` を発生させず最初の文字の数値を返すということです。"
+msgstr ""
+"これらのマクロについて **特に** 注意すべき点は、符号なしの型に変換に変換する "
+"*どの* マクロも、負値を渡したときに例外が発生しないということです（驚くべきこ"
+"とに[バグではありません][bug]）。`NUM2CHR()` にはもう2つ妙なところがありま"
+"す。変換前の値が _int_ には大きすぎるときに `RangeError` のみ生じることと、文"
+"字列を渡したときに `TypeError` を発生させず最初の文字の数値を返すということで"
+"す。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:192
@@ -554,7 +602,14 @@ msgid ""
 "case `StringValueCStr()` will raise an `ArgumentError`! Instead you can use "
 "the macros `StringValuePtr()` and `RSTRING_LEN()` to get a (possibly "
 "unterminated)  `char*` and the string's length as a `long`."
-msgstr "Rubyの `String` はだいたいCの `char*` に対応します。もっとも簡素なマクロは `StringValueCStr()` です。このマクロは `String` からnull終端付きの `char*` を返します。ただしこれには問題があって、Rubyの `String` が *nullを含むかもしれません*。そのような場合には `StringValueCStr()` は `ArgumentError` を発生させます！その代わりに `StringValuePtr()` マクロと `RSTRING_LEN()` マクロを使えば、それぞれ（終端が付いていない可能性がある）`char*` とその長さの `long` 値を取得できます。"
+msgstr ""
+"Rubyの `String` はだいたいCの `char*` に対応します。もっとも簡素なマクロは "
+"`StringValueCStr()` です。このマクロは `String` からnull終端付きの `char*` を"
+"返します。ただしこれには問題があって、Rubyの `String` が *nullを含むかもしれ"
+"ません*。そのような場合には `StringValueCStr()` は `ArgumentError` を発生させ"
+"ます！その代わりに `StringValuePtr()` マクロと `RSTRING_LEN()` マクロを使え"
+"ば、それぞれ（終端が付いていない可能性がある）`char*` とその長さの `long` 値"
+"を取得できます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:211
@@ -586,7 +641,13 @@ msgid ""
 "takes a corresponding `VALUE` argument. This conversion specifier "
 "substitutes a string by sending the object `to_s`. You can substitute the "
 "result of `inspect` instead by adding the `+` flag."
-msgstr "もっと複雑な文字列を構築したければ、`printf` のような関数 `rb_sprintf()`があります。この関数では通常の変換での全ての指定子だけではなく、APIで定義された指定子 `PRIsVALUE` も使えます。`PRIsVALUE` は対応する `VALUE` を引数に取ります。この変換指定子はオブジェクトに `to_s` メッセージを送って文字列に置き換えます。`+` フラグを加えることで `inspect` を使った結果の文字列に置き換えることもできます。"
+msgstr ""
+"もっと複雑な文字列を構築したければ、`printf` のような関数 `rb_sprintf()`があ"
+"ります。この関数では通常の変換での全ての指定子だけではなく、APIで定義された指"
+"定子 `PRIsVALUE` も使えます。`PRIsVALUE` は対応する `VALUE` を引数に取りま"
+"す。この変換指定子はオブジェクトに `to_s` メッセージを送って文字列に置き換え"
+"ます。`+` フラグを加えることで `inspect` を使った結果の文字列に置き換えること"
+"もできます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:222
@@ -603,7 +664,11 @@ msgid ""
 "API.  `PRIsVALUE` works by hijacking the `i` conversion specifier, so when "
 "printing an `int` you should use `d` to ensure that Ruby doesn't think it's "
 "actually a `VALUE`."
-msgstr "この独自の指定子はAPIにあるあらゆる `printf` っぽい関数で使えるでしょう。`PRIsVALUE` は `i` 変換指定子を間借りすることで実現されているので、Rubyに「それって実は `VALUE` なんじゃないか」と勘違いさせないように、`int` を文字列にするときは `d` を使うべきです。"
+msgstr ""
+"この独自の指定子はAPIにあるあらゆる `printf` っぽい関数で使えるでしょう。"
+"`PRIsVALUE` は `i` 変換指定子を間借りすることで実現されているので、Rubyに「そ"
+"れって実は `VALUE` なんじゃないか」と勘違いさせないように、`int` を文字列にす"
+"るときは `d` を使うべきです。"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:228
@@ -620,7 +685,13 @@ msgid ""
 "`Symbol` and an `ID` use the `SYM2ID()` and `ID2SYM()` macros. Instead of a "
 "`Symbol` you may want to convert to/from a `char*` C string. To get an `ID` "
 "from a `char*` use `rb_intern()` and for the reverse use `rb_id2name()`."
-msgstr "APIではRubyの `Symbol` に対応するCの型 `ID` が定義されています。Rubyが `Symbol` をメソッドや変数名として受け渡しするように、多くのAPI呼び出しでメソッドや変数の名前として`ID` を使うようにしています。`Symbol` と `ID` を変換するには、 `SYM2ID()` と `ID2SYM()` マクロを使います。`Symbol` ではなくCの文字列 `char*` と相互に変換したいときもあるでしょう。`char*` から `ID` を取得するためには `rb_intern()` を、その逆向きでは `rb_id2name()` を使います。"
+msgstr ""
+"APIではRubyの `Symbol` に対応するCの型 `ID` が定義されています。Rubyが "
+"`Symbol` をメソッドや変数名として受け渡しするように、多くのAPI呼び出しでメ"
+"ソッドや変数の名前として`ID` を使うようにしています。`Symbol` と `ID` を変換"
+"するには、 `SYM2ID()` と `ID2SYM()` マクロを使います。`Symbol` ではなくCの文"
+"字列 `char*` と相互に変換したいときもあるでしょう。`char*` から `ID` を取得す"
+"るためには `rb_intern()` を、その逆向きでは `rb_id2name()` を使います。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:246
@@ -634,7 +705,15 @@ msgid ""
 "frequently using a certain C string in API calls, you may see some "
 "performance benefit by storing the `ID` and using the `ID` versions of the "
 "functions (though you'll have to look these up yourself in the Ruby headers)."
-msgstr "多くのAPI関数が `ID` を必要としていますが、適切な `ID` が手元にないことも沢山あるでしょう。そのため、代わりに `char*` を引数に取って自動で `rb_intern()` してくれる関数も沢山あります。これらの関数はより読みやすく、 `rb_intern()` の呼び出しでのオーバーヘッドは無視できる程度なので、このガイドでは可能な限り `char*` バージョンのAPI関数が使われる傾向にあります。特定のCの文字列をAPIの呼出しで頻繁に使う場合は、`ID` に変換して保管しておき、`ID` バージョンの関数を使うことでいくらかの効率性の向上を確かめられるかもしれません（Rubyのヘッダから自分で見つける必要がありますが）。"
+msgstr ""
+"多くのAPI関数が `ID` を必要としていますが、適切な `ID` が手元にないことも沢山"
+"あるでしょう。そのため、代わりに `char*` を引数に取って自動で `rb_intern()` "
+"してくれる関数も沢山あります。これらの関数はより読みやすく、 `rb_intern()` の"
+"呼び出しでのオーバーヘッドは無視できる程度なので、このガイドでは可能な限り "
+"`char*` バージョンのAPI関数が使われる傾向にあります。特定のCの文字列をAPIの呼"
+"出しで頻繁に使う場合は、`ID` に変換して保管しておき、`ID` バージョンの関数を"
+"使うことでいくらかの効率性の向上を確かめられるかもしれません（Rubyのヘッダか"
+"ら自分で見つける必要がありますが）。"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:247
@@ -649,7 +728,11 @@ msgid ""
 "should prefer these functions to `rb_eval_string()` and the like whenever "
 "possible. They are faster since they skip the parser and allow for some "
 "compile-time checks."
-msgstr "この節には直接Rubyのメソッドを呼び出すAPI関数が含まれます。`rb_eval_string()`などより、できるだけ常にこれらの関数を贔屓すべきです。これらの関数では構文解析の過程が飛ばされますし、いくつかのコンパイル時検査が免除されるのでより速いのです。"
+msgstr ""
+"この節には直接Rubyのメソッドを呼び出すAPI関数が含まれます。`rb_eval_string()`"
+"などより、できるだけ常にこれらの関数を贔屓すべきです。これらの関数では構文解"
+"析の過程が飛ばされますし、いくつかのコンパイル時検査が免除されるのでより速い"
+"のです。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:255
@@ -684,7 +767,10 @@ msgid ""
 "method name. The third argument is the number of method arguments, which is "
 "needed since `rb_funcall()` is a varargs function. Then come the actual "
 "method arguments."
-msgstr "最初の引数はレシーバです。その次はメソッド名用の[`ID`](#symbol)です。3つ目の引数はメソッド引数の数です。この引数が必要なのは`rb_funcall()`がvarargs関数だからです。それから実際メソッド引数に行き着きます。"
+msgstr ""
+"最初の引数はレシーバです。その次はメソッド名用の[`ID`](#symbol)です。3つ目の"
+"引数はメソッド引数の数です。この引数が必要なのは`rb_funcall()`がvarargs関数だ"
+"からです。それから実際メソッド引数に行き着きます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:274
@@ -692,7 +778,10 @@ msgid ""
 "Alternatively, you can use `rb_funcallv()` where the fourth argument is a "
 "`VALUE*` pointing to a C array of arguments. This also has the variant "
 "`rb_funcallv_public()` which is like `public_send` in Ruby."
-msgstr "これに代えて4つ目の引数が引数のCの配列を指す`VALUE*`になっている`rb_funcallv()`を使うことができます。これにもRubyでの`public_send`のような派生、`rb_funcallv_public()`があります。"
+msgstr ""
+"これに代えて4つ目の引数が引数のCの配列を指す`VALUE*`になっている"
+"`rb_funcallv()`を使うことができます。これにもRubyでの`public_send`のような派"
+"生、`rb_funcallv_public()`があります。"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:275
@@ -723,7 +812,10 @@ msgid ""
 "If you don't have a proc for the block, you'll need to define a certain kind "
 "of C function to represent the block. Then there's a different variant of "
 "`rb_funcallv()` but with a couple extra arguments for the block:"
-msgstr "ブロック用のprocがなければ、ブロックを表現する何らかの類のC関数を定義する必要があります。それから`rb_funcallv()`の異なる派生形で、ブロック用に2つ引数が追加されたものがあります。"
+msgstr ""
+"ブロック用のprocがなければ、ブロックを表現する何らかの類のC関数を定義する必要"
+"があります。それから`rb_funcallv()`の異なる派生形で、ブロック用に2つ引数が追"
+"加されたものがあります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:291
@@ -795,7 +887,9 @@ msgstr "require"
 msgid ""
 "The API can also load some Ruby code from a script. There's an equivalent to "
 "`require`:"
-msgstr "APIには何らかのRubyコードをスクリプトから読み込むための、`require`と等価なものがあります。"
+msgstr ""
+"APIには何らかのRubyコードをスクリプトから読み込むための、`require`と等価なも"
+"のがあります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:318
@@ -835,7 +929,10 @@ msgid ""
 "Just like [`load` in Ruby][rbload], these functions can wrap the loaded code "
 "in an anonymous module to protect the global namespace. Just pass a nonzero "
 "value for the second argument."
-msgstr "ちょうど[Rubyの`load`][rbload]と同じように、こうした関数は読み込まれたコードを匿名のモジュールに包んで大域名前空間を保護するのに使えます。単に非ゼロの値を2つ目の引数に渡せばよいのです。"
+msgstr ""
+"ちょうど[Rubyの`load`][rbload]と同じように、こうした関数は読み込まれたコード"
+"を匿名のモジュールに包んで大域名前空間を保護するのに使えます。単に非ゼロの値"
+"を2つ目の引数に渡せばよいのです。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:333
@@ -874,7 +971,10 @@ msgid ""
 "like `raise` in Ruby. The big difference is that the message is a format "
 "string [just like in `rb_sprintf()`](#string), letting you more easily build "
 "a useful message."
-msgstr "1つ目と2つ目の引数は例外クラスと文言で、Rubyの`raise`のような見た目です。大きな違いは文言が（ちょうど`rb_sprintf()`のような）書式文字列である点で、有用な文言をより簡単に構築できます。"
+msgstr ""
+"1つ目と2つ目の引数は例外クラスと文言で、Rubyの`raise`のような見た目です。大き"
+"な違いは文言が（ちょうど`rb_sprintf()`のような）書式文字列である点で、有用な"
+"文言をより簡単に構築できます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:355
@@ -885,7 +985,12 @@ msgid ""
 "(#string)  counterparts, constructing an exception using a null-terminated "
 "string, non-null-terminated string, and a `String` object, resp. Then you "
 "can raise your exception object with `rb_exc_raise`."
-msgstr "また`rb_exc_new_cstr`、`rb_exc_new`、`rb_exc_new_str`を直接使って例外オブジェクトを構築することもできます。これら全ては例外クラスを1つ目の引数に受け取り、そうしてそれぞれの関数に対応する[文字列](#string)に対してはたらきます。すなわち例外はそれぞれnull終端文字列、非null終端文字列、`String`オブジェクトを使って構築されます。それから`rb_exc_raise`で例外オブジェクトを投げられます。"
+msgstr ""
+"また`rb_exc_new_cstr`、`rb_exc_new`、`rb_exc_new_str`を直接使って例外オブジェ"
+"クトを構築することもできます。これら全ては例外クラスを1つ目の引数に受け取り、"
+"そうしてそれぞれの関数に対応する[文字列](#string)に対してはたらきます。すなわ"
+"ち例外はそれぞれnull終端文字列、非null終端文字列、`String`オブジェクトを使っ"
+"て構築されます。それから`rb_exc_raise`で例外オブジェクトを投げられます。"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:356
@@ -899,7 +1004,9 @@ msgid ""
 "There are several ways to rescue exceptions using the API. All of them "
 "require the code you're protecting to be in a function that takes and "
 "returns a single `VALUE`."
-msgstr "APIを使って例外を補足するにはいくつか方法があります。全ての方法で保護対象のコードは単一の`VALUE`を取って返す関数の中にある必要があります。"
+msgstr ""
+"APIを使って例外を補足するにはいくつか方法があります。全ての方法で保護対象の"
+"コードは単一の`VALUE`を取って返す関数の中にある必要があります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:365
@@ -916,7 +1023,10 @@ msgid ""
 "probably need to make a wrapper function in this format that runs the "
 "desired code. The way to access a rescued exception is also independent of "
 "the way it is rescued:"
-msgstr "厳密にこの型の関数を救出したいのでない限り、恐らくこの形式で所望のコードを走らせる梱包関数を作る必要があるでしょう。救出された例外にアクセスする方法もまた、救出される方法とは独立です。"
+msgstr ""
+"厳密にこの型の関数を救出したいのでない限り、恐らくこの形式で所望のコードを走"
+"らせる梱包関数を作る必要があるでしょう。救出された例外にアクセスする方法もま"
+"た、救出される方法とは独立です。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:373
@@ -933,7 +1043,11 @@ msgid ""
 "be `Qnil` if no exception occurred). Unlike in Ruby, you must manually clear "
 "the exception after reading it[^clear]. Otherwise later API calls might read "
 "the old value and think another exception has occurred."
-msgstr "`rb_errinfo()`により、欠かせないRubyの`$!`（1つも例外が起こらなければ`Qnil`になります）の`VALUE`が与えられます。Rubyとは異なり読んだ後で例外を手動で消し去らなければなりません[^clear]。さもなくばその後のAPI呼び出しが古い値を読んで別の例外が起こったと考えるかもしれません。"
+msgstr ""
+"`rb_errinfo()`により、欠かせないRubyの`$!`（1つも例外が起こらなければ`Qnil`に"
+"なります）の`VALUE`が与えられます。Rubyとは異なり読んだ後で例外を手動で消し去"
+"らなければなりません[^clear]。さもなくばその後のAPI呼び出しが古い値を読んで別"
+"の例外が起こったと考えるかもしれません。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:382
@@ -941,7 +1055,10 @@ msgid ""
 "Next we will go over several methods of rescuing; you can use whichever you "
 "like, but I think that generally the right choice is determined by your [use-"
 "case](#the-two-paths) of the API."
-msgstr "次に救出するための方法をいくつか眺めていきます。どれでも好きなものを使ってよいですが、一般に正しい選択はAPIの[用途](#the-two-paths)により決まると考えています。"
+msgstr ""
+"次に救出するための方法をいくつか眺めていきます。どれでも好きなものを使ってよ"
+"いですが、一般に正しい選択はAPIの[用途](#the-two-paths)により決まると考えてい"
+"ます。"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:383
@@ -959,7 +1076,8 @@ msgid ""
 msgstr ""
 "Rubyによって読み込まれるライブラリをコンパイルしている場合、話は簡単です。\n"
 "APIで投げられるいかなる例外もいつも通りRubyのコードで救出できます。\n"
-"APIで例外を救出したければRubyの`rescue`と似ている`rb_rescue2()`を使うことができます。"
+"APIで例外を救出したければRubyの`rescue`と似ている`rb_rescue2()`を使うことがで"
+"きます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:393
@@ -980,7 +1098,14 @@ msgid ""
 "exceptions not in this list will not be rescued. If you just want to rescue "
 "`StandardError` (like a blank `rescue` in Ruby), you can use `rb_rescue()` "
 "which takes just the first four arguments of `rb_rescue2()`."
-msgstr "始めから2つの引数は保護する関数とその引数です。その次の2つは例外が投げられた場合に呼ばれる関数とその引数です。`rb_rescue2()`はvarargs関数なのでその後には救出したい例外クラスのリストが来ます。最後の引数は常に`0`で、クラスのリストの末尾を示します。Rubyの`rescue`のように、このリストにない例外は何も救出されません。もし（Rubyでの空の`rescue`のように）`StandardError`を救出したいだけなら、`rb_rescue2()`の最初の4つの引数だけを取る`rb_rescue()`を使うことができます。"
+msgstr ""
+"始めから2つの引数は保護する関数とその引数です。その次の2つは例外が投げられた"
+"場合に呼ばれる関数とその引数です。`rb_rescue2()`はvarargs関数なのでその後には"
+"救出したい例外クラスのリストが来ます。最後の引数は常に`0`で、クラスのリストの"
+"末尾を示します。Rubyの`rescue`のように、このリストにない例外は何も救出されま"
+"せん。もし（Rubyでの空の`rescue`のように）`StandardError`を救出したいだけな"
+"ら、`rb_rescue2()`の最初の4つの引数だけを取る`rb_rescue()`を使うことができま"
+"す。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:406
@@ -989,7 +1114,10 @@ msgid ""
 "different exception classes as Ruby does. You'll need to rescue all the "
 "classes you want at once and use some kind of switch to handle them "
 "separately."
-msgstr "Rubyとは違い、APIではそれぞれの例外クラス用に救出コードを走らせる簡単な方法を提供していません。一旦欲しい全てのクラスを救出して、switchの類を使って個別に取り扱う必要があります。"
+msgstr ""
+"Rubyとは違い、APIではそれぞれの例外クラス用に救出コードを走らせる簡単な方法を"
+"提供していません。一旦欲しい全てのクラスを救出して、switchの類を使って個別に"
+"取り扱う必要があります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:413
@@ -1000,7 +1128,13 @@ msgid ""
 "return value of the first (dangerous) function, otherwise the return value "
 "of the second (rescue) function. By having these return, say, `Qtrue` and "
 "`Qfalse` you can detect which case you are in."
-msgstr "またAPIはRubyの`else`と等価なもの、つまり _何ら_ 例外が投げられなかったときに走るコード、を直接は提供していません。このための1つの方法は`rb_rescue2()`の返り値を使うことです。もし1つも例外が投げられなければ最初の（危険な）関数の返り値を、さもなくば2つ目の（救出）関数の返り値を返します。これらが返すもの、ここでは`Qtrue`と`Qfalse`としましょう、を受け取ることによって、どちらの場合になっているのかを検出できます。"
+msgstr ""
+"またAPIはRubyの`else`と等価なもの、つまり _何ら_ 例外が投げられなかったときに"
+"走るコード、を直接は提供していません。このための1つの方法は`rb_rescue2()`の返"
+"り値を使うことです。もし1つも例外が投げられなければ最初の（危険な）関数の返り"
+"値を、さもなくば2つ目の（救出）関数の返り値を返します。これらが返すもの、ここ"
+"では`Qtrue`と`Qfalse`としましょう、を受け取ることによって、どちらの場合になっ"
+"ているのかを検出できます。"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:414
@@ -1039,7 +1173,12 @@ msgid ""
 "it returns `Qnil` and sets `state` to some nonzero value. If you want to re-"
 "raise the exception, pass `state` to `rb_jump_tag()` (this also works for "
 "the state from the other `*_protect()` functions)."
-msgstr "`rb_rescue2()`と同様、最初2つの引数は保護する関数を呼び出すためのものです。しかし、`rb_eval_string_protect()`のように、例外が投げられれば`Qnil`を返し`state`を非ゼロの値に設定します。例外を再度投げたければ`state`を`rb_jump_tag()`に渡してください（これは他の`*_protect()`関数からの状態についても同じことが言えます）。"
+msgstr ""
+"`rb_rescue2()`と同様、最初2つの引数は保護する関数を呼び出すためのものです。し"
+"かし、`rb_eval_string_protect()`のように、例外が投げられれば`Qnil`を返し"
+"`state`を非ゼロの値に設定します。例外を再度投げたければ`state`を"
+"`rb_jump_tag()`に渡してください（これは他の`*_protect()`関数からの状態につい"
+"ても同じことが言えます）。"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:432
@@ -1055,7 +1194,12 @@ msgid ""
 "first.  That may sound simple enough, but that means that if you want the "
 "usual `begin; rescue; ensure; end` structure as in Ruby, you'll need another "
 "layer of wrapping:"
-msgstr "`rb_ensure()`は`rb_rescue()`に似ていますが、例外を関知しないことと2つ目の関数が _常に_ 1つ目のものの後に呼ばれる点で異なります。充分に単純に思われるかもしれませんが、これが意味しているのは、もしRubyでするような通常の`begin; rescue; end`の構造が欲しければ、梱包に別の層が必要になってくるということです。"
+msgstr ""
+"`rb_ensure()`は`rb_rescue()`に似ていますが、例外を関知しないことと2つ目の関数"
+"が _常に_ 1つ目のものの後に呼ばれる点で異なります。充分に単純に思われるかもし"
+"れませんが、これが意味しているのは、もしRubyでするような通常の`begin; "
+"rescue; end`の構造が欲しければ、梱包に別の層が必要になってくるということで"
+"す。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:443
@@ -1072,7 +1216,11 @@ msgid ""
 "no exception occurs, `rb_rescue()` will return the value of `begin_func()` "
 "which returns the value of `dangerous_func()`. If an exception does occur, "
 "`rb_rescue()` returns the value of `rescue_func()`."
-msgstr "Rubyでの`ensure`のように、`ensure_func()`の返り値は決して使われません。何も例外が起きなければ`rb_rescue()`は`begin_func()`の値を返します。ここで、`begin_func()`は`dangerous_func()`の値を返します。もし例外が発生したら`rb_rescue()`は`rescue_func()`の値を返します。"
+msgstr ""
+"Rubyでの`ensure`のように、`ensure_func()`の返り値は決して使われません。何も例"
+"外が起きなければ`rb_rescue()`は`begin_func()`の値を返します。ここで、"
+"`begin_func()`は`dangerous_func()`の値を返します。もし例外が発生したら"
+"`rb_rescue()`は`rescue_func()`の値を返します。"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:449
@@ -1103,7 +1251,15 @@ msgid ""
 "variable `bar` (no `@`), but the API will happily create them. The API "
 "handles this by **not exposing invalid names to Ruby**. Since that's "
 "probably not what you want, double check the names you choose!"
-msgstr "Rubyから見えるようにするにはいくつかの方法がありますが、全て同じ汎用的な仕組みではたらきます。その共通するところはRubyがアクセスできる何らかの名前を定義するという点です。例えば変数名やメソッド名などです。しかし注意を呼び掛けておきましょう。Rubyとは違い、**APIでは不正な名前を与えることができます**。クラスに`foo`（定数でない）やインスタンス変数に`bar`（`@`がない）を名付けようとするとRubyは`SyntaxError`や`NameError`を投げるでしょうが、APIは嬉々としてそうした名前で作り、**不正な名前をRubyにさらけ出さない** ようにして対処します。そうしたいわけではないでしょうから、選ぶ名前はダブルチェックしてくださいね。"
+msgstr ""
+"Rubyから見えるようにするにはいくつかの方法がありますが、全て同じ汎用的な仕組"
+"みではたらきます。その共通するところはRubyがアクセスできる何らかの名前を定義"
+"するという点です。例えば変数名やメソッド名などです。しかし注意を呼び掛けてお"
+"きましょう。Rubyとは違い、**APIでは不正な名前を与えることができます**。クラス"
+"に`foo`（定数でない）やインスタンス変数に`bar`（`@`がない）を名付けようとする"
+"とRubyは`SyntaxError`や`NameError`を投げるでしょうが、APIは嬉々としてそうした"
+"名前で作り、**不正な名前をRubyにさらけ出さない** ようにして対処します。そうし"
+"たいわけではないでしょうから、選ぶ名前はダブルチェックしてくださいね。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:469
@@ -1113,7 +1269,12 @@ msgid ""
 "the API, it can be helpful to think about how you would do it in Ruby using "
 "only metaprogramming method calls. For example, rather than `class Foo; def "
 "bar; end; end`, think `Foo = Class.new; Foo.define_method(:bar) {}`."
-msgstr "この節のほとんどのAPI関数はRubyのメタプログラミングに近いです。APIを使って何かしようとするときは、Rubyでメタプログラミングのメソッド呼び出しだけを使ってするとしたらどうするだろうと考えると役立つことがあります。例えば`class Foo; def bar; end`とするのではなく、`Foo = Class.new; Foo.define_method(:bar) {}`と考えるのです。"
+msgstr ""
+"この節のほとんどのAPI関数はRubyのメタプログラミングに近いです。APIを使って何"
+"かしようとするときは、Rubyでメタプログラミングのメソッド呼び出しだけを使って"
+"するとしたらどうするだろうと考えると役立つことがあります。例えば`class Foo; "
+"def bar; end`とするのではなく、`Foo = Class.new; Foo.define_method(:bar) {}`"
+"と考えるのです。"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:470
@@ -1162,7 +1323,13 @@ msgid ""
 "operation. Or you can throw out `global` entirely with "
 "`rb_define_virtual_variable()` though of course the getter and setter _must_ "
 "be defined in that case."
-msgstr "`VALUE`はRubyで大域変数を作る前に初期化するべきで、そうしておけばCでも大域変数になります。Rubyが使っている間はスコープを外れてほしくはないですからね。`rb_define_hooked_variable()`にすると、そうした操作で通常の同期をしたい場合にゲッターやセッターに`NULL`を渡すことができます。もしくは`rb_define_virtual_variable()`で完全に`global`を投げ出すこともできますが、もちろんゲッターとセッターはそうした場合で定義されている _必要_ があります。"
+msgstr ""
+"`VALUE`はRubyで大域変数を作る前に初期化するべきで、そうしておけばCでも大域変"
+"数になります。Rubyが使っている間はスコープを外れてほしくはないですからね。"
+"`rb_define_hooked_variable()`にすると、そうした操作で通常の同期をしたい場合に"
+"ゲッターやセッターに`NULL`を渡すことができます。もしくは"
+"`rb_define_virtual_variable()`で完全に`global`を投げ出すこともできますが、も"
+"ちろんゲッターとセッターはそうした場合で定義されている _必要_ があります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:495
@@ -1170,7 +1337,9 @@ msgid ""
 "If you ever create a global `VALUE` in C which is _not_ exposed to Ruby, you "
 "must tell the garbage collector about it to prevent it from being "
 "prematurely cleaned up:"
-msgstr "Rubyに露出 _しない_ 大域変数`VALUE`をCで作った場合、中途半端に掃除されてしまうのを防ぐためにガベージコレクタにそのことを伝えなければなりません。"
+msgstr ""
+"Rubyに露出 _しない_ 大域変数`VALUE`をCで作った場合、中途半端に掃除されてしま"
+"うのを防ぐためにガベージコレクタにそのことを伝えなければなりません。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:499
@@ -1208,7 +1377,9 @@ msgstr ""
 msgid ""
 "There isn't an automatic way to synchronize instance variables like you can "
 "with globals."
-msgstr "大域変数もそうでしたがインスタンス変数を同期する自動化された方法はありません。"
+msgstr ""
+"大域変数もそうでしたがインスタンス変数を同期する自動化された方法はありませ"
+"ん。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:513
@@ -1221,7 +1392,9 @@ msgstr ""
 msgid ""
 "For class variables, the methods are `rb_cv_get()` and `rb_cv_set()` and of "
 "course the first argument should be a class object."
-msgstr "クラス変数については、メソッドは`rb_cv_get()`と`rb_cv_set()`があり、もちろん最初の引数はクラスオブジェクトです。"
+msgstr ""
+"クラス変数については、メソッドは`rb_cv_get()`と`rb_cv_set()`があり、もちろん"
+"最初の引数はクラスオブジェクトです。"
 
 #. type: Title ###
 #: _posts/2010-01-01-c.markdown:517
@@ -1251,7 +1424,10 @@ msgid ""
 "You undefine a constant by setting it to `Qundef`. Getting a constant's "
 "`VALUE` is a little nuanced. The API function you call depends on what you "
 "want to happen if the constant is _not_ defined in the module you specify:"
-msgstr "`Qundef`を設定すると定数は未定義にされます。定数の`VALUE`の取得に関しては少しずつ違います。定数が指定されたモジュールで定義されて _いない_ ときに何が起こってほしいのかに依って呼び出すべきAPI関数が決まります。"
+msgstr ""
+"`Qundef`を設定すると定数は未定義にされます。定数の`VALUE`の取得に関しては少し"
+"ずつ違います。定数が指定されたモジュールで定義されて _いない_ ときに何が起"
+"こってほしいのかに依って呼び出すべきAPI関数が決まります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:532
@@ -1353,7 +1529,12 @@ msgid ""
 "fancier method definition in Ruby. Thankfully, the API has a shortcut for "
 "doing exactly that.  To use it, you should use the C array function "
 "definition, then you can pass `argc` and `argv` along to:"
-msgstr "さて、様々な個数の引数を受け付けられたら、メソッド内で自力で全ての仕組みをコードに書くことができ、あたかもRubyで凝ったメソッドを定義したように _振る舞わ_ せられます。ありがたいことにAPIにはちょうどそういうことをするための早道があります。それにはC配列関数の定義を使うとよく、それから`argc`と`argv`を以下の流れに沿って渡すことができます。"
+msgstr ""
+"さて、様々な個数の引数を受け付けられたら、メソッド内で自力で全ての仕組みを"
+"コードに書くことができ、あたかもRubyで凝ったメソッドを定義したように _振る舞"
+"わ_ せられます。ありがたいことにAPIにはちょうどそういうことをするための早道が"
+"あります。それにはC配列関数の定義を使うとよく、それから`argc`と`argv`を以下の"
+"流れに沿って渡すことができます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:576
@@ -1451,7 +1632,9 @@ msgid ""
 "You can also use the return value of `rb_scan_args()` to determine how the "
 "function was called. It returns the number of arguments that were passed in "
 "Ruby."
-msgstr "`rb_scan_args()`の返り値を使って、関数がどう呼ばれたのかを確定することもできます。そうすることでRubyで渡された引数の数が返ります。"
+msgstr ""
+"`rb_scan_args()`の返り値を使って、関数がどう呼ばれたのかを確定することもでき"
+"ます。そうすることでRubyで渡された引数の数が返ります。"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:610
@@ -1516,7 +1699,9 @@ msgstr ""
 msgid ""
 "There's also `rb_yield_values2()` which is like `rb_yield_values()` but "
 "instead of varargs the second argument is a `VALUE*`[^yield]."
-msgstr "`rb_yield_values()`に似た`rb_yield_values2()`もあり、`varargs`の代わりに2つ目の引数が`VALUE*`になっています[^yield]。"
+msgstr ""
+"`rb_yield_values()`に似た`rb_yield_values2()`もあり、`varargs`の代わりに2つ目"
+"の引数が`VALUE*`になっています[^yield]。"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:635
@@ -1545,7 +1730,12 @@ msgid ""
 "explicitly pass the correct `argc` and `argv` (it _does_ automatically pass "
 "`self`). For that reason I recommend using the C array style of method "
 "definition if you want to use `rb_call_super()`."
-msgstr "Rubyとは異なり、引数を1つも与えなければ`rb_call_super()`はメソッドの引数をsuperに暗黙に渡すことは**ありません**。明示的に正しい`argc`及び`argv`を渡さなければならないのです（`self`を自動的に渡し*ます*）。そういった理由から`rb_call_super()`を使いたければCの配列スタイルのメソッド定義を使うことをお勧めします。"
+msgstr ""
+"Rubyとは異なり、引数を1つも与えなければ`rb_call_super()`はメソッドの引数を"
+"superに暗黙に渡すことは**ありません**。明示的に正しい`argc`及び`argv`を渡さな"
+"ければならないのです（`self`を自動的に渡し*ます*）。そういった理由から"
+"`rb_call_super()`を使いたければCの配列スタイルのメソッド定義を使うことをお勧"
+"めします。"
 
 #. type: Title ####
 #: _posts/2010-01-01-c.markdown:649
@@ -1560,7 +1750,10 @@ msgid ""
 "method in Ruby. Every API call to create a method takes at least the method "
 "name (`char*`), a pointer to your C function, and an `argc` describing its "
 "arguments.  `argc` should be:"
-msgstr "Cの関数を用意するのは大変ですが、Ruby用にメソッドを定義するのは簡単です。メソッドをつくるAPI呼び出しは全て最低でもメソッド名 (`char*`)、Cの関数へのポインタ、引数を表す`argc`を取ります。`argc`は以下のようなものです。"
+msgstr ""
+"Cの関数を用意するのは大変ですが、Ruby用にメソッドを定義するのは簡単です。メ"
+"ソッドをつくるAPI呼び出しは全て最低でもメソッド名 (`char*`)、Cの関数へのポイ"
+"ンタ、引数を表す`argc`を取ります。`argc`は以下のようなものです。"
 
 #. type: Bullet: '1. '
 #: _posts/2010-01-01-c.markdown:660
@@ -1598,7 +1791,10 @@ msgid ""
 "There's also a shortcut for defining a method in a module _and_ its "
 "singleton class. This is used a lot in `Math`, for example, letting you "
 "`include Math` to avoid typing `Math.` before every method call."
-msgstr "モジュール _と_ そのシングルトンクラス中でメソッドを定義する早道もあります。例えば`Math`で多用されており、例として`include Math`とすることで一々メソッド呼び出しで`Math.`と打つのを避けられます。"
+msgstr ""
+"モジュール _と_ そのシングルトンクラス中でメソッドを定義する早道もあります。"
+"例えば`Math`で多用されており、例として`include Math`とすることで一々メソッド"
+"呼び出しで`Math.`と打つのを避けられます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:674
@@ -1641,7 +1837,13 @@ msgid ""
 "world? If your data can be naturally translated into `VALUE`s it's easy: "
 "convert and assign to instance variables as usual. But what if your data "
 "have no Ruby analog (e.g. data structures defined by some C library)?"
-msgstr "今となってはAPIを使ってRubyのクラスを作ったり操作したりできるでしょう。しかしCの世界でデータをカプセル化するRubyのクラスを作るにはどうすればよいのでしょうか。データが自然に`VALUE`に翻訳できるのであれば簡単です。いつも通り変換してインスタンス変数に代入すればよいです。でもデータに、Rubyでいうところのこれ、といったものがないとしたらどうでしょうか（例：何らかのCのライブラリで定義されたデータ構造）。"
+msgstr ""
+"今となってはAPIを使ってRubyのクラスを作ったり操作したりできるでしょう。しかし"
+"Cの世界でデータをカプセル化するRubyのクラスを作るにはどうすればよいのでしょう"
+"か。データが自然に`VALUE`に翻訳できるのであれば簡単です。いつも通り変換してイ"
+"ンスタンス変数に代入すればよいです。でもデータに、Rubyでいうところのこれ、と"
+"いったものがないとしたらどうでしょうか（例：何らかのCのライブラリで定義された"
+"データ構造）。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:697
@@ -1652,7 +1854,13 @@ msgid ""
 "pointer and cast it back to the correct type. But where does this "
 "encapsulation occur? Let's answer that question with a question: what "
 "happens when you tell Ruby to create an object using `new`? Basically this:"
-msgstr "APIを使うと、所望の`VALUE`を作り、Rubyのオブジェクトの中にCのデータを指す`void*`を格納することで、Cのデータをカプセル化できます。そうしてCのデータにアクセスする必要が生じたら、ポインタを開封して正しい型に変換し戻せばよいのです。しかしどの時点でこのカプセル化は起こるのでしょうか。その質問へは次の質問でもって答えましょう。`new`を使ってオブジェクトを作るようRubyに伝えたとき何が起こるでしょうか。基本的にはこうです。"
+msgstr ""
+"APIを使うと、所望の`VALUE`を作り、Rubyのオブジェクトの中にCのデータを指す"
+"`void*`を格納することで、Cのデータをカプセル化できます。そうしてCのデータにア"
+"クセスする必要が生じたら、ポインタを開封して正しい型に変換し戻せばよいので"
+"す。しかしどの時点でこのカプセル化は起こるのでしょうか。その質問へは次の質問"
+"でもって答えましょう。`new`を使ってオブジェクトを作るようRubyに伝えたとき何が"
+"起こるでしょうか。基本的にはこうです。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:701
@@ -1709,42 +1917,54 @@ msgstr ""
 msgid ""
 "`wrap_struct_name` is a string used by Ruby to identify your type. It "
 "doesn't really matter what it is as long as it's sensible and unique"
-msgstr "`wrap_struct_name`はRubyによって使われる文字列で、型を識別するために使われます。意味が通っていて一意である限り本当に何でも構いません"
+msgstr ""
+"`wrap_struct_name`はRubyによって使われる文字列で、型を識別するために使われま"
+"す。意味が通っていて一意である限り本当に何でも構いません"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
 msgid ""
 "`function` is a struct containing several function pointers for use by the "
 "garbage collector"
-msgstr "`function`はガベージコレクタによって使われるいくつかの関数ポインタを含む構造体です"
+msgstr ""
+"`function`はガベージコレクタによって使われるいくつかの関数ポインタを含む構造"
+"体です"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
 msgid ""
 "`dmark` will be described later, but as long your C data doesn't point to "
 "any Ruby objects you don't need it"
-msgstr "`dmark`については後述しますが、CのデータがRubyのオブジェクトを指さない限り不要です"
+msgstr ""
+"`dmark`については後述しますが、CのデータがRubyのオブジェクトを指さない限り不"
+"要です"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
 msgid ""
 "`dfree` will be called when your object is destroyed and should free all "
 "memory allocated by the object"
-msgstr "`dfree`が呼ばれるのは、オブジェクトが破棄されオブジェクトによってアロケートされた全てのメモリが解放されるときです"
+msgstr ""
+"`dfree`が呼ばれるのは、オブジェクトが破棄されオブジェクトによってアロケートさ"
+"れた全てのメモリが解放されるときです"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
 msgid ""
 "`dsize` is called by Ruby to check how much memory your object is taking "
 "up.  It _can_ be omitted, but it's polite to include it"
-msgstr "`dsize`はがRubyから呼ばれるのはオブジェクトがどの位メモリを取っているのか確認するときです。省略も _可能_ ですが、含めておくのが誠実というものです"
+msgstr ""
+"`dsize`はがRubyから呼ばれるのはオブジェクトがどの位メモリを取っているのか確認"
+"するときです。省略も _可能_ ですが、含めておくのが誠実というものです"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
 msgid ""
 "`data` can point to arbitrary data. Think of it as wrapping C data at a "
 "class level. Also not manadatory"
-msgstr "`data`は任意のデータを指すことができます。Cのデータをクラス水準で包んだものと考えてください。こちらも必須ではありません"
+msgstr ""
+"`data`は任意のデータを指すことができます。Cのデータをクラス水準で包んだものと"
+"考えてください。こちらも必須ではありません"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:736
@@ -1753,7 +1973,11 @@ msgid ""
 "garbage collected. As long as your `dfree` function doesn't unlock the [GVL]"
 "(#c-in-ruby-threads) (why would you do that???) you can safely set it to "
 "`RUBY_TYPED_FREE_IMMEDIATELY` for a slight performance improvement"
-msgstr "`flags`を使うとオブジェクトがガベージコレクトされたときの追加の最適化を有効にします。`dfree`関数が[GVL](#c-in-ruby-threads)を解放しない限り（そうしたいことなんてあるのでしょうか）、`RUBY_TYPED_FREE_IMMEDIATELY`を安全に設定することで僅かに効率性の向上が得られます"
+msgstr ""
+"`flags`を使うとオブジェクトがガベージコレクトされたときの追加の最適化を有効に"
+"します。`dfree`関数が[GVL](#c-in-ruby-threads)を解放しない限り（そうしたいこ"
+"となんてあるのでしょうか）、`RUBY_TYPED_FREE_IMMEDIATELY`を安全に設定すること"
+"で僅かに効率性の向上が得られます"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:741
@@ -1762,7 +1986,11 @@ msgid ""
 "Ruby doesn't accidentally read garbage data. That's why I used C99's "
 "[designated initializer][desinit] syntax in the example above: any members "
 "you omit will be safely cleared by the compiler."
-msgstr "これらの要素を設定しない場合はRubyがうっかりゴミデータを読まないようにゼロにしてしまうべきです。上の例でC99の[明示初期化子][desinit]構文を使っているのはそのためです。どの要素を省いてもコンパイラによって安全に掃除された状態になっています"
+msgstr ""
+"これらの要素を設定しない場合はRubyがうっかりゴミデータを読まないようにゼロに"
+"してしまうべきです。上の例でC99の[明示初期化子][desinit]構文を使っているのは"
+"そのためです。どの要素を省いてもコンパイラによって安全に掃除された状態になっ"
+"ています"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:743
@@ -1775,7 +2003,10 @@ msgid ""
 "`VALUE`s that wrap C data will have type `T_DATA` with respect to the "
 "[`TYPE()` macro](#value). This helps ensure a clear separation between "
 "native Ruby objects and those wrapping C data."
-msgstr "Cのデータを包む`VALUE`は、[`TYPE()`マクロ](#value)に関しては型`T_DATA`を持ちます。これはRuby固有のオブジェクトとCのデータを包んでいるオブジェクトとの間の区別を明確にする補助になります。"
+msgstr ""
+"Cのデータを包む`VALUE`は、[`TYPE()`マクロ](#value)に関しては型`T_DATA`を持ち"
+"ます。これはRuby固有のオブジェクトとCのデータを包んでいるオブジェクトとの間の"
+"区別を明確にする補助になります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:752
@@ -1998,7 +2229,12 @@ msgid ""
 "almost all Ruby code so that only a single `Thread` can run at a time. This "
 "is the reason why you'll often hear people say that `Thread` does not allow "
 "true parallelism."
-msgstr "他方で、重いCのコードをAPIでRubyにさらけ出す場合（例えばCのライブラリを包む拡張を書いている場合など）、大域的VMロック (GVL) と呼ばれる頭痛の種には時間を取って考えてみることです。ほとんどのAPIは`Thread`安全ではないですから、一度に単一の`Thread`だけが走るように、GVLはほぼ全てのRubyのコードをロックしてしまいます。これが俗に`Thread`では真の並列性がないと言われる所以です。"
+msgstr ""
+"他方で、重いCのコードをAPIでRubyにさらけ出す場合（例えばCのライブラリを包む拡"
+"張を書いている場合など）、大域的VMロック (GVL) と呼ばれる頭痛の種には時間を"
+"取って考えてみることです。ほとんどのAPIは`Thread`安全ではないですから、一度に"
+"単一の`Thread`だけが走るように、GVLはほぼ全てのRubyのコードをロックしてしまい"
+"ます。これが俗に`Thread`では真の並列性がないと言われる所以です。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:850
@@ -2032,7 +2268,10 @@ msgid ""
 "The code to do this is considered so fancy by the Ruby developers that you "
 "actually need to include another header to use it. First we'll look at the "
 "slightly simpler way to release the GVL:"
-msgstr "こういったことをするコードはRubyで開発している人にとっては酷だと思われるので、実際には使用する別のヘッダを含める必要があるでしょう。まずGVLを解除する少しだけ単純なやり方を見ていきます。"
+msgstr ""
+"こういったことをするコードはRubyで開発している人にとっては酷だと思われるの"
+"で、実際には使用する別のヘッダを含める必要があるでしょう。まずGVLを解除する少"
+"しだけ単純なやり方を見ていきます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:858
@@ -2058,7 +2297,10 @@ msgid ""
 "in parallel, it can't be interrupted (by signals, `Thread.kill`, etc.)! To "
 "allow for that you must pass an unblocking function using the last two "
 "arguments:"
-msgstr "上のようにGVLを解除するとコードは確かに並列で走るものの、（シグナルや`Thread.kill`などによって）中断できないことに気付かれるでしょう。中断できるようにするには末尾の2引数を使ってブロック解除関数を渡さなければいけません。"
+msgstr ""
+"上のようにGVLを解除するとコードは確かに並列で走るものの、（シグナルや`Thread."
+"kill`などによって）中断できないことに気付かれるでしょう。中断できるようにする"
+"には末尾の2引数を使ってブロック解除関数を渡さなければいけません。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:870
@@ -2075,7 +2317,10 @@ msgid ""
 "work, you will probably need to pass a pointer to both functions that can be "
 "used to communicate an interrupt from one to the other. The interrupted "
 "function should perform any necessary cleanup before returning early."
-msgstr "ブロック解除関数は中断のイベント中に呼ばれます。動作させるためには恐らくポインタを両方の関数に渡して、中断が一方から他方へと伝わるようにするために使う必要があるでしょう。中断された関数は早期に返る前に必要な片付けを実施します。"
+msgstr ""
+"ブロック解除関数は中断のイベント中に呼ばれます。動作させるためには恐らくポイ"
+"ンタを両方の関数に渡して、中断が一方から他方へと伝わるようにするために使う必"
+"要があるでしょう。中断された関数は早期に返る前に必要な片付けを実施します。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:880
@@ -2095,7 +2340,10 @@ msgid ""
 "If you go through all of that effort to release the GVL only to find that "
 "you need to make an API call in your unlocked thread, there's a function to "
 "temporarily reacquire the GVL:"
-msgstr "GVLを解除するためにこうした一通りの骨折りをした後で、ブロックが解除されたスレッドでAPI呼び出しをする必要があるとわかった場合のみ、一時的にGVLを再装填する関数があります。"
+msgstr ""
+"GVLを解除するためにこうした一通りの骨折りをした後で、ブロックが解除されたス"
+"レッドでAPI呼び出しをする必要があるとわかった場合のみ、一時的にGVLを再装填す"
+"る関数があります。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:888
@@ -2204,7 +2452,9 @@ msgstr "`ruby/thread.h` [GVL](#c-in-ruby-threads)を扱うための関数"
 msgid ""
 "`ruby/version.h` functions for version introspection. Do not use this as "
 "feature-detection code!"
-msgstr "`ruby/version.h` バージョンを調べる関数。これを機能を検出するコードに使わないように"
+msgstr ""
+"`ruby/version.h` バージョンを調べる関数。これを機能を検出するコードに使わない"
+"ように"
 
 #. type: Bullet: '* '
 #: _posts/2010-01-01-c.markdown:923
@@ -2276,7 +2526,11 @@ msgid ""
 "significant that I left out? Did I make some stupid mistake? Check out the "
 "[source][gh] for this site on Github and you can report issues, submit pull "
 "requests, and download all of the code examples."
-msgstr "これでこのガイドを読み終わりましたが、何か著しく書き漏らしたものがあるでしょうか。粗忽な誤りがなかったでしょうか。このサイトの[ソース][gh]をGithubで確認してイシューを報告したりプルリクエストを送ってください。またGithubから全てのコード例をダウンロードできます。"
+msgstr ""
+"これでこのガイドを読み終わりましたが、何か著しく書き漏らしたものがあるでしょ"
+"うか。粗忽な誤りがなかったでしょうか。このサイトの[ソース][gh]をGithubで確認"
+"してイシューを報告したりプルリクエストを送ってください。またGithubから全ての"
+"コード例をダウンロードできます。"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:951
@@ -2402,19 +2656,21 @@ msgstr "[^maybe]: 謎めいた名前の`rb_gc_mark_maybe()`もありますが、
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:1004
 msgid "[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data)."
-msgstr "[^tdata]: あるいはオブジェクトが[Cのポインタを包む](#data)のなら`T_DATA`を使ってください。"
+msgstr ""
+"[^tdata]: あるいはオブジェクトが[Cのポインタを包む](#data)のなら`T_DATA`を"
+"使ってください。"
 
 # "[control]:"の直後で空白を入れていないのは意図的です。
 # これがないとここで改行が入ってしまうので正しいMarkdownの解釈になりません。
 # 解消するにはpo4aが正しくリンクの参照を構文解析できるようにする必要があります。
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:1006
-#, no-wrap
 msgid ""
 "[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
 "Control+Structure [bug2]: https://bugs.ruby-lang.org/issues/10466"
 msgstr ""
-"[control]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure\n"
+"[control]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
+"Control+Structure\n"
 "[bug2]: https://bugs.ruby-lang.org/issues/10466"
 
 #. type: Title ##
@@ -2436,7 +2692,12 @@ msgid ""
 "specific header `ruby/config.h`. You will probably need to tell your "
 "compiler about the include paths for these headers. You will also need to "
 "link with the Ruby lib.  On my machine, my minimal compiler options are"
-msgstr "Rubyを組込むには `ruby.h` という1つのヘッダファイルが必要です。このファイルはプラットフォーム固有のヘッダである `ruby/config.h` を含めます。場合によってはコンパイラにヘッダファイルの含めるファイルパスを指定する必要があります。Rubyライブラリとリンクする必要もあります。私の環境では、最小のコンパイラオプションは以下のようになります。"
+msgstr ""
+"Rubyを組込むには `ruby.h` という1つのヘッダファイルが必要です。このファイルは"
+"プラットフォーム固有のヘッダである `ruby/config.h` を含めます。場合によっては"
+"コンパイラにヘッダファイルの含めるファイルパスを指定する必要があります。Ruby"
+"ライブラリとリンクする必要もあります。私の環境では、最小のコンパイラオプショ"
+"ンは以下のようになります。"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:16
@@ -2502,7 +2763,11 @@ msgid ""
 "exit your program! If you would rather have a softer error, you can instead "
 "call `ruby_setup()` which returns a nonzero value if a failure occurred "
 "(unfortunately it is not clear how to get a message for the error[^err])."
-msgstr "`ruby_init()` の最中にVMが実行に失敗したら、エラーを表示してプログラムが終了してしまいます！もっと柔軟にエラーを出したいときは、代わりに失敗したときにゼロではない値を返す`ruby_setup()` を使いましょう（残念ながら、この場合のエラーメッセージの出しかたはよくわかっていません[^err]）。"
+msgstr ""
+"`ruby_init()` の最中にVMが実行に失敗したら、エラーを表示してプログラムが終了"
+"してしまいます！もっと柔軟にエラーを出したいときは、代わりに失敗したときにゼ"
+"ロではない値を返す`ruby_setup()` を使いましょう（残念ながら、この場合のエラー"
+"メッセージの出しかたはよくわかっていません[^err]）。"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:43
@@ -2511,7 +2776,10 @@ msgid ""
 "otherwise it returns the argument you passed it. This allows a little "
 "shortcut for returning an error status if the cleanup fails (as demonstrated "
 "in the previous example)."
-msgstr "`rb_cleanup()` の最中にエラーが発生したときは、ゼロではない値を返します。もしエラーが発生しなければ、渡した引数が返ります。この仕様により、後片付けに失敗したときのエラーステータスを返す部分が少し短く書けます（先の例のように）。"
+msgstr ""
+"`rb_cleanup()` の最中にエラーが発生したときは、ゼロではない値を返します。もし"
+"エラーが発生しなければ、渡した引数が返ります。この仕様により、後片付けに失敗"
+"したときのエラーステータスを返す部分が少し短く書けます（先の例のように）。"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:52
@@ -2670,7 +2938,13 @@ msgid ""
 "script to load or code to run with `-e`, it will try to read from `stdin`. "
 "If you want to set options but _not_ run any Ruby code, you can pass it an "
 "empty line: `\"-e \"`."
-msgstr "`ruby_options`への引数はmain関数と同じ`argc`と`argv`です。そして、`ruby`プログラムのmainと同じように、呼び出したときはVMは何らかのRubyのコードがあるものとしています。ロードするスクリプトのファイル名を与えていなかったり、`-e`で実行するコードがないときは、`stdin`から読み込もうとします。オプションを設定したいけれども、Rubyのコードを実行したく _ない_ ときには、`\"-e \"`のように空行を渡せばよいです。"
+msgstr ""
+"`ruby_options`への引数はmain関数と同じ`argc`と`argv`です。そして、`ruby`プロ"
+"グラムのmainと同じように、呼び出したときはVMは何らかのRubyのコードがあるもの"
+"としています。ロードするスクリプトのファイル名を与えていなかったり、`-e`で実"
+"行するコードがないときは、`stdin`から読み込もうとします。オプションを設定した"
+"いけれども、Rubyのコードを実行したく _ない_ ときには、`\"-e \"`のように空行を"
+"渡せばよいです。"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:115
@@ -2702,7 +2976,9 @@ msgstr ""
 msgid ""
 "Ruby currently doesn't support any other way of compiling and running code "
 "separately[^load]."
-msgstr "Rubyは今のところコードの他のコンパイル・実行を別々にする方法を提供していません[^load]。"
+msgstr ""
+"Rubyは今のところコードの他のコンパイル・実行を別々にする方法を提供していませ"
+"ん[^load]。"
 
 #. type: Title ##
 #: _posts/2012-01-01-embed.markdown:119 _posts/2013-01-01-extend.markdown:105
@@ -2830,8 +3106,10 @@ msgid ""
 "Ruby at your disposal if you need it). For example, an extension which uses "
 "SDL2 and needs to know how big `int`s are might call:"
 msgstr ""
-"よくある機能は `mkmf` で提供されます（でも、必要とあらばRubyをまったく使わなくてもいいです）。\n"
-"例えば、SDL2を使っていて、それとは別に `int` の大きさを知らなければいけないような拡張であれば、\n"
+"よくある機能は `mkmf` で提供されます（でも、必要とあらばRubyをまったく使わな"
+"くてもいいです）。\n"
+"例えば、SDL2を使っていて、それとは別に `int` の大きさを知らなければいけないよ"
+"うな拡張であれば、\n"
 "こんな感じで呼び出すことになります。"
 
 #. type: Plain text
@@ -3036,7 +3314,11 @@ msgid ""
 "`require` in Ruby. You can fill in your `Init` function with plain C code, "
 "but you'll probably want to go back and learn about the [C API](../c) to do "
 "more interesting stuff."
-msgstr "これにてmakeで`.so`（またはその他のライブラリ）にコンパイルして、Rubyで`require`できるようになりました。純粋なC言語のコードで`Init`関数を実装していくこともできますが、たぶんいったん戻って、もっと面白いことをするために[C API](../c.ja)を学ばれるのではないでしょうか。"
+msgstr ""
+"これにてmakeで`.so`（またはその他のライブラリ）にコンパイルして、Rubyで"
+"`require`できるようになりました。純粋なC言語のコードで`Init`関数を実装してい"
+"くこともできますが、たぶんいったん戻って、もっと面白いことをするために[C API]"
+"(../c.ja)を学ばれるのではないでしょうか。"
 
 #. type: Title ##
 #: _posts/2013-01-01-extend.markdown:112
@@ -3051,7 +3333,10 @@ msgid ""
 "as an easily distributable Ruby gem. rubygems.org has a [detailed guide]"
 "[rbg] on creating gems, but as far as C extensions go you just need to tell "
 "the spec about `extconf.rb`[^rbg]:"
-msgstr "いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたいはずです。rubygems.orgにはgemをつくる上での[詳細なガイド][rbg]がありますが、C拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
+msgstr ""
+"いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたい"
+"はずです。rubygems.orgにはgemをつくる上での[詳細なガイド][rbg]がありますが、C"
+"拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:122
@@ -3097,7 +3382,9 @@ msgstr "[^argv]: 公式文書は、`--vendor` のようなコマンドライン�
 msgid ""
 "[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides."
 "rubygems.org/gems-with-extensions/)"
-msgstr "[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
+msgstr ""
+"[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides."
+"rubygems.org/gems-with-extensions/)"
 
 # 空白を入れていないのは意図的です。
 #. type: Plain text
@@ -3107,8 +3394,10 @@ msgid ""
 "Prepare+extconf.rb [makefile]: https://github.com/ruby/ruby/blob/master/doc/"
 "extension.rdoc#label-Generate+Makefile"
 msgstr ""
-"[globals]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb\n"
-"[makefile]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile"
+"[globals]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
+"Prepare+extconf.rb\n"
+"[makefile]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
+"Generate+Makefile"
 
 #. type: Plain text
 #: _posts/2014-01-01-examples.markdown:14
@@ -3243,7 +3532,12 @@ msgid ""
 "yourself a couple CPU cycles compared to implementing the method in Ruby. "
 "And of course that comes at the cost of needing to spend more time writing C "
 "and less time writing Ruby. 😀"
-msgstr "この例ではCにおける全てを試そうとしましたが、実際は必要ではないです（し望ましくもないです）。Cのメソッドの中に（例にある`to_i`や`==`のような）単に有象無象のAPI関数を呼ぶだけのものがあるなら、恐らくRubyでメソッドを実装することに比較して数CPUサイクル分しか稼いでいないでしょう。そしてもちろんCを書く時間が増えてRubyを書く時間が減ってしまうツケを払うことになります。😀"
+msgstr ""
+"この例ではCにおける全てを試そうとしましたが、実際は必要ではないです（し望まし"
+"くもないです）。Cのメソッドの中に（例にある`to_i`や`==`のような）単に有象無象"
+"のAPI関数を呼ぶだけのものがあるなら、恐らくRubyでメソッドを実装することに比較"
+"して数CPUサイクル分しか稼いでいないでしょう。そしてもちろんCを書く時間が増え"
+"てRubyを書く時間が減ってしまうツケを払うことになります。😀"
 
 #. type: Plain text
 #: _posts/2014-01-01-examples.markdown:75
@@ -3252,7 +3546,10 @@ msgid ""
 "\" of the extension in C and to do everything else in a regular Ruby script "
 "that pulls in the compiled library. For example, we could have written a "
 "`gmp.rb` script to significantly simplify our extension:"
-msgstr "拡張を書くときの共通する慣習はCでは拡張の「肝」だけを実装し、残りを通常のRubyスクリプトでやってコンパイルされたライブラリに取り込むことです。例えば`gmp.rb`スクリプトを書いて拡張を著しく単純にすることができます。"
+msgstr ""
+"拡張を書くときの共通する慣習はCでは拡張の「肝」だけを実装し、残りを通常のRuby"
+"スクリプトでやってコンパイルされたライブラリに取り込むことです。例えば`gmp."
+"rb`スクリプトを書いて拡張を著しく単純にすることができます。"
 
 #. type: Plain text
 #: _posts/2014-01-01-examples.markdown:78
@@ -3261,3 +3558,83 @@ msgstr ""
 "{% highlight ruby %}\n"
 "{% include examples/gmp.rb %}\n"
 "{% endhighlight %}"
+
+#. type: Plain text
+#: README.md:3
+msgid ""
+"This is the source for my online guide to Ruby's C API. Visit the live site "
+"[here][io]."
+msgstr ""
+
+#. type: Plain text
+#: README.md:5
+#, fuzzy
+#| msgid "[gh]: https://github.com/silverhammermba/emberb"
+msgid "[io]: http://silverhammermba.github.io/emberb"
+msgstr "[gh]: https://github.com/silverhammermba/emberb"
+
+#. type: Title #
+#: README.md:6
+#, no-wrap
+msgid "Why I'm Making This Guide"
+msgstr ""
+
+#. type: Plain text
+#: README.md:11
+msgid ""
+"Oh my god there are so [many][g] [freaking][f] [guides][e] [to][d] [Ruby's]"
+"[c] [C][b] [API][a]. Why make another one? Because from what I've seen of "
+"the others:"
+msgstr ""
+
+#. type: Bullet: '* '
+#: README.md:18
+msgid "Most of them are outdated"
+msgstr ""
+
+#. type: Bullet: '* '
+#: README.md:18
+msgid "Most fail to cover different approaches when they are available"
+msgstr ""
+
+#. type: Bullet: '* '
+#: README.md:18
+msgid "Many cover only very specific use-cases"
+msgstr ""
+
+#. type: Bullet: '* '
+#: README.md:18
+msgid "Many have bad recommendations"
+msgstr ""
+
+#. type: Bullet: '* '
+#: README.md:18
+msgid "Many fail to explain _when_ and _why_ things are needed"
+msgstr ""
+
+#. type: Bullet: '* '
+#: README.md:18
+msgid ""
+"Many try to be exhaustive rather getting the reader up and running quickly"
+msgstr ""
+
+#. type: Plain text
+#: README.md:22
+msgid ""
+"And it struck me that all of these problems come from these guides largely "
+"being on media that do not promote community-driven updates. So I'm writing "
+"a new guide that doesn't suck and is on Github so you too can help make it "
+"not suck."
+msgstr ""
+
+#. type: Plain text
+#: README.md:29
+msgid ""
+"[a]: http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-"
+"part-1.html [b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/"
+"extension.rdoc [c]: http://blog.jacius.info/ruby-c-extension-cheat-sheet/ "
+"[d]: http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-"
+"application.html [e]: https://gist.github.com/jefftrull/1305431 [f]: http://"
+"metaeditor.sourceforge.net/embed/ [g]: http://ruby-doc.com/docs/"
+"ProgrammingRuby/html/ext_ruby.html"
+msgstr ""
