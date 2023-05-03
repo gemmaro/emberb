@@ -2,6 +2,17 @@
     "rules": {
         "preset-jtf-style": {
             "4.3.2.大かっこ［］": false
+        },
+        "preset-ja-technical-writing": {
+            "ja-no-mixed-period": false,
+            "no-doubled-joshi": false,
+            "max-kanji-continuous-len": false,
+            "ja-no-weak-phrase": false,
+            "ja-no-redundant-expression": false,
+            "no-exclamation-question-mark": false,
+            "sentence-length": false,
+            "no-doubled-conjunction": false,
+            "ja-no-successive-word": false
         }
     }
 }

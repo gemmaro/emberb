@@ -1,9 +1,11 @@
 {
     "scripts": {
-        "test": "textlint _posts/*.ja.markdown"
+        "test": "textlint _posts/*.ja.markdown",
+        "fix": "textlint --fix _posts/*.ja.markdown"
     },
     "devDependencies": {
         "textlint": "^13.3.1",
+        "textlint-rule-preset-ja-technical-writing": "^7.0.0",
         "textlint-rule-preset-jtf-style": "^2.3.13"
     }
 }
