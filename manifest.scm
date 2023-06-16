@@ -6,6 +6,8 @@
              (guix build-system ruby)
              ((guix licenses) #:prefix license:))
 
+(setenv "PERL5LIB" (string-append (getenv "PWD") "/_translation/po4a/lib:" (getenv "PERL5LIB")))
+
 (define-public ruby-guard
   (package
     (name "ruby-guard")

@@ -1,12 +1,12 @@
 PORT ?= 8080
 
 all:
-	po4a po4a.cfg
-	cd _po/ja && jekyll build
+	cd _translation && po4a po4a.cfg
+	cd _translation/ja && jekyll build
 .PHONY: all
 
 serve:
-	ruby -run -e httpd _po/ja/_site --port=8081
+	ruby -run -e httpd _translation/ja/_site --port=8081
 .PHONY: serve
 
 .PHONEY: watch

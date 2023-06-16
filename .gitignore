@@ -2,4 +2,4 @@
 /_includes/*.out
 /_site
 /node_modules/
-/_po/ja/_site/
+/_translation/ja/_site/

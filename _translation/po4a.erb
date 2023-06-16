@@ -1,0 +1,38 @@
+[options]                                \
+--master-charset UTF-8                 \
+--localized-charset UTF-8              \
+--addendum-charset UTF-8               \
+--master-language en                   \
+--package-name emberb                  \
+--option markdown                      \
+--copyright-holder 'Maxwell Anselm'    \
+--keep 0
+
+[po_directory] .
+
+[type: text]                             \
+../_posts/2010-01-01-c.markdown        \
+$lang:ja/_posts/2010-01-01-c.markdown
+
+[type: text]                             \
+../_posts/2012-01-01-embed.markdown    \
+$lang:ja/_posts/2012-01-01-embed.markdown
+
+[type: text]                             \
+../_posts/2013-01-01-extend.markdown   \
+$lang:ja/_posts/2013-01-01-extend.markdown
+
+[type: text]                             \
+../_posts/2014-01-01-examples.markdown \
+$lang:ja/_posts/2014-01-01-examples.markdown
+
+[type: text]                             \
+../README.md                           \
+$lang:ja/README.md
+
+[type:text] ../index.markdown            \
+ja:ja/index.markdown
+
+<% c_sources.each do |c_source| %>
+[type:Clang] <%= c_source.master %> ja:<%= c_source.local %>
+<% end %>

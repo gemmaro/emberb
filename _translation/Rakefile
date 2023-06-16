@@ -1,0 +1,43 @@
+require "pathname"
+require "erb"
+targets = []
+sources = Pathname.glob("../_includes/**/*").select { _1.file? }.reject { _1.extname.match?(/\.[ch]/) }
+def to_local(master)
+  Pathname("ja") / master.relative_path_from("..")
+end
+sources.each do |source|
+  target = to_local(source)
+  file target => [source, target.dirname] do |t|
+    cp t.source, t.name
+  end
+  directory target.dirname
+  targets << target
+end
+class Pair
+  attr_reader :master
+  def initialize(master)
+    @master = master
+  end
+  def local
+    @local ||= to_local(master)
+  end
+end
+file "po4a.cfg" => "po4a.erb" do |t|
+  c_sources = Pathname.glob("../_includes/**/*.[ch]").map { Pair.new(_1) }
+  template = File.read(t.source)
+  config = ERB.new(template).result_with_hash(c_sources: c_sources)
+  File.write(t.name, config)
+end
+task :translate => ["po4a.cfg"] + targets do |t|
+  sh "po4a", t.source
+end
+task :default => :translate do
+  cd "ja" do
+    sh "jekyll build"
+  end
+end
+task :serve do
+  cd "ja" do
+    sh "jekyll serve"
+  end
+end

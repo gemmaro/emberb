@@ -3,11 +3,42 @@
 # Copyright (C) 2022, 2023 gemmaro.
 # This file is distributed under the same license as the emberb.
 #
+# TODO: translate bellow:
+#
+# 	/*
+# 	 * We want to define a method like
+# 	 *
+# 	 *     def my_method man1, opt1 = true, opt2 = false, *splat, man2, **opts, &blk
+# 	*/
+#
+# 	/*
+# 	 * Notice that even though Actor wraps C data, we didn't define an
+# 	 * allocation or free function. That's because we're going to create all
+# 	 * the actors in C and expose them to Ruby. However we should make sure
+# 	 * that Ruby can't create new Actors, because they'll contain invalid data
+# 	 * pointers
+# 	 */
+#
+# TODO: translate comments in Ruby code:
+#
+#       # create and return an empty instance
+#
+#       # preparation for compilation goes here
+#
+#       # usual gem spec stuff...
+#
+#       ...
+#
+# TODO: translate bellow:
+#
+#       // top speed in pixels/millisecond
+#
+# TODO: rescueとレスキューのどちらかに揃える
 msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
-"POT-Creation-Date: 2023-05-23 00:19+0900\n"
-"PO-Revision-Date: 2023-05-23 00:28+0900\n"
+"POT-Creation-Date: 2023-06-17 02:20+0900\n"
+"PO-Revision-Date: 2023-06-17 12:25+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -17,26 +48,27 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. type: YAML Front Matter: layout
-#: _posts/2010-01-01-c.markdown:1 _posts/2012-01-01-embed.markdown:1
-#: _posts/2013-01-01-extend.markdown:1 _posts/2014-01-01-examples.markdown:1
+#: ../_posts/2010-01-01-c.markdown:1 ../_posts/2012-01-01-embed.markdown:1
+#: ../_posts/2013-01-01-extend.markdown:1
+#: ../_posts/2014-01-01-examples.markdown:1
 #, no-wrap
 msgid "chapter"
 msgstr "chapter"
 
 #. type: YAML Front Matter: title
-#: _posts/2010-01-01-c.markdown:1
+#: ../_posts/2010-01-01-c.markdown:1
 #, no-wrap
 msgid "The Ruby C API"
 msgstr "RubyのC API"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:6
+#: ../_posts/2010-01-01-c.markdown:6
 #, no-wrap
 msgid "Before You Start"
 msgstr "始める前に"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:10
+#: ../_posts/2010-01-01-c.markdown:10
 msgid ""
 "For the greatest chance of success with this guide, I recommend being fairly "
 "comfortable with C and _very_ comfortable with Ruby."
@@ -45,7 +77,7 @@ msgstr ""
 "んでいるとよいでしょう。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:16
+#: ../_posts/2010-01-01-c.markdown:16
 msgid ""
 "Using Ruby's C API does not require any advanced C concepts, however the API "
 "is **huge** and largely **undocumented**. After you start using it, you will "
@@ -61,7 +93,7 @@ msgstr ""
 "しょうけれども。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:22
+#: ../_posts/2010-01-01-c.markdown:22
 msgid ""
 "You can think of the C API is being a big, clunky alternative to writing "
 "normal Ruby code. However the simple, elegant patterns of Ruby can be pretty "
@@ -76,13 +108,13 @@ msgstr ""
 "けられるでしょう。"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:23
+#: ../_posts/2010-01-01-c.markdown:23
 #, no-wrap
 msgid "The Two Paths"
 msgstr "分岐点"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:28
+#: ../_posts/2010-01-01-c.markdown:28
 msgid ""
 "The official Ruby interpreter is written in C. That means that everything "
 "you can do in Ruby, you can also do using function calls to Ruby's C API. "
@@ -94,7 +126,7 @@ msgstr ""
 "もっともな理由が2つあります。"
 
 #. type: Bullet: '1. '
-#: _posts/2010-01-01-c.markdown:37
+#: ../_posts/2010-01-01-c.markdown:37
 msgid ""
 "You're writing some fancy application in C or C++ and you want some parts of "
 "your code to leverage the dynamic flexibility of Ruby. You can run the Ruby "
@@ -108,7 +140,7 @@ msgstr ""
 "Rubyのコードの結果をAPIで受け取ることができます。"
 
 #. type: Bullet: '2. '
-#: _posts/2010-01-01-c.markdown:37
+#: ../_posts/2010-01-01-c.markdown:37
 msgid ""
 "You're writing some fancy application in Ruby and you want some parts of "
 "your code to leverage the speed and power of C (or an existing C library). "
@@ -123,7 +155,7 @@ msgstr ""
 "そうしてできた特別なライブラリをコンパイルするとRubyから `require` できます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:42
+#: ../_posts/2010-01-01-c.markdown:42
 msgid ""
 "You'll need to structure your C code differently depending on your goal. If "
 "you want to embed the Ruby interpreter in C, read [Running Ruby in C](../"
@@ -132,23 +164,25 @@ msgid ""
 "API."
 msgstr ""
 "目標によってC言語のコードの組み立てかたは変わってきます。\n"
-"C言語にRubyインタプリタを組込みたければ、[C言語でRubyを実行する](../embed)をお読みください。\n"
-"コンパイルされたC言語のライブラリを `require` したければ、[RubyでC言語を実行する](../extend)をお読みください。\n"
+"C言語にRubyインタプリタを組込みたければ、[C言語でRubyを実行する](../embed)を"
+"お読みください。\n"
+"コンパイルされたC言語のライブラリを `require` したければ、[RubyでC言語を実行"
+"する](../extend)をお読みください。\n"
 "どちらかを読み終えたら、ここに戻ってきてAPIについて学びましょう。"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:43
+#: ../_posts/2010-01-01-c.markdown:43
 #, no-wrap
 msgid "Eval"
 msgstr "Eval"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:46
+#: ../_posts/2010-01-01-c.markdown:46
 msgid "The quick 'n' dirty way to run some Ruby code from C is to `eval` it"
 msgstr "ちゃちゃっと雑にCでRubyを動かすには、 `eval` します。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:50
+#: ../_posts/2010-01-01-c.markdown:50
 msgid "{% highlight c %} {% include c/eval.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -156,7 +190,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:55
+#: ../_posts/2010-01-01-c.markdown:55
 msgid ""
 "This is a good fallback if you can't find an API function for something that "
 "you want to do[^wrap]. `rb_eval_string_protect()` returns the result of the "
@@ -170,7 +204,7 @@ msgstr ""
 "ブジェクトのためのCのデータ型です。次の節で後述します。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:60
+#: ../_posts/2010-01-01-c.markdown:60
 msgid ""
 "If `state` is nonzero, `result` will be a `VALUE` representing `nil` and you "
 "should handle the exception. Alternatively, you can use `rb_eval_string()` "
@@ -185,7 +219,7 @@ msgstr ""
 "(#exceptions)の節を参照してください。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:64
+#: ../_posts/2010-01-01-c.markdown:64
 msgid ""
 "Unlike `eval` in Ruby, these functions evaluate the string in an isolated "
 "binding&mdash;like when you `require` something. So local variables in the "
@@ -196,7 +230,7 @@ msgstr ""
 "は他の場所から参照できませんし、逆もまた然りです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:69
+#: ../_posts/2010-01-01-c.markdown:69
 msgid ""
 "However, like using `eval` in Ruby, using these functions is not a good "
 "practice. It's inefficient since the parser is invoked and it somewhat "
@@ -211,13 +245,13 @@ msgstr ""
 "もっといい方法を[後述](#send)します。"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:70
+#: ../_posts/2010-01-01-c.markdown:70
 #, no-wrap
 msgid "VALUE"
 msgstr "VALUE"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:79
+#: ../_posts/2010-01-01-c.markdown:79
 msgid ""
 "Before we go any further, we need to understand `VALUE`s. Due to the danger "
 "of monkeying around inside the VM, the API never lets you directly access "
@@ -238,7 +272,7 @@ msgstr ""
 "`VALUE` はAPIで定義されたCの型で、このポインタを扱います。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:84
+#: ../_posts/2010-01-01-c.markdown:84
 msgid ""
 "Probably the most frequent question you'll have is: \"is this `VALUE` the "
 "right type?\". There are a couple macros for performing this test, and both "
@@ -254,7 +288,7 @@ msgstr ""
 
 # 空白を空けないことによって意図しない改行を回避しています
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:86
+#: ../_posts/2010-01-01-c.markdown:86
 msgid ""
 "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension."
 "rdoc#label-Data+Types"
@@ -263,7 +297,7 @@ msgstr ""
 "rdoc#label-Data+Types"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:90
+#: ../_posts/2010-01-01-c.markdown:90
 msgid "{% highlight c %} {% include c/checktype.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -271,7 +305,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:96
+#: ../_posts/2010-01-01-c.markdown:96
 msgid ""
 "These tests work for subclasses too: if you're testing for a subclass of "
 "`Array` use `T_ARRAY`, if you're testing for a subclass of `Object` use "
@@ -290,14 +324,14 @@ msgstr ""
 "他にもっと適した定数がないときにのみ真となります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:99
+#: ../_posts/2010-01-01-c.markdown:99
 msgid ""
 "For certain classes, there are specialized macros that are a little more "
 "efficient than the previous:"
 msgstr "特定のクラスについては、前述したものより少し便利なマクロが使えます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:103
+#: ../_posts/2010-01-01-c.markdown:103
 msgid "{% highlight c %} {% include c/check_p.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -305,7 +339,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:107
+#: ../_posts/2010-01-01-c.markdown:107
 msgid ""
 "If you want to handle a `VALUE` that could be one of a variety of types, the "
 "previous macros can be a little clumsy. In that case you can use the "
@@ -316,7 +350,7 @@ msgstr ""
 "御できます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:111
+#: ../_posts/2010-01-01-c.markdown:111
 msgid "{% highlight c %} {% include c/type.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -324,13 +358,13 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:112
+#: ../_posts/2010-01-01-c.markdown:112
 #, no-wrap
 msgid "Constants"
 msgstr "定数"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:121
+#: ../_posts/2010-01-01-c.markdown:121
 msgid ""
 "Most of the standard Ruby constants have global `VALUE`s defined for them in "
 "the API so you don't need an API call to access them. Modules are prefixed "
@@ -349,13 +383,13 @@ msgstr ""
 "`Qnil` です[^undef]。便宜上、 `Qfalse` はCの偽値 (`0`) でもあります。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:122
+#: ../_posts/2010-01-01-c.markdown:122
 #, no-wrap
 msgid "Translation"
 msgstr "変換"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:126
+#: ../_posts/2010-01-01-c.markdown:126
 msgid ""
 "A few Ruby classes are analogous to C types. These classes will be your "
 "primary means of transferring data between C and Ruby."
@@ -364,13 +398,13 @@ msgstr ""
 "この対応する組み合わせは、CとRubyの間のデータのやりとりにうってつけです。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:127
+#: ../_posts/2010-01-01-c.markdown:127
 #, no-wrap
 msgid "Fixnum"
 msgstr "Fixnum"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:133
+#: ../_posts/2010-01-01-c.markdown:133
 msgid ""
 "Ruby's `Fixnum` corresponds to C's `long`. The `FIX2LONG()` macro gives you "
 "the `long` for a `Fixnum`. For smaller C types there's `FIX2UINT()`, "
@@ -385,7 +419,7 @@ msgstr ""
 "`RangeError` を生じます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:136
+#: ../_posts/2010-01-01-c.markdown:136
 msgid ""
 "In the other direction, `LONG2FIX()` works for `long` **and** every smaller "
 "integer C type[^chr]."
@@ -395,13 +429,13 @@ msgstr ""
 "に使えます。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:137
+#: ../_posts/2010-01-01-c.markdown:137
 #, no-wrap
 msgid "Bignum"
 msgstr "Bignum"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:143
+#: ../_posts/2010-01-01-c.markdown:143
 msgid ""
 "Ruby's `Bignum` is for anything bigger than a `Fixnum`, so it works if you "
 "need to work with `long long`, for example. `rb_big2ll()` and `rb_big2ull()` "
@@ -415,18 +449,18 @@ msgstr ""
 
 # Numericは節の名前なので訳しません。
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:145 _posts/2010-01-01-c.markdown:152
+#: ../_posts/2010-01-01-c.markdown:145 ../_posts/2010-01-01-c.markdown:152
 msgid "See [Numeric](#numeric) for the reverse direction."
 msgstr "逆向きの変換については [Numeric](#numeric) を参照してください。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:146
+#: ../_posts/2010-01-01-c.markdown:146
 #, no-wrap
 msgid "Float"
 msgstr "Float"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:150
+#: ../_posts/2010-01-01-c.markdown:150
 msgid ""
 "Ruby's `Float` corresponds to C's `double`. The `RFLOAT_VALUE()` macro gives "
 "you the `double` for a `Float`."
@@ -435,13 +469,13 @@ msgstr ""
 "`RFLOAT_VALUE()` マクロを使えば、 `Float` から `double` が得られます。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:153
+#: ../_posts/2010-01-01-c.markdown:153
 #, no-wrap
 msgid "Numeric"
 msgstr "Numeric"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:158
+#: ../_posts/2010-01-01-c.markdown:158
 msgid ""
 "There are a host of \"NUM\" macros that try to be more duck-typish about "
 "things.  These will convert their C types to whatever Ruby `Numeric` "
@@ -453,42 +487,42 @@ msgstr ""
 "タンス）に変換します。"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:166
+#: ../_posts/2010-01-01-c.markdown:166
 msgid "`INT2NUM()` for `int`"
 msgstr "`INT2NUM()` は `int` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:166
+#: ../_posts/2010-01-01-c.markdown:166
 msgid "`UINT2NUM()` for `unsigned int`"
 msgstr "`UINT2NUM()` は `unsigned int` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:166
+#: ../_posts/2010-01-01-c.markdown:166
 msgid "`LONG2NUM()` for `long`"
 msgstr "`LONG2NUM()` は `long` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:166
+#: ../_posts/2010-01-01-c.markdown:166
 msgid "`ULONG2NUM()` for `unsigned long`"
 msgstr "`ULONG2NUM()` は `unsigned long` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:166
+#: ../_posts/2010-01-01-c.markdown:166
 msgid "`LL2NUM()` for `long long`"
 msgstr "`LL2NUM()` は `long long` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:166
+#: ../_posts/2010-01-01-c.markdown:166
 msgid "`ULL2NUM()` for `unsigned long long`"
 msgstr "`ULL2NUM()` は `unsigned long long` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:166
+#: ../_posts/2010-01-01-c.markdown:166
 msgid "`DBL2NUM()` for `double`"
 msgstr "`DBL2NUM()` は `double` からの変換用"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:171
+#: ../_posts/2010-01-01-c.markdown:171
 msgid ""
 "And there are macros for the opposite direction, which will try to convert "
 "whatever `Numeric` to the desired C type. These will raise a `RangeError` if "
@@ -503,58 +537,58 @@ msgstr ""
 "`Numeric` ではないオブジェクトを渡しても大丈夫です）。"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2CHR()` for `char` (works for `unsigned char` too)"
 msgstr ""
 "`NUM2CHR()` は `char` からの変換用（`unsigned char` からでも変換できます）"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2SHORT()` for `short`"
 msgstr "`NUM2SHORT()` は `short` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2USHORT()` for `unsigned short`"
 msgstr "`NUM2USHORT()` は `unsigned short` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2INT()` for `int`"
 msgstr "`NUM2INT()` は `int` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2UINT()` for `unsigned int`"
 msgstr "`NUM2UINT()` は `unsigned int` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2LONG()` for `long`"
 msgstr "`NUM2LONG()` は `long` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2ULONG()` for `unsigned long`"
 msgstr "`NUM2ULONG()` は `unsigned long` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2LL()` for `long long`"
 msgstr "`NUM2LL()` は `long long` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2ULL()` for `unsigned long long`"
 msgstr "`NUM2ULL()` は `unsigned long long` からの変換用"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:182
+#: ../_posts/2010-01-01-c.markdown:182
 msgid "`NUM2DBL()` for `double`"
 msgstr "`NUM2DBL()` は `double` からの変換用"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:189
+#: ../_posts/2010-01-01-c.markdown:189
 msgid ""
 "A **major** gotcha with these is that _none_ of the macros for converting to "
 "unsigned types raise an exception if you pass a negative value (surprisingly "
@@ -571,7 +605,7 @@ msgstr ""
 "す。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:192
+#: ../_posts/2010-01-01-c.markdown:192
 msgid ""
 "If you know that the conversion is safe, you should prefer the macros from "
 "the previous sections as they skip the range checks."
@@ -581,18 +615,18 @@ msgstr ""
 "なぜなら範囲の確認を省けるためです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:194
+#: ../_posts/2010-01-01-c.markdown:194
 msgid "[bug]: https://bugs.ruby-lang.org/issues/9089"
 msgstr "[bug]: https://bugs.ruby-lang.org/issues/9089"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:195
+#: ../_posts/2010-01-01-c.markdown:195
 #, no-wrap
 msgid "String"
 msgstr "String"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:203
+#: ../_posts/2010-01-01-c.markdown:203
 msgid ""
 "Ruby's `String` kinda corresponds to C's `char*`. The simplest macro is "
 "`StringValueCStr()` which returns a null-terminated `char*` for a `String`. "
@@ -610,7 +644,7 @@ msgstr ""
 "を取得できます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:211
+#: ../_posts/2010-01-01-c.markdown:211
 msgid ""
 "Conversely, if you have a null-terminated `char*`, you can use "
 "`rb_str_new_cstr()` to create a Ruby `String`. And if you want your `String` "
@@ -630,7 +664,7 @@ msgstr ""
 "ケールのエンコーディングでの `VALUE` を取得できます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:218
+#: ../_posts/2010-01-01-c.markdown:218
 msgid ""
 "If you want to build more complex strings, you can do so using the `printf`-"
 "like function `rb_sprintf()`. This accepts all of the usual conversion "
@@ -647,7 +681,7 @@ msgstr ""
 "もできます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:222
+#: ../_posts/2010-01-01-c.markdown:222
 msgid "{% highlight c %} {% include c/printf.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -655,7 +689,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:227
+#: ../_posts/2010-01-01-c.markdown:227
 msgid ""
 "This custom specifier should work for any `printf`-like function in the "
 "API.  `PRIsVALUE` works by hijacking the `i` conversion specifier, so when "
@@ -668,13 +702,13 @@ msgstr ""
 "るときは `d` を使うべきです。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:228
+#: ../_posts/2010-01-01-c.markdown:228
 #, no-wrap
 msgid "Symbol"
 msgstr "Symbol"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:236
+#: ../_posts/2010-01-01-c.markdown:236
 msgid ""
 "The API defines a C type `ID` which corresponds to Ruby's `Symbol`. Just "
 "like how Ruby passes around `Symbol`s as method or variable names, many API "
@@ -691,7 +725,7 @@ msgstr ""
 "るためには `rb_intern()` を、その逆向きでは `rb_id2name()` を使います。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:246
+#: ../_posts/2010-01-01-c.markdown:246
 msgid ""
 "Since many API functions require an `ID` and in many cases you will not have "
 "the appropriate `ID` at hand, the API also defines a slew of functions that "
@@ -713,13 +747,13 @@ msgstr ""
 "ら自分で見つける必要がありますが）。"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:247
+#: ../_posts/2010-01-01-c.markdown:247
 #, no-wrap
 msgid "Send"
 msgstr "send"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:253
+#: ../_posts/2010-01-01-c.markdown:253
 msgid ""
 "This section contains API functions for directly calling Ruby methods. You "
 "should prefer these functions to `rb_eval_string()` and the like whenever "
@@ -732,12 +766,12 @@ msgstr ""
 "のです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:255
+#: ../_posts/2010-01-01-c.markdown:255
 msgid "The easiest way to send an object a method looks like this:"
 msgstr "一番簡単な方法はオブジェクトにメソッドをこのように送ることです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:259
+#: ../_posts/2010-01-01-c.markdown:259
 msgid "{% highlight c %} {% include c/funcall.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -745,12 +779,12 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:261
+#: ../_posts/2010-01-01-c.markdown:261
 msgid "This is roughly equivalent to the Ruby code"
 msgstr "これは大雑把には次のRubyコードと同じです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:265
+#: ../_posts/2010-01-01-c.markdown:265
 msgid "{% highlight ruby %} {% include c/funcall.rb %} {% endhighlight %}"
 msgstr ""
 "{% highlight ruby %}\n"
@@ -758,7 +792,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:270
+#: ../_posts/2010-01-01-c.markdown:270
 msgid ""
 "The first argument is the receiver. The next is the [`ID`](#symbol) for the "
 "method name. The third argument is the number of method arguments, which is "
@@ -770,7 +804,7 @@ msgstr ""
 "からです。それから実際メソッド引数に行き着きます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:274
+#: ../_posts/2010-01-01-c.markdown:274
 msgid ""
 "Alternatively, you can use `rb_funcallv()` where the fourth argument is a "
 "`VALUE*` pointing to a C array of arguments. This also has the variant "
@@ -781,13 +815,13 @@ msgstr ""
 "生、`rb_funcallv_public()`があります。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:275
+#: ../_posts/2010-01-01-c.markdown:275
 #, no-wrap
 msgid "Passing Blocks"
 msgstr "ブロックを渡す"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:279
+#: ../_posts/2010-01-01-c.markdown:279
 msgid ""
 "If you want to pass a `Proc` as the block to a method, that's easy. The "
 "function is just like `rb_funcallv()` but with the proc on the end."
@@ -796,7 +830,7 @@ msgstr ""
 "関数はほぼ`rb_funcallv()`と同じですが後ろにprocが付きます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:283
+#: ../_posts/2010-01-01-c.markdown:283
 msgid "{% highlight c %} {% include c/proc.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -804,7 +838,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:287
+#: ../_posts/2010-01-01-c.markdown:287
 msgid ""
 "If you don't have a proc for the block, you'll need to define a certain kind "
 "of C function to represent the block. Then there's a different variant of "
@@ -815,7 +849,7 @@ msgstr ""
 "加されたものがあります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:291
+#: ../_posts/2010-01-01-c.markdown:291
 msgid "{% highlight c %} {% include c/block.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -823,7 +857,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:297
+#: ../_posts/2010-01-01-c.markdown:297
 msgid ""
 "The last argument to `rb_block_call()` is helpful for passing in values "
 "outside the block function's scope, but in this example we don't need it "
@@ -840,13 +874,13 @@ msgstr ""
 "じゃないですか[^break]。"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:298
+#: ../_posts/2010-01-01-c.markdown:298
 #, no-wrap
 msgid "Builtins"
 msgstr "組み込みの機能"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:305
+#: ../_posts/2010-01-01-c.markdown:305
 msgid ""
 "Many of Ruby's built-in classes have API functions defined for their most "
 "useful methods. Using them can save you from the verbosity of always using "
@@ -862,7 +896,7 @@ msgstr ""
 "`ruby/intern.h`を眺めることを推奨します。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:309
+#: ../_posts/2010-01-01-c.markdown:309
 msgid ""
 "Functions are generally named like `rb_(class)_(method)` and take at least "
 "one `VALUE` argument (the receiver). E.g. `rb_ary_pop()` for `Array#pop`, "
@@ -874,13 +908,13 @@ msgstr ""
 "いった具合です。"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:310
+#: ../_posts/2010-01-01-c.markdown:310
 #, no-wrap
 msgid "Require"
 msgstr "require"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:314
+#: ../_posts/2010-01-01-c.markdown:314
 msgid ""
 "The API can also load some Ruby code from a script. There's an equivalent to "
 "`require`:"
@@ -889,7 +923,7 @@ msgstr ""
 "のがあります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:318
+#: ../_posts/2010-01-01-c.markdown:318
 msgid "{% highlight c %} {% include c/require.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -897,7 +931,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:321
+#: ../_posts/2010-01-01-c.markdown:321
 msgid ""
 "As with `require`, these could raise exceptions. Read the [next section]"
 "(#exceptions) for how to handle them."
@@ -906,14 +940,14 @@ msgstr ""
 "対処方法については[次節](#exceptions)を読んでください。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:323
+#: ../_posts/2010-01-01-c.markdown:323
 msgid ""
 "There are also functions for `load` if you want to load a script multiple "
 "times:"
 msgstr "スクリプトを複数回読み込みたければ、`load`用の関数もあります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:327
+#: ../_posts/2010-01-01-c.markdown:327
 msgid "{% highlight c %} {% include c/load.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -921,7 +955,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:331
+#: ../_posts/2010-01-01-c.markdown:331
 msgid ""
 "Just like [`load` in Ruby][rbload], these functions can wrap the loaded code "
 "in an anonymous module to protect the global namespace. Just pass a nonzero "
@@ -932,29 +966,29 @@ msgstr ""
 "を2つ目の引数に渡せばよいのです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:333
+#: ../_posts/2010-01-01-c.markdown:333
 msgid "[rbload]: http://www.ruby-doc.org/core/Kernel.html#method-i-load"
 msgstr "[rbload]: http://www.ruby-doc.org/core/Kernel.html#method-i-load"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:334
+#: ../_posts/2010-01-01-c.markdown:334
 #, no-wrap
 msgid "Exceptions"
 msgstr "例外"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:336
+#: ../_posts/2010-01-01-c.markdown:336
 #, no-wrap
 msgid "Raise"
 msgstr "raise"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:339
+#: ../_posts/2010-01-01-c.markdown:339
 msgid "To raise an exception, use:"
 msgstr "例外を投げるには以下を使ってください。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:343
+#: ../_posts/2010-01-01-c.markdown:343
 msgid "{% highlight c %} {% include c/raise.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -962,7 +996,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:348
+#: ../_posts/2010-01-01-c.markdown:348
 msgid ""
 "The first and second arguments are the exception class and message&mdash;"
 "like `raise` in Ruby. The big difference is that the message is a format "
@@ -974,7 +1008,7 @@ msgstr ""
 "文言をより簡単に構築できます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:355
+#: ../_posts/2010-01-01-c.markdown:355
 msgid ""
 "You can also construct exception objects directly using `rb_exc_new_cstr`, "
 "`rb_exc_new`, and `rb_exc_new_str`. All of these accept an exception class "
@@ -990,13 +1024,13 @@ msgstr ""
 "て構築されます。それから`rb_exc_raise`で例外オブジェクトを投げられます。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:356
+#: ../_posts/2010-01-01-c.markdown:356
 #, no-wrap
 msgid "Rescue"
 msgstr "rescue"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:361
+#: ../_posts/2010-01-01-c.markdown:361
 msgid ""
 "There are several ways to rescue exceptions using the API. All of them "
 "require the code you're protecting to be in a function that takes and "
@@ -1007,7 +1041,7 @@ msgstr ""
 "ります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:365
+#: ../_posts/2010-01-01-c.markdown:365
 msgid "{% highlight c %} {% include c/danger.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1015,7 +1049,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:369
+#: ../_posts/2010-01-01-c.markdown:369
 msgid ""
 "Unless you wanted to rescue a function of exactly this type, you will "
 "probably need to make a wrapper function in this format that runs the "
@@ -1027,7 +1061,7 @@ msgstr ""
 "た、救出される方法とは独立です。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:373
+#: ../_posts/2010-01-01-c.markdown:373
 msgid "{% highlight c %} {% include c/handle.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1035,7 +1069,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:378
+#: ../_posts/2010-01-01-c.markdown:378
 msgid ""
 "`rb_errinfo()` essentially gives you the `VALUE` of Ruby's `$!` (which will "
 "be `Qnil` if no exception occurred). Unlike in Ruby, you must manually clear "
@@ -1048,7 +1082,7 @@ msgstr ""
 "の例外が起こったと考えるかもしれません。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:382
+#: ../_posts/2010-01-01-c.markdown:382
 msgid ""
 "Next we will go over several methods of rescuing; you can use whichever you "
 "like, but I think that generally the right choice is determined by your [use-"
@@ -1059,13 +1093,13 @@ msgstr ""
 "ます。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:383
+#: ../_posts/2010-01-01-c.markdown:383
 #, no-wrap
 msgid "rb_rescue2"
 msgstr "rb_rescue2"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:389
+#: ../_posts/2010-01-01-c.markdown:389
 msgid ""
 "If you're compiling a library to be loaded by Ruby, you have it easy. Any "
 "exceptions raised in the API can be rescued as usual in your Ruby code. If "
@@ -1078,7 +1112,7 @@ msgstr ""
 "きます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:393
+#: ../_posts/2010-01-01-c.markdown:393
 msgid "{% highlight c %} {% include c/rescue2.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1086,7 +1120,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:402
+#: ../_posts/2010-01-01-c.markdown:402
 msgid ""
 "The first two arguments are the function to protect and its argument, the "
 "next two are the function to call if an exception is raised and its "
@@ -1106,7 +1140,7 @@ msgstr ""
 "す。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:406
+#: ../_posts/2010-01-01-c.markdown:406
 msgid ""
 "The API does not provide an easy way to run different rescue code for "
 "different exception classes as Ruby does. You'll need to rescue all the "
@@ -1118,7 +1152,7 @@ msgstr ""
 "取り扱う必要があります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:413
+#: ../_posts/2010-01-01-c.markdown:413
 msgid ""
 "The API also does not directly provide an equivalent to Ruby's `else` i.e. "
 "code to run when _no_ exception was raised. One way to do this is using the "
@@ -1135,13 +1169,13 @@ msgstr ""
 "ているのかを検出できます。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:414
+#: ../_posts/2010-01-01-c.markdown:414
 #, no-wrap
 msgid "rb_protect"
 msgstr "rb_protect"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:421
+#: ../_posts/2010-01-01-c.markdown:421
 msgid ""
 "If you're embedding the Ruby interpreter in C, you need to be _extremely "
 "careful_ when calling API functions that could raise exceptions: **an "
@@ -1156,7 +1190,7 @@ msgstr ""
 "る別の手法があります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:425
+#: ../_posts/2010-01-01-c.markdown:425
 msgid "{% highlight c %} {% include c/protect.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1164,7 +1198,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:431
+#: ../_posts/2010-01-01-c.markdown:431
 msgid ""
 "Like `rb_rescue2()`, the first two arguments are for calling the function to "
 "protect. However, like `rb_eval_string_protect()`, if an exception is raised "
@@ -1179,13 +1213,13 @@ msgstr ""
 "ても同じことが言えます）。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:432
+#: ../_posts/2010-01-01-c.markdown:432
 #, no-wrap
 msgid "Ensure"
 msgstr "ensure"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:439
+#: ../_posts/2010-01-01-c.markdown:439
 msgid ""
 "`rb_ensure()` is similar to `rb_rescue()` except that it doesn't do anything "
 "about exceptions and the second function is _always_ called after the "
@@ -1200,7 +1234,7 @@ msgstr ""
 "す。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:443
+#: ../_posts/2010-01-01-c.markdown:443
 msgid "{% highlight c %} {% include c/ensure.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1208,7 +1242,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:448
+#: ../_posts/2010-01-01-c.markdown:448
 msgid ""
 "Like `ensure` in Ruby, the return value of `ensure_func()` is never used. If "
 "no exception occurs, `rb_rescue()` will return the value of `begin_func()` "
@@ -1221,13 +1255,13 @@ msgstr ""
 "`rb_rescue()`は`rescue_func()`の値を返します。"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:449
+#: ../_posts/2010-01-01-c.markdown:449
 #, no-wrap
 msgid "Definitions, Declarations"
 msgstr "定義、宣言"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:454
+#: ../_posts/2010-01-01-c.markdown:454
 msgid ""
 "So far we've been creating and modifying objects directly in the VM's "
 "memory, but none of our API calls have had a visible effect _within the Ruby "
@@ -1239,7 +1273,7 @@ msgstr ""
 "`rb_str_new_cstr()`で作られた`String`は、既定ではCからのみアクセスできます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:463
+#: ../_posts/2010-01-01-c.markdown:463
 msgid ""
 "There are a few ways to make things visible to Ruby but they all work the "
 "same general way: by defining some name that Ruby can access e.g. a variable "
@@ -1260,7 +1294,7 @@ msgstr ""
 "たいわけではないでしょうから、選ぶ名前はダブルチェックしてくださいね。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:469
+#: ../_posts/2010-01-01-c.markdown:469
 msgid ""
 "Most of the API functions in this section correspond closely to "
 "metaprogramming methods in Ruby. When you're trying to do something using "
@@ -1275,18 +1309,18 @@ msgstr ""
 "と考えるのです。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:470
+#: ../_posts/2010-01-01-c.markdown:470
 #, no-wrap
 msgid "Global Variables"
 msgstr "大域変数"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:473
+#: ../_posts/2010-01-01-c.markdown:473
 msgid "The simplest way to deal with globals is:"
 msgstr "大域変数を扱う一番簡単な方法は以下です。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:477
+#: ../_posts/2010-01-01-c.markdown:477
 msgid "{% highlight c %} {% include c/global.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1294,7 +1328,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:480
+#: ../_posts/2010-01-01-c.markdown:480
 msgid ""
 "If you're frequently accessing Ruby's globals, you can set up a `VALUE` "
 "which will be automatically synchronized with one."
@@ -1303,7 +1337,7 @@ msgstr ""
 "取られます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:484
+#: ../_posts/2010-01-01-c.markdown:484
 msgid "{% highlight c %} {% include c/global2.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1312,7 +1346,7 @@ msgstr ""
 
 # ちょっと意味が通りにくい。
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:491
+#: ../_posts/2010-01-01-c.markdown:491
 msgid ""
 "The `VALUE` should be initialized before you create the global in Ruby and "
 "it should be global in C as well&mdash;you don't want it to go out of scope "
@@ -1330,7 +1364,7 @@ msgstr ""
 "ちろんゲッターとセッターはそうした場合で定義されている _必要_ があります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:495
+#: ../_posts/2010-01-01-c.markdown:495
 msgid ""
 "If you ever create a global `VALUE` in C which is _not_ exposed to Ruby, you "
 "must tell the garbage collector about it to prevent it from being "
@@ -1340,7 +1374,7 @@ msgstr ""
 "うのを防ぐためにガベージコレクタにそのことを伝えなければなりません。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:499
+#: ../_posts/2010-01-01-c.markdown:499
 msgid "{% highlight c %} {% include c/gc.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1348,13 +1382,13 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:500
+#: ../_posts/2010-01-01-c.markdown:500
 #, no-wrap
 msgid "Class and Instance Variables"
 msgstr "クラスとインスタンス変数"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:504
+#: ../_posts/2010-01-01-c.markdown:504
 msgid ""
 "Getting/setting instance variables is similar to the simple way of accessing "
 "globals, but of course you need an object to get the variable from."
@@ -1363,7 +1397,7 @@ msgstr ""
 "が、もちろん変数を取得してくるオブジェクトが必要です。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:508
+#: ../_posts/2010-01-01-c.markdown:508
 msgid "{% highlight c %} {% include c/ivar.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1371,7 +1405,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:511
+#: ../_posts/2010-01-01-c.markdown:511
 msgid ""
 "There isn't an automatic way to synchronize instance variables like you can "
 "with globals."
@@ -1380,13 +1414,13 @@ msgstr ""
 "ん。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:513
+#: ../_posts/2010-01-01-c.markdown:513
 msgid "To iterate over all instance variables, use `rb_ivar_foreach`."
 msgstr ""
 "全てのインスタンス変数を巡回するには`rb_ivar_foreach`を使ってください。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:516
+#: ../_posts/2010-01-01-c.markdown:516
 msgid ""
 "For class variables, the methods are `rb_cv_get()` and `rb_cv_set()` and of "
 "course the first argument should be a class object."
@@ -1395,13 +1429,13 @@ msgstr ""
 "最初の引数はクラスオブジェクトです。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:517
+#: ../_posts/2010-01-01-c.markdown:517
 #, no-wrap
 msgid "Constants ####"
 msgstr "定数"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:520
+#: ../_posts/2010-01-01-c.markdown:520
 msgid ""
 "Constants are defined similarly, but with the module to define them under:"
 msgstr ""
@@ -1409,7 +1443,7 @@ msgstr ""
 "ます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:524
+#: ../_posts/2010-01-01-c.markdown:524
 msgid "{% highlight c %} {% include c/constant.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1417,7 +1451,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:528
+#: ../_posts/2010-01-01-c.markdown:528
 msgid ""
 "You undefine a constant by setting it to `Qundef`. Getting a constant's "
 "`VALUE` is a little nuanced. The API function you call depends on what you "
@@ -1428,7 +1462,7 @@ msgstr ""
 "こってほしいのかに依って呼び出すべきAPI関数が決まります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:532
+#: ../_posts/2010-01-01-c.markdown:532
 msgid "{% highlight c %} {% include c/const_get.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1436,23 +1470,23 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:534
+#: ../_posts/2010-01-01-c.markdown:534
 msgid "All of these API calls will get private constants too."
 msgstr "これら全てのAPIはプライベート定数も取得します。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:535
+#: ../_posts/2010-01-01-c.markdown:535
 #, no-wrap
 msgid "Modules and Classes"
 msgstr "モジュールとクラス"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:538
+#: ../_posts/2010-01-01-c.markdown:538
 msgid "Defining modules is super easy."
 msgstr "モジュールの定義は超簡単です。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:542
+#: ../_posts/2010-01-01-c.markdown:542
 msgid "{% highlight c %} {% include c/module.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1460,12 +1494,12 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:544
+#: ../_posts/2010-01-01-c.markdown:544
 msgid "Classes work the same way but they also need a superclass."
 msgstr "クラスも同じやり方ですが、こちらはスーパークラスも必要になります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:548
+#: ../_posts/2010-01-01-c.markdown:548
 msgid "{% highlight c %} {% include c/class.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1473,13 +1507,13 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:549
+#: ../_posts/2010-01-01-c.markdown:549
 #, no-wrap
 msgid "Methods"
 msgstr "メソッド"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:555
+#: ../_posts/2010-01-01-c.markdown:555
 msgid ""
 "Here's where it gets interesting. There are many kinds of API calls for "
 "defining methods, but before you use any of them you'll need a C function "
@@ -1493,7 +1527,7 @@ msgstr ""
 "数を定義するのには3つの方法があります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:559
+#: ../_posts/2010-01-01-c.markdown:559
 msgid "{% highlight c %} {% include c/methodc.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1501,7 +1535,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:564
+#: ../_posts/2010-01-01-c.markdown:564
 msgid ""
 "So really the API only lets you define two types of methods: ones that take "
 "a fixed number of arguments, and ones that slurp up all of their arguments. "
@@ -1514,13 +1548,13 @@ msgstr ""
 "混在はどこにあるのでしょうか。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:565
+#: ../_posts/2010-01-01-c.markdown:565
 #, no-wrap
 msgid "Parsing Arguments"
 msgstr "引数を解析する"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:572
+#: ../_posts/2010-01-01-c.markdown:572
 msgid ""
 "Well, if you accept a variable number of arguments you could code all of "
 "that logic yourself in the method, and make it _behave_ like it has a "
@@ -1535,7 +1569,7 @@ msgstr ""
 "流れに沿って渡すことができます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:576
+#: ../_posts/2010-01-01-c.markdown:576
 msgid "{% highlight c %} {% include c/scan.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1543,7 +1577,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:581
+#: ../_posts/2010-01-01-c.markdown:581
 msgid ""
 "Here `fmt` is a format string describing how the method arguments would look "
 "in Ruby. The string can have at most 6 characters, where each character "
@@ -1556,37 +1590,37 @@ msgstr ""
 "下の通りです。"
 
 #. type: Bullet: '1. '
-#: _posts/2010-01-01-c.markdown:588
+#: ../_posts/2010-01-01-c.markdown:588
 msgid "The number of leading mandatory arguments: a digit"
 msgstr "先頭にある必須引数の数：数字"
 
 #. type: Bullet: '2. '
-#: _posts/2010-01-01-c.markdown:588
+#: ../_posts/2010-01-01-c.markdown:588
 msgid "The number of optional arguments: a digit"
 msgstr "オプション引数の数：数字"
 
 #. type: Bullet: '3. '
-#: _posts/2010-01-01-c.markdown:588
+#: ../_posts/2010-01-01-c.markdown:588
 msgid "A splatted argument: `*`"
 msgstr "展開される引数：`*`"
 
 #. type: Bullet: '4. '
-#: _posts/2010-01-01-c.markdown:588
+#: ../_posts/2010-01-01-c.markdown:588
 msgid "The number of trailing mandatory arguments: a digit"
 msgstr "後ろに続く必須引数の数：数字"
 
 #. type: Bullet: '5. '
-#: _posts/2010-01-01-c.markdown:588
+#: ../_posts/2010-01-01-c.markdown:588
 msgid "Keyword arguments: `:`"
 msgstr "キーワード引数：`:`"
 
 #. type: Bullet: '6. '
-#: _posts/2010-01-01-c.markdown:588
+#: ../_posts/2010-01-01-c.markdown:588
 msgid "A block argument: `&`"
 msgstr "ブロック引数：`&`"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:598
+#: ../_posts/2010-01-01-c.markdown:598
 msgid ""
 "Each section is optional, so you can leave out the characters for things you "
 "don't need. Be aware that the parsing of the format string is greedy: `1*` "
@@ -1608,7 +1642,7 @@ msgstr ""
 "（2つの必須引数、1つのオプション引数、1つの展開、1つのブロックです）。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:601
+#: ../_posts/2010-01-01-c.markdown:601
 msgid ""
 "`rb_scan_args()` unpacks `argv` using the `VALUE*`s you pass it and will "
 "raise a fitting exception if the wrong number of arguments were passed."
@@ -1617,7 +1651,7 @@ msgstr ""
 "渡されたときは符牒が合わない旨の例外を投げます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:605
+#: ../_posts/2010-01-01-c.markdown:605
 msgid "{% highlight c %} {% include c/methodex.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1625,7 +1659,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:609
+#: ../_posts/2010-01-01-c.markdown:609
 msgid ""
 "You can also use the return value of `rb_scan_args()` to determine how the "
 "function was called. It returns the number of arguments that were passed in "
@@ -1635,20 +1669,20 @@ msgstr ""
 "ます。そうすることでRubyで渡された引数の数が返ります。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:610
+#: ../_posts/2010-01-01-c.markdown:610
 #, no-wrap
 msgid "Handling Blocks"
 msgstr "ブロックの扱い"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:613
+#: ../_posts/2010-01-01-c.markdown:613
 msgid ""
 "There are two ways to check if your C method has been called with a block:"
 msgstr ""
 "Cのメソッドがブロック付きで呼ばれたかどうかを確認する方法は2つあります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:617
+#: ../_posts/2010-01-01-c.markdown:617
 msgid "{% highlight c %} {% include c/checkblock.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1656,7 +1690,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:622
+#: ../_posts/2010-01-01-c.markdown:622
 msgid ""
 "There are two ways to capture the block as a proc. If you're using "
 "`rb_scan_args()` for your method arguments, just include `&` in your format "
@@ -1669,7 +1703,7 @@ msgstr ""
 "出しがあります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:625
+#: ../_posts/2010-01-01-c.markdown:625
 #, no-wrap
 msgid ""
 "    VALUE block;\n"
@@ -1679,13 +1713,13 @@ msgstr ""
 "    block = rb_block_proc();\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:627
+#: ../_posts/2010-01-01-c.markdown:627
 msgid ""
 "If you don't want to capture the block, there are a few ways to yield to it:"
 msgstr "ブロックを捉えたくなければ、yieldする方法が2つあります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:631
+#: ../_posts/2010-01-01-c.markdown:631
 msgid "{% highlight c %} {% include c/yield.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1693,7 +1727,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:634
+#: ../_posts/2010-01-01-c.markdown:634
 msgid ""
 "There's also `rb_yield_values2()` which is like `rb_yield_values()` but "
 "instead of varargs the second argument is a `VALUE*`[^yield]."
@@ -1702,18 +1736,18 @@ msgstr ""
 "の引数が`VALUE*`になっています[^yield]。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:635
+#: ../_posts/2010-01-01-c.markdown:635
 #, no-wrap
 msgid "Super"
 msgstr "super"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:638
+#: ../_posts/2010-01-01-c.markdown:638
 msgid "You might want to call `super` in your method."
 msgstr "メソッドで`super`を呼びたいことがあるかもしれません。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:642
+#: ../_posts/2010-01-01-c.markdown:642
 msgid "{% highlight c %} {% include c/super.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1721,7 +1755,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:648
+#: ../_posts/2010-01-01-c.markdown:648
 msgid ""
 "Unlike in Ruby `rb_call_super()` will **not** implicitly pass along the "
 "method arguments to the super if you give it no arguments. You must "
@@ -1736,13 +1770,13 @@ msgstr ""
 "めします。"
 
 #. type: Title ####
-#: _posts/2010-01-01-c.markdown:649
+#: ../_posts/2010-01-01-c.markdown:649
 #, no-wrap
 msgid "Definition"
 msgstr "定義"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:655
+#: ../_posts/2010-01-01-c.markdown:655
 msgid ""
 "Setting up the C function is the hard part, now it's easy to define the "
 "method in Ruby. Every API call to create a method takes at least the method "
@@ -1754,29 +1788,29 @@ msgstr ""
 "ンタ、引数を表す`argc`を取ります。`argc`は以下のようなものです。"
 
 #. type: Bullet: '1. '
-#: _posts/2010-01-01-c.markdown:660
+#: ../_posts/2010-01-01-c.markdown:660
 msgid ""
 "For a fixed number of arguments, the number of arguments (not counting the "
 "receiver)"
 msgstr "引数が一定数のときは、その引数の数（レシーバは数えません）"
 
 #. type: Bullet: '2. '
-#: _posts/2010-01-01-c.markdown:660
+#: ../_posts/2010-01-01-c.markdown:660
 msgid "For a variable number of arguments in a C array, `-1`"
 msgstr "Cの配列中の引数の数が可変なときは、`-1`"
 
 #. type: Bullet: '3. '
-#: _posts/2010-01-01-c.markdown:660
+#: ../_posts/2010-01-01-c.markdown:660
 msgid "For a variable number of arguments in a Ruby Array, `-2`"
 msgstr "Rubyの配列中の引数の数が可変なときは、`-2`"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:662
+#: ../_posts/2010-01-01-c.markdown:662
 msgid "Everything is pretty self-explanatory from there:"
 msgstr "これ以降の全てはかなりそれ自体が分かりやすいものです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:666
+#: ../_posts/2010-01-01-c.markdown:666
 msgid "{% highlight c %} {% include c/methodr.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1784,7 +1818,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:670
+#: ../_posts/2010-01-01-c.markdown:670
 msgid ""
 "There's also a shortcut for defining a method in a module _and_ its "
 "singleton class. This is used a lot in `Math`, for example, letting you "
@@ -1795,7 +1829,7 @@ msgstr ""
 "呼び出しで`Math.`と打つのを避けられます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:674
+#: ../_posts/2010-01-01-c.markdown:674
 msgid "{% highlight c %} {% include c/modulefunc.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1803,18 +1837,18 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:675
+#: ../_posts/2010-01-01-c.markdown:675
 #, no-wrap
 msgid "Other Stuff"
 msgstr "その他のもの"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:678
+#: ../_posts/2010-01-01-c.markdown:678
 msgid "Some simple API functions for class/method definitions:"
 msgstr "クラスやメソッドの定義のための単純なAPI関数があります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:682
+#: ../_posts/2010-01-01-c.markdown:682
 msgid "{% highlight c %} {% include c/etc.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1822,13 +1856,13 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:683
+#: ../_posts/2010-01-01-c.markdown:683
 #, no-wrap
 msgid "Data"
 msgstr "データ"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:690
+#: ../_posts/2010-01-01-c.markdown:690
 msgid ""
 "By now you should be able to create and manipulate Ruby classes using the "
 "API, but how can you create a Ruby class that encapsulates data from the C "
@@ -1844,7 +1878,7 @@ msgstr ""
 "データ構造）。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:697
+#: ../_posts/2010-01-01-c.markdown:697
 msgid ""
 "The API lets you encapsulate C data by creating a `VALUE` of the desired "
 "class and then storing a `void*` pointing to the C data inside the Ruby "
@@ -1861,7 +1895,7 @@ msgstr ""
 "起こるでしょうか。基本的にはこうです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:701
+#: ../_posts/2010-01-01-c.markdown:701
 msgid "{% highlight ruby %} {% include c/new.rb %} {% endhighlight %}"
 msgstr ""
 "{% highlight ruby %}\n"
@@ -1869,7 +1903,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:707
+#: ../_posts/2010-01-01-c.markdown:707
 msgid ""
 "Before calling the _instance method_ `initialize` that we know so well, "
 "`new` first calls the _class method_ `allocate` to actually create the "
@@ -1884,7 +1918,7 @@ msgstr ""
 "ています。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:711
+#: ../_posts/2010-01-01-c.markdown:711
 msgid "{% highlight c %} {% include c/wrap.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -1892,7 +1926,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:719
+#: ../_posts/2010-01-01-c.markdown:719
 msgid ""
 "In most cases you'll probably be wrapping something more complicated (like a "
 "`struct`), but the principles will be the same. After allocating the C data, "
@@ -1911,7 +1945,7 @@ msgstr ""
 "う追加情報を提供するものです。"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:736
+#: ../_posts/2010-01-01-c.markdown:736
 msgid ""
 "`wrap_struct_name` is a string used by Ruby to identify your type. It "
 "doesn't really matter what it is as long as it's sensible and unique"
@@ -1920,7 +1954,7 @@ msgstr ""
 "す。意味が通っていて一意である限り本当に何でも構いません"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:736
+#: ../_posts/2010-01-01-c.markdown:736
 msgid ""
 "`function` is a struct containing several function pointers for use by the "
 "garbage collector"
@@ -1929,7 +1963,7 @@ msgstr ""
 "体です"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:736
+#: ../_posts/2010-01-01-c.markdown:736
 msgid ""
 "`dmark` will be described later, but as long your C data doesn't point to "
 "any Ruby objects you don't need it"
@@ -1938,7 +1972,7 @@ msgstr ""
 "要です"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:736
+#: ../_posts/2010-01-01-c.markdown:736
 msgid ""
 "`dfree` will be called when your object is destroyed and should free all "
 "memory allocated by the object"
@@ -1947,7 +1981,7 @@ msgstr ""
 "れた全てのメモリが解放されるときです"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:736
+#: ../_posts/2010-01-01-c.markdown:736
 msgid ""
 "`dsize` is called by Ruby to check how much memory your object is taking "
 "up.  It _can_ be omitted, but it's polite to include it"
@@ -1956,7 +1990,7 @@ msgstr ""
 "するときです。省略も _可能_ ですが、含めておくのが誠実というものです"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:736
+#: ../_posts/2010-01-01-c.markdown:736
 msgid ""
 "`data` can point to arbitrary data. Think of it as wrapping C data at a "
 "class level. Also not manadatory"
@@ -1965,7 +1999,7 @@ msgstr ""
 "考えてください。こちらも必須ではありません"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:736
+#: ../_posts/2010-01-01-c.markdown:736
 msgid ""
 "`flags` lets you enable additional optimizations when your objects are "
 "garbage collected. As long as your `dfree` function doesn't unlock the [GVL]"
@@ -1978,7 +2012,7 @@ msgstr ""
 "で僅かに効率性の向上が得られます"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:741
+#: ../_posts/2010-01-01-c.markdown:741
 msgid ""
 "If you don't set some of these members, you should zero them out so that "
 "Ruby doesn't accidentally read garbage data. That's why I used C99's "
@@ -1991,12 +2025,12 @@ msgstr ""
 "ています"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:743
+#: ../_posts/2010-01-01-c.markdown:743
 msgid "[desinit]: https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html"
 msgstr "[desinit]: https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:747
+#: ../_posts/2010-01-01-c.markdown:747
 msgid ""
 "`VALUE`s that wrap C data will have type `T_DATA` with respect to the "
 "[`TYPE()` macro](#value). This helps ensure a clear separation between "
@@ -2007,7 +2041,7 @@ msgstr ""
 "区別を明確にする補助になります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:752
+#: ../_posts/2010-01-01-c.markdown:752
 msgid ""
 "Once you've done all of that work to wrap up the C data, getting it back out "
 "is easy: `TypedData_Get_Struct()` takes the object to unwrap, the C type of "
@@ -2020,7 +2054,7 @@ msgstr ""
 
 # https://kaworu.jpn.org/cpp/%E9%85%8D%E7%BD%AEnew
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:758
+#: ../_posts/2010-01-01-c.markdown:758
 msgid ""
 "This separation of allocation and initialization doesn't jive with [RAII]"
 "[raii], so if you're using C++ you will probably want to use [placement new]"
@@ -2034,7 +2068,7 @@ msgstr ""
 "際の_ アロケーションを`initialize`ですることもできます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:761
+#: ../_posts/2010-01-01-c.markdown:761
 msgid ""
 "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization "
 "[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
@@ -2043,7 +2077,7 @@ msgstr ""
 "[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:769
+#: ../_posts/2010-01-01-c.markdown:769
 msgid ""
 "In simple cases (like the previous example) you can make your code a little "
 "less verbose. If the function to free your data just calls `free()` as in "
@@ -2064,7 +2098,7 @@ msgstr ""
 "以前の例を以下のように短くできます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:773
+#: ../_posts/2010-01-01-c.markdown:773
 msgid "{% highlight c %} {% include c/makestruct.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2073,13 +2107,13 @@ msgstr ""
 
 # マークアンドスイープと合わせます
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:774
+#: ../_posts/2010-01-01-c.markdown:774
 #, no-wrap
 msgid "Marking"
 msgstr "マークする"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:783
+#: ../_posts/2010-01-01-c.markdown:783
 msgid ""
 "That `dmark` pointer in the type structure above is the pointer to your "
 "object's \"mark function\". This is so named because of the garbage "
@@ -2099,7 +2133,7 @@ msgstr ""
 "ブジェクトを巡回し、活性と印が付けられていないものを解放します。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:793
+#: ../_posts/2010-01-01-c.markdown:793
 msgid ""
 "This is relevant to wrapping C data because it's possible that you might "
 "wrap a C `struct` which contains a Ruby `VALUE`&mdash;which the garbage "
@@ -2122,7 +2156,7 @@ msgstr ""
 "ば……。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:797
+#: ../_posts/2010-01-01-c.markdown:797
 msgid ""
 "In the following example, we'll wrap a C `struct` which contains a `VALUE`. "
 "The mark function has the same signature as the free function and all it has "
@@ -2133,7 +2167,7 @@ msgstr ""
 "です。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:801
+#: ../_posts/2010-01-01-c.markdown:801
 msgid "{% highlight c %} {% include c/mark.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2141,7 +2175,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:806
+#: ../_posts/2010-01-01-c.markdown:806
 msgid ""
 "If your `struct` contains a pointer to a C array of `VALUE`s, you can "
 "instead use `rb_gc_mark_locations()` which takes two arguments: the pointers "
@@ -2154,19 +2188,19 @@ msgstr ""
 "[^maybe]。"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:807
+#: ../_posts/2010-01-01-c.markdown:807
 #, no-wrap
 msgid "Threading"
 msgstr "スレッド"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:809
+#: ../_posts/2010-01-01-c.markdown:809
 #, no-wrap
 msgid "Ruby in C Threads"
 msgstr "Cのスレッドの中のRuby"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:819
+#: ../_posts/2010-01-01-c.markdown:819
 msgid ""
 "If you're making a lot of API calls and running a lot of Ruby code from C, "
 "at some point you might catch yourself thinking, \"I'm running all of these "
@@ -2187,7 +2221,7 @@ msgstr ""
 "がないようにするためです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:822
+#: ../_posts/2010-01-01-c.markdown:822
 msgid ""
 "If you just want to create normal Ruby `Thread`s using the API (and don't "
 "mind the GVL, as described in the next section), there's an easy way to do "
@@ -2197,7 +2231,7 @@ msgstr ""
 "気にならなければ）、簡単な方法があります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:826
+#: ../_posts/2010-01-01-c.markdown:826
 msgid "{% highlight c %} {% include c/thread.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2205,7 +2239,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:829
+#: ../_posts/2010-01-01-c.markdown:829
 msgid ""
 "Other `Thread` functions are in `ruby/intern.h` (but there's always "
 "`rb_funcall()` for everything else)."
@@ -2214,13 +2248,13 @@ msgstr ""
 "`rb_funcall()`があります）。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:830
+#: ../_posts/2010-01-01-c.markdown:830
 #, no-wrap
 msgid "C in Ruby Threads"
 msgstr "Rubyのスレッドの中のC"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:838
+#: ../_posts/2010-01-01-c.markdown:838
 msgid ""
 "On the other hand, if you expose some heavy C code to Ruby with the API (if "
 "you're writing an extension that wraps a C library, for example), you should "
@@ -2237,7 +2271,7 @@ msgstr ""
 "ます。これが俗に`Thread`では真の並列性がないと言われる所以です。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:850
+#: ../_posts/2010-01-01-c.markdown:850
 msgid ""
 "The VM also applies the GVL to any C code you expose to Ruby. That's why you "
 "can use the API without worrying about it exploding when someone calls your "
@@ -2267,7 +2301,7 @@ msgstr ""
 "さい。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:854
+#: ../_posts/2010-01-01-c.markdown:854
 msgid ""
 "The code to do this is considered so fancy by the Ruby developers that you "
 "actually need to include another header to use it. First we'll look at the "
@@ -2278,7 +2312,7 @@ msgstr ""
 "しだけ単純なやり方を見ていきます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:858
+#: ../_posts/2010-01-01-c.markdown:858
 msgid "{% highlight c %} {% include c/gvl2.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2286,7 +2320,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:861
+#: ../_posts/2010-01-01-c.markdown:861
 msgid ""
 "Since the function that is run without the GVL gets and returns data using "
 "`void*`, you may want to define a `struct` for passing data via pointers."
@@ -2295,7 +2329,7 @@ msgstr ""
 "ンタを介してデータを渡すために`struct`を定義したいところでしょう。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:866
+#: ../_posts/2010-01-01-c.markdown:866
 msgid ""
 "If you unlock the GVL as above you will find that while your code does run "
 "in parallel, it can't be interrupted (by signals, `Thread.kill`, etc.)! To "
@@ -2307,7 +2341,7 @@ msgstr ""
 "には末尾の2引数を使ってブロック解除関数を渡さなければいけません。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:870
+#: ../_posts/2010-01-01-c.markdown:870
 msgid "{% highlight c %} {% include c/gvl.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2315,7 +2349,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:875
+#: ../_posts/2010-01-01-c.markdown:875
 msgid ""
 "The unblocking function is called in the event of an interrupt. To make it "
 "work, you will probably need to pass a pointer to both functions that can be "
@@ -2327,7 +2361,7 @@ msgstr ""
 "要があるでしょう。中断された関数は早期に返る前に必要な片付けを実施します。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:880
+#: ../_posts/2010-01-01-c.markdown:880
 msgid ""
 "Alternatively, if the interrupted function doesn't _need_ to perform any "
 "special cleanup, you can use the built in unblocking function "
@@ -2339,7 +2373,7 @@ msgstr ""
 "は単純に中断を走っているスレッドに転送します[^int]。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:884
+#: ../_posts/2010-01-01-c.markdown:884
 msgid ""
 "If you go through all of that effort to release the GVL only to find that "
 "you need to make an API call in your unlocked thread, there's a function to "
@@ -2350,7 +2384,7 @@ msgstr ""
 "る関数があります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:888
+#: ../_posts/2010-01-01-c.markdown:888
 msgid "{% highlight c %} {% include c/with_gvl.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2358,19 +2392,19 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:889
+#: ../_posts/2010-01-01-c.markdown:889
 #, no-wrap
 msgid "See Also"
 msgstr "参考文献"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:891
+#: ../_posts/2010-01-01-c.markdown:891
 #, no-wrap
 msgid "extension.rdoc"
 msgstr "extension.rdoc"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:897
+#: ../_posts/2010-01-01-c.markdown:897
 msgid ""
 "Ruby does have [official API documentation][readme]. It's a bit spotty and "
 "has some poor recommendations (in my opinion), but it is also a little more "
@@ -2385,18 +2419,18 @@ msgstr ""
 "からなのです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:899
+#: ../_posts/2010-01-01-c.markdown:899
 msgid "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
 msgstr "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:900
+#: ../_posts/2010-01-01-c.markdown:900
 #, no-wrap
 msgid "Headers"
 msgstr "ヘッダ"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:910
+#: ../_posts/2010-01-01-c.markdown:910
 msgid ""
 "I think some of the handiest resources are the Ruby headers themselves. The "
 "full API (i.e. everything you get by including `ruby.h`) easily consists of "
@@ -2416,7 +2450,7 @@ msgstr ""
 "クラスとやり取りする関数全てがあります。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:914
+#: ../_posts/2010-01-01-c.markdown:914
 msgid ""
 "There are also some headers _not_ pulled in by `ruby.h` which you can "
 "include to get additional API functionality. Maybe one day I'll write "
@@ -2426,33 +2460,33 @@ msgstr ""
 "るものがあります。いつの日かこのガイドで節を改めることがあるかもしれません。"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:923
+#: ../_posts/2010-01-01-c.markdown:923
 msgid "`ruby/debug.h` (experimental) functions for profiling and tracing code"
 msgstr "`ruby/debug.h`（実験的）プロファイリングとコードの追跡用の関数"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:923
+#: ../_posts/2010-01-01-c.markdown:923
 msgid "`ruby/encoding.h` functions for working with string encodings"
 msgstr "`ruby/encoding.h` 文字列エンコーディングを扱う関数"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:923
+#: ../_posts/2010-01-01-c.markdown:923
 msgid "`ruby/io.h` additional functions for Ruby's IO class"
 msgstr "`ruby/io.h` RubyのIOクラス用の追加の関数"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:923
+#: ../_posts/2010-01-01-c.markdown:923
 msgid "`ruby/re.h` additional functions for Ruby's Regexp class"
 msgstr "`ruby/re.h` RubyのRegexpクラス用の追加の関数"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:923
+#: ../_posts/2010-01-01-c.markdown:923
 msgid ""
 "`ruby/thread.h` functions for working with the [GVL](#c-in-ruby-threads)"
 msgstr "`ruby/thread.h` [GVL](#c-in-ruby-threads)を扱うための関数"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:923
+#: ../_posts/2010-01-01-c.markdown:923
 msgid ""
 "`ruby/version.h` functions for version introspection. Do not use this as "
 "feature-detection code!"
@@ -2461,18 +2495,18 @@ msgstr ""
 "ように"
 
 #. type: Bullet: '* '
-#: _posts/2010-01-01-c.markdown:923
+#: ../_posts/2010-01-01-c.markdown:923
 msgid "`ruby/vm.h` (experimental) functions for VM control"
 msgstr "`ruby/vm.h`（実験的）VM制御用の関数"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:924
+#: ../_posts/2010-01-01-c.markdown:924
 #, no-wrap
 msgid "Source"
 msgstr "ソース"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:928
+#: ../_posts/2010-01-01-c.markdown:928
 msgid ""
 "If you find some function in the header that isn't documented anywhere, your "
 "next stop should be the Ruby source code."
@@ -2481,7 +2515,7 @@ msgstr ""
 "Rubyのソースコードです。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:932
+#: ../_posts/2010-01-01-c.markdown:932
 msgid ""
 "{% highlight shell_session %} $ git clone https://github.com/ruby/ruby.git "
 "{% endhighlight %}"
@@ -2491,7 +2525,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:937
+#: ../_posts/2010-01-01-c.markdown:937
 msgid ""
 "When reading through the source code, always keep the headers at hand: there "
 "are lots of really useful functions in there that _look_ like they should be "
@@ -2503,13 +2537,13 @@ msgstr ""
 "合その役に立つ関数を呼び出すために梱包するAPI関数があることでしょう。"
 
 #. type: YAML Front Matter: title
-#: _posts/2010-01-01-c.markdown:938 _posts/2014-01-01-examples.markdown:1
+#: ../_posts/2010-01-01-c.markdown:938 ../_posts/2014-01-01-examples.markdown:1
 #, no-wrap
 msgid "Examples"
 msgstr "例"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:942
+#: ../_posts/2010-01-01-c.markdown:942
 msgid ""
 "Head over to the [Examples](../examples) page for short, compilable examples "
 "of the API in action."
@@ -2518,13 +2552,13 @@ msgstr ""
 "読んでみてください。"
 
 #. type: Title ###
-#: _posts/2010-01-01-c.markdown:943
+#: ../_posts/2010-01-01-c.markdown:943
 #, no-wrap
 msgid "Contribute"
 msgstr "貢献する"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:949
+#: ../_posts/2010-01-01-c.markdown:949
 msgid ""
 "Now that you've finished reading my guide, did you notice something "
 "significant that I left out? Did I make some stupid mistake? Check out the "
@@ -2537,19 +2571,19 @@ msgstr ""
 "コード例をダウンロードできます。"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:951
+#: ../_posts/2010-01-01-c.markdown:951
 msgid "[gh]: https://github.com/silverhammermba/emberb"
 msgstr "[gh]: https://github.com/silverhammermba/emberb"
 
 #. type: Title ##
-#: _posts/2010-01-01-c.markdown:952 _posts/2012-01-01-embed.markdown:123
-#: _posts/2013-01-01-extend.markdown:128
+#: ../_posts/2010-01-01-c.markdown:952 ../_posts/2012-01-01-embed.markdown:123
+#: ../_posts/2013-01-01-extend.markdown:128
 #, no-wrap
 msgid "Footnotes"
 msgstr "脚註"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:958
+#: ../_posts/2010-01-01-c.markdown:958
 #, no-wrap
 msgid ""
 "[^intern]: That's a blatant lie. The API _definitely_ lets you mess around\n"
@@ -2562,7 +2596,7 @@ msgstr ""
 "           しかし一般には名案にはなりませんし必要でもないのです。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:963
+#: ../_posts/2010-01-01-c.markdown:963
 #, no-wrap
 msgid ""
 "[^undef]: There's also `Qundef` representing an undefined value, but\n"
@@ -2572,7 +2606,7 @@ msgid ""
 msgstr "[^undef]: 未定義値を表す`Qundef`もありますがRubyで等価なものはなく[滅多に](#handling-blocks)[使われ](#constants-1)ないものです。実際、こうした稀な出現はさておき、Rubyで通常の`VALUE`が期待するところで`Qundef`があるとVMはセグフォします。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:966
+#: ../_posts/2010-01-01-c.markdown:966
 #, no-wrap
 msgid ""
 "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is\n"
@@ -2580,7 +2614,7 @@ msgid ""
 msgstr "[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _でしょう_ が、実は[バグ][bug2]のために`rb_eval_string_protect()`と同じものになっています。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:969
+#: ../_posts/2010-01-01-c.markdown:969
 #, no-wrap
 msgid ""
 "[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave\n"
@@ -2588,7 +2622,7 @@ msgid ""
 msgstr "[^chr]: `CHR2FIX()`マクロもありますが、筆者が試したところ時々思いがけない結果になりました。`LONG2FIX()`はうまくいきます。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:973
+#: ../_posts/2010-01-01-c.markdown:973
 #, no-wrap
 msgid ""
 "[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had\n"
@@ -2597,7 +2631,7 @@ msgid ""
 msgstr "[^wchar]: `wchar_t`を扱う一番の方法はわかりません。試したところ単なる`char`として扱うことに成功したことがありますが、それはたまたま運が良かっただけで、違うプラットフォームではきっと失敗することでしょう。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:978
+#: ../_posts/2010-01-01-c.markdown:978
 #, no-wrap
 msgid ""
 "[^clear]: The documentation [states][control] that \"You have to clear the error\n"
@@ -2607,7 +2641,7 @@ msgid ""
 msgstr "[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。しかしいつ消去してくれるのかについてのドキュメントは見付かっていません。 _常に_ 消去しなければいけないように思われます。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:981
+#: ../_posts/2010-01-01-c.markdown:981
 #, no-wrap
 msgid ""
 "[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is\n"
@@ -2615,7 +2649,7 @@ msgid ""
 msgstr "[^yield]: そして`rb_yield_block()`という2つの使われない引数を取るものがあり、Rubyではどこからも呼ばれないのです。妙です。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:985
+#: ../_posts/2010-01-01-c.markdown:985
 #, no-wrap
 msgid ""
 "[^break]: The documentation [mentions][control] `rb_iter_break()` and\n"
@@ -2624,7 +2658,7 @@ msgid ""
 msgstr "[^break]: ドキュメントは`rb_iter_block()`とブロックを突破する用の`rb_iter_break_value()`について[言及][control]していますが、単に早期の返値はできないのでしょうか。筆者はこれらの使い途が思い付きません。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:991
+#: ../_posts/2010-01-01-c.markdown:991
 #, no-wrap
 msgid ""
 "[^int]: There is also the function `rb_thread_call_without_gvl2()`. The\n"
@@ -2635,7 +2669,7 @@ msgid ""
 msgstr "[^int]: 関数`rb_thread_call_without_gvl2()`もあります。`thread.c`のドキュメントには「中断を検知すると直ちに返る」とありますが、どういう意味なのかよく分かりません。ブロック解除関数がスレッドをキルしなければ、返る前にひとりでにスレッドが終わるまで待ちぼうけるでしょうから。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:994
+#: ../_posts/2010-01-01-c.markdown:994
 #, no-wrap
 msgid ""
 "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover\n"
@@ -2643,7 +2677,7 @@ msgid ""
 msgstr "[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅れのコードの残滓のようなのでちょうど同じ効果があります。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:999
+#: ../_posts/2010-01-01-c.markdown:999
 #, no-wrap
 msgid ""
 "[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since\n"
@@ -2653,7 +2687,7 @@ msgid ""
 msgstr "[^oldwrap]: `TypedData*`マクロはRuby 1.9.2以降データを包む好ましいやり方です。古いバージョンのRubyを使っているならGithubでこのガイドの古いバージョンを確認すればかつてどのように使われていたのかがわかります。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:1002
+#: ../_posts/2010-01-01-c.markdown:1002
 #, no-wrap
 msgid ""
 "[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not\n"
@@ -2661,7 +2695,7 @@ msgid ""
 msgstr "[^maybe]: 謎めいた名前の`rb_gc_mark_maybe()`もありますが、いつ必要になるのかよくわかりません。\n"
 
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:1004
+#: ../_posts/2010-01-01-c.markdown:1004
 msgid "[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data)."
 msgstr ""
 "[^tdata]: あるいはオブジェクトが[Cのポインタを包む](#data)のなら`T_DATA`を"
@@ -2671,7 +2705,7 @@ msgstr ""
 # これがないとここで改行が入ってしまうので正しいMarkdownの解釈になりません。
 # 解消するにはpo4aが正しくリンクの参照を構文解析できるようにする必要があります。
 #. type: Plain text
-#: _posts/2010-01-01-c.markdown:1006
+#: ../_posts/2010-01-01-c.markdown:1006
 msgid ""
 "[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
 "Control+Structure [bug2]: https://bugs.ruby-lang.org/issues/10466"
@@ -2681,19 +2715,20 @@ msgstr ""
 "[bug2]: https://bugs.ruby-lang.org/issues/10466"
 
 #. type: Title ##
-#: _posts/2012-01-01-embed.markdown:1 _posts/2014-01-01-examples.markdown:6
+#: ../_posts/2012-01-01-embed.markdown:1
+#: ../_posts/2014-01-01-examples.markdown:6
 #, no-wrap
 msgid "Running Ruby in C"
 msgstr "CでRubyを実行する"
 
 #. type: Title ##
-#: _posts/2012-01-01-embed.markdown:6 _posts/2013-01-01-extend.markdown:6
+#: ../_posts/2012-01-01-embed.markdown:6 ../_posts/2013-01-01-extend.markdown:6
 #, no-wrap
 msgid "Compiling"
 msgstr "コンパイルする"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:12
+#: ../_posts/2012-01-01-embed.markdown:12
 msgid ""
 "Embedding Ruby requires one header `ruby.h`, which includes a platform-"
 "specific header `ruby/config.h`. You will probably need to tell your "
@@ -2707,7 +2742,7 @@ msgstr ""
 "ンは以下のようになります。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:16
+#: ../_posts/2012-01-01-embed.markdown:16
 msgid ""
 "{% highlight shell_session %} $ gcc -I/usr/include/ruby-{{ site."
 "rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -"
@@ -2719,7 +2754,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:19
+#: ../_posts/2012-01-01-embed.markdown:19
 msgid ""
 "Though, if available, you should really use `pkg-config` to get the "
 "appropriate options for your distribution:"
@@ -2728,7 +2763,7 @@ msgstr ""
 "各々のディストリビューションに適したオプションが得られるようにするべきです。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:23
+#: ../_posts/2012-01-01-embed.markdown:23
 msgid ""
 "{% highlight shell_session %} $ pkg-config --cflags --libs ruby-{{ site."
 "rbversion }} {% endhighlight %}"
@@ -2738,13 +2773,13 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ##
-#: _posts/2012-01-01-embed.markdown:24
+#: ../_posts/2012-01-01-embed.markdown:24
 #, no-wrap
 msgid "Startup, Teardown"
 msgstr "起動と終了"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:29
+#: ../_posts/2012-01-01-embed.markdown:29
 msgid ""
 "Including the Ruby interpreter in your C/C++ program is pretty simple. Just "
 "include the header, call a startup function in `main` before you use the "
@@ -2756,7 +2791,7 @@ msgstr ""
 "そして完了後に後片付けをする関数を呼べばよいのです。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:33
+#: ../_posts/2012-01-01-embed.markdown:33
 msgid "{% highlight c %} {% include embed/simple.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2764,7 +2799,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:38
+#: ../_posts/2012-01-01-embed.markdown:38
 msgid ""
 "If the VM fails to start during `ruby_init()` it will print an error and "
 "exit your program! If you would rather have a softer error, you can instead "
@@ -2777,7 +2812,7 @@ msgstr ""
 "メッセージの出しかたはよくわかっていません[^err]）。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:43
+#: ../_posts/2012-01-01-embed.markdown:43
 msgid ""
 "If an error occurs during `rb_cleanup()`, it returns a nonzero value&mdash;"
 "otherwise it returns the argument you passed it. This allows a little "
@@ -2789,7 +2824,7 @@ msgstr ""
 "したときのエラーステータスを返す部分が少し短く書けます（先の例のように）。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:52
+#: ../_posts/2012-01-01-embed.markdown:52
 msgid ""
 "_Technically_ you don't have to call `ruby_init`/`ruby_setup` in `main`, but "
 "the Ruby VM assumes that all future Ruby code will be run from the same "
@@ -2812,7 +2847,7 @@ msgstr ""
 "{: .alert .alert-danger}"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:58
+#: ../_posts/2012-01-01-embed.markdown:58
 msgid ""
 "During cleanup, the VM might evaluate more Ruby code (if you passed a block "
 "to `at_exit`, for example) which could raise an exception. `ruby_cleanup()` "
@@ -2829,12 +2864,12 @@ msgstr ""
 "（制御方法については[Exceptions](../c#rescue)節を参照）"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:60
+#: ../_posts/2012-01-01-embed.markdown:60
 msgid "Here's an alternative example:"
 msgstr "別の例はこちらです。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:64
+#: ../_posts/2012-01-01-embed.markdown:64
 msgid "{% highlight c %} {% include embed/advanced.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2842,13 +2877,13 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ###
-#: _posts/2012-01-01-embed.markdown:65
+#: ../_posts/2012-01-01-embed.markdown:65
 #, no-wrap
 msgid "Limitations"
 msgstr "制約"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:73
+#: ../_posts/2012-01-01-embed.markdown:73
 msgid ""
 "Other than the stack frame warning above, there is another limitation: you "
 "only get one Ruby VM per process. The startup/teardown might make it look "
@@ -2867,7 +2902,7 @@ msgstr ""
 "もう一度 `ruby_init` を呼び出すと、実行に失敗してしまうでしょう。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:76
+#: ../_posts/2012-01-01-embed.markdown:76
 msgid ""
 "If for some reason you need multiple Ruby VMs in your program, you will need "
 "to spin them off in multiple processes to bypass this limitation."
@@ -2876,13 +2911,13 @@ msgstr ""
 "この制約を回避するために複数のプロセスに小分けにしなければいけません。"
 
 #. type: Title ##
-#: _posts/2012-01-01-embed.markdown:77
+#: ../_posts/2012-01-01-embed.markdown:77
 #, no-wrap
 msgid "Tweaking the VM"
 msgstr "VMを設定する"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:82
+#: ../_posts/2012-01-01-embed.markdown:82
 msgid ""
 "You now have a bare-bones Ruby VM running, but you may want to set up a "
 "little more stuff before you start running Ruby code. To set the name of the "
@@ -2896,7 +2931,7 @@ msgstr ""
 "以下のようにします。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:86
+#: ../_posts/2012-01-01-embed.markdown:86
 msgid "{% highlight c %} ruby_script(\"new name\")  {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2904,14 +2939,14 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:88
+#: ../_posts/2012-01-01-embed.markdown:88
 msgid "To set up the load path so that gems can be loaded with `require`, use"
 msgstr ""
 "gemが `require` で呼び出せるようにするためにロードパスを設定するには、\n"
 "次のようにします。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:92
+#: ../_posts/2012-01-01-embed.markdown:92
 msgid "{% highlight c %} ruby_init_loadpath()  {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2919,7 +2954,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:96
+#: ../_posts/2012-01-01-embed.markdown:96
 msgid ""
 "You can also pass options to the VM just like you would to `ruby` on the "
 "command line. This is handy for stuff like setting the warning level or "
@@ -2929,7 +2964,7 @@ msgstr ""
 "警告水準や冗長モード[^opt]の設定に手頃です。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:100
+#: ../_posts/2012-01-01-embed.markdown:100
 msgid "{% highlight c %} {% include embed/options.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2937,7 +2972,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:106
+#: ../_posts/2012-01-01-embed.markdown:106
 msgid ""
 "The arguments to `ruby_options` are `argc` and `argv` just like a main "
 "function.  And just like the main of the `ruby` program, the VM expects to "
@@ -2954,7 +2989,7 @@ msgstr ""
 "渡せばよいです。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:115
+#: ../_posts/2012-01-01-embed.markdown:115
 msgid ""
 "`ruby_options()` returns a \"node\" that represents the compiled Ruby code. "
 "In some cases (such as a syntax error) the node will be invalid and you "
@@ -2979,7 +3014,7 @@ msgstr ""
 "できます。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:118
+#: ../_posts/2012-01-01-embed.markdown:118
 msgid ""
 "Ruby currently doesn't support any other way of compiling and running code "
 "separately[^load]."
@@ -2988,20 +3023,21 @@ msgstr ""
 "ん[^load]。"
 
 #. type: Title ##
-#: _posts/2012-01-01-embed.markdown:119 _posts/2013-01-01-extend.markdown:105
+#: ../_posts/2012-01-01-embed.markdown:119
+#: ../_posts/2013-01-01-extend.markdown:105
 #, no-wrap
 msgid "Success"
 msgstr "やったね"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:122
+#: ../_posts/2012-01-01-embed.markdown:122
 msgid "Now you're ready to interact with Ruby! Go back to the [C API](../c)."
 msgstr ""
 "これでRubyとやりとりできました！\n"
 "[C API](../c)に戻りましょう。"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:127
+#: ../_posts/2012-01-01-embed.markdown:127
 #, no-wrap
 msgid ""
 "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this\n"
@@ -3013,7 +3049,7 @@ msgstr ""
 "        これはよくあることなのでしょうか。\n"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:131
+#: ../_posts/2012-01-01-embed.markdown:131
 #, no-wrap
 msgid ""
 "[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This\n"
@@ -3025,7 +3061,7 @@ msgstr ""
 "        きっとそれでコマンドラインオプションをパースすることなしに実現できるはずです。\n"
 
 #. type: Plain text
-#: _posts/2012-01-01-embed.markdown:133
+#: ../_posts/2012-01-01-embed.markdown:133
 #, no-wrap
 msgid ""
 "[^load]: It looks like the function `rb_load_file()` should do this, but I\n"
@@ -3035,13 +3071,14 @@ msgstr ""
 "         動かせた試しがありません。\n"
 
 #. type: Title ##
-#: _posts/2013-01-01-extend.markdown:1 _posts/2014-01-01-examples.markdown:35
+#: ../_posts/2013-01-01-extend.markdown:1
+#: ../_posts/2014-01-01-examples.markdown:35
 #, no-wrap
 msgid "Running C in Ruby"
 msgstr "RubyでCを実行する"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:11
+#: ../_posts/2013-01-01-extend.markdown:11
 msgid ""
 "Compiling C code to be loaded as a Ruby extension requires some fancy "
 "compiler options. Ruby's [`mkmf` stdlib][mkmf] makes it easy to do this by "
@@ -3054,13 +3091,13 @@ msgstr ""
 "コンパイルが楽になります。"
 
 #. type: Title ###
-#: _posts/2013-01-01-extend.markdown:12
+#: ../_posts/2013-01-01-extend.markdown:12
 #, no-wrap
 msgid "Preparation"
 msgstr "準備"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:15
+#: ../_posts/2013-01-01-extend.markdown:15
 msgid ""
 "First create the file `extconf.rb` in the same directory as your C code:"
 msgstr ""
@@ -3068,7 +3105,7 @@ msgstr ""
 "つくります。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:19
+#: ../_posts/2013-01-01-extend.markdown:19
 msgid ""
 "{% highlight ruby %} {% include extend/ext/extconf.rb %} {% endhighlight %}"
 msgstr ""
@@ -3077,7 +3114,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:22
+#: ../_posts/2013-01-01-extend.markdown:22
 msgid ""
 "The preparation section should perform actions similar to the standard UNIX "
 "[`configure` script][conf] e.g."
@@ -3087,27 +3124,27 @@ msgstr ""
 "例えば次のようなことです。"
 
 #. type: Bullet: '* '
-#: _posts/2013-01-01-extend.markdown:26
+#: ../_posts/2013-01-01-extend.markdown:26
 msgid "Check features of the current platform"
 msgstr "現在のプラットフォームの特徴を確認する"
 
 #. type: Bullet: '* '
-#: _posts/2013-01-01-extend.markdown:26
+#: ../_posts/2013-01-01-extend.markdown:26
 msgid "Check for existence of required libraries and functions"
 msgstr "必要なライブラリと関数があることを確認する"
 
 #. type: Bullet: '* '
-#: _posts/2013-01-01-extend.markdown:26
+#: ../_posts/2013-01-01-extend.markdown:26
 msgid "Check for programs needed for building"
 msgstr "ビルドするのに必要なプログラムがあることを確認する"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:28
+#: ../_posts/2013-01-01-extend.markdown:28
 msgid "[conf]: http://en.wikipedia.org/wiki/Configure_script"
 msgstr "[conf]: http://en.wikipedia.org/wiki/Configure_script"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:32
+#: ../_posts/2013-01-01-extend.markdown:32
 msgid ""
 "The most common of these actions are provided by `mkmf` (but you have all of "
 "Ruby at your disposal if you need it). For example, an extension which uses "
@@ -3120,7 +3157,7 @@ msgstr ""
 "こんな感じで呼び出すことになります。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:36
+#: ../_posts/2013-01-01-extend.markdown:36
 msgid ""
 "{% highlight ruby %} {% include extend/ext/exex.rb %} {% endhighlight %}"
 msgstr ""
@@ -3129,7 +3166,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:40
+#: ../_posts/2013-01-01-extend.markdown:40
 msgid ""
 "`create_header` creates the file `extconf.h` containing preprocessor "
 "definitions based on the results of the `mkmf` functions you called "
@@ -3140,7 +3177,7 @@ msgstr ""
 "この例では `extconf.h` は次のような内容を含みます。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:44
+#: ../_posts/2013-01-01-extend.markdown:44
 msgid "{% highlight c %} {% include extend/ext/exh.h %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -3148,7 +3185,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:52
+#: ../_posts/2013-01-01-extend.markdown:52
 msgid ""
 "This header should be included in your C files so that you can adapt your "
 "code to a variety of platforms. Note that you can and should abort the "
@@ -3171,7 +3208,7 @@ msgstr ""
 "よくわからないコンパイルエラーで利用者を置き去りにするよりはマシです。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:57
+#: ../_posts/2013-01-01-extend.markdown:57
 msgid ""
 "`create_makefile` obviously creates the Makefile, but its argument is "
 "especially important: it defines the entry point of your C code, the name of "
@@ -3186,7 +3223,7 @@ msgstr ""
 "これは拡張の名前であるべきです。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:63
+#: ../_posts/2013-01-01-extend.markdown:63
 msgid ""
 "You can modify a few of the generated Makefile variables by modifying the "
 "corresponding globals in Ruby: `$CFLAGS`, `$CPPFLAGS`, and "
@@ -3202,7 +3239,7 @@ msgstr ""
 "きます。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:68
+#: ../_posts/2013-01-01-extend.markdown:68
 msgid ""
 "All of the `mkmf` functions and their options are well-documented [online]"
 "[mkmf]. In addition to the functions for generating `extconf.h`, there are a "
@@ -3215,25 +3252,25 @@ msgstr ""
 "また違ったソースファイルの配置や依存関係を制御する様々な関数があります。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:70
+#: ../_posts/2013-01-01-extend.markdown:70
 msgid ""
 "[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html"
 msgstr ""
 "[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html"
 
 #. type: Title ###
-#: _posts/2013-01-01-extend.markdown:71
+#: ../_posts/2013-01-01-extend.markdown:71
 #, no-wrap
 msgid "Execution"
 msgstr "実行"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:74
+#: ../_posts/2013-01-01-extend.markdown:74
 msgid "The rest couldn't be simpler"
 msgstr "あとはもう、これ以上簡単になりようがありません"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:79
+#: ../_posts/2013-01-01-extend.markdown:79
 msgid ""
 "{% highlight shell_session %} $ ruby extconf.rb $ make {% endhighlight %}"
 msgstr ""
@@ -3243,7 +3280,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:81
+#: ../_posts/2013-01-01-extend.markdown:81
 msgid ""
 "[^argv]But of course that won't do anything without some C code to compile."
 msgstr ""
@@ -3251,13 +3288,13 @@ msgstr ""
 "どね。"
 
 #. type: Title ##
-#: _posts/2013-01-01-extend.markdown:82
+#: ../_posts/2013-01-01-extend.markdown:82
 #, no-wrap
 msgid "Init"
 msgstr "初期化"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:89
+#: ../_posts/2013-01-01-extend.markdown:89
 msgid ""
 "In your C code, you'll want to include `ruby.h` to access the API. Other "
 "than that the only requirement is to define a function for the Ruby VM to "
@@ -3274,7 +3311,7 @@ msgstr ""
 "次の内容の `foobar.c` ファイルをつくります。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:93
+#: ../_posts/2013-01-01-extend.markdown:93
 msgid "{% highlight c %} {% include extend/ext/foobar.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -3282,13 +3319,13 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ###
-#: _posts/2013-01-01-extend.markdown:94
+#: ../_posts/2013-01-01-extend.markdown:94
 #, no-wrap
 msgid "Filenames"
 msgstr "ファイル名"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:101
+#: ../_posts/2013-01-01-extend.markdown:101
 msgid ""
 "If your extension has only a single C file, you should name it after your "
 "extension as we did above. If your extensions has multiple C files _do not_ "
@@ -3306,7 +3343,7 @@ msgstr ""
 "うからです。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:104
+#: ../_posts/2013-01-01-extend.markdown:104
 msgid ""
 "Also avoid naming any files `conftest.c` as this file may be written to by "
 "`mkmf`."
@@ -3315,24 +3352,27 @@ msgstr ""
 "ないので避けます。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:111
+#: ../_posts/2013-01-01-extend.markdown:111
 msgid ""
 "Now make should compile a `.so` (or some other library) file which you can "
 "`require` in Ruby. You can fill in your `Init` function with plain C code, "
 "but you'll probably want to go back and learn about the [C API](../c) to do "
 "more interesting stuff."
 msgstr ""
-"これにてmakeで`.so`（またはその他のライブラリ）にコンパイルして、Rubyで`require`できるようになりました。\n"
-"純粋なC言語のコードで`Init`関数を実装していくこともできますが、たぶんいったん戻って、もっと面白いことをするために[C API](../c)を学ばれるのではないでしょうか。"
+"これにてmakeで`.so`（またはその他のライブラリ）にコンパイルして、Rubyで"
+"`require`できるようになりました。\n"
+"純粋なC言語のコードで`Init`関数を実装していくこともできますが、たぶんいったん"
+"戻って、もっと面白いことをするために[C API](../c)を学ばれるのではないでしょう"
+"か。"
 
 #. type: Title ##
-#: _posts/2013-01-01-extend.markdown:112
+#: ../_posts/2013-01-01-extend.markdown:112
 #, no-wrap
 msgid "Gem"
 msgstr "Gem"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:118
+#: ../_posts/2013-01-01-extend.markdown:118
 msgid ""
 "After you've got your extension working nicely, you may want to bundle it up "
 "as an easily distributable Ruby gem. rubygems.org has a [detailed guide]"
@@ -3344,7 +3384,7 @@ msgstr ""
 "拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:122
+#: ../_posts/2013-01-01-extend.markdown:122
 msgid ""
 "{% highlight ruby %} {% include extend/foobar.gemspec %} {% endhighlight %}"
 msgstr ""
@@ -3353,7 +3393,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:125
+#: ../_posts/2013-01-01-extend.markdown:125
 msgid ""
 "If your gem includes multiple independent extensions, you can organize them "
 "in subdirectories of `ext/` and pass all of the `extconf.rb`s to the spec."
@@ -3363,17 +3403,17 @@ msgstr ""
 "specに各々の `extconf.rb` を記します。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:127
+#: ../_posts/2013-01-01-extend.markdown:127
 msgid "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 msgstr "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:131
+#: ../_posts/2013-01-01-extend.markdown:131
 msgid "[^glob]: Check the [official documentation][globals]."
 msgstr "[^glob]: [公式文書][globals]をご確認ください。"
 
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:135
+#: ../_posts/2013-01-01-extend.markdown:135
 #, no-wrap
 msgid ""
 "[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain\n"
@@ -3383,7 +3423,7 @@ msgstr "[^argv]: 公式文書は、`--vendor` のようなコマンドライン�
 
 # 空白を入れていないのは意図的です
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:137
+#: ../_posts/2013-01-01-extend.markdown:137
 msgid ""
 "[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides."
 "rubygems.org/gems-with-extensions/)"
@@ -3393,7 +3433,7 @@ msgstr ""
 
 # 空白を入れていないのは意図的です。
 #. type: Plain text
-#: _posts/2013-01-01-extend.markdown:139
+#: ../_posts/2013-01-01-extend.markdown:139
 msgid ""
 "[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
 "Prepare+extconf.rb [makefile]: https://github.com/ruby/ruby/blob/master/doc/"
@@ -3405,7 +3445,7 @@ msgstr ""
 "Generate+Makefile"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:14
+#: ../_posts/2014-01-01-examples.markdown:14
 msgid ""
 "This example is a simple little game of tag. In the game there are two "
 "squares: the blue square is controlled using the arrow keys on the keyboard "
@@ -3421,12 +3461,12 @@ msgstr ""
 "データをカプセル化するオブジェクトを渡します。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:16
+#: ../_posts/2014-01-01-examples.markdown:16
 msgid "The Ruby script can look something like this:"
 msgstr "Rubyスクリプトは以下のような見た目をしています。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:20
+#: ../_posts/2014-01-01-examples.markdown:20
 msgid "{% highlight ruby %} {% include examples/ai.rb %} {% endhighlight %}"
 msgstr ""
 "{% highlight ruby %}\n"
@@ -3434,7 +3474,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:24
+#: ../_posts/2014-01-01-examples.markdown:24
 msgid ""
 "The C code uses SDL2 for graphics and input and uses `stat()` (which may not "
 "be very portable) to hot-reload the AI script whenever the file is changed . "
@@ -3445,7 +3485,7 @@ msgstr ""
 "使います。以下は`tag.c`です。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:28
+#: ../_posts/2014-01-01-examples.markdown:28
 msgid "{% highlight c %} {% include examples/tag.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -3453,12 +3493,12 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:30
+#: ../_posts/2014-01-01-examples.markdown:30
 msgid "The Makefile is nothing special:"
 msgstr "Makefileは何ということはありません。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:34
+#: ../_posts/2014-01-01-examples.markdown:34
 msgid "{% highlight make %} {% include examples/Makefile %} {% endhighlight %}"
 msgstr ""
 "{% highlight make %}\n"
@@ -3466,7 +3506,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:42
+#: ../_posts/2014-01-01-examples.markdown:42
 msgid ""
 "This example is a Ruby C extension that wraps the [GMP][gmp] C library for "
 "arbitrary precision arithmetic. This is far from a complete example: it only "
@@ -3481,19 +3521,19 @@ msgstr ""
 "い。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:45
+#: ../_posts/2014-01-01-examples.markdown:45
 msgid "[gmp]: https://gmplib.org/ [gem]: https://github.com/srawlins/gmp"
 msgstr ""
 "[gmp]: https://gmplib.org/\n"
 "[gem]: https://github.com/srawlins/gmp"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:47
+#: ../_posts/2014-01-01-examples.markdown:47
 msgid "Everything is in `gmp.c` where we define our `GMP::Integer` class:"
 msgstr "全ては`GMP::Integer`クラスを定義している`gmp.c`にあります。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:51
+#: ../_posts/2014-01-01-examples.markdown:51
 msgid "{% highlight c %} {% include examples/ext/gmp.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -3501,12 +3541,12 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:53
+#: ../_posts/2014-01-01-examples.markdown:53
 msgid "The `extconf.rb` is really simple."
 msgstr "`extconf.rb`は本当に単純です。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:57
+#: ../_posts/2014-01-01-examples.markdown:57
 msgid ""
 "{% highlight ruby %} {% include examples/ext/extconf.rb %} {% endhighlight %}"
 msgstr ""
@@ -3515,12 +3555,12 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:59
+#: ../_posts/2014-01-01-examples.markdown:59
 msgid "And now you can finally find out what your name means in base 62:"
 msgstr "そしてこれで遂に基数62で自分の名前が何になるのかがわかります。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:63
+#: ../_posts/2014-01-01-examples.markdown:63
 msgid ""
 "{% highlight ruby %} {% include examples/gmp_ex.rb %} {% endhighlight %}"
 msgstr ""
@@ -3529,7 +3569,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:70
+#: ../_posts/2014-01-01-examples.markdown:70
 msgid ""
 "For this example I tried to do everything in C, but practically that isn't "
 "necessary (or desirable). If one of your C methods just calls a bunch of API "
@@ -3545,7 +3585,7 @@ msgstr ""
 "てRubyを書く時間が減ってしまうツケを払うことになります。😀"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:75
+#: ../_posts/2014-01-01-examples.markdown:75
 msgid ""
 "A common convention when writing extensions is to only implement the "
 "\"meat\" of the extension in C and to do everything else in a regular Ruby "
@@ -3557,7 +3597,7 @@ msgstr ""
 "例えば`gmp.rb`スクリプトを書いて拡張を著しく単純にできます。"
 
 #. type: Plain text
-#: _posts/2014-01-01-examples.markdown:78
+#: ../_posts/2014-01-01-examples.markdown:78
 msgid "{% highlight ruby %} {% include examples/gmp.rb %} {% endhighlight %}"
 msgstr ""
 "{% highlight ruby %}\n"
@@ -3565,7 +3605,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: README.md:3
+#: ../README.md:3
 msgid ""
 "This is the source for my online guide to Ruby's C API. Visit the live site "
 "[here][io]."
@@ -3574,18 +3614,18 @@ msgstr ""
 "をご覧ください。"
 
 #. type: Plain text
-#: README.md:5
+#: ../README.md:5
 msgid "[io]: http://silverhammermba.github.io/emberb"
 msgstr "[io]: http://silverhammermba.github.io/emberb"
 
 #. type: Title #
-#: README.md:6
+#: ../README.md:6
 #, no-wrap
 msgid "Why I'm Making This Guide"
 msgstr "なぜこの手引きを作ったか"
 
 #. type: Plain text
-#: README.md:11
+#: ../README.md:11
 msgid ""
 "Oh my god there are so [many][g] [freaking][f] [guides][e] [to][d] [Ruby's]"
 "[c] [C][b] [API][a]. Why make another one? Because from what I've seen of "
@@ -3596,39 +3636,39 @@ msgstr ""
 "のを作るのでしょうか。それは筆者が次のようなことに直面してきたからです。"
 
 #. type: Bullet: '* '
-#: README.md:18
+#: ../README.md:18
 msgid "Most of them are outdated"
 msgstr "ほとんどが時代遅れである"
 
 #. type: Bullet: '* '
-#: README.md:18
+#: ../README.md:18
 msgid "Most fail to cover different approaches when they are available"
 msgstr "ほとんどが、別の解決策が利用できるときも、それらを押さえられていない"
 
 #. type: Bullet: '* '
-#: README.md:18
+#: ../README.md:18
 msgid "Many cover only very specific use-cases"
 msgstr "多くのものがかなり限定的な用例のみを押さえている"
 
 #. type: Bullet: '* '
-#: README.md:18
+#: ../README.md:18
 msgid "Many have bad recommendations"
 msgstr "多くのものにあまりお勧めできない点がある"
 
 #. type: Bullet: '* '
-#: README.md:18
+#: ../README.md:18
 msgid "Many fail to explain _when_ and _why_ things are needed"
 msgstr "多くが _いつ_ そして _なぜ_ それが必要なのかを説明できていない"
 
 #. type: Bullet: '* '
-#: README.md:18
+#: ../README.md:18
 msgid ""
 "Many try to be exhaustive rather getting the reader up and running quickly"
 msgstr ""
 "多くが網羅的であろうとするがあまり、読者が手早く始められるようになっていない"
 
 #. type: Plain text
-#: README.md:22
+#: ../README.md:22
 msgid ""
 "And it struck me that all of these problems come from these guides largely "
 "being on media that do not promote community-driven updates. So I'm writing "
@@ -3642,7 +3682,7 @@ msgstr ""
 "です。"
 
 #. type: Plain text
-#: README.md:29
+#: ../README.md:29
 msgid ""
 "[a]: http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-"
 "part-1.html [b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/"
@@ -3663,19 +3703,19 @@ msgstr ""
 "[g]:http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
 
 #. type: YAML Front Matter: layout
-#: index.markdown:1
+#: ../index.markdown:1
 #, no-wrap
 msgid "default"
 msgstr "default"
 
 #. type: YAML Front Matter: title
-#: index.markdown:1
+#: ../index.markdown:1
 #, no-wrap
 msgid "The Definitive Guide to Ruby's C API"
 msgstr "RubyのC APIの手引き 決定版"
 
 #. type: Plain text
-#: index.markdown:10
+#: ../index.markdown:10
 #, no-wrap
 msgid ""
 "<div class=\"container\">\n"
@@ -3689,7 +3729,7 @@ msgstr ""
 "[こちら][start]から始めてください。\n"
 
 #. type: Plain text
-#: index.markdown:17
+#: ../index.markdown:17
 #, no-wrap
 msgid ""
 "This site is generated from a [Github repo][repo]. If something isn't working\n"
@@ -3706,7 +3746,7 @@ msgstr ""
 "</div>\n"
 
 #. type: Plain text
-#: index.markdown:21
+#: ../index.markdown:21
 msgid ""
 "[start]: c [repo]: https://github.com/silverhammermba/emberb [iss]: https://"
 "github.com/silverhammermba/emberb/issues/new [pull]: https://github.com/"
@@ -3716,3 +3756,978 @@ msgstr ""
 "[repo]: https://github.com/silverhammermba/emberb\n"
 "[iss]: https://github.com/silverhammermba/emberb/issues/new\n"
 "[pull]: https://github.com/silverhammermba/emberb/pulls"
+
+#. type: comment
+#: ../_includes/embed/simple.c:5
+#, no-wrap
+msgid "construct the VM"
+msgstr "VMを構築"
+
+#. type: comment
+#: ../_includes/embed/simple.c:8 ../_includes/embed/advanced.c:11
+#, no-wrap
+msgid "Ruby goes here"
+msgstr "Rubyはここに入る"
+
+#. type: comment
+#: ../_includes/embed/simple.c:10
+#, no-wrap
+msgid "destruct the VM"
+msgstr "VMを解体"
+
+#. type: comment
+#: ../_includes/embed/advanced.c:7
+#, no-wrap
+msgid "run code without Ruby"
+msgstr "Rubyなしのコードを走らせる"
+
+#. type: comment
+#: ../_includes/embed/advanced.c:13
+#, no-wrap
+msgid "XXX rescue exceptions here!!!"
+msgstr "XXX 絶対にここで例外をrescueすること"
+
+#. type: comment
+#: ../_includes/embed/options.c:18
+#, no-wrap
+msgid "handle exception, perhaps"
+msgstr "例外に対処します。ないとは思いますが"
+
+#. type: comment
+#: ../_includes/examples/tag.c:11
+#, no-wrap
+msgid "constants"
+msgstr "定数"
+
+#. type: comment
+#: ../_includes/examples/tag.c:16
+#, no-wrap
+msgid "for position and direction"
+msgstr "位置と方向用"
+
+#. type: comment
+#: ../_includes/examples/tag.c:23
+#, no-wrap
+msgid "for the player and their opponent"
+msgstr "プレーヤーと敵用"
+
+#. type: comment
+#: ../_includes/examples/tag.c:32
+#, no-wrap
+msgid "wrapper for passing AI actor with AI script metadata"
+msgstr "AIのアクターにAIのスクリプトのメタデータを渡すための梱包"
+
+#. type: comment
+#: ../_includes/examples/tag.c:42
+#, no-wrap
+msgid "set AI error state and possibly print exception"
+msgstr "AIのエラー状態を設定し、例外を印字する可能性があります"
+
+#. type: comment
+#: ../_includes/examples/tag.c:51
+#, no-wrap
+msgid "print exception"
+msgstr "例外を印字"
+
+#. type: comment
+#: ../_includes/examples/tag.c:58
+#, no-wrap
+msgid "clear AI error state"
+msgstr "AIのエラー状態を消去"
+
+#. type: comment
+#: ../_includes/examples/tag.c:65
+#, no-wrap
+msgid "try to (re)load AI script"
+msgstr "（再）読み込みしたAIスクリプトを試す"
+
+#. type: comment
+#: ../_includes/examples/tag.c:68
+#, no-wrap
+msgid "get script modification time"
+msgstr "スクリプトの変更日時を得る"
+
+#. type: comment
+#: ../_includes/examples/tag.c:79
+#, no-wrap
+msgid "nothing to do if we've already loaded the script and it hasn't been updated"
+msgstr "既にスクリプトを読み込んでおり更新されていなければ、することはありません"
+
+#. type: comment
+#: ../_includes/examples/tag.c:98
+#, no-wrap
+msgid "for rescuing exceptions in the AI script"
+msgstr "AIのスクリプト中で例外をrescueするためのもの"
+
+#. type: comment
+#: ../_includes/examples/tag.c:106
+#, no-wrap
+msgid "run the AI script if possible"
+msgstr "可能であればAIのスクリプトを走らせる"
+
+#. type: comment
+#: ../_includes/examples/tag.c:117
+#, no-wrap
+msgid "move actor after ms time has elapsed"
+msgstr "msだけ時間が経ったらアクターを動かす"
+
+#. type: comment
+#: ../_includes/examples/tag.c:122
+#, no-wrap
+msgid "no movement"
+msgstr "動きなし"
+
+#. type: comment
+#: ../_includes/examples/tag.c:125
+#, no-wrap
+msgid "allow actor to move slower than speed, but not faster"
+msgstr "アクターがspeedに比べて遅くはあっても速くならない程度に動けるようにします"
+
+#. type: comment
+#: ../_includes/examples/tag.c:131
+#, no-wrap
+msgid "clamp position to screen"
+msgstr "位置が画面内に来るよう切り詰めます"
+
+#. type: comment
+#: ../_includes/examples/tag.c:142
+#, no-wrap
+msgid "draw an actor as a colored box"
+msgstr "アクターを色付きの箱として描画します"
+
+#. type: comment
+#: ../_includes/examples/tag.c:150
+#, no-wrap
+msgid "methods for the API we're defining for the AI script"
+msgstr "AIのスクリプト用に定義する、API用のメソッド"
+
+#. type: comment
+#: ../_includes/examples/tag.c:151
+#, no-wrap
+msgid "time - returns total elapsed time in milliseconds"
+msgstr "time - 合計の消費時間をミリ秒で返します"
+
+#. type: comment
+#: ../_includes/examples/tag.c:157
+#, no-wrap
+msgid "we don't need any mark/free/GC/etc. see later comment when we define the class"
+msgstr "mark/free/GCなどは何ら必要ありません。クラスを定義するところにある後述のコメントを参照"
+
+#. type: comment
+#: ../_includes/examples/tag.c:160
+#, no-wrap
+msgid "Actor#pos - returns screen position x, y in pixels"
+msgstr "Actor#pos - 画面の位置x, yをピクセルで返します"
+
+#. type: comment
+#: ../_includes/examples/tag.c:169
+#, no-wrap
+msgid "Actor#dir - returns last movement direction x, y. each is in the range (-1..1)"
+msgstr "Actor#dir - 直近の動く方向x, yを返します。それぞれ (-1..1) の範囲内です"
+
+#. type: comment
+#: ../_includes/examples/tag.c:178
+#, no-wrap
+msgid "Actor#move - set next movement direction. x, y as in Actor#pos"
+msgstr "Actor#move - 次の動く方向を設定します。x, yはActor#posと同様です"
+
+#. type: comment
+#: ../_includes/examples/tag.c:195
+#, no-wrap
+msgid "start Ruby TODO is this redundant?"
+msgstr "Rubyを開始 TODO これは余計だろうか"
+
+#. type: comment
+#: ../_includes/examples/tag.c:201
+#, no-wrap
+msgid "set a nicer script name than <main>"
+msgstr "<main>よりもいい名前を設定"
+
+#. type: comment
+#: ../_includes/examples/tag.c:204
+#, no-wrap
+msgid "define our own little API for use in the AI script"
+msgstr "AIスクリプトで使う小振りの独自APIを定義"
+
+#. type: comment
+#: ../_includes/examples/tag.c:207
+#, no-wrap
+msgid "Actor will wrap struct actor for passing to Ruby"
+msgstr "ActorはRubyに渡す上で構造体actorを梱包します"
+
+#. type: comment
+#: ../_includes/examples/tag.c:222
+#, no-wrap
+msgid "start SDL"
+msgstr "SDLを開始"
+
+#. type: comment
+#: ../_includes/examples/tag.c:225
+#, no-wrap
+msgid "create window"
+msgstr "ウィンドウを作成"
+
+#. type: comment
+#: ../_includes/examples/tag.c:240
+#, no-wrap
+msgid "create renderer"
+msgstr "描画子を作成"
+
+#. type: comment
+#: ../_includes/examples/tag.c:249
+#, no-wrap
+msgid "create actors"
+msgstr "アクターを作成"
+
+#. type: comment
+#: ../_includes/examples/tag.c:270
+#, no-wrap
+msgid "create Ruby objects for actors"
+msgstr "アクター用のRubyオブジェクトを作成"
+
+#. type: comment
+#: ../_includes/examples/tag.c:271
+#, no-wrap
+msgid "we can use NULL for the free function because the data are on the stack"
+msgstr "データがスタックにあるので解放関数にはNULLが使えます"
+
+#. type: comment
+#: ../_includes/examples/tag.c:275
+#, no-wrap
+msgid "don't allow the player to be moved via the AI script"
+msgstr "プレーヤーがAIスクリプトを介して動くことがないようにします"
+
+#. type: comment
+#: ../_includes/examples/tag.c:278
+#, no-wrap
+msgid "set up timing"
+msgstr "タイミングを取る"
+
+#. type: comment
+#: ../_includes/examples/tag.c:279
+#, no-wrap
+msgid "run AI at 30fps"
+msgstr "30fpsでAIを走らせる"
+
+#. type: comment
+#: ../_includes/examples/tag.c:285
+#, no-wrap
+msgid "start up AI"
+msgstr "AIを起動"
+
+#. type: comment
+#: ../_includes/examples/tag.c:289
+#, no-wrap
+msgid "for player input"
+msgstr "プレーヤーの入力用"
+
+#. type: comment
+#: ../_includes/examples/tag.c:292
+#, no-wrap
+msgid "main loop"
+msgstr "本体の繰り返し"
+
+#. type: comment
+#: ../_includes/examples/tag.c:297
+#, no-wrap
+msgid "update timers"
+msgstr "タイマーを更新"
+
+#. type: comment
+#: ../_includes/examples/tag.c:303
+#, no-wrap
+msgid "event handling"
+msgstr "イベントの制御"
+
+#. type: comment
+#: ../_includes/examples/tag.c:320
+#, no-wrap
+msgid "player movement"
+msgstr "プレーヤーの動作"
+
+#. type: comment
+#: ../_includes/examples/tag.c:333
+#, no-wrap
+msgid "AI movement"
+msgstr "AIの動作"
+
+#. type: comment
+#: ../_includes/examples/tag.c:342
+#, no-wrap
+msgid "game step"
+msgstr "ゲームを停止"
+
+#. type: comment
+#: ../_includes/examples/tag.c:346
+#, no-wrap
+msgid "render"
+msgstr "描画"
+
+#. type: comment
+#: ../_includes/examples/tag.c:355
+#, no-wrap
+msgid "let CPU rest"
+msgstr "CPUを休止"
+
+#. type: comment
+#: ../_includes/examples/tag.c:359
+#, no-wrap
+msgid "clean up"
+msgstr "整頓"
+
+#. type: comment
+#: ../_includes/examples/tag.c:363
+#, no-wrap
+msgid "stop SDL"
+msgstr "SDLを停止"
+
+#. type: comment
+#: ../_includes/examples/tag.c:366
+#, no-wrap
+msgid "stop Ruby"
+msgstr "Rubyを停止"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:22
+#, no-wrap
+msgid "it's nice to have these as globals for easy access in methods"
+msgstr "メソッドで簡単にアクセスできるので、これらを大域的にしているのはいいことです"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:26
+#, no-wrap
+msgid "function to free data wrapped in GMP::Integer"
+msgstr "GMP::Integerに梱包されたデータを解放する関数"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:29
+#, no-wrap
+msgid "free memory allocated by GMP"
+msgstr "GMPにより割り当てられたメモリを解放"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:39
+#, no-wrap
+msgid "probably should set .dsize but I don't know how to write it for mpz_t..."
+msgstr "恐らく.dsizeを設定すべきなのでしょうがどうmpz_tに書き込めばいいか分かりません……"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:44
+#, no-wrap
+msgid "GMP::Integer.allocate"
+msgstr "GMP::Integer.allocate"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:48
+#, no-wrap
+msgid "GMP initialization"
+msgstr "GMPの初期化"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:66 ../_includes/examples/ext/gmp.c:137
+#, no-wrap
+msgid "check for optional base argument"
+msgstr "基数のオプション引数を確認"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:71
+#, no-wrap
+msgid "base only makes sense with a string"
+msgstr "基数は文字列のみが認識されます"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:77 ../_includes/examples/ext/gmp.c:145
+#, no-wrap
+msgid "GMP only accepts certain bases"
+msgstr "GMPは特定の基数のみを受け付けます"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:89
+#, no-wrap
+msgid "easy case"
+msgstr "簡単な場合"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:93
+#, no-wrap
+msgid "this is the easiest way to safely convert"
+msgstr "これが安全に変換する上で一番簡単な方法です"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:101
+#, no-wrap
+msgid "copy another GMP::Integer"
+msgstr "別のGMP::Integerを複製"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:110
+#, no-wrap
+msgid "break intentionally omitted"
+msgstr "breakは意図的に省かれています"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:116
+#, no-wrap
+msgid "assign"
+msgstr "代入"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:152
+#, no-wrap
+msgid "get C string from GMP"
+msgstr "GMPからCの文字列を得る"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:156
+#, no-wrap
+msgid "create Ruby String"
+msgstr "Rubyの文字列を作成"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:159
+#, no-wrap
+msgid "free memory"
+msgstr "メモリを解放"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:165
+#, no-wrap
+msgid "GMP::Integer#to_i"
+msgstr "GMP::Integer#to_i"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:168
+#, no-wrap
+msgid "safest and easiest way to convert is to call to_s.to_i"
+msgstr "最も安全かつ簡単に変換する方法はto_s.to_iを呼び出すことです"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:172
+#, no-wrap
+msgid "GMP::Integer#<=>"
+msgstr "GMP::Integer#<=>"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:180
+#, no-wrap
+msgid "shortcut for identical objects"
+msgstr "同値なオブジェクトのための早道"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:187
+#, no-wrap
+msgid "GMP::Integer#=="
+msgstr "GMP::Integer#=="
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:190
+#, no-wrap
+msgid "for GMP::Integers, use <=>"
+msgstr "GMP::Integerについては<=>を使用"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:197
+#, no-wrap
+msgid "GMP::Integer#+"
+msgstr "GMP::Integer#+"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:216
+#, no-wrap
+msgid "multiplication and subtraction would be defined nearly identically"
+msgstr "乗算と減算はほぼ同様に定義されるでしょう"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:218
+#, no-wrap
+msgid "GMP::Integer#-@"
+msgstr "GMP::Integer#-@"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:223
+#, no-wrap
+msgid "bypassing `new` as in the + method"
+msgstr "+メソッド中なので`new`を迂回"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:232
+#, no-wrap
+msgid "entry point"
+msgstr "入口"
+
+#. type: comment
+#: ../_includes/examples/ext/gmp.c:237
+#, no-wrap
+msgid "define GMP::Integer"
+msgstr "GMP::Integerを定義"
+
+#. type: comment
+#: ../_includes/extend/ext/foobar.c:6
+#, no-wrap
+msgid "code run by `require`"
+msgstr "`require`により走るコード"
+
+#. type: comment
+#: ../_includes/c/constant.h:3
+#, no-wrap
+msgid "shortcut for defining under rb_cObject"
+msgstr "rb_cObjectの元に定義される早道"
+
+#. type: comment
+#: ../_includes/c/rescue2.h:3 ../_includes/c/eval.h:7
+#: ../_includes/c/protect.h:12 ../_includes/c/ensure.h:15
+#, no-wrap
+msgid "handle exception"
+msgstr "例外に対処"
+
+#. type: comment
+#: ../_includes/c/rescue2.h:9 ../_includes/c/rescue2.h:16
+#: ../_includes/c/mark.h:1 ../_includes/c/mark.h:14 ../_includes/c/mark.h:17
+#: ../_includes/c/mark.h:19 ../_includes/c/mark.h:30 ../_includes/c/thread.h:3
+#: ../_includes/c/thread.h:8 ../_includes/c/thread.h:14
+#: ../_includes/c/wrap.h:46 ../_includes/c/wrap.h:53
+#: ../_includes/c/methodex.h:23 ../_includes/c/methodc.h:4
+#: ../_includes/c/methodc.h:10 ../_includes/c/methodc.h:16
+#: ../_includes/c/global2.h:15 ../_includes/c/global2.h:31
+#: ../_includes/c/with_gvl.h:1 ../_includes/c/with_gvl.h:10
+#: ../_includes/c/with_gvl.h:14 ../_includes/c/with_gvl.h:17
+#: ../_includes/c/protect.h:3 ../_includes/c/protect.h:19
+#: ../_includes/c/gvl.h:3 ../_includes/c/gvl.h:12 ../_includes/c/gvl.h:16
+#: ../_includes/c/type.h:14 ../_includes/c/ensure.h:21
+#: ../_includes/c/ensure.h:25 ../_includes/c/block.h:10
+#: ../_includes/c/block.h:17
+#, no-wrap
+msgid "..."
+msgstr "..."
+
+#. type: comment
+#: ../_includes/c/rescue2.h:13
+#, no-wrap
+msgid "rescue TypeError and RangeError"
+msgstr "TypeErrorとRangeErrorをレスキューする"
+
+#. type: comment
+#: ../_includes/c/checkblock.h:1
+#, no-wrap
+msgid "raise a LocalJumpError if we don't have a block"
+msgstr "ブロックがなければLocalJumpErrorを投げる"
+
+#. type: comment
+#: ../_includes/c/checkblock.h:4
+#, no-wrap
+msgid "or the softer approach"
+msgstr "あるいはより柔軟な手法"
+
+#. type: comment
+#: ../_includes/c/checkblock.h:7
+#, no-wrap
+msgid "code to run when we have a block"
+msgstr "ブロックがあるときに走るコード"
+
+#. type: comment
+#: ../_includes/c/danger.h:3
+#, no-wrap
+msgid "code that could raise an exception"
+msgstr "例外を投げる可能性があるコード"
+
+#. type: comment
+#: ../_includes/c/yield.h:3
+#, no-wrap
+msgid "yield a value. To yield nothing, use Qundef"
+msgstr "値をyieldします。何もyieldしないならQundefを使います"
+
+#. type: comment
+#: ../_includes/c/yield.h:5
+#, no-wrap
+msgid "yield several values"
+msgstr "複数の値をyield"
+
+#. type: comment
+#: ../_includes/c/yield.h:7
+#, no-wrap
+msgid "splat a Ruby array and yield it"
+msgstr "Rubyの配列をスプラットしてyield"
+
+#. type: comment
+#: ../_includes/c/mark.h:26 ../_includes/c/wrap.h:29
+#, no-wrap
+msgid "wrap"
+msgstr "梱包"
+
+#. type: comment
+#: ../_includes/c/proc.h:3
+#, no-wrap
+msgid "assuming proc is assigned a Proc from somewhere"
+msgstr "procはどこかでProcが代入された前提です"
+
+#. type: comment
+#: ../_includes/c/require.h:3
+#, no-wrap
+msgid "or, using a Ruby String (first argument is ignored)"
+msgstr "もしくはRubyの文字列を使用（最初の引数は無視されます）"
+
+#. type: comment
+#: ../_includes/c/gvl2.h:5
+#, no-wrap
+msgid "slow code that DOES NOT USE THE API"
+msgstr "APIを全く使わない低速なコード"
+
+#. type: comment
+#: ../_includes/c/gvl2.h:10
+#, no-wrap
+msgid "arg parsing, API stuff, etc."
+msgstr "引数の譲渡、API関連など"
+
+#. type: comment
+#: ../_includes/c/gvl2.h:14
+#, no-wrap
+msgid "more API stuff. probably turn the result of slow_func into a VALUE"
+msgstr "さらにAPI関連のもの。slow_funcの結果をVALUEに変えることが多い"
+
+#. type: comment
+#: ../_includes/c/wrap.h:26
+#, no-wrap
+msgid "allocate"
+msgstr "割り当て"
+
+#. type: comment
+#: ../_includes/c/wrap.h:36
+#, no-wrap
+msgid "unwrap"
+msgstr "開封"
+
+#. type: comment
+#: ../_includes/c/printf.h:7
+#, no-wrap
+msgid "pi = 3.141593. Hello, world! inspected: \"Hello, world!\""
+msgstr "pi = 3.141593. Hello, world! inspected: \"Hello, world!\""
+
+#. type: comment
+#: ../_includes/c/const_get.h:3
+#, no-wrap
+msgid "if not defined, call const_missing hook"
+msgstr "定義されていなければconst_missingフックを呼ぶ"
+
+#. type: comment
+#: ../_includes/c/const_get.h:6
+#, no-wrap
+msgid "if not defined, look for it up the inheritance chain, call const_missing if still not found"
+msgstr "定義されていなければ継承の連鎖を遡る。それでも見付からなければconst_missingを呼ぶ"
+
+#. type: comment
+#: ../_includes/c/const_get.h:9
+#, no-wrap
+msgid "same as previous, but print a warning if the constant ends up coming from Object (i.e. toplevel)"
+msgstr "前と同じですが、定数がObject由来（トップレベル）に落ち着いたときに警告を印字"
+
+#. type: comment
+#: ../_includes/c/methodex.h:17
+#, no-wrap
+msgid "you must manually set the default values for optional arguments"
+msgstr "オプション引数に手動で既定値を設定しなければいけません"
+
+#. type: comment
+#: ../_includes/c/methodex.h:20
+#, no-wrap
+msgid "opts will be nil (rather than {}) if no keyword arguments were passed"
+msgstr "キーワード引数が全く渡されなければoptsは（{}ではなく）nilになります"
+
+#. type: comment
+#: ../_includes/c/methodc.h:1
+#, no-wrap
+msgid "normal mandatory args (can have up to 16 args not counting self)"
+msgstr "通常は必須の引数（selfを除いて16以内）"
+
+#. type: comment
+#: ../_includes/c/methodc.h:7
+#, no-wrap
+msgid "or, slurp all args into a Ruby Array"
+msgstr "あるいは全ての引数をRubyのArrayに丸呑みする"
+
+#. type: comment
+#: ../_includes/c/methodc.h:13
+#, no-wrap
+msgid "or, pass all args as a C array"
+msgstr "あるいは全ての引数をCの配列として渡す"
+
+#. type: comment
+#: ../_includes/c/module.h:4
+#, no-wrap
+msgid "toplevel module Foo"
+msgstr "最上位のモジュールFoo"
+
+#. type: comment
+#: ../_includes/c/module.h:6
+#, no-wrap
+msgid "nested module Foo::Bar"
+msgstr "入れ子のモジュールFoo::Bar"
+
+#. type: comment
+#: ../_includes/c/load.h:5
+#, no-wrap
+msgid "or, handle exceptions like rb_eval_string_protect() does"
+msgstr "あるいはrb_eval_string_protect()のように例外を制御"
+
+#. type: comment
+#: ../_includes/c/load.h:11
+#, no-wrap
+msgid "got exception"
+msgstr "例外があった"
+
+#. type: comment
+#: ../_includes/c/global2.h:5
+#, no-wrap
+msgid "return some VALUE, probably based on global"
+msgstr "何らかのVALUEを返す。多くの場合大域変数に基づく"
+
+#. type: comment
+#: ../_includes/c/global2.h:10
+#, no-wrap
+msgid "set global, probably based on val"
+msgstr "大域変数を設定する。多くの場合valに基づく"
+
+#. type: comment
+#: ../_includes/c/global2.h:17
+#, no-wrap
+msgid "initialize global first!"
+msgstr "まず大域変数を初期化すること"
+
+#. type: comment
+#: ../_includes/c/global2.h:19
+#, no-wrap
+msgid "$w can be changed freely in Ruby"
+msgstr "$wはRubyで自由に変えられます"
+
+#. type: comment
+#: ../_includes/c/global2.h:22
+#, no-wrap
+msgid "assigning a new value to $x in Ruby will raise a NameError"
+msgstr "Rubyで新しい値を$xに代入するとNameErrorが投げられます"
+
+#. type: comment
+#: ../_includes/c/global2.h:25
+#, no-wrap
+msgid "$y can be changed freely in Ruby, but through the specified functions"
+msgstr "特定の関数を通じてですが、$yはRubyで自由に変えられます"
+
+#. type: comment
+#: ../_includes/c/global2.h:28
+#, no-wrap
+msgid "same as previous, but there's no corresponding VALUE!"
+msgstr "前と同じですが対応するVALUEがありませんよ"
+
+#. type: comment
+#: ../_includes/c/check_p.h:1
+#, no-wrap
+msgid "like RB_TYPE_P(obj, T_FIXNUM)"
+msgstr "RB_TYPE_P(obj, T_FIXNUM)と同様"
+
+#. type: comment
+#: ../_includes/c/check_p.h:2
+#, no-wrap
+msgid "like RB_TYPE_P(obj, T_FLOAT)"
+msgstr "RB_TYPE_P(obj, T_FLOAT)と同様"
+
+#. type: comment
+#: ../_includes/c/check_p.h:3
+#, no-wrap
+msgid "like RB_TYPE_P(obj, T_SYMBOL)"
+msgstr "RB_TYPE_P(obj, T_SYMBOL)と同様"
+
+#. type: comment
+#: ../_includes/c/check_p.h:4
+#, no-wrap
+msgid "like RB_TYPE_P(obj, T_NIL)"
+msgstr "RB_TYPE_P(obj, T_NIL)と同様"
+
+#. type: comment
+#: ../_includes/c/check_p.h:5
+#, no-wrap
+msgid "return true if obj is \"truthy\" i.e. not nil or false"
+msgstr "objが「真値」のときtrueを返す。つまりnilでもfalseでもありません"
+
+#. type: comment
+#: ../_includes/c/class.h:4
+#, no-wrap
+msgid "toplevel class Foo < Object"
+msgstr "最上位のクラスFoo < Object"
+
+#. type: comment
+#: ../_includes/c/class.h:6
+#, no-wrap
+msgid "nested class Foo::Bar < Array"
+msgstr "入れ子のクラスFoo::Bar < Array"
+
+#. type: comment
+#: ../_includes/c/with_gvl.h:5
+#, no-wrap
+msgid "call API functions"
+msgstr "API関数を呼び出す"
+
+#. type: comment
+#: ../_includes/c/checktype.h:1
+#, no-wrap
+msgid "return true if obj is a String"
+msgstr "objが文字列ならtrueを返す"
+
+#. type: comment
+#: ../_includes/c/checktype.h:2
+#, no-wrap
+msgid "or, raise a TypeError unless obj is a String"
+msgstr "あるいはobjが文字列でなければTypeErrorを投げる"
+
+#. type: comment
+#: ../_includes/c/protect.h:16
+#, no-wrap
+msgid "no exception occured"
+msgstr "例外の発生無し"
+
+#. type: comment
+#: ../_includes/c/etc.h:1
+#, no-wrap
+msgid "klass.include module"
+msgstr "klass.include module"
+
+#. type: comment
+#: ../_includes/c/etc.h:4
+#, no-wrap
+msgid "klass.prepend module"
+msgstr "klass.prepend module"
+
+#. type: comment
+#: ../_includes/c/etc.h:7
+#, no-wrap
+msgid "obj.extend module"
+msgstr "obj.extend module"
+
+#. type: comment
+#: ../_includes/c/etc.h:10
+#, no-wrap
+msgid "klass.class_eval { undef :method }"
+msgstr "klass.class_eval { undef :method }"
+
+#. type: comment
+#: ../_includes/c/etc.h:13
+#, no-wrap
+msgid "klass.class_eval { alias :meth2 :meth1 }"
+msgstr "klass.class_eval { alias :meth2 :meth1 }"
+
+#. type: comment
+#: ../_includes/c/etc.h:16
+#, no-wrap
+msgid "klass.attr_reader :x"
+msgstr "klass.attr_reader :x"
+
+#. type: comment
+#: ../_includes/c/etc.h:18
+#, no-wrap
+msgid "klass.attr_writer :x"
+msgstr "klass.attr_writer :x"
+
+#. type: comment
+#: ../_includes/c/etc.h:20
+#, no-wrap
+msgid "klass.attr_accessor :x"
+msgstr "klass.attr_accessor :x"
+
+#. type: comment
+#: ../_includes/c/etc.h:23
+#, no-wrap
+msgid "obj.singleton_class # handy in combination with the other functions"
+msgstr "obj.singleton_class # 他の関数と組み合わせると便利"
+
+#. type: comment
+#: ../_includes/c/makestruct.h:13
+#, no-wrap
+msgid "allocate and wrap. note that it needs the type to allocate"
+msgstr "割り当てて梱包します。なお型が割り当てられている必要があります"
+
+#. type: comment
+#: ../_includes/c/methodr.h:1
+#, no-wrap
+msgid "the usual"
+msgstr "通常"
+
+#. type: comment
+#: ../_includes/c/methodr.h:3
+#, no-wrap
+msgid "or, like a toplevel def (by defining a method in Kernel)"
+msgstr "または（Kernelでメソッドを定義することによる）最上位のdefと同様"
+
+#. type: comment
+#: ../_includes/c/methodr.h:6
+#, no-wrap
+msgid "or, with access control"
+msgstr "もしくはアクセス制御付き"
+
+#. type: comment
+#: ../_includes/c/methodr.h:10
+#, no-wrap
+msgid "or, in the singleton class"
+msgstr "もしくはシングルトンクラス中で"
+
+#. type: comment
+#: ../_includes/c/gvl.h:7
+#, no-wrap
+msgid "somehow tell slow_func to return early"
+msgstr "どうにかしてslow_funcに早めに返るよう伝える"
+
+#. type: comment
+#: ../_includes/c/type.h:6
+#, no-wrap
+msgid "handle NilClass"
+msgstr "NilClassを扱う"
+
+#. type: comment
+#: ../_includes/c/type.h:9
+#, no-wrap
+msgid "handle Fixnum"
+msgstr "Fixnumを扱う"
+
+#. type: comment
+#: ../_includes/c/type.h:12
+#, no-wrap
+msgid "handle String"
+msgstr "文字列を扱う"
+
+#. type: comment
+#: ../_includes/c/ensure.h:3
+#, no-wrap
+msgid "stuff to always run after dangerous_func"
+msgstr "dangerous_funcの後に常に走るもの"
+
+#. type: comment
+#: ../_includes/c/ensure.h:7
+#, no-wrap
+msgid "wrap rb_ensure so we can rescue an exception"
+msgstr "例外をレスキューできるようrb_ensureで梱包"
+
+#. type: comment
+#: ../_includes/c/handle.h:1
+#, no-wrap
+msgid "get last exception"
+msgstr "直近の例外を得る"
+
+#. type: comment
+#: ../_includes/c/handle.h:2
+#, no-wrap
+msgid "clear last exception"
+msgstr "直近の例外を消去"
+
+#. type: comment
+#: ../_includes/c/block.h:3
+#, no-wrap
+msgid "block_arg will be the first yielded value"
+msgstr "block_argは最初のyieldされる値です"
+
+#. type: comment
+#: ../_includes/c/block.h:4
+#, no-wrap
+msgid "data will be the last argument you passed to rb_block_call"
+msgstr "dataはrb_block_callに渡される最後の引数です"
+
+#. type: comment
+#: ../_includes/c/block.h:5
+#, no-wrap
+msgid "if multiple values are yielded, use argc/argv to access them"
+msgstr "複数の値がyieldされる場合、アクセスするにはargc/argvを使います"
