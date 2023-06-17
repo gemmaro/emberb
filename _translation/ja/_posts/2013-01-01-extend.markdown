@@ -117,8 +117,9 @@ API](../c)を学ばれるのではないでしょうか。
 
 ## Gem ##
 
-いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたいはずです。rubygems.orgにはgemをつくる上での[詳細なガイド][rbg]がありますが、C拡張に関して言えば
-`extconf.rb` についてspecに記すだけでよいです[^rbg]。
+いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたいはずです。
+rubygems.orgにはgemをつくる上での[詳細な手引き][rbg]がありますが、C拡張に関して言えば `extconf.rb`
+についてspecに記すだけでよいです[^rbg]。
 
 {% highlight ruby %}
 {% include extend/foobar.gemspec %}

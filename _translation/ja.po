@@ -38,7 +38,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2023-06-17 02:20+0900\n"
-"PO-Revision-Date: 2023-06-17 12:25+0900\n"
+"PO-Revision-Date: 2023-06-17 12:43+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -72,9 +72,7 @@ msgstr "始める前に"
 msgid ""
 "For the greatest chance of success with this guide, I recommend being fairly "
 "comfortable with C and _very_ comfortable with Ruby."
-msgstr ""
-"このガイドを完全に理解するためには、C言語はそこそこ、Rubyは _かなり_ 慣れ親し"
-"んでいるとよいでしょう。"
+msgstr "この手引きを完全に理解するためには、C言語はそこそこ、Rubyは _かなり_ 慣れ親しんでいるとよいでしょう。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:16
@@ -737,14 +735,10 @@ msgid ""
 "performance benefit by storing the `ID` and using the `ID` versions of the "
 "functions (though you'll have to look these up yourself in the Ruby headers)."
 msgstr ""
-"多くのAPI関数が `ID` を必要としていますが、適切な `ID` が手元にないことも沢山"
-"あるでしょう。そのため、代わりに `char*` を引数に取って自動で `rb_intern()` "
-"してくれる関数も沢山あります。これらの関数はより読みやすく、 `rb_intern()` の"
-"呼び出しでのオーバーヘッドは無視できる程度なので、このガイドでは可能な限り "
-"`char*` バージョンのAPI関数が使われる傾向にあります。特定のCの文字列をAPIの呼"
-"出しで頻繁に使う場合は、`ID` に変換して保管しておき、`ID` バージョンの関数を"
-"使うことでいくらかの効率性の向上を確かめられるかもしれません（Rubyのヘッダか"
-"ら自分で見つける必要がありますが）。"
+"多くのAPI関数が `ID` を必要としていますが、適切な `ID` が手元にないことも沢山あるでしょう。\n"
+"そのため、代わりに `char*` を引数に取って自動で `rb_intern()` してくれる関数も沢山あります。\n"
+"これらの関数はより読みやすく、 `rb_intern()` の呼び出しでのオーバーヘッドは無視できる程度なので、本手引きでは可能な限り `char*` バージョンのAPI関数が使われる傾向にあります。\n"
+"特定のCの文字列をAPIの呼出しで頻繁に使う場合は、`ID` に変換して保管しておき、`ID` バージョンの関数を使うことでいくらかの効率性の向上を確かめられるかもしれません（Rubyのヘッダから自分で見つける必要がありますが）。"
 
 #. type: Title ##
 #: ../_posts/2010-01-01-c.markdown:247
@@ -2456,8 +2450,8 @@ msgid ""
 "include to get additional API functionality. Maybe one day I'll write "
 "another section to this guide going over them:"
 msgstr ""
-"`ruby.h`では取り込まれ _ない_ ヘッダもあり、含めることで追加のAPI機能が得られ"
-"るものがあります。いつの日かこのガイドで節を改めることがあるかもしれません。"
+"`ruby.h`では取り込まれ _ない_ ヘッダもあり、含めることで追加のAPI機能が得られるものがあります。\n"
+"いつの日か本手引きで節を改めることがあるかもしれません。"
 
 #. type: Bullet: '* '
 #: ../_posts/2010-01-01-c.markdown:923
@@ -2565,10 +2559,9 @@ msgid ""
 "[source][gh] for this site on Github and you can report issues, submit pull "
 "requests, and download all of the code examples."
 msgstr ""
-"これでこのガイドを読み終わりましたが、何か著しく書き漏らしたものがあるでしょ"
-"うか。粗忽な誤りがなかったでしょうか。このサイトの[ソース][gh]をGithubで確認"
-"してイシューを報告したりプルリクエストを送ってください。またGithubから全ての"
-"コード例をダウンロードできます。"
+"これで本手引きを読み終わりましたが、何か著しく書き漏らしたものがあるでしょうか。\n"
+"粗忽な誤りがなかったでしょうか。このサイトの[ソース][gh]をGithubで確認してイシューを報告したりプルリクエストを送ってください。\n"
+"またGithubから全てのコード例をダウンロードできます。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:951
@@ -2684,7 +2677,7 @@ msgid ""
 "            Ruby 1.9.2. If you're using an older version of Ruby you can check\n"
 "            out an older version of this guide on Github to see how it used to\n"
 "            be done.\n"
-msgstr "[^oldwrap]: `TypedData*`マクロはRuby 1.9.2以降データを包む好ましいやり方です。古いバージョンのRubyを使っているならGithubでこのガイドの古いバージョンを確認すればかつてどのように使われていたのかがわかります。\n"
+msgstr "[^oldwrap]: `TypedData*`マクロはRuby 1.9.2以降データを包む好ましいやり方です。古いバージョンのRubyを使っているならGithubで本手引きの古いバージョンを確認すればかつてどのように使われていたのかがわかります。\n"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:1002
@@ -3379,9 +3372,8 @@ msgid ""
 "[rbg] on creating gems, but as far as C extensions go you just need to tell "
 "the spec about `extconf.rb`[^rbg]:"
 msgstr ""
-"いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたい"
-"はずです。rubygems.orgにはgemをつくる上での[詳細なガイド][rbg]がありますが、C"
-"拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
+"いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたいはずです。\n"
+"rubygems.orgにはgemをつくる上での[詳細な手引き][rbg]がありますが、C拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
 
 #. type: Plain text
 #: ../_posts/2013-01-01-extend.markdown:122
