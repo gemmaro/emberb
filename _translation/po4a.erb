@@ -1,12 +1,11 @@
-[options]                                \
---master-charset UTF-8                 \
---localized-charset UTF-8              \
---addendum-charset UTF-8               \
---master-language en                   \
---package-name emberb                  \
---option markdown                      \
---copyright-holder 'Maxwell Anselm'    \
---keep 0
+[options] --master-charset UTF-8                 \
+          --localized-charset UTF-8              \
+          --addendum-charset UTF-8               \
+          --master-language en                   \
+          --package-name emberb                  \
+          --option markdown                      \
+          --copyright-holder 'Maxwell Anselm'    \
+          --keep 0
 
 [po_directory] .
 
@@ -35,4 +34,13 @@ ja:ja/index.markdown
 
 <% c_sources.each do |c_source| %>
 [type:Clang] <%= c_source.master %> ja:<%= c_source.local %>
+<% end %>
+
+<% ruby_sources.each do |ruby_source| %>
+[type:Ruby] <%= ruby_source.master %> ja:<%= ruby_source.local %>
+<% end %>
+
+<% make_sources.each do |make_source| %>
+# 一時的な措置
+[type:Ruby] <%= make_source.master %> ja:<%= make_source.local %>
 <% end %>

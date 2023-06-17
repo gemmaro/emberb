@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: emberb VERSION\n"
-"POT-Creation-Date: 2023-06-17 02:20+0900\n"
+"POT-Creation-Date: 2023-06-17 18:46+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3163,6 +3163,12 @@ msgstr ""
 msgid "for the player and their opponent"
 msgstr ""
 
+#. type: double-slash-comment
+#: ../_includes/examples/tag.c:28
+#, no-wrap
+msgid "top speed in pixels/millisecond"
+msgstr ""
+
 #. type: comment
 #: ../_includes/examples/tag.c:32
 #, no-wrap
@@ -3311,6 +3317,18 @@ msgstr ""
 msgid "Actor will wrap struct actor for passing to Ruby"
 msgstr ""
 
+#. type: multiline-comment
+#: ../_includes/examples/tag.c:213
+#, no-wrap
+msgid ""
+"\n"
+" Notice that even though Actor wraps C data, we didn't define an\n"
+" allocation or free function. That's because we're going to create all\n"
+" the actors in C and expose them to Ruby. However we should make sure\n"
+" that Ruby can't create new Actors, because they'll contain invalid data\n"
+" pointers\n"
+msgstr ""
+
 #. type: comment
 #: ../_includes/examples/tag.c:222
 #, no-wrap
@@ -3443,6 +3461,25 @@ msgstr ""
 msgid "stop Ruby"
 msgstr ""
 
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:5
+#, no-wrap
+msgid ""
+"\n"
+" we're going to be unwrapping VALUEs to get the C data A LOT.\n"
+" It's not that hard, but it gets tedious. This lets us go\n"
+" straight from a VALUE to the underlying data\n"
+msgstr ""
+
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:14
+#, no-wrap
+msgid ""
+"\n"
+" we're also going to be pretty strict about accepting only\n"
+" objects of our GMP::Integer type, so this will be a frequent test\n"
+msgstr ""
+
 #. type: comment
 #: ../_includes/examples/ext/gmp.c:22
 #, no-wrap
@@ -3477,6 +3514,20 @@ msgstr ""
 #: ../_includes/examples/ext/gmp.c:48
 #, no-wrap
 msgid "GMP initialization"
+msgstr ""
+
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:54
+#, no-wrap
+msgid ""
+" GMP::Integer#initialize\n"
+"\n"
+" Sets internal mpz_t using first argument\n"
+"\n"
+" If the first argument is a String, you can supply a second Fixnum "
+"argument\n"
+" as the base for interpreting the String. The default base of 0 means that\n"
+" the base will be determined by the String's prefix.\n"
 msgstr ""
 
 #. type: comment
@@ -3525,6 +3576,16 @@ msgstr ""
 #: ../_includes/examples/ext/gmp.c:116
 #, no-wrap
 msgid "assign"
+msgstr ""
+
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:129
+#, no-wrap
+msgid ""
+" GMP::Integer#to_s\n"
+"\n"
+" Accepts an optional Fixnum argument for the base of the String (default "
+"10)\n"
 msgstr ""
 
 #. type: comment
@@ -3585,6 +3646,15 @@ msgstr ""
 #: ../_includes/examples/ext/gmp.c:197
 #, no-wrap
 msgid "GMP::Integer#+"
+msgstr ""
+
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:205
+#, no-wrap
+msgid ""
+"\n"
+" we need a new GMP::Integer to store the result, but there's no need\n"
+" to actually use the `new` method\n"
 msgstr ""
 
 #. type: comment
@@ -3778,6 +3848,17 @@ msgstr ""
 msgid ""
 "same as previous, but print a warning if the constant ends up coming from "
 "Object (i.e. toplevel)"
+msgstr ""
+
+#. type: multiline-comment
+#: ../_includes/c/methodex.h:3
+#, no-wrap
+msgid ""
+"\n"
+" We want to define a method like\n"
+"\n"
+"     def my_method man1, opt1 = true, opt2 = false, *splat, man2, **opts, "
+"&blk\n"
 msgstr ""
 
 #. type: comment
@@ -4090,4 +4171,94 @@ msgstr ""
 #: ../_includes/c/block.h:5
 #, no-wrap
 msgid "if multiple values are yielded, use argc/argv to access them"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:27
+#, no-wrap
+msgid "only accept base with strings"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:29
+#, no-wrap
+msgid "only accept fixnum bases"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:31 ../_includes/examples/ext/test.rb:46
+#, no-wrap
+msgid "wrong base range"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:33
+#, no-wrap
+msgid "invalid base for string"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:35 ../_includes/examples/ext/test.rb:48
+#, no-wrap
+msgid "good"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:44
+#, no-wrap
+msgid "base must be Fixnum"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ai.rb:2
+#, no-wrap
+msgid "get my position"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ai.rb:5
+#, no-wrap
+msgid "get direction that player moved"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ai.rb:8
+#, no-wrap
+msgid "... movement logic ..."
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/ai.rb:12
+#, no-wrap
+msgid "move in this direction"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/gmp_ex.rb:4
+#, no-wrap
+msgid "1283471748369"
+msgstr ""
+
+#. type: comment
+#: ../_includes/extend/ext/extconf.rb:4
+#, no-wrap
+msgid "preparation for compilation goes here"
+msgstr ""
+
+#. type: comment
+#: ../_includes/c/new.rb:9
+#, no-wrap
+msgid "create and return an empty instance"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/Makefile:1
+#, no-wrap
+msgid "this is just a hack to get the Ruby version in this guide"
+msgstr ""
+
+#. type: comment
+#: ../_includes/examples/Makefile:2
+#, no-wrap
+msgid "you can just hard-code it e.g. RUBY=2.4"
 msgstr ""

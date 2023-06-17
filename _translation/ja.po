@@ -3,42 +3,17 @@
 # Copyright (C) 2022, 2023 gemmaro.
 # This file is distributed under the same license as the emberb.
 #
-# TODO: translate bellow:
-#
-# 	/*
-# 	 * We want to define a method like
-# 	 *
-# 	 *     def my_method man1, opt1 = true, opt2 = false, *splat, man2, **opts, &blk
-# 	*/
-#
-# 	/*
-# 	 * Notice that even though Actor wraps C data, we didn't define an
-# 	 * allocation or free function. That's because we're going to create all
-# 	 * the actors in C and expose them to Ruby. However we should make sure
-# 	 * that Ruby can't create new Actors, because they'll contain invalid data
-# 	 * pointers
-# 	 */
-#
-# TODO: translate comments in Ruby code:
-#
-#       # create and return an empty instance
-#
-#       # preparation for compilation goes here
-#
-#       # usual gem spec stuff...
-#
-#       ...
-#
-# TODO: translate bellow:
-#
-#       // top speed in pixels/millisecond
-#
 # TODO: rescueとレスキューのどちらかに揃える
+#
+# TODO: translate bellow in Makefile
+#
+#   # this is just a hack to get the Ruby version in this guide
+#   # you can just hard-code it e.g. RUBY=2.4
 msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
-"POT-Creation-Date: 2023-06-17 02:20+0900\n"
-"PO-Revision-Date: 2023-06-17 12:43+0900\n"
+"POT-Creation-Date: 2023-06-17 18:46+0900\n"
+"PO-Revision-Date: 2023-06-17 18:48+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -72,7 +47,9 @@ msgstr "始める前に"
 msgid ""
 "For the greatest chance of success with this guide, I recommend being fairly "
 "comfortable with C and _very_ comfortable with Ruby."
-msgstr "この手引きを完全に理解するためには、C言語はそこそこ、Rubyは _かなり_ 慣れ親しんでいるとよいでしょう。"
+msgstr ""
+"この手引きを完全に理解するためには、C言語はそこそこ、Rubyは _かなり_ 慣れ親し"
+"んでいるとよいでしょう。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:16
@@ -735,10 +712,16 @@ msgid ""
 "performance benefit by storing the `ID` and using the `ID` versions of the "
 "functions (though you'll have to look these up yourself in the Ruby headers)."
 msgstr ""
-"多くのAPI関数が `ID` を必要としていますが、適切な `ID` が手元にないことも沢山あるでしょう。\n"
-"そのため、代わりに `char*` を引数に取って自動で `rb_intern()` してくれる関数も沢山あります。\n"
-"これらの関数はより読みやすく、 `rb_intern()` の呼び出しでのオーバーヘッドは無視できる程度なので、本手引きでは可能な限り `char*` バージョンのAPI関数が使われる傾向にあります。\n"
-"特定のCの文字列をAPIの呼出しで頻繁に使う場合は、`ID` に変換して保管しておき、`ID` バージョンの関数を使うことでいくらかの効率性の向上を確かめられるかもしれません（Rubyのヘッダから自分で見つける必要がありますが）。"
+"多くのAPI関数が `ID` を必要としていますが、適切な `ID` が手元にないことも沢山"
+"あるでしょう。\n"
+"そのため、代わりに `char*` を引数に取って自動で `rb_intern()` してくれる関数"
+"も沢山あります。\n"
+"これらの関数はより読みやすく、 `rb_intern()` の呼び出しでのオーバーヘッドは無"
+"視できる程度なので、本手引きでは可能な限り `char*` バージョンのAPI関数が使わ"
+"れる傾向にあります。\n"
+"特定のCの文字列をAPIの呼出しで頻繁に使う場合は、`ID` に変換して保管しておき、"
+"`ID` バージョンの関数を使うことでいくらかの効率性の向上を確かめられるかもしれ"
+"ません（Rubyのヘッダから自分で見つける必要がありますが）。"
 
 #. type: Title ##
 #: ../_posts/2010-01-01-c.markdown:247
@@ -2450,7 +2433,8 @@ msgid ""
 "include to get additional API functionality. Maybe one day I'll write "
 "another section to this guide going over them:"
 msgstr ""
-"`ruby.h`では取り込まれ _ない_ ヘッダもあり、含めることで追加のAPI機能が得られるものがあります。\n"
+"`ruby.h`では取り込まれ _ない_ ヘッダもあり、含めることで追加のAPI機能が得られ"
+"るものがあります。\n"
 "いつの日か本手引きで節を改めることがあるかもしれません。"
 
 #. type: Bullet: '* '
@@ -2559,8 +2543,10 @@ msgid ""
 "[source][gh] for this site on Github and you can report issues, submit pull "
 "requests, and download all of the code examples."
 msgstr ""
-"これで本手引きを読み終わりましたが、何か著しく書き漏らしたものがあるでしょうか。\n"
-"粗忽な誤りがなかったでしょうか。このサイトの[ソース][gh]をGithubで確認してイシューを報告したりプルリクエストを送ってください。\n"
+"これで本手引きを読み終わりましたが、何か著しく書き漏らしたものがあるでしょう"
+"か。\n"
+"粗忽な誤りがなかったでしょうか。このサイトの[ソース][gh]をGithubで確認してイ"
+"シューを報告したりプルリクエストを送ってください。\n"
 "またGithubから全てのコード例をダウンロードできます。"
 
 #. type: Plain text
@@ -3372,8 +3358,10 @@ msgid ""
 "[rbg] on creating gems, but as far as C extensions go you just need to tell "
 "the spec about `extconf.rb`[^rbg]:"
 msgstr ""
-"いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたいはずです。\n"
-"rubygems.orgにはgemをつくる上での[詳細な手引き][rbg]がありますが、C拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
+"いい感じに拡張が動くようになったら、簡単に配布できるRubyのgemとしてまとめたい"
+"はずです。\n"
+"rubygems.orgにはgemをつくる上での[詳細な手引き][rbg]がありますが、C拡張に関し"
+"て言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。"
 
 #. type: Plain text
 #: ../_posts/2013-01-01-extend.markdown:122
@@ -3803,6 +3791,12 @@ msgstr "位置と方向用"
 msgid "for the player and their opponent"
 msgstr "プレーヤーと敵用"
 
+#. type: double-slash-comment
+#: ../_includes/examples/tag.c:28
+#, no-wrap
+msgid "top speed in pixels/millisecond"
+msgstr "ピクセル毎ミリ秒での最高速度"
+
 #. type: comment
 #: ../_includes/examples/tag.c:32
 #, no-wrap
@@ -3947,6 +3941,23 @@ msgstr "AIスクリプトで使う小振りの独自APIを定義"
 msgid "Actor will wrap struct actor for passing to Ruby"
 msgstr "ActorはRubyに渡す上で構造体actorを梱包します"
 
+#. type: multiline-comment
+#: ../_includes/examples/tag.c:213
+#, no-wrap
+msgid ""
+"\n"
+" Notice that even though Actor wraps C data, we didn't define an\n"
+" allocation or free function. That's because we're going to create all\n"
+" the actors in C and expose them to Ruby. However we should make sure\n"
+" that Ruby can't create new Actors, because they'll contain invalid data\n"
+" pointers\n"
+msgstr ""
+"\n"
+" ActorがCのデータを梱包していたとしても、割り当てや解放関数を定義しなかった点に注目です。\n"
+" これは全てのアクターをCで作り、Rubyに露出させるつもりだからです。\n"
+" しかしRubyが新しいActorを作れてしまうと不当なデータポインタを含んでしまうので、\n"
+" Rubyがそうできないようにすべきです。\n"
+
 #. type: comment
 #: ../_includes/examples/tag.c:222
 #, no-wrap
@@ -4079,6 +4090,32 @@ msgstr "SDLを停止"
 msgid "stop Ruby"
 msgstr "Rubyを停止"
 
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:5
+#, no-wrap
+msgid ""
+"\n"
+" we're going to be unwrapping VALUEs to get the C data A LOT.\n"
+" It's not that hard, but it gets tedious. This lets us go\n"
+" straight from a VALUE to the underlying data\n"
+msgstr ""
+"\n"
+" Cのデータを得るためにVALUEを開封することがしょっちゅうになるでしょう。\n"
+" そこまで大変ではないですが、面倒になってきます。\n"
+" これがあるとVALUEから奥底にあるデータに直通できるようにするものです。\n"
+
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:14
+#, no-wrap
+msgid ""
+"\n"
+" we're also going to be pretty strict about accepting only\n"
+" objects of our GMP::Integer type, so this will be a frequent test\n"
+msgstr ""
+"\n"
+" またGMP::Integer型のオブジェクトのみ受け付けるように大変厳密にしていきます。\n"
+" なのでこれを頻繁に検査します。\n"
+
 #. type: comment
 #: ../_includes/examples/ext/gmp.c:22
 #, no-wrap
@@ -4114,6 +4151,25 @@ msgstr "GMP::Integer.allocate"
 #, no-wrap
 msgid "GMP initialization"
 msgstr "GMPの初期化"
+
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:54
+#, no-wrap
+msgid ""
+" GMP::Integer#initialize\n"
+"\n"
+" Sets internal mpz_t using first argument\n"
+"\n"
+" If the first argument is a String, you can supply a second Fixnum argument\n"
+" as the base for interpreting the String. The default base of 0 means that\n"
+" the base will be determined by the String's prefix.\n"
+msgstr ""
+" GMP::Integer#initialize\n"
+"\n"
+" 最初の引数を使って内部のmpz_tを設定します\n"
+"\n"
+" 最初の引数が文字列なら2つ目のFixnum引数を文字列を解釈するための基数として与えられます。\n"
+" 既定の0の基数は基数がStringの前置詞から決定することを意味しています。\n"
 
 #. type: comment
 #: ../_includes/examples/ext/gmp.c:66 ../_includes/examples/ext/gmp.c:137
@@ -4162,6 +4218,18 @@ msgstr "breakは意図的に省かれています"
 #, no-wrap
 msgid "assign"
 msgstr "代入"
+
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:129
+#, no-wrap
+msgid ""
+" GMP::Integer#to_s\n"
+"\n"
+" Accepts an optional Fixnum argument for the base of the String (default 10)\n"
+msgstr ""
+" GMP::Integer#to_s\n"
+"\n"
+" Stringの基数（既定は10）のためにオプションのFixnum引数を受け付けます\n"
 
 #. type: comment
 #: ../_includes/examples/ext/gmp.c:152
@@ -4222,6 +4290,18 @@ msgstr "GMP::Integerについては<=>を使用"
 #, no-wrap
 msgid "GMP::Integer#+"
 msgstr "GMP::Integer#+"
+
+#. type: multiline-comment
+#: ../_includes/examples/ext/gmp.c:205
+#, no-wrap
+msgid ""
+"\n"
+" we need a new GMP::Integer to store the result, but there's no need\n"
+" to actually use the `new` method\n"
+msgstr ""
+"\n"
+" 結果を補完するために新しいGMP::Integerが必要ですが、\n"
+" 実際に`new`メソッドを使う必要は全くありません。\n"
 
 #. type: comment
 #: ../_includes/examples/ext/gmp.c:216
@@ -4411,6 +4491,20 @@ msgstr "定義されていなければ継承の連鎖を遡る。それでも見
 #, no-wrap
 msgid "same as previous, but print a warning if the constant ends up coming from Object (i.e. toplevel)"
 msgstr "前と同じですが、定数がObject由来（トップレベル）に落ち着いたときに警告を印字"
+
+#. type: multiline-comment
+#: ../_includes/c/methodex.h:3
+#, no-wrap
+msgid ""
+"\n"
+" We want to define a method like\n"
+"\n"
+"     def my_method man1, opt1 = true, opt2 = false, *splat, man2, **opts, &blk\n"
+msgstr ""
+"\n"
+" 次のようなメソッドを定義したいです。\n"
+"\n"
+"     def my_method man1, opt1 = true, opt2 = false, *splat, man2, **opts, &blk\n"
 
 #. type: comment
 #: ../_includes/c/methodex.h:17
@@ -4723,3 +4817,94 @@ msgstr "dataはrb_block_callに渡される最後の引数です"
 #, no-wrap
 msgid "if multiple values are yielded, use argc/argv to access them"
 msgstr "複数の値がyieldされる場合、アクセスするにはargc/argvを使います"
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:27
+#, no-wrap
+msgid "only accept base with strings"
+msgstr "文字列付きの基数のみを受け付けます"
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:29
+#, no-wrap
+msgid "only accept fixnum bases"
+msgstr "fixnumの基数のみ受け付けます"
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:31 ../_includes/examples/ext/test.rb:46
+#, no-wrap
+msgid "wrong base range"
+msgstr "間違った基数の範囲"
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:33
+#, no-wrap
+msgid "invalid base for string"
+msgstr "文字列が不正な基数"
+
+# 「可」ぐらいでいいけれども
+#. type: comment
+#: ../_includes/examples/ext/test.rb:35 ../_includes/examples/ext/test.rb:48
+#, no-wrap
+msgid "good"
+msgstr "ヨシ"
+
+#. type: comment
+#: ../_includes/examples/ext/test.rb:44
+#, no-wrap
+msgid "base must be Fixnum"
+msgstr "基数はFixnumでなければなりません"
+
+#. type: comment
+#: ../_includes/examples/ai.rb:2
+#, no-wrap
+msgid "get my position"
+msgstr "位置を得る"
+
+#. type: comment
+#: ../_includes/examples/ai.rb:5
+#, no-wrap
+msgid "get direction that player moved"
+msgstr "プレーヤーが動いた方向を得る"
+
+#. type: comment
+#: ../_includes/examples/ai.rb:8
+#, no-wrap
+msgid "... movement logic ..."
+msgstr "……動作の仕組み……"
+
+#. type: comment
+#: ../_includes/examples/ai.rb:12
+#, no-wrap
+msgid "move in this direction"
+msgstr "この方向に動く"
+
+#. type: comment
+#: ../_includes/examples/gmp_ex.rb:4
+#, no-wrap
+msgid "1283471748369"
+msgstr "1283471748369"
+
+#. type: comment
+#: ../_includes/extend/ext/extconf.rb:4
+#, no-wrap
+msgid "preparation for compilation goes here"
+msgstr "コンパイルのための準備がここに来ます"
+
+#. type: comment
+#: ../_includes/c/new.rb:9
+#, no-wrap
+msgid "create and return an empty instance"
+msgstr "空のインスタンスを作って返します"
+
+#. type: comment
+#: ../_includes/examples/Makefile:1
+#, no-wrap
+msgid "this is just a hack to get the Ruby version in this guide"
+msgstr "これは本手引きでのRubyのバージョンを得るための単なるハックです"
+
+#. type: comment
+#: ../_includes/examples/Makefile:2
+#, no-wrap
+msgid "you can just hard-code it e.g. RUBY=2.4"
+msgstr "単にハードコードできます 例：RUBY=2.4"

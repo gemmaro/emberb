@@ -3,17 +3,17 @@
 #include <string.h>
 
 /*
- * we're going to be unwrapping VALUEs to get the C data A LOT.
- * It's not that hard, but it gets tedious. This lets us go
- * straight from a VALUE to the underlying data
+   Cのデータを得るためにVALUEを開封することがしょっちゅうになるでしょう。
+   そこまで大変ではないですが、面倒になってきます。
+   これがあるとVALUEから奥底にあるデータに直通できるようにするものです。
  */
 #define UNWRAP(val, data) \
 	mpz_t* data;\
 	TypedData_Get_Struct(val, mpz_t, &mpz_type, data);
 
 /*
- * we're also going to be pretty strict about accepting only
- * objects of our GMP::Integer type, so this will be a frequent test
+   またGMP::Integer型のオブジェクトのみ受け付けるように大変厳密にしていきます。
+   なのでこれを頻繁に検査します。
  */
 #define CHECK_MPZ(val) \
 	if (CLASS_OF(val) != cInteger)\
@@ -52,12 +52,11 @@ VALUE integer_c_alloc(VALUE self)
 }
 
 /* GMP::Integer#initialize
- *
- * Sets internal mpz_t using first argument
- *
- * If the first argument is a String, you can supply a second Fixnum argument
- * as the base for interpreting the String. The default base of 0 means that
- * the base will be determined by the String's prefix.
+  
+   最初の引数を使って内部のmpz_tを設定します
+  
+   最初の引数が文字列なら2つ目のFixnum引数を文字列を解釈するための基数として与えられます。
+   既定の0の基数は基数がStringの前置詞から決定することを意味しています。
  */
 VALUE integer_m_initialize(int argc, VALUE* argv, VALUE self)
 {
@@ -127,8 +126,8 @@ VALUE integer_m_initialize(int argc, VALUE* argv, VALUE self)
 }
 
 /* GMP::Integer#to_s
- *
- * Accepts an optional Fixnum argument for the base of the String (default 10)
+  
+   Stringの基数（既定は10）のためにオプションのFixnum引数を受け付けます
  */
 VALUE integer_m_to_s(int argc, VALUE* argv, VALUE self)
 {
@@ -203,8 +202,8 @@ VALUE integer_m_add(VALUE self, VALUE x)
 	UNWRAP(x, other);
 
 	/*
-	 * we need a new GMP::Integer to store the result, but there's no need
-	 * to actually use the `new` method
+	   結果を補完するために新しいGMP::Integerが必要ですが、
+	   実際に`new`メソッドを使う必要は全くありません。
 	 */
 	VALUE result = integer_c_alloc(cInteger);
 	UNWRAP(result, res);

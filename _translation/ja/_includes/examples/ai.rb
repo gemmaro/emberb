@@ -1,14 +1,14 @@
 def think ai, player
-  # get my position
+  # 位置を得る
   ax, ay = ai.pos
 
-  # get direction that player moved
+  # プレーヤーが動いた方向を得る
   dx, dy = player.dir
 
-  # ... movement logic ...
+  # ……動作の仕組み……
   x = dy
   y = -dx
 
-  # move in this direction
+  # この方向に動く
   ai.move x, y
 end

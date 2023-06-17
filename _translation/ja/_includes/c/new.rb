@@ -6,6 +6,6 @@ class Class
   end
 
   def allocate
-    # create and return an empty instance
+    # 空のインスタンスを作って返します
   end
 end

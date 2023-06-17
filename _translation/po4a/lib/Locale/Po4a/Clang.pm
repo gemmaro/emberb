@@ -39,15 +39,50 @@ sub parse {
         chomp($line);
         print STDERR "begin\n" if $debug;
 
-        if ($line =~ m/(.*?\/\*\s*)(.*?)(\s*\*\/.*)/) {
-            my $pre = $1;
+        if ( $line =~ m/(.*?\/\*\s*)(.*?)(\s*\*\/.*)/ ) {
+            my $pre     = $1;
             my $content = $2;
-            my $post = $3;
+            my $post    = $3;
 
-            my $t = $self->translate($content, $ref, "comment");
-            $self->pushline($pre . $t . $post . "\n");
+            my $t = $self->translate( $content, $ref, "comment" );
+            $self->pushline( $pre . $t . $post . "\n" );
+        } elsif ( $line =~ m/(.*?\/\*)(.*)/ ) {
+            my $pre     = $1;
+            my $content = $2 . "\n";
+
+            my $halfway_ref;
+            ( $line, $halfway_ref ) = $self->shiftline();
+
+          PARA:
+            while () {
+                if ( $line =~ m/(.*?)(\s*\*\/.*)/ ) {
+                    $content .= $1;
+                    my $suffix = $2;
+
+                    my $t = $self->translate( $content, $ref, "multiline-comment" );
+
+                    my $indent = $pre =~ s/\S/ /gr;
+                    $t =~ s/\n/\n${indent}/g;
+                    $t =~ s/\s*$//;
+
+                    $self->pushline( $pre . $t . "\n" . $suffix . "\n" );
+
+                    last PARA;
+                } else {
+                    $line =~ m/(\s*\*?)(.*)/;
+                    $content .= $2 . "\n";
+
+                    ( $line, $halfway_ref ) = $self->shiftline();
+                }
+            }
+        } elsif ( $line =~ m/(.*?\/\/\s*)(.*)/ ) {
+            my $pre     = $1;
+            my $content = $2;
+
+            my $t = $self->translate( $content, $ref, "double-slash-comment" );
+            $self->pushline( $pre . $t . "\n" );
         } else {
-            $self->pushline($line . "\n");
+            $self->pushline( $line . "\n" );
         }
 
         # Reinit the loop
@@ -77,6 +112,8 @@ The module searches for lines of the following format and extracts the
 quoted text:
 
  /* this is a comment */
+
+ // this is also a comment
 
 =head1 SEE ALSO
 

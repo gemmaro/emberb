@@ -25,7 +25,7 @@ struct actor
 {
 	struct vec2 pos;
 	struct vec2 dir;
-	float speed; // top speed in pixels/millisecond
+	float speed; // ピクセル毎ミリ秒での最高速度
 	SDL_Color color;
 };
 
@@ -211,11 +211,10 @@ int main(int argc, char** argv)
 	rb_define_method(cActor, "move", actor_m_move, 2);
 
 	/*
-	 * Notice that even though Actor wraps C data, we didn't define an
-	 * allocation or free function. That's because we're going to create all
-	 * the actors in C and expose them to Ruby. However we should make sure
-	 * that Ruby can't create new Actors, because they'll contain invalid data
-	 * pointers
+	   ActorがCのデータを梱包していたとしても、割り当てや解放関数を定義しなかった点に注目です。
+	   これは全てのアクターをCで作り、Rubyに露出させるつもりだからです。
+	   しかしRubyが新しいActorを作れてしまうと不当なデータポインタを含んでしまうので、
+	   Rubyがそうできないようにすべきです。
 	 */
 	rb_undef_method(rb_singleton_class(cActor), "new");
 

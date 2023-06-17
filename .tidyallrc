@@ -1,0 +1,3 @@
+[PerlTidy]
+select = _translation/po4a/lib/**/*.pm
+argv = -utf8 -log -noll --maximum-line-length=120 --iterations=2 --cuddled-else

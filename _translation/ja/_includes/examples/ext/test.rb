@@ -24,15 +24,15 @@ describe GMP::Integer do
     end
 
     it "must raise if the base is invalid" do
-      # only accept base with strings
+      # 文字列付きの基数のみを受け付けます
       proc { GMP::Integer.new(3, 10) }.must_raise TypeError
-      # only accept fixnum bases
+      # fixnumの基数のみ受け付けます
       proc { GMP::Integer.new('3', 1.5) }.must_raise TypeError
-      # wrong base range
+      # 間違った基数の範囲
       proc { GMP::Integer.new('3', 64) }.must_raise RangeError
-      # invalid base for string
+      # 文字列が不正な基数
       proc { GMP::Integer.new('3', 2) }.must_raise ArgumentError
-      # good
+      # ヨシ
       GMP::Integer.new('3', 9)
     end
   end
@@ -41,11 +41,11 @@ describe GMP::Integer do
     it "must raise if the base is invalid" do
       x = GMP::Integer.new(3)
 
-      # base must be Fixnum
+      # 基数はFixnumでなければなりません
       proc { x.to_s(1.5) }.must_raise TypeError
-      # wrong base range
+      # 間違った基数の範囲
       proc { x.to_s(64) }.must_raise RangeError
-      # good
+      # ヨシ
       x.to_s(2)
     end
   end

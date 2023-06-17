@@ -1,7 +1,7 @@
 require "pathname"
 require "erb"
 targets = []
-sources = Pathname.glob("../_includes/**/*").select { _1.file? }.reject { _1.extname.match?(/\.[ch]/) }
+sources = Pathname.glob("../_includes/**/*").select { _1.file? }.reject { _1.extname.match?(/\.([ch]|rb)|Makefile/) }
 def to_local(master)
   Pathname("ja") / master.relative_path_from("..")
 end
@@ -24,8 +24,10 @@ class Pair
 end
 file "po4a.cfg" => "po4a.erb" do |t|
   c_sources = Pathname.glob("../_includes/**/*.[ch]").map { Pair.new(_1) }
+  ruby_sources = Pathname.glob("../_includes/**/*.rb").map { Pair.new(_1) }
+  make_sources = Pathname.glob("../_includes/**/Makefile").map { Pair.new(_1) }
   template = File.read(t.source)
-  config = ERB.new(template).result_with_hash(c_sources: c_sources)
+  config = ERB.new(template).result_with_hash(c_sources: c_sources, ruby_sources: ruby_sources, make_sources: make_sources)
   File.write(t.name, config)
 end
 task :translate => ["po4a.cfg"] + targets do |t|

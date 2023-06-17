@@ -4,7 +4,9 @@
              (guix packages)
              (guix download)
              (guix build-system ruby)
-             ((guix licenses) #:prefix license:))
+             ((guix licenses) #:prefix license:)
+             (gnu packages perl)
+             (gemmaro packages perl))
 
 (setenv "PERL5LIB" (string-append (getenv "PWD") "/_translation/po4a/lib:" (getenv "PERL5LIB")))
 
@@ -78,4 +80,4 @@ modifications.")
     (home-page "http://github.com/sdwolfz/guard-shell")
     (license license:expat)))
 
-(packages->manifest (list po4a node-lts jekyll ruby-guard ruby-guard-shell ruby-rubocop ruby))
+(packages->manifest (list po4a node-lts jekyll ruby-guard ruby-guard-shell ruby-rubocop ruby tidyall perl-perl-tidy perl))
