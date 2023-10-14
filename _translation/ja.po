@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
-"POT-Creation-Date: 2023-06-17 18:46+0900\n"
-"PO-Revision-Date: 2023-06-23 20:58+0900\n"
+"POT-Creation-Date: 2023-10-14 17:14+0900\n"
+"PO-Revision-Date: 2023-10-14 17:36+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. type: YAML Front Matter: layout
+#. type: Yaml Front Matter Hash Value: layout
 #: ../_posts/2010-01-01-c.markdown:1 ../_posts/2012-01-01-embed.markdown:1
 #: ../_posts/2013-01-01-extend.markdown:1
 #: ../_posts/2014-01-01-examples.markdown:1
@@ -30,7 +30,7 @@ msgstr ""
 msgid "chapter"
 msgstr "chapter"
 
-#. type: YAML Front Matter: title
+#. type: Yaml Front Matter Hash Value: title
 #: ../_posts/2010-01-01-c.markdown:1
 #, no-wrap
 msgid "The Ruby C API"
@@ -197,12 +197,11 @@ msgstr ""
 #: ../_posts/2010-01-01-c.markdown:64
 msgid ""
 "Unlike `eval` in Ruby, these functions evaluate the string in an isolated "
-"binding&mdash;like when you `require` something. So local variables in the "
-"string will not be accessible from elsewhere and vice versa."
+"binding—like when you `require` something. So local variables in the string "
+"will not be accessible from elsewhere and vice versa."
 msgstr ""
-"Rubyでの `eval` とは異なり、これらの関数は独立したbindingの状態で評価します。"
-"ちょうど何かを `require` するときと同じです。したがって文字列中のローカル変数"
-"は他の場所から参照できませんし、逆もまた然りです。"
+"Rubyでの`eval`とは異なり、これらの関数は何かしらを`require`したときに、独立したbindingのようなものの中で文字列を評価します。\n"
+"そのため文字列中の局所変数は他所から参照できませんし、逆もまた然りです。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:69
@@ -975,14 +974,13 @@ msgstr ""
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:348
 msgid ""
-"The first and second arguments are the exception class and message&mdash;"
-"like `raise` in Ruby. The big difference is that the message is a format "
-"string [just like in `rb_sprintf()`](#string), letting you more easily build "
-"a useful message."
+"The first and second arguments are the exception class and message—like "
+"`raise` in Ruby. The big difference is that the message is a format string "
+"[just like in `rb_sprintf()`](#string), letting you more easily build a "
+"useful message."
 msgstr ""
-"1つ目と2つ目の引数は例外クラスと文言で、Rubyの`raise`のような見た目です。大き"
-"な違いは文言が（ちょうど`rb_sprintf()`のような）書式文字列である点で、有用な"
-"文言をより簡単に構築できます。"
+"1つ目と2つ目の引数は例外クラスと文言で、Rubyの`raise`のような感じです。\n"
+"大きな違いは、文言が（[ちょうど`rb_sprintf()`のような](#string)）書式文字列である点で、有用な文言をより簡単に構築できます。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:355
@@ -1321,24 +1319,20 @@ msgstr ""
 "{% include c/global2.h %}\n"
 "{% endhighlight %}"
 
-# ちょっと意味が通りにくい。
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:491
 msgid ""
 "The `VALUE` should be initialized before you create the global in Ruby and "
-"it should be global in C as well&mdash;you don't want it to go out of scope "
-"while Ruby is using it! For `rb_define_hooked_variable()`, you can pass "
-"`NULL` for the getter/setter if you want to synchronize normally for that "
-"operation. Or you can throw out `global` entirely with "
-"`rb_define_virtual_variable()` though of course the getter and setter _must_ "
-"be defined in that case."
+"it should be global in C as well—you don't want it to go out of scope while "
+"Ruby is using it! For `rb_define_hooked_variable()`, you can pass `NULL` for "
+"the getter/setter if you want to synchronize normally for that operation. Or "
+"you can throw out `global` entirely with `rb_define_virtual_variable()` "
+"though of course the getter and setter _must_ be defined in that case."
 msgstr ""
-"`VALUE`はRubyで大域変数を作る前に初期化するべきで、そうしておけばCでも大域変"
-"数になります。Rubyが使っている間はスコープを外れてほしくはないですからね。"
-"`rb_define_hooked_variable()`にすると、そうした操作で通常の同期をしたい場合に"
-"ゲッターやセッターに`NULL`を渡すことができます。もしくは"
-"`rb_define_virtual_variable()`で完全に`global`を投げ出すこともできますが、も"
-"ちろんゲッターとセッターはそうした場合で定義されている _必要_ があります。"
+"`VALUE`はRubyで大域変数を作る前に初期化するべきで、そうしておけばCでも大域変数になります。\n"
+"Rubyが使っている間はスコープを外れてほしくはないですからね。\n"
+"`rb_define_hooked_variable()`にすると、そうした操作で通常の同期をしたい場合にゲッターやセッターに`NULL`を渡すことができます。\n"
+"もしくは`rb_define_virtual_variable()`で完全に`global`を投げ出すこともできますが、もちろんゲッターとセッターはそうした場合で定義されている*必要*があります。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:495
@@ -2039,10 +2033,8 @@ msgid ""
 "and initialization, you can just wrap your data in a `struct` and do the "
 "_actual_ allocation in `initialize`."
 msgstr ""
-"このアロケーションと初期化は[RAII](raii)を誤魔化すことはないので、C++を使って"
-"いるなら恐らくデーアを開封するときに[配置new][place]を使うことになるでしょ"
-"う。アロケーションと初期化を分離するのが難しければデータを`struct`に包み _実"
-"際の_ アロケーションを`initialize`ですることもできます。"
+"このアロケーションと初期化は[RAII](raii)を誤魔化すことはないので、C++を使っているなら恐らくデータを開封するときに[配置new][place]を使うことになるでしょう。\n"
+"アロケーションと初期化を分離するのが難しければデータを`struct`に包み*実際の*アロケーションを`initialize`ですることもできます。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:761
@@ -2113,24 +2105,22 @@ msgstr ""
 #: ../_posts/2010-01-01-c.markdown:793
 msgid ""
 "This is relevant to wrapping C data because it's possible that you might "
-"wrap a C `struct` which contains a Ruby `VALUE`&mdash;which the garbage "
-"collector is responsible for cleaning up. Since the garbage collector is "
-"only aware of `VALUE`s referenced _by Ruby_ (not by C pointers), it won't be "
-"able to mark the referenced `VALUE` as active. The result is that as soon as "
-"the garbage collector needs to free up some memory, your C data is going to "
-"end up with a reference to a nonexistent Ruby object. Note that this kind of "
-"wrapping of Ruby data inside C data is a really bad idea, precisely because "
-"of this kind of issue. But if you really must..."
+"wrap a C `struct` which contains a Ruby `VALUE`—which the garbage collector "
+"is responsible for cleaning up. Since the garbage collector is only aware of "
+"`VALUE`s referenced _by Ruby_ (not by C pointers), it won't be able to mark "
+"the referenced `VALUE` as active. The result is that as soon as the garbage "
+"collector needs to free up some memory, your C data is going to end up with "
+"a reference to a nonexistent Ruby object. Note that this kind of wrapping of "
+"Ruby data inside C data is a really bad idea, precisely because of this kind "
+"of issue. But if you really must..."
 msgstr ""
-"このことはCのデータを包むことに関係してきます。なぜかというとRubyの`VALUE`を"
-"含むCの`struct`を包む可能性があるからです。ガベージコレクタはこの`VALUE`を消"
-"し去る使命があります。ガベージコレクタは（Cのポインタではなく）*Rubyで*参照さ"
-"れた`VALUE`だけはそれと気付きますが、この場合は`VALUE`を活性だと印を付けられ"
-"ません。結果として、ガベージコレクタがメモリを解放する必要が生じるやいなや、C"
-"のデータは不在のRubyのオブジェクトを参照することになってしまうでしょう。なお"
-"こういった類の、Cのデータの中にRubyのデータを包むことは本当に悪い考え方で、正"
-"にこれに類する問題が理由です。でももし本当にそうしなければならないとすれ"
-"ば……。"
+"このことはCのデータを包むことに関係してきます。\n"
+"なぜかというとRubyの`VALUE`を含むCの`struct`を包む可能性があるからです。\n"
+"ガベージコレクタはこの`VALUE`を消し去る使命があります。\n"
+"ガベージコレクタは（Cのポインタではなく）*Rubyで*参照された`VALUE`だけはそれと気付きますが、この場合は`VALUE`を活性だと印を付けられません。\n"
+"結果として、ガベージコレクタがメモリを解放する必要が生じるやいなや、Cのデータは不在のRubyのオブジェクトを参照することになってしまうでしょう。\n"
+"なおこういった類の、Cのデータの中にRubyのデータを包むことは本当に悪い考え方で、正にこれに類する問題が理由です。\n"
+"でももし本当にそうしなければならないとすれば……。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:797
@@ -2411,20 +2401,19 @@ msgstr "ヘッダ"
 msgid ""
 "I think some of the handiest resources are the Ruby headers themselves. The "
 "full API (i.e. everything you get by including `ruby.h`) easily consists of "
-"a thousand functions, macros, constants, and globals&mdash;most of which "
-"have never been documented. However _most_ things are reasonably named and "
-"you should be able to figure out what they do from the header. Most "
-"everything you need should be in the headers `ruby/ruby.h` and `ruby/intern."
-"h`. The former has all of the VM and metaprogramming functions, the latter "
-"has all of the functions for interacting with Ruby's built in classes."
+"a thousand functions, macros, constants, and globals—most of which have "
+"never been documented. However _most_ things are reasonably named and you "
+"should be able to figure out what they do from the header. Most everything "
+"you need should be in the headers `ruby/ruby.h` and `ruby/intern.h`. The "
+"former has all of the VM and metaprogramming functions, the latter has all "
+"of the functions for interacting with Ruby's built in classes."
 msgstr ""
-"最も敷居の高い資料はRubyのヘッダ自体だと思っています。完全なAPI（すなわち"
-"`ruby.h`を含めることで手に入る全てのもの）はゆうに千を越える関数、マクロ、定"
-"数、大域変数からなります。そのほとんどは全くドキュメントがありません。しかし "
-"_ほとんど_ のものは理に適った命名でヘッダから何をするものなのかを調べることが"
-"できるでしょう。必要になるもののほとんどは`ruby/ruby.h`と`ruby/intern.h`にあ"
-"ります。前者は全部のVMとメタプログラミング関数があり、後者にはRubyに組み込み"
-"クラスとやり取りする関数全てがあります。"
+"最も敷居の高い資料はRubyのヘッダ自体だと思っています。\n"
+"完全なAPI（すなわち`ruby.h`を含めることで手に入る全てのもの）はゆうに千を越える関数、マクロ、定数、大域変数からなります。\n"
+"そのほとんどは全くドキュメントがありません。\n"
+"しかし*ほとんど*のものは理に適った命名でヘッダから何をするものなのかを調べることができるでしょう。\n"
+"必要になるもののほとんどは`ruby/ruby.h`と`ruby/intern.h`のヘッダにあります。\n"
+"前者はVMとメタプログラミング関数についての全てがあり、後者にはRubyに組み込みクラスとやり取りする関数の全てがあります。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:914
@@ -2514,7 +2503,7 @@ msgstr ""
 "当に役立ちそうでいてAPIにありそうに _見える_ 関数が沢山あります。ほとんどの場"
 "合その役に立つ関数を呼び出すために梱包するAPI関数があることでしょう。"
 
-#. type: YAML Front Matter: title
+#. type: Yaml Front Matter Hash Value: title
 #: ../_posts/2010-01-01-c.markdown:938 ../_posts/2014-01-01-examples.markdown:1
 #, no-wrap
 msgid "Examples"
@@ -2580,9 +2569,9 @@ msgstr ""
 msgid ""
 "[^undef]: There's also `Qundef` representing an undefined value, but\n"
 "          this has no Ruby equivalent and is [rarely](#handling-blocks)\n"
-"          [used](#constants-1). In fact, outside of those rare occassions,\n"
+"          [used](#constants-1). In fact, outside of those rare occasions,\n"
 "          `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.\n"
-msgstr "[^undef]: 未定義値を表す`Qundef`もありますがRubyで等価なものはなく[滅多に](#handling-blocks)[使われ](#constants-1)ないものです。実際、こうした稀な出現はさておき、Rubyで通常の`VALUE`が期待するところで`Qundef`があるとVMはセグフォします。\n"
+msgstr "[^undef]: 未定義値を表す`Qundef`もありますが、Rubyで等価なものはなく[滅多に](#handling-blocks)[使われ](#constants-1)ないものです。実際、こうした稀な出現はさておき、Rubyで通常の`VALUE`が期待するところで`Qundef`があるとVMはセグフォします。\n"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:966
@@ -2614,10 +2603,10 @@ msgstr "[^wchar]: `wchar_t`を扱う一番の方法はわかりません。試�
 #, no-wrap
 msgid ""
 "[^clear]: The documentation [states][control] that \"You have to clear the error\n"
-"          info [when] ignoring the caught exception\" during `rb_protect`. But I\n"
+"          info... when ignoring the caught exception\" during `rb_protect`. But I\n"
 "          can't find any documentation of when it would be cleared for\n"
-"          you&mdash;it seems like you _always_ have to clear it.\n"
-msgstr "[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。しかしいつ消去してくれるのかについてのドキュメントは見付かっていません。 _常に_ 消去しなければいけないように思われます。\n"
+"          you—it seems like you _always_ have to clear it.\n"
+msgstr "[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。どのような場合に消去すべきかについてのドキュメントは見付かっていません。*常に*消去しなければいけないように思われます。\n"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:981
@@ -2793,14 +2782,14 @@ msgstr ""
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:43
 msgid ""
-"If an error occurs during `rb_cleanup()`, it returns a nonzero value&mdash;"
+"If an error occurs during `rb_cleanup()`, it returns a nonzero value—"
 "otherwise it returns the argument you passed it. This allows a little "
 "shortcut for returning an error status if the cleanup fails (as demonstrated "
 "in the previous example)."
 msgstr ""
-"`rb_cleanup()` の最中にエラーが発生したときは、ゼロではない値を返します。もし"
-"エラーが発生しなければ、渡した引数が返ります。この仕様により、後片付けに失敗"
-"したときのエラーステータスを返す部分が少し短く書けます（先の例のように）。"
+"`rb_cleanup()` の最中にエラーが発生したときは、ゼロではない値を返します。\n"
+"もしエラーが発生しなければ、渡した引数が返ります。\n"
+"この仕様により、後片付けに失敗したときのエラーステータスを返す部分が少し短く書けます（先の例で実演したように）。"
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:52
@@ -3655,8 +3644,12 @@ msgid ""
 "a new guide that doesn't suck and is on Github so you too can help make it "
 "not suck."
 msgstr ""
-"そして筆者が衝撃を受けたのはこれらの手引きによるこうした問題の全ては、コミュニティ駆動の更新を推進しないメディアから出ていることが多いということでした。\n"
-"そのためこうした詰まらないことが起きない新しい手引きを書き、Githubに置くことで、詰まらないことにならないよう読者のあなたが手助けできるようにしてあるのです。"
+"そして筆者が衝撃を受けたのはこれらの手引きによるこうした問題の全ては、コミュ"
+"ニティ駆動の更新を推進しないメディアから出ていることが多いということでし"
+"た。\n"
+"そのためこうした詰まらないことが起きない新しい手引きを書き、Githubに置くこと"
+"で、詰まらないことにならないよう読者のあなたが手助けできるようにしてあるので"
+"す。"
 
 #. type: Plain text
 #: ../README.md:29
@@ -3679,13 +3672,13 @@ msgstr ""
 "[f]:http://metaeditor.sourceforge.net/embed/\n"
 "[g]:http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
 
-#. type: YAML Front Matter: layout
+#. type: Yaml Front Matter Hash Value: layout
 #: ../index.markdown:1
 #, no-wrap
 msgid "default"
 msgstr "default"
 
-#. type: YAML Front Matter: title
+#. type: Yaml Front Matter Hash Value: title
 #: ../index.markdown:1
 #, no-wrap
 msgid "The Definitive Guide to Ruby's C API"

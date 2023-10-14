@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: emberb VERSION\n"
-"POT-Creation-Date: 2023-06-17 18:46+0900\n"
+"POT-Creation-Date: 2023-10-14 17:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. type: YAML Front Matter: layout
+#. type: Yaml Front Matter Hash Value: layout
 #: ../_posts/2010-01-01-c.markdown:1 ../_posts/2012-01-01-embed.markdown:1
 #: ../_posts/2013-01-01-extend.markdown:1
 #: ../_posts/2014-01-01-examples.markdown:1
@@ -24,7 +24,7 @@ msgstr ""
 msgid "chapter"
 msgstr ""
 
-#. type: YAML Front Matter: title
+#. type: Yaml Front Matter Hash Value: title
 #: ../_posts/2010-01-01-c.markdown:1
 #, no-wrap
 msgid "The Ruby C API"
@@ -158,8 +158,8 @@ msgstr ""
 #, markdown-text
 msgid ""
 "Unlike `eval` in Ruby, these functions evaluate the string in an isolated "
-"binding&mdash;like when you `require` something. So local variables in the "
-"string will not be accessible from elsewhere and vice versa."
+"binding—like when you `require` something. So local variables in the string "
+"will not be accessible from elsewhere and vice versa."
 msgstr ""
 
 #. type: Plain text
@@ -812,10 +812,10 @@ msgstr ""
 #: ../_posts/2010-01-01-c.markdown:348
 #, markdown-text
 msgid ""
-"The first and second arguments are the exception class and "
-"message&mdash;like `raise` in Ruby. The big difference is that the message "
-"is a format string [just like in `rb_sprintf()`](#string), letting you more "
-"easily build a useful message."
+"The first and second arguments are the exception class and message—like "
+"`raise` in Ruby. The big difference is that the message is a format string "
+"[just like in `rb_sprintf()`](#string), letting you more easily build a "
+"useful message."
 msgstr ""
 
 #. type: Plain text
@@ -1089,12 +1089,11 @@ msgstr ""
 #, markdown-text
 msgid ""
 "The `VALUE` should be initialized before you create the global in Ruby and "
-"it should be global in C as well&mdash;you don't want it to go out of scope "
-"while Ruby is using it! For `rb_define_hooked_variable()`, you can pass "
-"`NULL` for the getter/setter if you want to synchronize normally for that "
-"operation. Or you can throw out `global` entirely with "
-"`rb_define_virtual_variable()` though of course the getter and setter _must_ "
-"be defined in that case."
+"it should be global in C as well—you don't want it to go out of scope while "
+"Ruby is using it! For `rb_define_hooked_variable()`, you can pass `NULL` for "
+"the getter/setter if you want to synchronize normally for that operation. Or "
+"you can throw out `global` entirely with `rb_define_virtual_variable()` "
+"though of course the getter and setter _must_ be defined in that case."
 msgstr ""
 
 #. type: Plain text
@@ -1750,14 +1749,14 @@ msgstr ""
 #, markdown-text
 msgid ""
 "This is relevant to wrapping C data because it's possible that you might "
-"wrap a C `struct` which contains a Ruby `VALUE`&mdash;which the garbage "
-"collector is responsible for cleaning up. Since the garbage collector is "
-"only aware of `VALUE`s referenced _by Ruby_ (not by C pointers), it won't be "
-"able to mark the referenced `VALUE` as active. The result is that as soon as "
-"the garbage collector needs to free up some memory, your C data is going to "
-"end up with a reference to a nonexistent Ruby object. Note that this kind of "
-"wrapping of Ruby data inside C data is a really bad idea, precisely because "
-"of this kind of issue. But if you really must..."
+"wrap a C `struct` which contains a Ruby `VALUE`—which the garbage collector "
+"is responsible for cleaning up. Since the garbage collector is only aware of "
+"`VALUE`s referenced _by Ruby_ (not by C pointers), it won't be able to mark "
+"the referenced `VALUE` as active. The result is that as soon as the garbage "
+"collector needs to free up some memory, your C data is going to end up with "
+"a reference to a nonexistent Ruby object. Note that this kind of wrapping of "
+"Ruby data inside C data is a really bad idea, precisely because of this kind "
+"of issue. But if you really must..."
 msgstr ""
 
 #. type: Plain text
@@ -1985,13 +1984,12 @@ msgstr ""
 msgid ""
 "I think some of the handiest resources are the Ruby headers themselves. The "
 "full API (i.e. everything you get by including `ruby.h`) easily consists of "
-"a thousand functions, macros, constants, and globals&mdash;most of which "
-"have never been documented. However _most_ things are reasonably named and "
-"you should be able to figure out what they do from the header. Most "
-"everything you need should be in the headers `ruby/ruby.h` and "
-"`ruby/intern.h`. The former has all of the VM and metaprogramming functions, "
-"the latter has all of the functions for interacting with Ruby's built in "
-"classes."
+"a thousand functions, macros, constants, and globals—most of which have "
+"never been documented. However _most_ things are reasonably named and you "
+"should be able to figure out what they do from the header. Most everything "
+"you need should be in the headers `ruby/ruby.h` and `ruby/intern.h`. The "
+"former has all of the VM and metaprogramming functions, the latter has all "
+"of the functions for interacting with Ruby's built in classes."
 msgstr ""
 
 #. type: Plain text
@@ -2079,7 +2077,7 @@ msgid ""
 "function elsewhere that wraps the call to the useful function."
 msgstr ""
 
-#. type: YAML Front Matter: title
+#. type: Yaml Front Matter Hash Value: title
 #: ../_posts/2010-01-01-c.markdown:938 ../_posts/2014-01-01-examples.markdown:1
 #, markdown-text, no-wrap
 msgid "Examples"
@@ -2140,7 +2138,7 @@ msgstr ""
 msgid ""
 "[^undef]: There's also `Qundef` representing an undefined value, but\n"
 "          this has no Ruby equivalent and is [rarely](#handling-blocks)\n"
-"          [used](#constants-1). In fact, outside of those rare occassions,\n"
+"          [used](#constants-1). In fact, outside of those rare occasions,\n"
 "          `Qundef` can segfault the VM if Ruby was expecting a normal "
 "`VALUE`.\n"
 msgstr ""
@@ -2181,10 +2179,10 @@ msgstr ""
 msgid ""
 "[^clear]: The documentation [states][control] that \"You have to clear the "
 "error\n"
-"          info [when] ignoring the caught exception\" during "
+"          info... when ignoring the caught exception\" during "
 "`rb_protect`. But I\n"
 "          can't find any documentation of when it would be cleared for\n"
-"          you&mdash;it seems like you _always_ have to clear it.\n"
+"          you—it seems like you _always_ have to clear it.\n"
 msgstr ""
 
 #. type: Plain text
@@ -2349,9 +2347,9 @@ msgstr ""
 #, markdown-text
 msgid ""
 "If an error occurs during `rb_cleanup()`, it returns a nonzero "
-"value&mdash;otherwise it returns the argument you passed it. This allows a "
-"little shortcut for returning an error status if the cleanup fails (as "
-"demonstrated in the previous example)."
+"value—otherwise it returns the argument you passed it. This allows a little "
+"shortcut for returning an error status if the cleanup fails (as demonstrated "
+"in the previous example)."
 msgstr ""
 
 #. type: Plain text
@@ -3062,13 +3060,13 @@ msgid ""
 "http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
 msgstr ""
 
-#. type: YAML Front Matter: layout
+#. type: Yaml Front Matter Hash Value: layout
 #: ../index.markdown:1
 #, no-wrap
 msgid "default"
 msgstr ""
 
-#. type: YAML Front Matter: title
+#. type: Yaml Front Matter Hash Value: title
 #: ../index.markdown:1
 #, no-wrap
 msgid "The Definitive Guide to Ruby's C API"
