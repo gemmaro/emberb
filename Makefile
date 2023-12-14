@@ -1,9 +1,12 @@
 PORT ?= 8080
 
-all:
-	cd _translation && po4a po4a.cfg
+all: translate
 	cd _translation/ja && jekyll build
 .PHONY: all
+
+translate:
+	cd _translation && po4a po4a.cfg
+.PHONY: translate
 
 serve:
 	ruby -run -e httpd _translation/ja/_site --port=8081
