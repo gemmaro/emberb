@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: emberb VERSION\n"
-"POT-Creation-Date: 2023-10-14 17:14+0900\n"
+"POT-Creation-Date: 2024-02-24 12:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2290,9 +2290,9 @@ msgstr ""
 #: ../_posts/2012-01-01-embed.markdown:16
 #, markdown-text
 msgid ""
-"{% highlight shell_session %} $ gcc -I/usr/include/ruby-{{ site.rbversion "
-"}}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby {% "
-"endhighlight %}"
+"{% highlight shell_session %} $ gcc foo.c -I/usr/include/ruby-{{ "
+"site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux "
+"-lruby {% endhighlight %}"
 msgstr ""
 
 #. type: Plain text

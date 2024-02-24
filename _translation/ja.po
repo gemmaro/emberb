@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
-"POT-Creation-Date: 2023-10-14 17:14+0900\n"
+"POT-Creation-Date: 2024-02-24 12:23+0900\n"
 "PO-Revision-Date: 2023-10-14 17:36+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
@@ -200,7 +200,8 @@ msgid ""
 "binding—like when you `require` something. So local variables in the string "
 "will not be accessible from elsewhere and vice versa."
 msgstr ""
-"Rubyでの`eval`とは異なり、これらの関数は何かしらを`require`したときに、独立したbindingのようなものの中で文字列を評価します。\n"
+"Rubyでの`eval`とは異なり、これらの関数は何かしらを`require`したときに、独立し"
+"たbindingのようなものの中で文字列を評価します。\n"
 "そのため文字列中の局所変数は他所から参照できませんし、逆もまた然りです。"
 
 #. type: Plain text
@@ -980,7 +981,8 @@ msgid ""
 "useful message."
 msgstr ""
 "1つ目と2つ目の引数は例外クラスと文言で、Rubyの`raise`のような感じです。\n"
-"大きな違いは、文言が（[ちょうど`rb_sprintf()`のような](#string)）書式文字列である点で、有用な文言をより簡単に構築できます。"
+"大きな違いは、文言が（[ちょうど`rb_sprintf()`のような](#string)）書式文字列で"
+"ある点で、有用な文言をより簡単に構築できます。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:355
@@ -1329,10 +1331,14 @@ msgid ""
 "you can throw out `global` entirely with `rb_define_virtual_variable()` "
 "though of course the getter and setter _must_ be defined in that case."
 msgstr ""
-"`VALUE`はRubyで大域変数を作る前に初期化するべきで、そうしておけばCでも大域変数になります。\n"
+"`VALUE`はRubyで大域変数を作る前に初期化するべきで、そうしておけばCでも大域変"
+"数になります。\n"
 "Rubyが使っている間はスコープを外れてほしくはないですからね。\n"
-"`rb_define_hooked_variable()`にすると、そうした操作で通常の同期をしたい場合にゲッターやセッターに`NULL`を渡すことができます。\n"
-"もしくは`rb_define_virtual_variable()`で完全に`global`を投げ出すこともできますが、もちろんゲッターとセッターはそうした場合で定義されている*必要*があります。"
+"`rb_define_hooked_variable()`にすると、そうした操作で通常の同期をしたい場合に"
+"ゲッターやセッターに`NULL`を渡すことができます。\n"
+"もしくは`rb_define_virtual_variable()`で完全に`global`を投げ出すこともできま"
+"すが、もちろんゲッターとセッターはそうした場合で定義されている*必要*がありま"
+"す。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:495
@@ -2033,8 +2039,11 @@ msgid ""
 "and initialization, you can just wrap your data in a `struct` and do the "
 "_actual_ allocation in `initialize`."
 msgstr ""
-"このアロケーションと初期化は[RAII](raii)を誤魔化すことはないので、C++を使っているなら恐らくデータを開封するときに[配置new][place]を使うことになるでしょう。\n"
-"アロケーションと初期化を分離するのが難しければデータを`struct`に包み*実際の*アロケーションを`initialize`ですることもできます。"
+"このアロケーションと初期化は[RAII](raii)を誤魔化すことはないので、C++を使って"
+"いるなら恐らくデータを開封するときに[配置new][place]を使うことになるでしょ"
+"う。\n"
+"アロケーションと初期化を分離するのが難しければデータを`struct`に包み*実際の*"
+"アロケーションを`initialize`ですることもできます。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:761
@@ -2117,9 +2126,12 @@ msgstr ""
 "このことはCのデータを包むことに関係してきます。\n"
 "なぜかというとRubyの`VALUE`を含むCの`struct`を包む可能性があるからです。\n"
 "ガベージコレクタはこの`VALUE`を消し去る使命があります。\n"
-"ガベージコレクタは（Cのポインタではなく）*Rubyで*参照された`VALUE`だけはそれと気付きますが、この場合は`VALUE`を活性だと印を付けられません。\n"
-"結果として、ガベージコレクタがメモリを解放する必要が生じるやいなや、Cのデータは不在のRubyのオブジェクトを参照することになってしまうでしょう。\n"
-"なおこういった類の、Cのデータの中にRubyのデータを包むことは本当に悪い考え方で、正にこれに類する問題が理由です。\n"
+"ガベージコレクタは（Cのポインタではなく）*Rubyで*参照された`VALUE`だけはそれ"
+"と気付きますが、この場合は`VALUE`を活性だと印を付けられません。\n"
+"結果として、ガベージコレクタがメモリを解放する必要が生じるやいなや、Cのデータ"
+"は不在のRubyのオブジェクトを参照することになってしまうでしょう。\n"
+"なおこういった類の、Cのデータの中にRubyのデータを包むことは本当に悪い考え方"
+"で、正にこれに類する問題が理由です。\n"
 "でももし本当にそうしなければならないとすれば……。"
 
 #. type: Plain text
@@ -2409,11 +2421,15 @@ msgid ""
 "of the functions for interacting with Ruby's built in classes."
 msgstr ""
 "最も敷居の高い資料はRubyのヘッダ自体だと思っています。\n"
-"完全なAPI（すなわち`ruby.h`を含めることで手に入る全てのもの）はゆうに千を越える関数、マクロ、定数、大域変数からなります。\n"
+"完全なAPI（すなわち`ruby.h`を含めることで手に入る全てのもの）はゆうに千を越え"
+"る関数、マクロ、定数、大域変数からなります。\n"
 "そのほとんどは全くドキュメントがありません。\n"
-"しかし*ほとんど*のものは理に適った命名でヘッダから何をするものなのかを調べることができるでしょう。\n"
-"必要になるもののほとんどは`ruby/ruby.h`と`ruby/intern.h`のヘッダにあります。\n"
-"前者はVMとメタプログラミング関数についての全てがあり、後者にはRubyに組み込みクラスとやり取りする関数の全てがあります。"
+"しかし*ほとんど*のものは理に適った命名でヘッダから何をするものなのかを調べる"
+"ことができるでしょう。\n"
+"必要になるもののほとんどは`ruby/ruby.h`と`ruby/intern.h`のヘッダにありま"
+"す。\n"
+"前者はVMとメタプログラミング関数についての全てがあり、後者にはRubyに組み込み"
+"クラスとやり取りする関数の全てがあります。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:914
@@ -2711,8 +2727,13 @@ msgstr ""
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:16
+#, fuzzy
+#| msgid ""
+#| "{% highlight shell_session %} $ gcc -I/usr/include/ruby-{{ site."
+#| "rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -"
+#| "lruby {% endhighlight %}"
 msgid ""
-"{% highlight shell_session %} $ gcc -I/usr/include/ruby-{{ site."
+"{% highlight shell_session %} $ gcc foo.c -I/usr/include/ruby-{{ site."
 "rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -"
 "lruby {% endhighlight %}"
 msgstr ""
@@ -2789,7 +2810,8 @@ msgid ""
 msgstr ""
 "`rb_cleanup()` の最中にエラーが発生したときは、ゼロではない値を返します。\n"
 "もしエラーが発生しなければ、渡した引数が返ります。\n"
-"この仕様により、後片付けに失敗したときのエラーステータスを返す部分が少し短く書けます（先の例で実演したように）。"
+"この仕様により、後片付けに失敗したときのエラーステータスを返す部分が少し短く"
+"書けます（先の例で実演したように）。"
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:52
