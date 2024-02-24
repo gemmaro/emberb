@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2024-02-24 12:23+0900\n"
-"PO-Revision-Date: 2023-10-14 17:36+0900\n"
+"PO-Revision-Date: 2024-02-24 12:24+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -2727,19 +2727,13 @@ msgstr ""
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:16
-#, fuzzy
-#| msgid ""
-#| "{% highlight shell_session %} $ gcc -I/usr/include/ruby-{{ site."
-#| "rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -"
-#| "lruby {% endhighlight %}"
 msgid ""
 "{% highlight shell_session %} $ gcc foo.c -I/usr/include/ruby-{{ site."
 "rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -"
 "lruby {% endhighlight %}"
 msgstr ""
 "{% highlight shell_session %}\n"
-"$ gcc -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site."
-"rbversion }}.0/x86_64-linux -lruby\n"
+"$ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby\n"
 "{% endhighlight %}"
 
 #. type: Plain text
