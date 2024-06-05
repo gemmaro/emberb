@@ -14,11 +14,16 @@ On my machine, my minimal compiler options are
 $ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby
 {% endhighlight %}
 
-Though, if available, you should really use `pkg-config` to get the appropriate
-options for your distribution:
+If available, you can use `pkg-config` to get the appropriate options for your OS:
 
 {% highlight shell_session %}
 $ pkg-config --cflags --libs ruby-{{ site.rbversion }}
+{% endhighlight %}
+
+Alternatively, you can ask Ruby itself what the compiler options should be:
+
+{% highlight shell_session %}
+$ ruby -rshellwords -e 'puts "-I#{Shellwords.escape RbConfig::CONFIG["rubyhdrdir"]} -I#{Shellwords.escape RbConfig::CONFIG["rubyarchhdrdir"]} -L#{Shellwords.escape RbConfig::CONFIG["libdir"]} -lruby"'
 {% endhighlight %}
 
 ## Startup, Teardown ##
