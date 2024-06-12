@@ -8,7 +8,7 @@ title: Running Ruby in C
 Embedding Ruby requires one header `ruby.h`, which includes a platform-specific
 header `ruby/config.h`. You will probably need to tell your compiler about the
 include paths for these headers. You will also need to link with the Ruby lib.
-On my machine, my minimal compiler options are
+On my machine, my minimal compiler options are:
 
 {% highlight shell_session %}
 $ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby
@@ -20,10 +20,22 @@ If available, you can use `pkg-config` to get the appropriate options for your O
 $ pkg-config --cflags --libs ruby-{{ site.rbversion }}
 {% endhighlight %}
 
-Alternatively, you can ask Ruby itself what the compiler options should be:
+Those approaches might not work if Ruby is installed in a nonstandard location on your machine or your OS does not provide standard header/library directories.
+A more robust approach is to ask Ruby itself where things are and to set up the run-time library path:
 
-{% highlight shell_session %}
-$ ruby -rshellwords -e 'puts "-I#{Shellwords.escape RbConfig::CONFIG["rubyhdrdir"]} -I#{Shellwords.escape RbConfig::CONFIG["rubyarchhdrdir"]} -L#{Shellwords.escape RbConfig::CONFIG["libdir"]} -lruby"'
+{% highlight ruby %}
+#!/usr/bin/env ruby
+require 'shellwords'
+
+# location of ruby.h
+hdrdir = Shellwords.escape RbConfig::CONFIG["rubyhdrdir"]
+# location of ruby/config.h
+archhdrdir = Shellwords.escape RbConfig::CONFIG["rubyarchhdrdir"]
+# location of libruby
+libdir = Shellwords.escape RbConfig::CONFIG["libdir"]
+
+# args for GCC
+puts "-I#{hdrdir} -I#{archhdrdir} -L#{libdir} -Wl,-rpath,#{libdir}"
 {% endhighlight %}
 
 ## Startup, Teardown ##
