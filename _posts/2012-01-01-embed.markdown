@@ -38,6 +38,25 @@ libdir = Shellwords.escape RbConfig::CONFIG["libdir"]
 puts "-I#{hdrdir} -I#{archhdrdir} -L#{libdir} -Wl,-rpath,#{libdir}"
 {% endhighlight %}
 
+### Windows
+
+On Windows, I highly recommend using the [RubyInstaller](https://rubyinstaller.org/downloads/) **with Devkit**.
+This gives you access to GCC on the Windows command line as well as `pkgconf` for getting the build flags.
+
+{% highlight shell_session %}
+$ ridk enable # enable devkit
+$ pkgconf.exe --cflags --libs C:\Ruby33-x64\lib\pkgconfig\ruby-3.3.pc # show GCC args
+$ gcc foo.c ...
+{% endhighlight %}
+
+Note that the GCC args might not be parsed correctly by PowerShell, so use `cmd` instead.
+Also the Ruby 3.3 installer is missing the lib location from its `pkgconf` output for some reason, so you'll need to add the `-L` option manually.
+You can locate that with `RbConfig::CONFIG["libdir"]` as above; the installer put it in `C:\Ruby33-x64\lib` for me.
+
+Finally, Windows has no `rpath` so you will need to copy any linked DLLs alongside the built executable for it to run.
+That includes any DLLs needed by Ruby itself.
+The installer put those in `C:\Ruby33-x64\bin\ruby_builtin_dlls` for me.
+
 ## Startup, Teardown ##
 
 Including the Ruby interpreter in your C/C++ program is pretty simple. Just
