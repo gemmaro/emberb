@@ -91,5 +91,5 @@ modifications.")
                           ruby-rubocop
                           ruby
                           tidyall
-                          perl-perl-tidy
+                          perltidy
                           perl))
