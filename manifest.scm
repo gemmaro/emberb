@@ -83,13 +83,16 @@ modifications.")
     (home-page "http://github.com/sdwolfz/guard-shell")
     (license license:expat)))
 
-(packages->manifest (list po4a
-                          node-lts
-                          jekyll
-                          ruby-guard
-                          ruby-guard-shell
-                          ruby-rubocop
-                          ruby
-                          tidyall
-                          perltidy
-                          perl))
+(concatenate-manifests
+ (list (packages->manifest (list po4a
+                                 node-lts
+                                 jekyll
+                                 ruby-guard
+                                 ruby-guard-shell
+                                 ruby-rubocop
+                                 ruby
+                                 tidyall
+                                 perltidy
+                                 perl))
+       (package->development-manifest
+        (specification->package "po4a"))))
