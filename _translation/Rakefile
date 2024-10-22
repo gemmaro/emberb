@@ -32,8 +32,9 @@ file "po4a.cfg" => "po4a.erb" do |t|
 end
 task :translate => ["po4a.cfg"] + targets do |t|
   lib = ENV["PERL5LIB"]
+  local = File.join(Dir.home, "src/po4a/lib")
   add = File.join(__dir__, "po4a/lib")
-  ENV["PERL5LIB"] = "#{add}:#{lib}"
+  ENV["PERL5LIB"] = "#{add}:#{local}:#{lib}"
   sh File.join(Dir.home, "src/po4a/po4a"), t.source
 end
 task :default => :translate do
