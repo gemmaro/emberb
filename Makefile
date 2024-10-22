@@ -1,9 +1,13 @@
 .PHONEY: default
-default: generate_translations
+default: generate_translations build
+
+.PHONEY: watch
+watch:
+	bundle exec guard
 
 .PHONEY: serve
-serve:
-	bundle exec jekyll serve --watch --baseurl=
+serve: generate_translations
+	bundle exec jekyll serve --watch --baseurl= --livereload
 
 .PHONEY: build
 build:
@@ -13,12 +17,12 @@ build:
 test:
 	$(MAKE) -C _test
 
-pot_file_path := po/all.pot
+pot_file_path := _po/all.pot
 
 .PHONEY: generate_translations
 generate_translations: $(pot_file_path)
 	po4a po4a.cfg
 
-$(pot_file_path): generate_po4a_config_file.sh *.md
+$(pot_file_path): generate_po4a_config_file.rb *.md
 	./$<
 

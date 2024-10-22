@@ -1,73 +1,84 @@
 ---
 layout: chapter
-title: 'The Ruby C API'
+title: 'RubyのC API'
 ---
 
-## Before You Start ##
+## 始める前に ##
 
-For the greatest chance of success with this guide, I recommend being fairly
-comfortable with C and _very_ comfortable with Ruby.
+このガイドを完全に理解するためには、C言語はそこそこ、Rubyは _かなり_ 慣れ親しんでいるとよいでしょう。
 
-Using Ruby's C API does not require any advanced C concepts, however the API is
-**huge** and largely **undocumented**. After you start using it, you will likely
-find yourself delving through the Ruby source code at some point to figure out
-the behavior of some obscure function or macro. The Ruby source uses some fairly
-sophisticated C, so you should at least feel comfortable reading it.
+RubyのC APIを使うのに発展的なC言語の概念は要りませんが、
+APIは**膨大**で大半が**文書化されていません**。
+APIを使い始めだすと、いつの日にか、
+はっきりしない関数やマクロの振舞いを見つけるためにRubyのソースコードを探ることになるでしょう。
+Rubyのソースはそこそこ洗練されたC言語で書かれているので、
+すいすい読めはするでしょうけれども。
 
-You can think of the C API is being a big, clunky alternative to writing normal
-Ruby code. However the simple, elegant patterns of Ruby can be pretty
-unintuitive once translated into the language of the API. Having a strong
-intuition for Ruby's internal logic and the ideas behind its design will go a
-long way toward steering you toward the correct API functions.
+C APIは、普通のRubyのコードよりもデカくてゴチャっとした書き方だと見なせます。
+とはいえ、簡素で明快なRubyの様式は、ひとたびAPIの言葉に翻訳されるとかなり非直感的になることがあります。
+Rubyの内部論理と設計の背後にある思想に裏打ちされたしっかりとした直感があれば、
+長い旅路のさなかでも正しいAPI関数へと進み続けられるでしょう。
 
-## The Two Paths ##
+## 分岐点 ##
 
-The official Ruby interpreter is written in C. That means that everything you
-can do in Ruby, you can also do using function calls to Ruby's C API. Why in the
-world would you do this? There are two good reasons:
+公式のRubyインタプリタはC言語で書かれています。
+Rubyでできるあらゆることは、RubyのC APIを呼び出す関数を使ってもできます。
+いったいなぜそんなことをするのでしょうか？
+もっともな理由が2つあります。
 
-1. You're writing some fancy application in C or C++ and you want some parts of
-   your code to leverage the dynamic flexibility of Ruby. You can run the
-   Ruby interpreter inside of your application and use the API to retrieve the
-   results of Ruby code.
+1. 意匠を凝らしたC言語ないしC++のアプリケーションを書いている最中で、
+   Rubyの動的な柔軟性をコードのいくつかの箇所に使って、
+   効果を引き出そうとするとき。
+   アプリケーションの内部でRubyインタプリタを実行でき、
+   Rubyのコードの結果をAPIで受け取ることができます。
 
-2. You're writing some fancy application in Ruby and you want some parts of your
-   code to leverage the speed and power of C (or an existing C library). You can
-   expose C code to Ruby using the API and compile a special library that Ruby
-   can `require`.
+2. 意匠を凝らしたRubyのアプリケーションを書いている最中で、
+   C言語（もしくは既にあるC言語のライブラリ）の速度と能力を
+   コードのいくつかの箇所に使って、
+   効果を引き出そうとするとき。
+   APIを使えば、RubyにC言語のコードをさらけ出すことができます。
+   そうしてできた特別なライブラリをコンパイルするとRubyから `require` できます。
 
 
-You'll need to structure your C code differently depending on your goal. If
-you want to embed the Ruby interpreter in C, read [Running Ruby in C](../embed). If
-you want to `require` a compiled C library, read [Running C in Ruby](../extend).
-After you finish that, come back here to learn about the API.
+目標によってC言語のコードの組み立てかたは変わってきます。
+C言語にRubyインタプリタを組込みたければ、
+[C言語でRubyを実行する](../embed.ja)をお読みください。
+コンパイルされたC言語のライブラリを `require` したければ、
+[RubyでC言語を実行する](../extend.ja)をお読みください。
+どちらかを読み終えたら、ここに戻ってきてAPIについて学びましょう。
 
 ## Eval ##
 
-The quick 'n' dirty way to run some Ruby code from C is to `eval` it
+ちゃちゃっと雑にCでRubyを動かすには、 `eval` します。
 
 {% highlight c %}
 {% include c/eval.h %}
 {% endhighlight %}
 
-This is a good fallback if you can't find an API function for something that you
-want to do[^wrap]. `rb_eval_string_protect()` returns the result of the Ruby
-code and sets `state` to some nonzero value if any exception is raised. `VALUE`
-is the C data type for all Ruby objects, as explained in the next section.
+これはやりたいことのためのAPI関数が見つからないときは選択肢に入ります[^wrap]。
+`rb_eval_string_protect()` はRubyのコードの結果を返し、
+何か例外が発生したときはゼロではない値を `state` に設定します。
+`VALUE` はあらゆるRubyのオブジェクトのためのCのデータ型です。
+次の節で後述します。
 
-If `state` is nonzero, `result` will be a `VALUE` representing `nil` and you
-should handle the exception. Alternatively, you can use `rb_eval_string()` which
-doesn't take a `state` argument and instead raises any exceptions normally. See
-[Exceptions](#exceptions) for how to handle both of these cases.
+`state` がゼロではないとき、
+`result` は `nil` を表す `VALUE` になっているでしょうから、
+そのときは例外に対処しなければいけません。
+代わりに `rb_eval_string()` を使うこともできます。
+この関数は引数 `state` を取らず、通常の方法で例外を発生させます。
+これら2つの場合での制御方法については[例外](#exceptions)節を参照してください。
 
-Unlike `eval` in Ruby, these functions evaluate the string in an isolated
-binding&mdash;like when you `require` something. So local variables in the
-string will not be accessible from elsewhere and vice versa.
+Rubyでの `eval` とは異なり、
+これらの関数は独立の束縛状態で評価します。
+ちょうど何かを `require` するときと同じです。
+したがって文字列中のローカル変数は他の場所から参照できませんし、逆もまた然りです。
 
-However, like using `eval` in Ruby, using these functions is not a good
-practice. It's inefficient since the parser is invoked and it somewhat defeats
-the point of writing in C. If you just want to call some Ruby method, we'll go
-over a better way to do that [later on](#send).
+しかし、Rubyで `eval` するときのように、
+これらの関数を使うことはあまりよくありません。
+パーサが起動されなければいけないのが非効率ですし、
+Cで書くことの利点が失われています。
+Rubyのメソッドを呼びたいだけであれば、
+もっといい方法を[後述](#send)します。
 
 ## VALUE ##
 
@@ -991,7 +1002,7 @@ download all of the code examples.
 
 [gh]: https://github.com/silverhammermba/emberb
 
-## Footnotes ##
+## 脚註 ##
 
 [^intern]: That's a blatant lie. The API _definitely_ lets you mess around
            with the internal data structures of objects (look for things with

@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2022-02-19 12:57+0900\n"
-"PO-Revision-Date: 2022-02-19 14:32+0900\n"
+"POT-Creation-Date: 2022-02-19 20:33+0900\n"
+"PO-Revision-Date: 2022-02-21 00:38+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -40,7 +40,7 @@ msgstr "始める前に"
 msgid ""
 "For the greatest chance of success with this guide, I recommend being fairly\n"
 "comfortable with C and _very_ comfortable with Ruby.\n"
-msgstr ""
+msgstr "このガイドを完全に理解するためには、C言語はそこそこ、Rubyは _かなり_ 慣れ親しんでいるとよいでしょう。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:16
@@ -52,6 +52,12 @@ msgid ""
 "the behavior of some obscure function or macro. The Ruby source uses some fairly\n"
 "sophisticated C, so you should at least feel comfortable reading it.\n"
 msgstr ""
+"RubyのC APIを使うのに発展的なC言語の概念は要りませんが、\n"
+"APIは**膨大**で大半が**文書化されていません**。\n"
+"APIを使い始めだすと、いつの日にか、\n"
+"はっきりしない関数やマクロの振舞いを見つけるためにRubyのソースコードを探ることになるでしょう。\n"
+"Rubyのソースはそこそこ洗練されたC言語で書かれているので、\n"
+"すいすい読めはするでしょうけれども。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:22
@@ -63,12 +69,16 @@ msgid ""
 "intuition for Ruby's internal logic and the ideas behind its design will go a\n"
 "long way toward steering you toward the correct API functions.\n"
 msgstr ""
+"C APIは、普通のRubyのコードよりもデカくてゴチャっとした書き方だと見なせます。\n"
+"とはいえ、簡素で明快なRubyの様式は、ひとたびAPIの言葉に翻訳されるとかなり非直感的になることがあります。\n"
+"Rubyの内部論理と設計の背後にある思想に裏打ちされたしっかりとした直感があれば、\n"
+"長い旅路のさなかでも正しいAPI関数へと進み続けられるでしょう。\n"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:23
 #, no-wrap
 msgid "The Two Paths"
-msgstr ""
+msgstr "分岐点"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:28
@@ -78,6 +88,10 @@ msgid ""
 "can do in Ruby, you can also do using function calls to Ruby's C API. Why in the\n"
 "world would you do this? There are two good reasons:\n"
 msgstr ""
+"公式のRubyインタプリタはC言語で書かれています。\n"
+"Rubyでできるあらゆることは、RubyのC APIを呼び出す関数を使ってもできます。\n"
+"いったいなぜそんなことをするのでしょうか？\n"
+"もっともな理由が2つあります。\n"
 
 #. type: Bullet: '1. '
 #: _posts/2010-01-01-c.markdown:37
@@ -88,6 +102,11 @@ msgid ""
 "Ruby interpreter inside of your application and use the API to retrieve the\n"
 "results of Ruby code.\n"
 msgstr ""
+"意匠を凝らしたC言語ないしC++のアプリケーションを書いている最中で、\n"
+"Rubyの動的な柔軟性をコードのいくつかの箇所に使って、\n"
+"効果を引き出そうとするとき。\n"
+"アプリケーションの内部でRubyインタプリタを実行でき、\n"
+"Rubyのコードの結果をAPIで受け取ることができます。\n"
 
 #. type: Bullet: '2. '
 #: _posts/2010-01-01-c.markdown:37
@@ -98,6 +117,12 @@ msgid ""
 "expose C code to Ruby using the API and compile a special library that Ruby\n"
 "can `require`.\n"
 msgstr ""
+"意匠を凝らしたRubyのアプリケーションを書いている最中で、\n"
+"C言語（もしくは既にあるC言語のライブラリ）の速度と能力を\n"
+"コードのいくつかの箇所に使って、\n"
+"効果を引き出そうとするとき。\n"
+"APIを使えば、RubyにC言語のコードをさらけ出すことができます。\n"
+"そうしてできた特別なライブラリをコンパイルするとRubyから `require` できます。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:42
@@ -108,18 +133,24 @@ msgid ""
 "you want to `require` a compiled C library, read [Running C in Ruby](../extend).\n"
 "After you finish that, come back here to learn about the API.\n"
 msgstr ""
+"目標によってC言語のコードの組み立てかたは変わってきます。\n"
+"C言語にRubyインタプリタを組込みたければ、\n"
+"[C言語でRubyを実行する](../embed.ja)をお読みください。\n"
+"コンパイルされたC言語のライブラリを `require` したければ、\n"
+"[RubyでC言語を実行する](../extend.ja)をお読みください。\n"
+"どちらかを読み終えたら、ここに戻ってきてAPIについて学びましょう。\n"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:43
 #, no-wrap
 msgid "Eval"
-msgstr ""
+msgstr "Eval"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:46
 #, no-wrap
 msgid "The quick 'n' dirty way to run some Ruby code from C is to `eval` it\n"
-msgstr ""
+msgstr "ちゃちゃっと雑にCでRubyを動かすには、 `eval` します。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:50
@@ -129,6 +160,9 @@ msgid ""
 "{% include c/eval.h %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include c/eval.h %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:55
@@ -139,6 +173,11 @@ msgid ""
 "code and sets `state` to some nonzero value if any exception is raised. `VALUE`\n"
 "is the C data type for all Ruby objects, as explained in the next section.\n"
 msgstr ""
+"これはやりたいことのためのAPI関数が見つからないときは選択肢に入ります[^wrap]。\n"
+"`rb_eval_string_protect()` はRubyのコードの結果を返し、\n"
+"何か例外が発生したときはゼロではない値を `state` に設定します。\n"
+"`VALUE` はあらゆるRubyのオブジェクトのためのCのデータ型です。\n"
+"次の節で後述します。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:60
@@ -149,6 +188,12 @@ msgid ""
 "doesn't take a `state` argument and instead raises any exceptions normally. See\n"
 "[Exceptions](#exceptions) for how to handle both of these cases.\n"
 msgstr ""
+"`state` がゼロではないとき、\n"
+"`result` は `nil` を表す `VALUE` になっているでしょうから、\n"
+"そのときは例外に対処しなければいけません。\n"
+"代わりに `rb_eval_string()` を使うこともできます。\n"
+"この関数は引数 `state` を取らず、通常の方法で例外を発生させます。\n"
+"これら2つの場合での制御方法については[例外](#exceptions)節を参照してください。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:64
@@ -158,6 +203,10 @@ msgid ""
 "binding&mdash;like when you `require` something. So local variables in the\n"
 "string will not be accessible from elsewhere and vice versa.\n"
 msgstr ""
+"Rubyでの `eval` とは異なり、\n"
+"これらの関数は独立の束縛状態で評価します。\n"
+"ちょうど何かを `require` するときと同じです。\n"
+"したがって文字列中のローカル変数は他の場所から参照できませんし、逆もまた然りです。\n"
 
 #. type: Plain text
 #: _posts/2010-01-01-c.markdown:69
@@ -168,6 +217,12 @@ msgid ""
 "the point of writing in C. If you just want to call some Ruby method, we'll go\n"
 "over a better way to do that [later on](#send).\n"
 msgstr ""
+"しかし、Rubyで `eval` するときのように、\n"
+"これらの関数を使うことはあまりよくありません。\n"
+"パーサが起動されなければいけないのが非効率ですし、\n"
+"Cで書くことの利点が失われています。\n"
+"Rubyのメソッドを呼びたいだけであれば、\n"
+"もっといい方法を[後述](#send)します。\n"
 
 #. type: Title ##
 #: _posts/2010-01-01-c.markdown:70
@@ -2694,7 +2749,7 @@ msgstr "やったね"
 msgid "Now you're ready to interact with Ruby! Go back to the [C API](../c).\n"
 msgstr ""
 "これでRubyとやりとりすることができました！\n"
-"[C API](../c)に戻りましょう。\n"
+"[C API](../c.ja)に戻りましょう。\n"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:127
@@ -2744,18 +2799,23 @@ msgid ""
 "options. Ruby's [`mkmf` stdlib][mkmf] makes it easy to do this by generating an\n"
 "appropriate makefile for you.\n"
 msgstr ""
+"C言語のコードを、Rubyの拡張としてロードできるようにコンパイルするには、\n"
+"ちょっとしたコンパイラのオプションが要ります。\n"
+"Rubyの [`mkmf` 標準ライブラリ][mkmf]があれば、\n"
+"適切なmakefileを生成してくれるので、\n"
+"コンパイルが楽になります。\n"
 
 #. type: Title ###
 #: _posts/2013-01-01-extend.markdown:12
 #, no-wrap
 msgid "Preparation"
-msgstr ""
+msgstr "準備"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:15
 #, no-wrap
 msgid "First create the file `extconf.rb` in the same directory as your C code:\n"
-msgstr ""
+msgstr "まず、C言語のコードがあるのと同じディレクトリに `extconf.rb` というファイルをつくります。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:19
@@ -2765,6 +2825,9 @@ msgid ""
 "{% include extend/ext/extconf.rb %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight ruby %}\n"
+"{% include extend/ext/extconf.rb %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:22
@@ -2773,30 +2836,32 @@ msgid ""
 "The preparation section should perform actions similar to the standard UNIX\n"
 "[`configure` script][conf] e.g.\n"
 msgstr ""
+"準備する部分では、標準的なUNIXでの [`configure` スクリプト][conf]でするようなことをします。\n"
+"例えば次のようなことです。\n"
 
 #. type: Bullet: '* '
 #: _posts/2013-01-01-extend.markdown:26
 #, no-wrap
 msgid "Check features of the current platform\n"
-msgstr ""
+msgstr "現在のプラットフォームの特徴を確認する\n"
 
 #. type: Bullet: '* '
 #: _posts/2013-01-01-extend.markdown:26
 #, no-wrap
 msgid "Check for existence of required libraries and functions\n"
-msgstr ""
+msgstr "必要なライブラリと関数があることを確認する\n"
 
 #. type: Bullet: '* '
 #: _posts/2013-01-01-extend.markdown:26
 #, no-wrap
 msgid "Check for programs needed for building\n"
-msgstr ""
+msgstr "ビルドするのに必要なプログラムがあることを確認する\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:28
 #, no-wrap
 msgid "[conf]: http://en.wikipedia.org/wiki/Configure_script\n"
-msgstr ""
+msgstr "[conf]: http://en.wikipedia.org/wiki/Configure_script\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:32
@@ -2806,6 +2871,9 @@ msgid ""
 "Ruby at your disposal if you need it). For example, an extension which uses SDL2\n"
 "and needs to know how big `int`s are might call:\n"
 msgstr ""
+"あるあるな機能は `mkmf` で提供されます（でも、必要とあらばRubyをまったく使わなくてもいいです）。\n"
+"例えば、SDL2を使っていて、それとは別に `int` の大きさを知らなければいけないような拡張であれば、\n"
+"こんな感じで呼び出すことになります。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:36
@@ -2815,6 +2883,9 @@ msgid ""
 "{% include extend/ext/exex.rb %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight ruby %}\n"
+"{% include extend/ext/exex.rb %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:40
@@ -2824,6 +2895,9 @@ msgid ""
 "based on the results of the `mkmf` functions you called previously. For this\n"
 "example, `extconf.h` might contain\n"
 msgstr ""
+"`create_header` は、それより前に呼んだ `mkmf` の関数の結果に基づいて、\n"
+"前処理器の定義を含む `extconf.h` ファイルをつくります。\n"
+"この例では `extconf.h` は次のような内容を含みます。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:44
@@ -2833,6 +2907,9 @@ msgid ""
 "{% include extend/ext/exh.h %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include extend/ext/exh.h %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:52
@@ -2846,6 +2923,16 @@ msgid ""
 "This is preferred to generating the Makefile anyway and leaving the user with an\n"
 "opaque compiler error.\n"
 msgstr ""
+"このヘッダはC言語のファイルに取り込むとよいでしょう。\n"
+"そうすれば様々なプラットフォームでコードが使えるようになります。\n"
+"気に留めておいてほしいことは、\n"
+"`mkmf` 関数がビルドの失敗を示す値を返したら、\n"
+"`extconf.rb` スクリプトを頓挫させられますし、そうするべきだということです。\n"
+"例えば、ある拡張にSDL2が _必須_ であれば、\n"
+"`have_library('SDL2')` が `false` を返したときは、\n"
+"何らかの有意味なエラーメッセージを吐いて終了するようなスクリプトにしましょう。\n"
+"とりあえずMakefileを生成して、\n"
+"よくわからないコンパイルエラーで利用者を置き去りにするよりはマシです。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:57
@@ -2856,6 +2943,12 @@ msgid ""
 "library, and thus the argument for `require` in Ruby! This should be the name of\n"
 "your extension.\n"
 msgstr ""
+"`create_makefile` はもちろんMakefileをつくりますが、\n"
+"その引数が特に大切です：\n"
+"C言語のコードの入口を決めるものであり、\n"
+"コンパイルされたライブラリの名前であり、\n"
+"Rubyで `require` するときの引数でもあるのです！\n"
+"これは拡張の名前であるべきです。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:63
@@ -2867,6 +2960,11 @@ msgid ""
 "Makefile if its method of automatically generating targets doesn't work for\n"
 "your extension.\n"
 msgstr ""
+"生成されるMakefileの変数のいくつかを変更するには、\n"
+"Rubyでの対応する大域変数を変更します：\n"
+"`$CFLAGS` や `$CPPFLAGS` や `$LDFLAGS` がそうです。\n"
+"自動的な生成方法がうまくいかないときは、\n"
+"Makefileでのオブジェクトファイルのリストを `$objs` 大域変数で指定することもできます。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:68
@@ -2877,24 +2975,27 @@ msgid ""
 "are a variety of functions for handling different source file layouts, different\n"
 "file dependencies, etc.\n"
 msgstr ""
+"全ての `mkmf` 関数とそれぞれのオプションは[オンライン][mkmf]で充分に文書化されています。\n"
+"`extconf.h` を生成する関数に加えて、\n"
+"また違ったソースファイルの配置や依存関係を制御する様々な関数があります。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:70
 #, no-wrap
 msgid "[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html\n"
-msgstr ""
+msgstr "[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html\n"
 
 #. type: Title ###
 #: _posts/2013-01-01-extend.markdown:71
 #, no-wrap
 msgid "Execution"
-msgstr ""
+msgstr "実行"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:74
 #, no-wrap
 msgid "The rest couldn't be simpler\n"
-msgstr ""
+msgstr "あとはもう、これ以上簡単になりようがありません\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:79
@@ -2905,18 +3006,22 @@ msgid ""
 "$ make\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight shell_session %}\n"
+"$ ruby extconf.rb\n"
+"$ make\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:81
 #, no-wrap
 msgid "[^argv]But of course that won't do anything without some C code to compile.\n"
-msgstr ""
+msgstr "[^argv] もちろん、C言語のコードがコンパイルできないことには話が進まないですけどね。\n"
 
 #. type: Title ##
 #: _posts/2013-01-01-extend.markdown:82
 #, no-wrap
 msgid "Init"
-msgstr ""
+msgstr "初期化"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:89
@@ -2928,6 +3033,12 @@ msgid ""
 "argument you passed to `create_makefile` in `extconf.rb`. We used \"foobar\" in\n"
 "our example, so we'll create `foobar.c` containing\n"
 msgstr ""
+"C言語のコードでは `ruby.h` を含めてAPIを使えるようにしたいのではないでしょうか。\n"
+"その他には、 `require` したときにRubyの仮想機械がライブラリを呼べるように、\n"
+"関数を定義するだけでよいです。\n"
+"関数の名前は、 `extconf.rb` で `create_makefile` に渡した引数で決まります。\n"
+"ここまでの例で `\"foobar\"` を使ってきたので、\n"
+"次の内容の `foobar.c` ファイルをつくります。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:93
@@ -2937,12 +3048,15 @@ msgid ""
 "{% include extend/ext/foobar.c %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight c %}\n"
+"{% include extend/ext/foobar.c %}\n"
+"{% endhighlight %}\n"
 
 #. type: Title ###
 #: _posts/2013-01-01-extend.markdown:94
 #, no-wrap
 msgid "Filenames"
-msgstr ""
+msgstr "ファイル名"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:101
@@ -2954,6 +3068,12 @@ msgid ""
 "`.o` file named after your extension for the linking stage, which would cause a\n"
 "conflict if you also have a `.c` file which compiles to that filename.\n"
 msgstr ""
+"拡張に1つのC言語のファイルだけしかないなら、\n"
+"さっきやったように拡張の名前と同じファイル名にしましょう。\n"
+"逆に複数のC言語のファイルからなる場合、\n"
+"拡張に _同じ名前を使わない_ ようにしましょう。\n"
+"リンクする段階でMakefileが拡張名と同じ `.o` ファイルを生成すると、\n"
+"それと同じファイル名にコンパイルされる `.c` ファイルがある場合に衝突してしまうからです。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:104
@@ -2961,7 +3081,7 @@ msgstr ""
 msgid ""
 "Also avoid naming any files `conftest.c` as this file may be written to by\n"
 "`mkmf`.\n"
-msgstr ""
+msgstr "また、 `conftest.c` というファイル名も、 `mkmf` によって書き込まれるかもしれないので避けます。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:111
@@ -2972,12 +3092,17 @@ msgid ""
 "you'll probably want to go back and learn about the [C API](../c) to do more\n"
 "interesting stuff.\n"
 msgstr ""
+"これにて make で `.so` （またはその他のライブラリ）にコンパイルして、\n"
+"Rubyで `require` できるようになりました。\n"
+"純粋なC言語のコードで `Init` 関数を実装していくこともできますが、\n"
+"たぶんいったん戻って、\n"
+"もっと面白いことをするために [C API](../c.ja) を学ばれるのではないでしょうか。\n"
 
 #. type: Title ##
 #: _posts/2013-01-01-extend.markdown:112
 #, no-wrap
 msgid "Gem"
-msgstr ""
+msgstr "Gem"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:118
@@ -2988,6 +3113,10 @@ msgid ""
 "creating gems, but as far as C extensions go you just need to tell the spec\n"
 "about `extconf.rb`[^rbg]:\n"
 msgstr ""
+"いい感じに拡張が動くようになったら、\n"
+"簡単に配布できるRubyのgemとしてまとめたいはずです。\n"
+"rubygems.org にはgemをつくる上での[詳細なガイド][rbg]がありますが、\n"
+"C拡張に関して言えば `extconf.rb` についてspecに記すだけでよいです[^rbg]。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:122
@@ -2997,6 +3126,9 @@ msgid ""
 "{% include extend/foobar.gemspec %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+"{% highlight ruby %}\n"
+"{% include extend/foobar.gemspec %}\n"
+"{% endhighlight %}\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:125
@@ -3005,18 +3137,21 @@ msgid ""
 "If your gem includes multiple independent extensions, you can organize them in\n"
 "subdirectories of `ext/` and pass all of the `extconf.rb`s to the spec.\n"
 msgstr ""
+"gemが複数の拡張に依存していたら、\n"
+"`ext/` のサブディレクトリにそれぞれ固めて、\n"
+"specに各々の `extconf.rb` を記します。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:127
 #, no-wrap
 msgid "[rbg]: http://guides.rubygems.org/make-your-own-gem/\n"
-msgstr ""
+msgstr "[rbg]: http://guides.rubygems.org/make-your-own-gem/\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:131
 #, no-wrap
 msgid "[^glob]: Check the [official documentation][globals].\n"
-msgstr ""
+msgstr "[^glob]: [公式文書][globals]をご確認ください。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:135
@@ -3025,13 +3160,13 @@ msgid ""
 "[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain\n"
 "         command line flags e.g.  `--vendor`. But I can't find this documented\n"
 "         anywhere.\n"
-msgstr ""
+msgstr "[^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化されていないように見えます。\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:137
 #, no-wrap
 msgid "[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)\n"
-msgstr ""
+msgstr "[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)\n"
 
 #. type: Plain text
 #: _posts/2013-01-01-extend.markdown:139
@@ -3040,6 +3175,8 @@ msgid ""
 "[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb\n"
 "[makefile]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile\n"
 msgstr ""
+"[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb\n"
+"[makefile]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile\n"
 
 #. type: Plain text
 #: _posts/2014-01-01-examples.markdown:14
@@ -3195,3 +3332,8 @@ msgid ""
 "{% include examples/gmp.rb %}\n"
 "{% endhighlight %}\n"
 msgstr ""
+
+#, fuzzy, no-wrap
+#~| msgid "The Ruby C API"
+#~ msgid "Rubyã®C API"
+#~ msgstr "RubyのC API"
