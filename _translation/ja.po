@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2024-10-22 21:20+0900\n"
-"PO-Revision-Date: 2024-10-22 21:08+0900\n"
+"PO-Revision-Date: 2024-10-22 21:21+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -2573,8 +2573,7 @@ msgstr "脚註"
 
 #. type: Footnote intern
 #: ../_posts/2010-01-01-c.markdown:954
-#, fuzzy, no-wrap
-#| msgid "[^intern]: That's a blatant lie. The API _definitely_ lets you mess around with the internal data structures of objects (look for things with names starting with capital R). But it's generally not a good idea and not necessary."
+#, no-wrap
 msgid ""
 "[^intern]: That's a blatant lie. The API _definitely_ lets you mess around\n"
 "           with the internal data structures of objects (look for things with\n"
@@ -2587,8 +2586,7 @@ msgstr ""
 
 #. type: Footnote undef
 #: ../_posts/2010-01-01-c.markdown:959
-#, fuzzy, no-wrap
-#| msgid "[^undef]: There's also `Qundef` representing an undefined value, but this has no Ruby equivalent and is [rarely](#handling-blocks)  [used](#constants-1). In fact, outside of those rare occasions, `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`."
+#, no-wrap
 msgid ""
 "[^undef]: There's also `Qundef` representing an undefined value, but\n"
 "          this has no Ruby equivalent and is [rarely](#handling-blocks)\n"
@@ -2601,8 +2599,7 @@ msgstr ""
 
 #. type: Footnote wrap
 #: ../_posts/2010-01-01-c.markdown:964
-#, fuzzy, no-wrap
-#| msgid "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is actually the same as `rb_eval_string_protect()` due to a [bug][bug2]."
+#, no-wrap
 msgid ""
 "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is\n"
 "         actually the same as `rb_eval_string_protect()` due to a [bug][bug2]."
@@ -2612,8 +2609,7 @@ msgstr ""
 
 #. type: Footnote chr
 #: ../_posts/2010-01-01-c.markdown:967
-#, fuzzy, no-wrap
-#| msgid "[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave unexpected results. `LONG2FIX()` should work."
+#, no-wrap
 msgid ""
 "[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave\n"
 "        unexpected results. `LONG2FIX()` should work."
@@ -2623,8 +2619,7 @@ msgstr ""
 
 #. type: Footnote wchar
 #: ../_posts/2010-01-01-c.markdown:970
-#, fuzzy, no-wrap
-#| msgid "[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had some success just treating them as `char`s, but I think that may have been a happy accident, and could certainly fail on different platforms."
+#, no-wrap
 msgid ""
 "[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had\n"
 "          some success just treating them as `char`s, but I think that may have\n"
@@ -2635,8 +2630,7 @@ msgstr ""
 
 #. type: Footnote clear
 #: ../_posts/2010-01-01-c.markdown:974
-#, fuzzy, no-wrap
-#| msgid "[^clear]: The documentation [states][control] that \"You have to clear the error info... when ignoring the caught exception\" during `rb_protect`. But I can't find any documentation of when it would be cleared for you—it seems like you _always_ have to clear it."
+#, no-wrap
 msgid ""
 "[^clear]: The documentation [states][control] that \"You have to clear the error\n"
 "          info... when ignoring the caught exception\" during `rb_protect`. But I\n"
@@ -2649,8 +2643,7 @@ msgstr ""
 
 #. type: Footnote yield
 #: ../_posts/2010-01-01-c.markdown:979
-#, fuzzy, no-wrap
-#| msgid "[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is never called by anything in Ruby. Odd."
+#, no-wrap
 msgid ""
 "[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is\n"
 "          never called by anything in Ruby. Odd."
@@ -2660,8 +2653,7 @@ msgstr ""
 
 #. type: Footnote break
 #: ../_posts/2010-01-01-c.markdown:982
-#, fuzzy, no-wrap
-#| msgid "[^break]: The documentation [mentions][control] `rb_iter_break()` and `rb_iter_break_value()` for breaking out of a block, but can't you just return early? I can't think of a use-case for these."
+#, no-wrap
 msgid ""
 "[^break]: The documentation [mentions][control] `rb_iter_break()` and\n"
 "          `rb_iter_break_value()` for breaking out of a block, but can't you\n"
@@ -2673,8 +2665,7 @@ msgstr ""
 
 #. type: Footnote int
 #: ../_posts/2010-01-01-c.markdown:986
-#, fuzzy, no-wrap
-#| msgid "[^int]: There is also the function `rb_thread_call_without_gvl2()`. The documentation in `thread.c` says that if it \"detects interrupt, it returns immediately,\" but I'm not sure what this means. If the unblocking function doesn't kill the thread, it still waits for the thread to finish on its own before returning."
+#, no-wrap
 msgid ""
 "[^int]: There is also the function `rb_thread_call_without_gvl2()`. The\n"
 "        documentation in `thread.c` says that if it \"detects interrupt, it\n"
@@ -2688,8 +2679,7 @@ msgstr ""
 
 #. type: Footnote ubf
 #: ../_posts/2010-01-01-c.markdown:992
-#, fuzzy, no-wrap
-#| msgid "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover from deprecated code and has the exact same effect."
+#, no-wrap
 msgid ""
 "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover\n"
 "        from deprecated code and has the exact same effect."
@@ -2700,8 +2690,7 @@ msgstr ""
 
 #. type: Footnote oldwrap
 #: ../_posts/2010-01-01-c.markdown:995
-#, fuzzy, no-wrap
-#| msgid "[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since Ruby 1.9.2. If you're using an older version of Ruby you can check out an older version of this guide on Github to see how it used to be done."
+#, no-wrap
 msgid ""
 "[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since\n"
 "            Ruby 1.9.2. If you're using an older version of Ruby you can check\n"
@@ -2713,8 +2702,7 @@ msgstr ""
 
 #. type: Footnote maybe
 #: ../_posts/2010-01-01-c.markdown:1000
-#, fuzzy, no-wrap
-#| msgid "[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not sure when it is needed."
+#, no-wrap
 msgid ""
 "[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not\n"
 "          sure when it is needed."
@@ -3171,8 +3159,7 @@ msgstr ""
 
 #. type: Footnote err
 #: ../_posts/2012-01-01-embed.markdown:161
-#, fuzzy, no-wrap
-#| msgid "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this function isn't exposed to the API. Is this a normal exception?"
+#, no-wrap
 msgid ""
 "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this\n"
 "        function isn't exposed to the API. Is this a normal exception?"
@@ -3183,8 +3170,7 @@ msgstr ""
 
 #. type: Footnote opt
 #: ../_posts/2012-01-01-embed.markdown:164
-#, fuzzy, no-wrap
-#| msgid "[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This could be related to `ruby_prog_init()`. And really it should be possible to do this without parsing command line options."
+#, no-wrap
 msgid ""
 "[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This\n"
 "        could be related to `ruby_prog_init()`. And really it should be possible\n"
@@ -3196,8 +3182,7 @@ msgstr ""
 
 #. type: Footnote load
 #: ../_posts/2012-01-01-embed.markdown:168
-#, fuzzy, no-wrap
-#| msgid "[^load]: It looks like the function `rb_load_file()` should do this, but I haven't had any luck getting it to work."
+#, no-wrap
 msgid ""
 "[^load]: It looks like the function `rb_load_file()` should do this, but I\n"
 "         haven't had any luck getting it to work."
@@ -3550,8 +3535,7 @@ msgstr "[^glob]: [公式の文書][globals]をご確認ください。"
 
 #. type: Footnote argv
 #: ../_posts/2013-01-01-extend.markdown:132
-#, fuzzy, no-wrap
-#| msgid "[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain command line flags e.g.  `--vendor`. But I can't find this documented anywhere."
+#, no-wrap
 msgid ""
 "[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain\n"
 "         command line flags e.g.  `--vendor`. But I can't find this documented\n"
