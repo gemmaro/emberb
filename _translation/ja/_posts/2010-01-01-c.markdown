@@ -754,7 +754,7 @@ $ git clone https://github.com/ruby/ruby.git
           [used](#constants-1). In fact, outside of those rare occasions,
           `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.
 
-[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is
+[^wrap]: [^wrap]: `rb_eval_string_wrap()`もあり、さぞ便利なのだろうと _思いきや_ 、[バグ][bug2]があるため、`rb_eval_string_protect()`と実は同じです。
          actually the same as `rb_eval_string_protect()` due to a [bug][bug2].
 
 [^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2024-10-22 20:14+0900\n"
-"PO-Revision-Date: 2024-10-22 09:19+0900\n"
+"PO-Revision-Date: 2024-10-22 20:22+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -2616,12 +2616,9 @@ msgstr "[^undef]: 未定義値を表す`Qundef`もありますが、Rubyで等�
 
 #. type: Footnote wrap
 #: ../_posts/2010-01-01-c.markdown:964
-#, fuzzy, no-wrap
-#| msgid ""
-#| "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is\n"
-#| "         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].\n"
+#, no-wrap
 msgid "There's also `rb_eval_string_wrap()` which _should_ be useful, but is"
-msgstr "[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _でしょう_ が、実は[バグ][bug2]のために`rb_eval_string_protect()`と同じものになっています。\n"
+msgstr "[^wrap]: `rb_eval_string_wrap()`もあり、さぞ便利なのだろうと _思いきや_ 、[バグ][bug2]があるため、`rb_eval_string_protect()`と実は同じです。"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:966
