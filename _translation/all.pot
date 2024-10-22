@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: emberb VERSION\n"
-"POT-Creation-Date: 2024-10-22 09:11+0900\n"
+"POT-Creation-Date: 2024-10-22 20:10+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2124,10 +2124,10 @@ msgstr ""
 msgid "Footnotes"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:954
 #, no-wrap
-msgid "[^intern]: That's a blatant lie. The API _definitely_ lets you mess around"
+msgid "That's a blatant lie. The API _definitely_ lets you mess around"
 msgstr ""
 
 #. type: Plain text
@@ -2141,10 +2141,10 @@ msgid ""
 "           and not necessary.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:959
 #, no-wrap
-msgid "[^undef]: There's also `Qundef` representing an undefined value, but"
+msgid "There's also `Qundef` representing an undefined value, but"
 msgstr ""
 
 #. type: Plain text
@@ -2157,12 +2157,10 @@ msgid ""
 "`VALUE`.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:964
 #, no-wrap
-msgid ""
-"[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but "
-"is"
+msgid "There's also `rb_eval_string_wrap()` which _should_ be useful, but is"
 msgstr ""
 
 #. type: Plain text
@@ -2173,10 +2171,10 @@ msgid ""
 "[bug][bug2].\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:967
 #, no-wrap
-msgid "[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave"
+msgid "There is a `CHR2FIX()` macro, but in my tests this sometimes gave"
 msgstr ""
 
 #. type: Plain text
@@ -2185,12 +2183,10 @@ msgstr ""
 msgid "        unexpected results. `LONG2FIX()` should work.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:970
 #, no-wrap
-msgid ""
-"[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests "
-"I had"
+msgid "I don't know what the best way is to handle `wchar_t`. In my tests I had"
 msgstr ""
 
 #. type: Plain text
@@ -2203,12 +2199,10 @@ msgid ""
 "platforms.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:974
 #, no-wrap
-msgid ""
-"[^clear]: The documentation [states][control] that \"You have to clear the "
-"error"
+msgid "The documentation [states][control] that \"You have to clear the error"
 msgstr ""
 
 #. type: Plain text
@@ -2221,12 +2215,10 @@ msgid ""
 "          you—it seems like you _always_ have to clear it.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:979
 #, no-wrap
-msgid ""
-"[^yield]: And there's `rb_yield_block()` which takes two unused arguments "
-"and is"
+msgid "And there's `rb_yield_block()` which takes two unused arguments and is"
 msgstr ""
 
 #. type: Plain text
@@ -2235,10 +2227,10 @@ msgstr ""
 msgid "          never called by anything in Ruby. Odd.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:982
 #, no-wrap
-msgid "[^break]: The documentation [mentions][control] `rb_iter_break()` and"
+msgid "The documentation [mentions][control] `rb_iter_break()` and"
 msgstr ""
 
 #. type: Plain text
@@ -2250,10 +2242,10 @@ msgid ""
 "          just return early? I can't think of a use-case for these.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:986
 #, no-wrap
-msgid "[^int]: There is also the function `rb_thread_call_without_gvl2()`. The"
+msgid "There is also the function `rb_thread_call_without_gvl2()`. The"
 msgstr ""
 
 #. type: Plain text
@@ -2268,10 +2260,10 @@ msgid ""
 "        thread to finish on its own before returning.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:992
 #, no-wrap
-msgid "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover"
+msgid "You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover"
 msgstr ""
 
 #. type: Plain text
@@ -2280,10 +2272,10 @@ msgstr ""
 msgid "        from deprecated code and has the exact same effect.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:995
 #, no-wrap
-msgid "[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since"
+msgid "The `TypedData*` macros are the preferred way to wrap data since"
 msgstr ""
 
 #. type: Plain text
@@ -2297,12 +2289,10 @@ msgid ""
 "            be done.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:1000
 #, no-wrap
-msgid ""
-"[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm "
-"not"
+msgid "There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not"
 msgstr ""
 
 #. type: Plain text
@@ -2311,10 +2301,10 @@ msgstr ""
 msgid "          sure when it is needed.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2010-01-01-c.markdown:1003
 #, no-wrap
-msgid "[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data)."
+msgid "Or use `T_DATA` if the object [wraps a C pointer](#data)."
 msgstr ""
 
 #. type: Link reference
@@ -2689,10 +2679,10 @@ msgstr ""
 msgid "Now you're ready to interact with Ruby! Go back to the [C API](../c)."
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2012-01-01-embed.markdown:161
 #, no-wrap
-msgid "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this"
+msgid "`ruby_init()` uses `error_print()` to get an error message, but this"
 msgstr ""
 
 #. type: Plain text
@@ -2701,12 +2691,10 @@ msgstr ""
 msgid "        function isn't exposed to the API. Is this a normal exception?\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2012-01-01-embed.markdown:164
 #, no-wrap
-msgid ""
-"[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do "
-"anything. This"
+msgid "In my tests I couldn't get flags like `-w` and `-v` to do anything. This"
 msgstr ""
 
 #. type: Plain text
@@ -2718,10 +2706,10 @@ msgid ""
 "        to do this without parsing command line options.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2012-01-01-embed.markdown:168
 #, no-wrap
-msgid "[^load]: It looks like the function `rb_load_file()` should do this, but I"
+msgid "It looks like the function `rb_load_file()` should do this, but I"
 msgstr ""
 
 #. type: Plain text
@@ -2995,18 +2983,16 @@ msgstr ""
 msgid "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2013-01-01-extend.markdown:130
 #, no-wrap
-msgid "[^glob]: Check the [official documentation][globals]."
+msgid "Check the [official documentation][globals]."
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2013-01-01-extend.markdown:132
 #, no-wrap
-msgid ""
-"[^argv]: The official documentation [hints][makefile] that `mkmf` parses "
-"certain"
+msgid "The official documentation [hints][makefile] that `mkmf` parses certain"
 msgstr ""
 
 #. type: Plain text
@@ -3018,12 +3004,10 @@ msgid ""
 "         anywhere.\n"
 msgstr ""
 
-#. type: Link reference
+#. type: Footnote
 #: ../_posts/2013-01-01-extend.markdown:136
 #, no-wrap
-msgid ""
-"[^rbg]: "
-"[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
+msgid "[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
 msgstr ""
 
 #. type: Link reference

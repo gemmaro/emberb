@@ -793,7 +793,7 @@ $ git clone https://github.com/ruby/ruby.git
 [^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not
           sure when it is needed.
 
-[^tdata]: あるいはオブジェクトが[Cのポインタを包む](#data)のなら`T_DATA`を使ってください。
+[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data).
 
 [control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure
 [bug2]: https://bugs.ruby-lang.org/issues/10466
