@@ -136,8 +136,8 @@ specに各々の `extconf.rb` を記します。
 [^glob]: Check the [official documentation][globals].
 
 [^argv]: The official documentation [hints][makefile] that `mkmf` parses certain
-         command line flags e.g.  `--vendor`. But I can't find this documented
-         anywhere.
+command line flags e.g.  `--vendor`. But I can't find this documented
+anywhere.
 
 [^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)
 

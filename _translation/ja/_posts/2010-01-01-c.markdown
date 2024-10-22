@@ -744,54 +744,52 @@ $ git clone https://github.com/ruby/ruby.git
 
 ## 脚註 ##
 
-[^intern]: That's a blatant lie. The API _definitely_ lets you mess around
-           with the internal data structures of objects (look for things with
-           names starting with capital R). But it's generally not a good idea
-           and not necessary.
+[^intern]: That's a blatant lie. The API _definitely_ lets you mess around with the
+internal data structures of objects (look for things with names starting
+with capital R). But it's generally not a good idea and not necessary.
 
-[^undef]: There's also `Qundef` representing an undefined value, but
-          this has no Ruby equivalent and is [rarely](#handling-blocks)
-          [used](#constants-1). In fact, outside of those rare occasions,
-          `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.
+[^undef]: There's also `Qundef` representing an undefined value, but this has no Ruby
+equivalent and is [rarely](#handling-blocks)  [used](#constants-1). In fact,
+outside of those rare occasions, `Qundef` can segfault the VM if Ruby was
+expecting a normal `VALUE`.
 
-[^wrap]: [^wrap]: `rb_eval_string_wrap()`もあり、さぞ便利なのだろうと _思いきや_ 、[バグ][bug2]があるため、`rb_eval_string_protect()`と実は同じです。
-         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].
+[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is
+actually the same as `rb_eval_string_protect()` due to a [bug][bug2].
 
-[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave
-        unexpected results. `LONG2FIX()` should work.
+[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave unexpected
+results. `LONG2FIX()` should work.
 
 [^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had
-          some success just treating them as `char`s, but I think that may have
-          been a happy accident, and could certainly fail on different platforms.
+some success just treating them as `char`s, but I think that may have been a
+happy accident, and could certainly fail on different platforms.
 
 [^clear]: The documentation [states][control] that "You have to clear the error
-          info... when ignoring the caught exception" during `rb_protect`. But I
-          can't find any documentation of when it would be cleared for
-          you—it seems like you _always_ have to clear it.
+info... when ignoring the caught exception" during `rb_protect`. But I can't
+find any documentation of when it would be cleared for you—it seems like you
+_always_ have to clear it.
 
-[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is
-          never called by anything in Ruby. Odd.
+[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is never
+called by anything in Ruby. Odd.
 
 [^break]: The documentation [mentions][control] `rb_iter_break()` and
-          `rb_iter_break_value()` for breaking out of a block, but can't you
-          just return early? I can't think of a use-case for these.
+`rb_iter_break_value()` for breaking out of a block, but can't you just
+return early? I can't think of a use-case for these.
 
 [^int]: There is also the function `rb_thread_call_without_gvl2()`. The
-        documentation in `thread.c` says that if it "detects interrupt, it
-        returns immediately," but I'm not sure what this means. If the
-        unblocking function doesn't kill the thread, it still waits for the
-        thread to finish on its own before returning.
+documentation in `thread.c` says that if it "detects interrupt, it returns
+immediately," but I'm not sure what this means. If the unblocking function
+doesn't kill the thread, it still waits for the thread to finish on its own
+before returning.
 
-[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover
-        from deprecated code and has the exact same effect.
+[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover from
+deprecated code and has the exact same effect.
 
-[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since
-            Ruby 1.9.2. If you're using an older version of Ruby you can check
-            out an older version of this guide on Github to see how it used to
-            be done.
+[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since Ruby
+1.9.2. If you're using an older version of Ruby you can check out an older
+version of this guide on Github to see how it used to be done.
 
-[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not
-          sure when it is needed.
+[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not sure
+when it is needed.
 
 [^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data).
 

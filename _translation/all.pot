@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: emberb VERSION\n"
-"POT-Creation-Date: 2024-10-22 20:14+0900\n"
+"POT-Creation-Date: 2024-10-22 20:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2126,184 +2126,101 @@ msgstr ""
 
 #. type: Footnote intern
 #: ../_posts/2010-01-01-c.markdown:954
-#, no-wrap
-msgid "That's a blatant lie. The API _definitely_ lets you mess around"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:958
-#, markdown-text, no-wrap
 msgid ""
-"           with the internal data structures of objects (look for things "
-"with\n"
-"           names starting with capital R). But it's generally not a good "
-"idea\n"
-"           and not necessary.\n"
+"That's a blatant lie. The API _definitely_ lets you mess around with the "
+"internal data structures of objects (look for things with names starting "
+"with capital R). But it's generally not a good idea and not necessary."
 msgstr ""
 
 #. type: Footnote undef
 #: ../_posts/2010-01-01-c.markdown:959
-#, no-wrap
-msgid "There's also `Qundef` representing an undefined value, but"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:963
-#, markdown-text, no-wrap
 msgid ""
-"          this has no Ruby equivalent and is [rarely](#handling-blocks)\n"
-"          [used](#constants-1). In fact, outside of those rare occasions,\n"
-"          `Qundef` can segfault the VM if Ruby was expecting a normal "
-"`VALUE`.\n"
+"There's also `Qundef` representing an undefined value, but this has no Ruby "
+"equivalent and is [rarely](#handling-blocks)  [used](#constants-1). In fact, "
+"outside of those rare occasions, `Qundef` can segfault the VM if Ruby was "
+"expecting a normal `VALUE`."
 msgstr ""
 
 #. type: Footnote wrap
 #: ../_posts/2010-01-01-c.markdown:964
-#, no-wrap
-msgid "There's also `rb_eval_string_wrap()` which _should_ be useful, but is"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:966
-#, markdown-text, no-wrap
 msgid ""
-"         actually the same as `rb_eval_string_protect()` due to a "
-"[bug][bug2].\n"
+"There's also `rb_eval_string_wrap()` which _should_ be useful, but is "
+"actually the same as `rb_eval_string_protect()` due to a [bug][bug2]."
 msgstr ""
 
 #. type: Footnote chr
 #: ../_posts/2010-01-01-c.markdown:967
-#, no-wrap
-msgid "There is a `CHR2FIX()` macro, but in my tests this sometimes gave"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:969
-#, markdown-text, no-wrap
-msgid "        unexpected results. `LONG2FIX()` should work.\n"
+msgid ""
+"There is a `CHR2FIX()` macro, but in my tests this sometimes gave unexpected "
+"results. `LONG2FIX()` should work."
 msgstr ""
 
 #. type: Footnote wchar
 #: ../_posts/2010-01-01-c.markdown:970
-#, no-wrap
-msgid "I don't know what the best way is to handle `wchar_t`. In my tests I had"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:973
-#, markdown-text, no-wrap
 msgid ""
-"          some success just treating them as `char`s, but I think that may "
-"have\n"
-"          been a happy accident, and could certainly fail on different "
-"platforms.\n"
+"I don't know what the best way is to handle `wchar_t`. In my tests I had "
+"some success just treating them as `char`s, but I think that may have been a "
+"happy accident, and could certainly fail on different platforms."
 msgstr ""
 
 #. type: Footnote clear
 #: ../_posts/2010-01-01-c.markdown:974
-#, no-wrap
-msgid "The documentation [states][control] that \"You have to clear the error"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:978
-#, markdown-text, no-wrap
 msgid ""
-"          info... when ignoring the caught exception\" during "
-"`rb_protect`. But I\n"
-"          can't find any documentation of when it would be cleared for\n"
-"          you—it seems like you _always_ have to clear it.\n"
+"The documentation [states][control] that \"You have to clear the error "
+"info... when ignoring the caught exception\" during `rb_protect`. But I "
+"can't find any documentation of when it would be cleared for you—it seems "
+"like you _always_ have to clear it."
 msgstr ""
 
 #. type: Footnote yield
 #: ../_posts/2010-01-01-c.markdown:979
-#, no-wrap
-msgid "And there's `rb_yield_block()` which takes two unused arguments and is"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:981
-#, markdown-text, no-wrap
-msgid "          never called by anything in Ruby. Odd.\n"
+msgid ""
+"And there's `rb_yield_block()` which takes two unused arguments and is never "
+"called by anything in Ruby. Odd."
 msgstr ""
 
 #. type: Footnote break
 #: ../_posts/2010-01-01-c.markdown:982
-#, no-wrap
-msgid "The documentation [mentions][control] `rb_iter_break()` and"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:985
-#, markdown-text, no-wrap
 msgid ""
-"          `rb_iter_break_value()` for breaking out of a block, but can't "
-"you\n"
-"          just return early? I can't think of a use-case for these.\n"
+"The documentation [mentions][control] `rb_iter_break()` and "
+"`rb_iter_break_value()` for breaking out of a block, but can't you just "
+"return early? I can't think of a use-case for these."
 msgstr ""
 
 #. type: Footnote int
 #: ../_posts/2010-01-01-c.markdown:986
-#, no-wrap
-msgid "There is also the function `rb_thread_call_without_gvl2()`. The"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:991
-#, markdown-text, no-wrap
 msgid ""
-"        documentation in `thread.c` says that if it \"detects interrupt, "
-"it\n"
-"        returns immediately,\" but I'm not sure what this means. If the\n"
-"        unblocking function doesn't kill the thread, it still waits for "
-"the\n"
-"        thread to finish on its own before returning.\n"
+"There is also the function `rb_thread_call_without_gvl2()`. The "
+"documentation in `thread.c` says that if it \"detects interrupt, it returns "
+"immediately,\" but I'm not sure what this means. If the unblocking function "
+"doesn't kill the thread, it still waits for the thread to finish on its own "
+"before returning."
 msgstr ""
 
 #. type: Footnote ubf
 #: ../_posts/2010-01-01-c.markdown:992
-#, no-wrap
-msgid "You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:994
-#, markdown-text, no-wrap
-msgid "        from deprecated code and has the exact same effect.\n"
+msgid ""
+"You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover from "
+"deprecated code and has the exact same effect."
 msgstr ""
 
 #. type: Footnote oldwrap
 #: ../_posts/2010-01-01-c.markdown:995
-#, no-wrap
-msgid "The `TypedData*` macros are the preferred way to wrap data since"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:999
-#, markdown-text, no-wrap
 msgid ""
-"            Ruby 1.9.2. If you're using an older version of Ruby you can "
-"check\n"
-"            out an older version of this guide on Github to see how it used "
-"to\n"
-"            be done.\n"
+"The `TypedData*` macros are the preferred way to wrap data since Ruby "
+"1.9.2. If you're using an older version of Ruby you can check out an older "
+"version of this guide on Github to see how it used to be done."
 msgstr ""
 
 #. type: Footnote maybe
 #: ../_posts/2010-01-01-c.markdown:1000
-#, no-wrap
-msgid "There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:1002
-#, markdown-text, no-wrap
-msgid "          sure when it is needed.\n"
+msgid ""
+"There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not sure "
+"when it is needed."
 msgstr ""
 
 #. type: Footnote tdata
 #: ../_posts/2010-01-01-c.markdown:1003
-#, no-wrap
 msgid "Or use `T_DATA` if the object [wraps a C pointer](#data)."
 msgstr ""
 
@@ -2681,41 +2598,24 @@ msgstr ""
 
 #. type: Footnote err
 #: ../_posts/2012-01-01-embed.markdown:161
-#, no-wrap
-msgid "`ruby_init()` uses `error_print()` to get an error message, but this"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:163
-#, markdown-text, no-wrap
-msgid "        function isn't exposed to the API. Is this a normal exception?\n"
+msgid ""
+"`ruby_init()` uses `error_print()` to get an error message, but this "
+"function isn't exposed to the API. Is this a normal exception?"
 msgstr ""
 
 #. type: Footnote opt
 #: ../_posts/2012-01-01-embed.markdown:164
-#, no-wrap
-msgid "In my tests I couldn't get flags like `-w` and `-v` to do anything. This"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:167
-#, markdown-text, no-wrap
 msgid ""
-"        could be related to `ruby_prog_init()`. And really it should be "
-"possible\n"
-"        to do this without parsing command line options.\n"
+"In my tests I couldn't get flags like `-w` and `-v` to do anything. This "
+"could be related to `ruby_prog_init()`. And really it should be possible to "
+"do this without parsing command line options."
 msgstr ""
 
 #. type: Footnote load
 #: ../_posts/2012-01-01-embed.markdown:168
-#, no-wrap
-msgid "It looks like the function `rb_load_file()` should do this, but I"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:169
-#, markdown-text, no-wrap
-msgid "         haven't had any luck getting it to work.\n"
+msgid ""
+"It looks like the function `rb_load_file()` should do this, but I haven't "
+"had any luck getting it to work."
 msgstr ""
 
 #. type: Title ##
@@ -2985,28 +2885,19 @@ msgstr ""
 
 #. type: Footnote glob
 #: ../_posts/2013-01-01-extend.markdown:130
-#, no-wrap
 msgid "Check the [official documentation][globals]."
 msgstr ""
 
 #. type: Footnote argv
 #: ../_posts/2013-01-01-extend.markdown:132
-#, no-wrap
-msgid "The official documentation [hints][makefile] that `mkmf` parses certain"
-msgstr ""
-
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:135
-#, markdown-text, no-wrap
 msgid ""
-"         command line flags e.g.  `--vendor`. But I can't find this "
-"documented\n"
-"         anywhere.\n"
+"The official documentation [hints][makefile] that `mkmf` parses certain "
+"command line flags e.g.  `--vendor`. But I can't find this documented "
+"anywhere."
 msgstr ""
 
 #. type: Footnote rbg
 #: ../_posts/2013-01-01-extend.markdown:136
-#, no-wrap
 msgid "[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
 msgstr ""
 
