@@ -165,12 +165,12 @@ Rubyは今のところコードの他のコンパイル・実行を別々にす�
 
 ## 脚註 ##
 
-[^err]: `ruby_init()`では、エラーメッセージを取得するために`error_print()` を使います。
-        しかし、この関数はAPIとして提供されていません。
-        これは普通に例外的なものなのでしょうか。
+[^err]: `ruby_init()` uses `error_print()` to get an error message, but this
+        function isn't exposed to the API. Is this a normal exception?
 
-[^opt]: 筆者の実験では、`-w` や `-v` といったフラグは得られませんでした。
-        `ruby_prog_init()` が関係するのかもしれません。
-        また、コマンドラインオプションを解析せず、これを実現できるはずです。
+[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This
+        could be related to `ruby_prog_init()`. And really it should be possible
+        to do this without parsing command line options.
 
-[^load]: `rb_load_file()` 関数でこれができそうですが、動かせた試しがありません。
+[^load]: It looks like the function `rb_load_file()` should do this, but I
+         haven't had any luck getting it to work.
