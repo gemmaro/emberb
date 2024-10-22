@@ -5,18 +5,19 @@ title: CでRubyを実行する
 
 ## コンパイルする ##
 
-Embedding Ruby requires one header `ruby.h`, which includes a
-platform-specific header `ruby/config.h`. You will probably need to tell
-your compiler about the include paths for these headers. You will also need
-to link with the Ruby lib.  On my machine, my minimal compiler options are:
+Rubyを組込むには、`ruby.h`ヘッダが要ります。
+このファイルには、プラットフォーム固有の`ruby/config.h`ヘッダが含まれます。
+恐らく、これらのヘッダのincludeパスをコンパイラに伝える必要があるでしょう。
+Rubyライブラリともリンクする必要があります。
+私の環境では、最小限のコンパイラオプションは次の通りです。
 
 {% highlight shell_session %}
 $ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0
 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby
 {% endhighlight %}
 
-If available, you can use `pkg-config` to get the appropriate options for
-your OS:
+しかしもし可能であれば、`pkg-config`を使うと良いでしょう。
+自分のOSに適したオプションが得られます。
 
 {% highlight shell_session %}
 $ pkg-config --cflags --libs ruby-{{ site.rbversion }}
@@ -47,9 +48,12 @@ On Windows, I highly recommend using the
 gives you access to GCC on the Windows command line as well as `pkgconf` for
 getting the build flags.
 
-{% highlight shell_session %} $ ridk enable # enable devkit $ pkgconf.exe
---cflags --libs C:\Ruby33-x64\lib\pkgconfig\ruby-3.3.pc # show GCC args $
-gcc foo.c ...  {% endhighlight %}
+{% highlight shell_session %}
+$ ridk enable # devkitを有効にする
+$ pkgconf.exe --cflags --libs C:\Ruby33-x64\lib\pkgconfig\ruby-3.3.pc #
+GCCの引数を表示
+$ gcc foo.c ...
+{% endhighlight %}
 
 Note that the GCC args might not be parsed correctly by PowerShell, so use
 `cmd` instead.  Also the Ruby 3.3 installer is missing the lib location from
