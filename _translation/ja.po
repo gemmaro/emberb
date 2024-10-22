@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2024-10-22 09:11+0900\n"
-"PO-Revision-Date: 2024-02-24 12:24+0900\n"
+"PO-Revision-Date: 2024-10-22 09:19+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -2047,17 +2047,15 @@ msgstr ""
 
 #. type: Link reference
 #: ../_posts/2010-01-01-c.markdown:759
-#, fuzzy, no-wrap
-#| msgid "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization [place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+#, no-wrap
 msgid "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization"
-msgstr "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization [place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+msgstr "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization"
 
 #. type: Link reference
 #: ../_posts/2010-01-01-c.markdown:760
-#, fuzzy, no-wrap
-#| msgid "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization [place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+#, no-wrap
 msgid "[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
-msgstr "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization [place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+msgstr "[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:769
@@ -2804,17 +2802,15 @@ msgstr "[^tdata]: あるいはオブジェクトが[Cのポインタを包む](#
 # 空白を空けないことによって意図しない改行を回避しています
 #. type: Link reference
 #: ../_posts/2010-01-01-c.markdown:1005
-#, fuzzy, no-wrap
-#| msgid "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+#, no-wrap
 msgid "[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure"
-msgstr "[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+msgstr "[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure"
 
 #. type: Link reference
 #: ../_posts/2010-01-01-c.markdown:1006
-#, fuzzy, no-wrap
-#| msgid "[bug]: https://bugs.ruby-lang.org/issues/9089"
+#, no-wrap
 msgid "[bug2]: https://bugs.ruby-lang.org/issues/10466"
-msgstr "[bug]: https://bugs.ruby-lang.org/issues/9089"
+msgstr "[bug2]: https://bugs.ruby-lang.org/issues/10466"
 
 #. type: Title ##
 #: ../_posts/2012-01-01-embed.markdown:1
@@ -2831,23 +2827,17 @@ msgstr "コンパイルする"
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:12
-#, fuzzy
-#| msgid ""
-#| "Embedding Ruby requires one header `ruby.h`, which includes a platform-"
-#| "specific header `ruby/config.h`. You will probably need to tell your "
-#| "compiler about the include paths for these headers. You will also need to "
-#| "link with the Ruby lib.  On my machine, my minimal compiler options are"
 msgid ""
 "Embedding Ruby requires one header `ruby.h`, which includes a platform-"
 "specific header `ruby/config.h`. You will probably need to tell your "
 "compiler about the include paths for these headers. You will also need to "
 "link with the Ruby lib.  On my machine, my minimal compiler options are:"
 msgstr ""
-"Rubyを組込むには `ruby.h` という1つのヘッダファイルが必要です。このファイルは"
-"プラットフォーム固有のヘッダである `ruby/config.h` を含めます。場合によっては"
-"コンパイラにヘッダファイルの含めるファイルパスを指定する必要があります。Ruby"
-"ライブラリとリンクする必要もあります。私の環境では、最小のコンパイラオプショ"
-"ンは以下のようになります。"
+"Rubyを組込むには、`ruby.h`ヘッダが要ります。\n"
+"このファイルには、プラットフォーム固有の`ruby/config.h`ヘッダが含まれます。\n"
+"恐らく、これらのヘッダのincludeパスをコンパイラに伝える必要があるでしょう。\n"
+"Rubyライブラリともリンクする必要があります。\n"
+"私の環境では、最小限のコンパイラオプションは次の通りです。"
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:16
@@ -2863,16 +2853,12 @@ msgstr ""
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:18
-#, fuzzy
-#| msgid ""
-#| "Though, if available, you should really use `pkg-config` to get the "
-#| "appropriate options for your distribution:"
 msgid ""
 "If available, you can use `pkg-config` to get the appropriate options for "
 "your OS:"
 msgstr ""
-"しかしもし可能であれば、ぜひとも `pkg-config` を使って、\n"
-"各々のディストリビューションに適したオプションが得られるようにするべきです。"
+"しかしもし可能であれば、`pkg-config`を使うと良いでしょう。\n"
+"自分のOSに適したオプションが得られます。"
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:22
@@ -2960,17 +2946,15 @@ msgstr ""
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:51
-#, fuzzy
-#| msgid ""
-#| "{% highlight shell_session %} $ pkg-config --cflags --libs ruby-{{ site."
-#| "rbversion }} {% endhighlight %}"
 msgid ""
 "{% highlight shell_session %} $ ridk enable # enable devkit $ pkgconf.exe --"
 "cflags --libs C:\\Ruby33-x64\\lib\\pkgconfig\\ruby-3.3.pc # show GCC args $ "
 "gcc foo.c ...  {% endhighlight %}"
 msgstr ""
 "{% highlight shell_session %}\n"
-"$ pkg-config --cflags --libs ruby-{{ site.rbversion }}\n"
+"$ ridk enable # devkitを有効にする\n"
+"$ pkgconf.exe --cflags --libs C:\\Ruby33-x64\\lib\\pkgconfig\\ruby-3.3.pc # GCCの引数を表示\n"
+"$ gcc foo.c ...\n"
 "{% endhighlight %}"
 
 #. type: Plain text
@@ -3698,18 +3682,16 @@ msgstr "[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides.
 # 空白を空けないことによって意図しない改行を回避しています
 #. type: Link reference
 #: ../_posts/2013-01-01-extend.markdown:138
-#, fuzzy, no-wrap
-#| msgid "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+#, no-wrap
 msgid "[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb"
-msgstr "[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+msgstr "[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb"
 
 # 空白を空けないことによって意図しない改行を回避しています
 #. type: Link reference
 #: ../_posts/2013-01-01-extend.markdown:139
-#, fuzzy, no-wrap
-#| msgid "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+#, no-wrap
 msgid "[makefile]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile"
-msgstr "[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+msgstr "[makefile]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile"
 
 #. type: Plain text
 #: ../_posts/2014-01-01-examples.markdown:14
@@ -3795,12 +3777,9 @@ msgstr ""
 
 #. type: Link reference
 #: ../_posts/2014-01-01-examples.markdown:44
-#, fuzzy, no-wrap
-#| msgid "[gmp]: https://gmplib.org/ [gem]: https://github.com/srawlins/gmp"
+#, no-wrap
 msgid "[gem]: https://github.com/srawlins/gmp"
-msgstr ""
-"[gmp]: https://gmplib.org/\n"
-"[gem]: https://github.com/srawlins/gmp"
+msgstr "[gem]: https://github.com/srawlins/gmp"
 
 #. type: Plain text
 #: ../_posts/2014-01-01-examples.markdown:47
@@ -3966,10 +3945,9 @@ msgstr ""
 
 #. type: Link reference
 #: ../README.md:24
-#, fuzzy, no-wrap
-#| msgid "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
+#, no-wrap
 msgid "[b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc"
-msgstr "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
+msgstr "[b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc"
 
 #. type: Link reference
 #: ../README.md:25
@@ -4046,31 +4024,27 @@ msgstr ""
 
 #. type: Link reference
 #: ../index.markdown:18
-#, fuzzy, no-wrap
-#| msgid "start SDL"
+#, no-wrap
 msgid "[start]: c"
-msgstr "SDLを開始"
+msgstr "[start]: c"
 
 #. type: Link reference
 #: ../index.markdown:19
-#, fuzzy, no-wrap
-#| msgid "[gh]: https://github.com/silverhammermba/emberb"
+#, no-wrap
 msgid "[repo]: https://github.com/silverhammermba/emberb"
-msgstr "[gh]: https://github.com/silverhammermba/emberb"
+msgstr "[repo]: https://github.com/silverhammermba/emberb"
 
 #. type: Link reference
 #: ../index.markdown:20
-#, fuzzy, no-wrap
-#| msgid "[gh]: https://github.com/silverhammermba/emberb"
+#, no-wrap
 msgid "[iss]: https://github.com/silverhammermba/emberb/issues/new"
-msgstr "[gh]: https://github.com/silverhammermba/emberb"
+msgstr "[iss]: https://github.com/silverhammermba/emberb/issues/new"
 
 #. type: Link reference
 #: ../index.markdown:21
-#, fuzzy, no-wrap
-#| msgid "[gh]: https://github.com/silverhammermba/emberb"
+#, no-wrap
 msgid "[pull]: https://github.com/silverhammermba/emberb/pulls"
-msgstr "[gh]: https://github.com/silverhammermba/emberb"
+msgstr "[pull]: https://github.com/silverhammermba/emberb/pulls"
 
 #. type: comment
 #: ../_includes/embed/simple.c:5
