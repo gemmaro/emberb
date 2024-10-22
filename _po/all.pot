@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: silverhammermba.github.io/emberb VERSION\n"
-"POT-Creation-Date: 2023-04-08 13:32+0900\n"
+"POT-Creation-Date: 2023-05-23 00:19+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2970,7 +2970,7 @@ msgid "{% highlight ruby %} {% include examples/gmp.rb %} {% endhighlight %}"
 msgstr ""
 
 #. type: Plain text
-#: ./README.md:3
+#: README.md:3
 #, markdown-text
 msgid ""
 "This is the source for my online guide to Ruby's C API. Visit the live site "
@@ -2978,19 +2978,19 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ./README.md:5
+#: README.md:5
 #, markdown-text
 msgid "[io]: http://silverhammermba.github.io/emberb"
 msgstr ""
 
 #. type: Title #
-#: ./README.md:6
+#: README.md:6
 #, markdown-text, no-wrap
 msgid "Why I'm Making This Guide"
 msgstr ""
 
 #. type: Plain text
-#: ./README.md:11
+#: README.md:11
 #, markdown-text
 msgid ""
 "Oh my god there are so [many][g] [freaking][f] [guides][e] [to][d] "
@@ -2999,43 +2999,43 @@ msgid ""
 msgstr ""
 
 #. type: Bullet: '* '
-#: ./README.md:18
+#: README.md:18
 #, markdown-text
 msgid "Most of them are outdated"
 msgstr ""
 
 #. type: Bullet: '* '
-#: ./README.md:18
+#: README.md:18
 #, markdown-text
 msgid "Most fail to cover different approaches when they are available"
 msgstr ""
 
 #. type: Bullet: '* '
-#: ./README.md:18
+#: README.md:18
 #, markdown-text
 msgid "Many cover only very specific use-cases"
 msgstr ""
 
 #. type: Bullet: '* '
-#: ./README.md:18
+#: README.md:18
 #, markdown-text
 msgid "Many have bad recommendations"
 msgstr ""
 
 #. type: Bullet: '* '
-#: ./README.md:18
+#: README.md:18
 #, markdown-text
 msgid "Many fail to explain _when_ and _why_ things are needed"
 msgstr ""
 
 #. type: Bullet: '* '
-#: ./README.md:18
+#: README.md:18
 #, markdown-text
 msgid "Many try to be exhaustive rather getting the reader up and running quickly"
 msgstr ""
 
 #. type: Plain text
-#: ./README.md:22
+#: README.md:22
 #, markdown-text
 msgid ""
 "And it struck me that all of these problems come from these guides largely "
@@ -3045,7 +3045,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ./README.md:29
+#: README.md:29
 #, markdown-text
 msgid ""
 "[a]: "
@@ -3056,4 +3056,51 @@ msgid ""
 "[e]: https://gist.github.com/jefftrull/1305431 [f]: "
 "http://metaeditor.sourceforge.net/embed/ [g]: "
 "http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
+msgstr ""
+
+#. type: YAML Front Matter: layout
+#: index.markdown:1
+#, no-wrap
+msgid "default"
+msgstr ""
+
+#. type: YAML Front Matter: title
+#: index.markdown:1
+#, no-wrap
+msgid "The Definitive Guide to Ruby's C API"
+msgstr ""
+
+#. type: Plain text
+#: index.markdown:10
+#, markdown-text, no-wrap
+msgid ""
+"<div class=\"container\">\n"
+"<div class=\"jumbotron\">\n"
+"This site is a complete, practical guide to using Ruby's C API. Get "
+"started\n"
+"[here][start].\n"
+msgstr ""
+
+#. type: Plain text
+#: index.markdown:17
+#, markdown-text, no-wrap
+msgid ""
+"This site is generated from a [Github repo][repo]. If something isn't "
+"working\n"
+"the way I described it or you notice a gaping hole in the guide, please "
+"[submit\n"
+"an issue][iss]. If you know a better way of doing something than I do, "
+"please\n"
+"consider [submitting a pull request][pull].\n"
+"</div>\n"
+"</div>\n"
+msgstr ""
+
+#. type: Plain text
+#: index.markdown:21
+#, markdown-text
+msgid ""
+"[start]: c [repo]: https://github.com/silverhammermba/emberb [iss]: "
+"https://github.com/silverhammermba/emberb/issues/new [pull]: "
+"https://github.com/silverhammermba/emberb/pulls"
 msgstr ""

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
-"POT-Creation-Date: 2023-04-08 13:32+0900\n"
-"PO-Revision-Date: 2023-05-03 09:26+0900\n"
+"POT-Creation-Date: 2023-05-23 00:19+0900\n"
+"PO-Revision-Date: 2023-05-23 00:28+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -132,10 +132,8 @@ msgid ""
 "API."
 msgstr ""
 "目標によってC言語のコードの組み立てかたは変わってきます。\n"
-"C言語にRubyインタプリタを組込みたければ、\n"
-"[C言語でRubyを実行する](../embed.ja)をお読みください。\n"
-"コンパイルされたC言語のライブラリを `require` したければ、\n"
-"[RubyでC言語を実行する](../extend.ja)をお読みください。\n"
+"C言語にRubyインタプリタを組込みたければ、[C言語でRubyを実行する](../embed)をお読みください。\n"
+"コンパイルされたC言語のライブラリを `require` したければ、[RubyでC言語を実行する](../extend)をお読みください。\n"
 "どちらかを読み終えたら、ここに戻ってきてAPIについて学びましょう。"
 
 #. type: Title ##
@@ -3000,7 +2998,7 @@ msgstr "やったね"
 msgid "Now you're ready to interact with Ruby! Go back to the [C API](../c)."
 msgstr ""
 "これでRubyとやりとりできました！\n"
-"[C API](../c.ja)に戻りましょう。"
+"[C API](../c)に戻りましょう。"
 
 #. type: Plain text
 #: _posts/2012-01-01-embed.markdown:127
@@ -3324,10 +3322,8 @@ msgid ""
 "but you'll probably want to go back and learn about the [C API](../c) to do "
 "more interesting stuff."
 msgstr ""
-"これにてmakeで`.so`（またはその他のライブラリ）にコンパイルして、Rubyで"
-"`require`できるようになりました。純粋なC言語のコードで`Init`関数を実装してい"
-"くこともできますが、たぶんいったん戻って、もっと面白いことをするために[C API]"
-"(../c.ja)を学ばれるのではないでしょうか。"
+"これにてmakeで`.so`（またはその他のライブラリ）にコンパイルして、Rubyで`require`できるようになりました。\n"
+"純粋なC言語のコードで`Init`関数を実装していくこともできますが、たぶんいったん戻って、もっと面白いことをするために[C API](../c)を学ばれるのではないでしょうか。"
 
 #. type: Title ##
 #: _posts/2013-01-01-extend.markdown:112
@@ -3665,3 +3661,58 @@ msgstr ""
 "[e]:https://gist.github.com/jefftrull/1305431\n"
 "[f]:http://metaeditor.sourceforge.net/embed/\n"
 "[g]:http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
+
+#. type: YAML Front Matter: layout
+#: index.markdown:1
+#, no-wrap
+msgid "default"
+msgstr "default"
+
+#. type: YAML Front Matter: title
+#: index.markdown:1
+#, no-wrap
+msgid "The Definitive Guide to Ruby's C API"
+msgstr "RubyのC APIの手引き 決定版"
+
+#. type: Plain text
+#: index.markdown:10
+#, no-wrap
+msgid ""
+"<div class=\"container\">\n"
+"<div class=\"jumbotron\">\n"
+"This site is a complete, practical guide to using Ruby's C API. Get started\n"
+"[here][start].\n"
+msgstr ""
+"<div class=\"container\">\n"
+"<div class=\"jumbotron\">\n"
+"本サイトはRubyのC APIを使うための完全で実践的な手引きです。\n"
+"[こちら][start]から始めてください。\n"
+
+#. type: Plain text
+#: index.markdown:17
+#, no-wrap
+msgid ""
+"This site is generated from a [Github repo][repo]. If something isn't working\n"
+"the way I described it or you notice a gaping hole in the guide, please [submit\n"
+"an issue][iss]. If you know a better way of doing something than I do, please\n"
+"consider [submitting a pull request][pull].\n"
+"</div>\n"
+"</div>\n"
+msgstr ""
+"本サイトは[Githubのリポジトリ][repo]から生成されました。\n"
+"何か説明した通りに動かなかったり手引きの不備に気付いたら[チケットを立てて][iss]ください。\n"
+"ここで書かれているものより良い方法を知っていたら[プルリクエストを送ることを][pull]ご検討ください。\n"
+"</div>\n"
+"</div>\n"
+
+#. type: Plain text
+#: index.markdown:21
+msgid ""
+"[start]: c [repo]: https://github.com/silverhammermba/emberb [iss]: https://"
+"github.com/silverhammermba/emberb/issues/new [pull]: https://github.com/"
+"silverhammermba/emberb/pulls"
+msgstr ""
+"[start]: c\n"
+"[repo]: https://github.com/silverhammermba/emberb\n"
+"[iss]: https://github.com/silverhammermba/emberb/issues/new\n"
+"[pull]: https://github.com/silverhammermba/emberb/pulls"

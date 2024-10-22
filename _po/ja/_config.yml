@@ -1,0 +1,8 @@
+name: The Definitive Guide to Ruby's C API
+highlighter: rouge
+# baseurl: /
+markdown: kramdown
+permalink: /:categories/:title/
+kramdown:
+  parse_block_html: true
+rbversion: 3.0
