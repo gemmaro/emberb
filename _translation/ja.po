@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
 "POT-Creation-Date: 2024-10-22 20:23+0900\n"
-"PO-Revision-Date: 2024-10-22 20:22+0900\n"
+"PO-Revision-Date: 2024-10-22 20:45+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -2573,157 +2573,89 @@ msgstr "脚註"
 
 #. type: Footnote intern
 #: ../_posts/2010-01-01-c.markdown:954
-#, fuzzy
-#| msgid ""
-#| "[^intern]: That's a blatant lie. The API _definitely_ lets you mess "
-#| "around\n"
-#| "           with the internal data structures of objects (look for things "
-#| "with\n"
-#| "           names starting with capital R). But it's generally not a good "
-#| "idea\n"
-#| "           and not necessary.\n"
 msgid ""
 "That's a blatant lie. The API _definitely_ lets you mess around with the "
 "internal data structures of objects (look for things with names starting "
 "with capital R). But it's generally not a good idea and not necessary."
 msgstr ""
-"[^intern]: 完膚なきまでの嘘です。\n"
-"           APIは*確実に*オブジェクトの内部データ構造を滅茶苦茶にできます（名"
-"前が大文字Rで始まるものを探してください）。\n"
-"           しかし一般には名案にはなりませんし必要でもないのです。\n"
+"まったくの嘘っぱちです。\n"
+"APIにより、*確実に*オブジェクトの内部データ構造を滅茶苦茶にできます（名前が大文字Rで始まるものを探してみてください）。\n"
+"しかし一般には感心しませんし、必要でもないのです。"
 
 #. type: Footnote undef
 #: ../_posts/2010-01-01-c.markdown:959
-#, fuzzy
-#| msgid ""
-#| "[^undef]: There's also `Qundef` representing an undefined value, but\n"
-#| "          this has no Ruby equivalent and is [rarely](#handling-blocks)\n"
-#| "          [used](#constants-1). In fact, outside of those rare "
-#| "occasions,\n"
-#| "          `Qundef` can segfault the VM if Ruby was expecting a normal "
-#| "`VALUE`.\n"
 msgid ""
 "There's also `Qundef` representing an undefined value, but this has no Ruby "
 "equivalent and is [rarely](#handling-blocks)  [used](#constants-1). In fact, "
 "outside of those rare occasions, `Qundef` can segfault the VM if Ruby was "
 "expecting a normal `VALUE`."
 msgstr ""
-"[^undef]: 未定義値を表す`Qundef`もありますが、Rubyで等価なものはなく[滅多に]"
-"(#handling-blocks)[使われ](#constants-1)ないものです。実際、こうした稀な出現"
-"はさておき、Rubyで通常の`VALUE`が期待するところで`Qundef`があるとVMはセグフォ"
-"します。\n"
+"未定義値を表す`Qundef`もあります。\n"
+"しかし、Rubyでそれと同じものはなく、[滅多に](#handling-blocks)[使われ](#constants-1)ません。\n"
+"実際、こうして稀に出てくることはありますが、Rubyで通常の`VALUE`が期待されるところに`Qundef`があると、VMはセグフォします。"
 
 #. type: Footnote wrap
 #: ../_posts/2010-01-01-c.markdown:964
-#, fuzzy
-#| msgid ""
-#| "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, "
-#| "but is\n"
-#| "         actually the same as `rb_eval_string_protect()` due to a [bug]"
-#| "[bug2].\n"
 msgid ""
 "There's also `rb_eval_string_wrap()` which _should_ be useful, but is "
 "actually the same as `rb_eval_string_protect()` due to a [bug][bug2]."
 msgstr ""
-"[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _でしょう_ が、実は[バ"
-"グ][bug2]のために`rb_eval_string_protect()`と同じものになっています。\n"
+"`rb_eval_string_wrap()`もあり、きっと便利なの*でしょう*。\n"
+"しかし実は[バグ][bug2]があり、`rb_eval_string_protect()`と同じものになっています。"
 
 #. type: Footnote chr
 #: ../_posts/2010-01-01-c.markdown:967
-#, fuzzy
-#| msgid ""
-#| "[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes "
-#| "gave\n"
-#| "        unexpected results. `LONG2FIX()` should work.\n"
 msgid ""
 "There is a `CHR2FIX()` macro, but in my tests this sometimes gave unexpected "
 "results. `LONG2FIX()` should work."
 msgstr ""
-"[^chr]: `CHR2FIX()`マクロもありますが、筆者が試したところ時々思いがけない結果"
-"になりました。`LONG2FIX()`はうまくいきます。\n"
+"`CHR2FIX()`マクロがありますが、筆者が試したところ、思いがけない結果になることがありました。\n"
+"`LONG2FIX()`は正しく機能するでしょう。"
 
 #. type: Footnote wchar
 #: ../_posts/2010-01-01-c.markdown:970
-#, fuzzy
-#| msgid ""
-#| "[^wchar]: I don't know what the best way is to handle `wchar_t`. In my "
-#| "tests I had\n"
-#| "          some success just treating them as `char`s, but I think that "
-#| "may have\n"
-#| "          been a happy accident, and could certainly fail on different "
-#| "platforms.\n"
 msgid ""
 "I don't know what the best way is to handle `wchar_t`. In my tests I had "
 "some success just treating them as `char`s, but I think that may have been a "
 "happy accident, and could certainly fail on different platforms."
 msgstr ""
-"[^wchar]: `wchar_t`を扱う一番の方法はわかりません。試したところ単なる`char`と"
-"して扱うことに成功したことがありますが、それはたまたま運が良かっただけで、違"
-"うプラットフォームではきっと失敗することでしょう。\n"
+"`wchar_t`を扱う、最も良い方法はわかりません。\n"
+"試したところ、単なる`char`として扱えたことがありますが、それはたまたま運が良かっただけで、違うプラットフォームではきっと失敗することでしょう。"
 
 #. type: Footnote clear
 #: ../_posts/2010-01-01-c.markdown:974
-#, fuzzy
-#| msgid ""
-#| "[^clear]: The documentation [states][control] that \"You have to clear "
-#| "the error\n"
-#| "          info... when ignoring the caught exception\" during "
-#| "`rb_protect`. But I\n"
-#| "          can't find any documentation of when it would be cleared for\n"
-#| "          you—it seems like you _always_ have to clear it.\n"
 msgid ""
 "The documentation [states][control] that \"You have to clear the error "
 "info... when ignoring the caught exception\" during `rb_protect`. But I "
 "can't find any documentation of when it would be cleared for you—it seems "
 "like you _always_ have to clear it."
 msgstr ""
-"[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場"
-"合][when]はエラー情報を消去しなければいけない」と[記述][control]されていま"
-"す。どのような場合に消去すべきかについてのドキュメントは見付かっていません。*"
-"常に*消去しなければいけないように思われます。\n"
+"ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]は……エラー情報を消去しなければいけない」と[記述][control]されています。\n"
+"どのような場合には消去してくれるのかについて書かれたドキュメントは見つかっていません。\n"
+"*常に*消去しなければいけないように思われます。"
 
 #. type: Footnote yield
 #: ../_posts/2010-01-01-c.markdown:979
-#, fuzzy
-#| msgid ""
-#| "[^yield]: And there's `rb_yield_block()` which takes two unused arguments "
-#| "and is\n"
-#| "          never called by anything in Ruby. Odd.\n"
 msgid ""
 "And there's `rb_yield_block()` which takes two unused arguments and is never "
 "called by anything in Ruby. Odd."
 msgstr ""
-"[^yield]: そして`rb_yield_block()`という2つの使われない引数を取るものがあり、"
-"Rubyではどこからも呼ばれないのです。妙です。\n"
+"そして、`rb_yield_block()`という使われない引数を2つ取るものがあり、Rubyではどこからも呼ばれません。\n"
+"妙です。"
 
 #. type: Footnote break
 #: ../_posts/2010-01-01-c.markdown:982
-#, fuzzy
-#| msgid ""
-#| "[^break]: The documentation [mentions][control] `rb_iter_break()` and\n"
-#| "          `rb_iter_break_value()` for breaking out of a block, but can't "
-#| "you\n"
-#| "          just return early? I can't think of a use-case for these.\n"
 msgid ""
 "The documentation [mentions][control] `rb_iter_break()` and "
 "`rb_iter_break_value()` for breaking out of a block, but can't you just "
 "return early? I can't think of a use-case for these."
 msgstr ""
-"[^break]: ドキュメントは`rb_iter_block()`とブロックを突破する用の"
-"`rb_iter_break_value()`について[言及][control]していますが、単に早期の返値は"
-"できないのでしょうか。筆者はこれらの使い途が思い付きません。\n"
+"ドキュメントではブロックを突破する用に、`rb_iter_block()`と`rb_iter_break_value()`について[言及][control]しています。\n"
+"しかし、単に早期に戻ることはできないのでしょうか。\n"
+"筆者はこれらの使い途が思いつきません。"
 
 #. type: Footnote int
 #: ../_posts/2010-01-01-c.markdown:986
-#, fuzzy
-#| msgid ""
-#| "[^int]: There is also the function `rb_thread_call_without_gvl2()`. The\n"
-#| "        documentation in `thread.c` says that if it \"detects interrupt, "
-#| "it\n"
-#| "        returns immediately,\" but I'm not sure what this means. If the\n"
-#| "        unblocking function doesn't kill the thread, it still waits for "
-#| "the\n"
-#| "        thread to finish on its own before returning.\n"
 msgid ""
 "There is also the function `rb_thread_call_without_gvl2()`. The "
 "documentation in `thread.c` says that if it \"detects interrupt, it returns "
@@ -2731,67 +2663,41 @@ msgid ""
 "doesn't kill the thread, it still waits for the thread to finish on its own "
 "before returning."
 msgstr ""
-"[^int]: 関数`rb_thread_call_without_gvl2()`もあります。`thread.c`のドキュメン"
-"トには「中断を検知すると直ちに返る」とありますが、どういう意味なのかよく分か"
-"りません。ブロック解除関数がスレッドをキルしなければ、返る前にひとりでにス"
-"レッドが終わるまで待ちぼうけるでしょうから。\n"
+"関数`rb_thread_call_without_gvl2()`もあります。\n"
+"`thread.c`のドキュメントには、「中断を検知すると直ちに戻る」とありますが、どういう意味なのかよく分かりません。\n"
+"ブロック解除関数がスレッドをキルしなければ、戻る前にスレッドがひとりでに終わるまでずっと待機することになります。"
 
 #. type: Footnote ubf
 #: ../_posts/2010-01-01-c.markdown:992
-#, fuzzy
-#| msgid ""
-#| "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a "
-#| "leftover\n"
-#| "        from deprecated code and has the exact same effect.\n"
 msgid ""
 "You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover from "
 "deprecated code and has the exact same effect."
 msgstr ""
-"[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅れのコードの残滓のよ"
-"うなのでちょうど同じ効果があります。\n"
+"`RUBY_UBF_PROCESS`を使うこともできます。\n"
+"しかし、旧式のコードの残滓と思われます。\n"
+"ともあれ全く同じ効果があります。"
 
 #. type: Footnote oldwrap
 #: ../_posts/2010-01-01-c.markdown:995
-#, fuzzy
-#| msgid ""
-#| "[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data "
-#| "since\n"
-#| "            Ruby 1.9.2. If you're using an older version of Ruby you can "
-#| "check\n"
-#| "            out an older version of this guide on Github to see how it "
-#| "used to\n"
-#| "            be done.\n"
 msgid ""
 "The `TypedData*` macros are the preferred way to wrap data since Ruby 1.9.2. "
 "If you're using an older version of Ruby you can check out an older version "
 "of this guide on Github to see how it used to be done."
 msgstr ""
-"[^oldwrap]: `TypedData*`マクロはRuby 1.9.2以降データを包む好ましいやり方で"
-"す。古いバージョンのRubyを使っているならGithubで本手引きの古いバージョンを確"
-"認すればかつてどのように使われていたのかがわかります。\n"
+"`TypedData*`マクロは、Ruby 1.9.2以降では、データを包む好ましいやり方です。\n"
+"古いバージョンのRubyを使っているなら、Githubで本手引きの古いバージョンを確認すれば、かつてどのように使われていたのかがわかります。"
 
 #. type: Footnote maybe
 #: ../_posts/2010-01-01-c.markdown:1000
-#, fuzzy
-#| msgid ""
-#| "[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but "
-#| "I'm not\n"
-#| "          sure when it is needed.\n"
 msgid ""
 "There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not sure "
 "when it is needed."
-msgstr ""
-"[^maybe]: 謎めいた名前の`rb_gc_mark_maybe()`もありますが、いつ必要になるのか"
-"よくわかりません。\n"
+msgstr "謎めいた名前の`rb_gc_mark_maybe()`もありますが、いつ必要になるのかわかりません。"
 
 #. type: Footnote tdata
 #: ../_posts/2010-01-01-c.markdown:1003
-#, fuzzy
-#| msgid "[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data)."
 msgid "Or use `T_DATA` if the object [wraps a C pointer](#data)."
-msgstr ""
-"[^tdata]: あるいはオブジェクトが[Cのポインタを包む](#data)のなら`T_DATA`を"
-"使ってください。"
+msgstr "あるいは、オブジェクトが[Cのポインタを包む](#data)のなら、`T_DATA`を使ってください。"
 
 # 空白を空けないことによって意図しない改行を回避しています
 #. type: Link reference
@@ -3238,52 +3144,31 @@ msgstr ""
 
 #. type: Footnote err
 #: ../_posts/2012-01-01-embed.markdown:161
-#, fuzzy
-#| msgid ""
-#| "[^err]: `ruby_init()` uses `error_print()` to get an error message, but "
-#| "this\n"
-#| "        function isn't exposed to the API. Is this a normal exception?\n"
 msgid ""
 "`ruby_init()` uses `error_print()` to get an error message, but this "
 "function isn't exposed to the API. Is this a normal exception?"
 msgstr ""
-"[^err]: `ruby_init()` はエラーメッセージを取得するために\n"
-"        `error_print()` を使います。\n"
-"        しかし、この関数はAPIとして出されていません。\n"
-"        これはよくあることなのでしょうか。\n"
+"`ruby_init()`では、エラーメッセージを取得するために`error_print()` を使います。\n"
+"しかし、この関数はAPIとして提供されていません。\n"
+"これは普通に例外的なものなのでしょうか。"
 
 #. type: Footnote opt
 #: ../_posts/2012-01-01-embed.markdown:164
-#, fuzzy
-#| msgid ""
-#| "[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do "
-#| "anything. This\n"
-#| "        could be related to `ruby_prog_init()`. And really it should be "
-#| "possible\n"
-#| "        to do this without parsing command line options.\n"
 msgid ""
 "In my tests I couldn't get flags like `-w` and `-v` to do anything. This "
 "could be related to `ruby_prog_init()`. And really it should be possible to "
 "do this without parsing command line options."
 msgstr ""
-"[^opt]: 筆者の実験では、フラグ `-w` や `-v` で何もできませんでした。\n"
-"        `ruby_prog_init()` がするのかもしれません。\n"
-"        きっとそれでコマンドラインオプションをパースすることなしに実現できる"
-"はずです。\n"
+"筆者の実験では、`-w` や `-v` といったフラグは得られませんでした。\n"
+"`ruby_prog_init()` が関係するのかもしれません。\n"
+"また、コマンドラインオプションを解析せず、これを実現できるはずです。"
 
 #. type: Footnote load
 #: ../_posts/2012-01-01-embed.markdown:168
-#, fuzzy
-#| msgid ""
-#| "[^load]: It looks like the function `rb_load_file()` should do this, but "
-#| "I\n"
-#| "         haven't had any luck getting it to work.\n"
 msgid ""
 "It looks like the function `rb_load_file()` should do this, but I haven't "
 "had any luck getting it to work."
-msgstr ""
-"[^load]: `rb_load_file()` 関数でこれができそうですが、\n"
-"         動かせた試しがありません。\n"
+msgstr "`rb_load_file()` 関数でこれができそうですが、動かせた試しがありません。"
 
 #. type: Title ##
 #: ../_posts/2013-01-01-extend.markdown:1
@@ -3626,42 +3511,26 @@ msgstr "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 
 #. type: Footnote glob
 #: ../_posts/2013-01-01-extend.markdown:130
-#, fuzzy
-#| msgid "[^glob]: Check the [official documentation][globals]."
 msgid "Check the [official documentation][globals]."
-msgstr "[^glob]: [公式文書][globals]をご確認ください。"
+msgstr "[公式の文書][globals]をご確認ください。"
 
 #. type: Footnote argv
 #: ../_posts/2013-01-01-extend.markdown:132
-#, fuzzy
-#| msgid ""
-#| "[^argv]: The official documentation [hints][makefile] that `mkmf` parses "
-#| "certain\n"
-#| "         command line flags e.g.  `--vendor`. But I can't find this "
-#| "documented\n"
-#| "         anywhere.\n"
 msgid ""
 "The official documentation [hints][makefile] that `mkmf` parses certain "
 "command line flags e.g.  `--vendor`. But I can't find this documented "
 "anywhere."
 msgstr ""
-"[^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパース"
-"できると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化さ"
-"れていないように見えます。\n"
+"公式の文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。\n"
+"でも、このことはどこにも文書化されていないようです。"
 
 # 空白を入れていないのは意図的です
 #. type: Footnote rbg
 #: ../_posts/2013-01-01-extend.markdown:136
-#, fuzzy
-#| msgid ""
-#| "[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides."
-#| "rubygems.org/gems-with-extensions/)"
 msgid ""
 "[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems."
 "org/gems-with-extensions/)"
-msgstr ""
-"[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides."
-"rubygems.org/gems-with-extensions/)"
+msgstr "[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
 
 # 空白を空けないことによって意図しない改行を回避しています
 #. type: Link reference
@@ -5205,32 +5074,6 @@ msgstr "単にハードコードできます 例：RUBY=2.4"
 #, no-wrap
 #~ msgid "There's also `rb_eval_string_wrap()` which _should_ be useful, but is"
 #~ msgstr "[^wrap]: `rb_eval_string_wrap()`もあり、さぞ便利なのだろうと _思いきや_ 、[バグ][bug2]があるため、`rb_eval_string_protect()`と実は同じです。"
-
-#, fuzzy, no-wrap
-#~| msgid ""
-#~| "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover\n"
-#~| "        from deprecated code and has the exact same effect.\n"
-#~ msgid "        from deprecated code and has the exact same effect.\n"
-#~ msgstr "[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅れのコードの残滓のようなのでちょうど同じ効果があります。\n"
-
-#, fuzzy, no-wrap
-#~| msgid ""
-#~| "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this\n"
-#~| "        function isn't exposed to the API. Is this a normal exception?\n"
-#~ msgid "`ruby_init()` uses `error_print()` to get an error message, but this"
-#~ msgstr ""
-#~ "[^err]: `ruby_init()` はエラーメッセージを取得するために\n"
-#~ "        `error_print()` を使います。\n"
-#~ "        しかし、この関数はAPIとして出されていません。\n"
-#~ "        これはよくあることなのでしょうか。\n"
-
-#, fuzzy, no-wrap
-#~| msgid ""
-#~| "[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain\n"
-#~| "         command line flags e.g.  `--vendor`. But I can't find this documented\n"
-#~| "         anywhere.\n"
-#~ msgid "The official documentation [hints][makefile] that `mkmf` parses certain"
-#~ msgstr "[^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化されていないように見えます。\n"
 
 # "[control]:"の直後で空白を入れていないのは意図的です。
 # これがないとここで改行が入ってしまうので正しいMarkdownの解釈になりません。
