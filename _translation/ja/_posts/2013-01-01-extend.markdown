@@ -133,12 +133,14 @@ specに各々の `extconf.rb` を記します。
 
 ## 脚註 ##
 
-[^glob]: [公式の文書][globals]をご確認ください。
+[^glob]: Check the [official documentation][globals].
 
-[^argv]: 公式の文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。
-でも、このことはどこにも文書化されていないようです。
+[^argv]: The official documentation [hints][makefile] that `mkmf` parses
+certain command line flags e.g.  `--vendor`. But I can't find this
+documented anywhere.
 
-[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)
+[^rbg]:
+[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)
 
 [globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb
 [makefile]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile
