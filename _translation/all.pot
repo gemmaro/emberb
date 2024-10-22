@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: emberb VERSION\n"
-"POT-Creation-Date: 2024-10-22 20:10+0900\n"
+"POT-Creation-Date: 2024-10-22 20:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2124,7 +2124,7 @@ msgstr ""
 msgid "Footnotes"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote intern
 #: ../_posts/2010-01-01-c.markdown:954
 #, no-wrap
 msgid "That's a blatant lie. The API _definitely_ lets you mess around"
@@ -2141,7 +2141,7 @@ msgid ""
 "           and not necessary.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote undef
 #: ../_posts/2010-01-01-c.markdown:959
 #, no-wrap
 msgid "There's also `Qundef` representing an undefined value, but"
@@ -2157,7 +2157,7 @@ msgid ""
 "`VALUE`.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote wrap
 #: ../_posts/2010-01-01-c.markdown:964
 #, no-wrap
 msgid "There's also `rb_eval_string_wrap()` which _should_ be useful, but is"
@@ -2171,7 +2171,7 @@ msgid ""
 "[bug][bug2].\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote chr
 #: ../_posts/2010-01-01-c.markdown:967
 #, no-wrap
 msgid "There is a `CHR2FIX()` macro, but in my tests this sometimes gave"
@@ -2183,7 +2183,7 @@ msgstr ""
 msgid "        unexpected results. `LONG2FIX()` should work.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote wchar
 #: ../_posts/2010-01-01-c.markdown:970
 #, no-wrap
 msgid "I don't know what the best way is to handle `wchar_t`. In my tests I had"
@@ -2199,7 +2199,7 @@ msgid ""
 "platforms.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote clear
 #: ../_posts/2010-01-01-c.markdown:974
 #, no-wrap
 msgid "The documentation [states][control] that \"You have to clear the error"
@@ -2215,7 +2215,7 @@ msgid ""
 "          you—it seems like you _always_ have to clear it.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote yield
 #: ../_posts/2010-01-01-c.markdown:979
 #, no-wrap
 msgid "And there's `rb_yield_block()` which takes two unused arguments and is"
@@ -2227,7 +2227,7 @@ msgstr ""
 msgid "          never called by anything in Ruby. Odd.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote break
 #: ../_posts/2010-01-01-c.markdown:982
 #, no-wrap
 msgid "The documentation [mentions][control] `rb_iter_break()` and"
@@ -2242,7 +2242,7 @@ msgid ""
 "          just return early? I can't think of a use-case for these.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote int
 #: ../_posts/2010-01-01-c.markdown:986
 #, no-wrap
 msgid "There is also the function `rb_thread_call_without_gvl2()`. The"
@@ -2260,7 +2260,7 @@ msgid ""
 "        thread to finish on its own before returning.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote ubf
 #: ../_posts/2010-01-01-c.markdown:992
 #, no-wrap
 msgid "You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover"
@@ -2272,7 +2272,7 @@ msgstr ""
 msgid "        from deprecated code and has the exact same effect.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote oldwrap
 #: ../_posts/2010-01-01-c.markdown:995
 #, no-wrap
 msgid "The `TypedData*` macros are the preferred way to wrap data since"
@@ -2289,7 +2289,7 @@ msgid ""
 "            be done.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote maybe
 #: ../_posts/2010-01-01-c.markdown:1000
 #, no-wrap
 msgid "There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not"
@@ -2301,7 +2301,7 @@ msgstr ""
 msgid "          sure when it is needed.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote tdata
 #: ../_posts/2010-01-01-c.markdown:1003
 #, no-wrap
 msgid "Or use `T_DATA` if the object [wraps a C pointer](#data)."
@@ -2679,7 +2679,7 @@ msgstr ""
 msgid "Now you're ready to interact with Ruby! Go back to the [C API](../c)."
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote err
 #: ../_posts/2012-01-01-embed.markdown:161
 #, no-wrap
 msgid "`ruby_init()` uses `error_print()` to get an error message, but this"
@@ -2691,7 +2691,7 @@ msgstr ""
 msgid "        function isn't exposed to the API. Is this a normal exception?\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote opt
 #: ../_posts/2012-01-01-embed.markdown:164
 #, no-wrap
 msgid "In my tests I couldn't get flags like `-w` and `-v` to do anything. This"
@@ -2706,7 +2706,7 @@ msgid ""
 "        to do this without parsing command line options.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote load
 #: ../_posts/2012-01-01-embed.markdown:168
 #, no-wrap
 msgid "It looks like the function `rb_load_file()` should do this, but I"
@@ -2983,13 +2983,13 @@ msgstr ""
 msgid "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote glob
 #: ../_posts/2013-01-01-extend.markdown:130
 #, no-wrap
 msgid "Check the [official documentation][globals]."
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote argv
 #: ../_posts/2013-01-01-extend.markdown:132
 #, no-wrap
 msgid "The official documentation [hints][makefile] that `mkmf` parses certain"
@@ -3004,7 +3004,7 @@ msgid ""
 "         anywhere.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote rbg
 #: ../_posts/2013-01-01-extend.markdown:136
 #, no-wrap
 msgid "[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"

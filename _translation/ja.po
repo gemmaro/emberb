@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
-"POT-Creation-Date: 2024-10-22 20:10+0900\n"
+"POT-Creation-Date: 2024-10-22 20:14+0900\n"
 "PO-Revision-Date: 2024-10-22 09:19+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
@@ -2571,7 +2571,7 @@ msgstr "[gh]: https://github.com/silverhammermba/emberb"
 msgid "Footnotes"
 msgstr "脚註"
 
-#. type: Footnote
+#. type: Footnote intern
 #: ../_posts/2010-01-01-c.markdown:954
 #, no-wrap
 msgid "That's a blatant lie. The API _definitely_ lets you mess around"
@@ -2594,7 +2594,7 @@ msgstr ""
 "           APIは*確実に*オブジェクトの内部データ構造を滅茶苦茶にできます（名前が大文字Rで始まるものを探してください）。\n"
 "           しかし一般には名案にはなりませんし必要でもないのです。\n"
 
-#. type: Footnote
+#. type: Footnote undef
 #: ../_posts/2010-01-01-c.markdown:959
 #, no-wrap
 msgid "There's also `Qundef` representing an undefined value, but"
@@ -2614,7 +2614,7 @@ msgid ""
 "          `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.\n"
 msgstr "[^undef]: 未定義値を表す`Qundef`もありますが、Rubyで等価なものはなく[滅多に](#handling-blocks)[使われ](#constants-1)ないものです。実際、こうした稀な出現はさておき、Rubyで通常の`VALUE`が期待するところで`Qundef`があるとVMはセグフォします。\n"
 
-#. type: Footnote
+#. type: Footnote wrap
 #: ../_posts/2010-01-01-c.markdown:964
 #, fuzzy, no-wrap
 #| msgid ""
@@ -2632,7 +2632,7 @@ msgstr "[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _で�
 msgid "         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].\n"
 msgstr "[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _でしょう_ が、実は[バグ][bug2]のために`rb_eval_string_protect()`と同じものになっています。\n"
 
-#. type: Footnote
+#. type: Footnote chr
 #: ../_posts/2010-01-01-c.markdown:967
 #, fuzzy, no-wrap
 #| msgid ""
@@ -2647,7 +2647,7 @@ msgstr "[^chr]: `CHR2FIX()`マクロもありますが、筆者が試したと�
 msgid "        unexpected results. `LONG2FIX()` should work.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote wchar
 #: ../_posts/2010-01-01-c.markdown:970
 #, no-wrap
 msgid "I don't know what the best way is to handle `wchar_t`. In my tests I had"
@@ -2665,7 +2665,7 @@ msgid ""
 "          been a happy accident, and could certainly fail on different platforms.\n"
 msgstr "[^wchar]: `wchar_t`を扱う一番の方法はわかりません。試したところ単なる`char`として扱うことに成功したことがありますが、それはたまたま運が良かっただけで、違うプラットフォームではきっと失敗することでしょう。\n"
 
-#. type: Footnote
+#. type: Footnote clear
 #: ../_posts/2010-01-01-c.markdown:974
 #, no-wrap
 msgid "The documentation [states][control] that \"You have to clear the error"
@@ -2685,7 +2685,7 @@ msgid ""
 "          you—it seems like you _always_ have to clear it.\n"
 msgstr "[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。どのような場合に消去すべきかについてのドキュメントは見付かっていません。*常に*消去しなければいけないように思われます。\n"
 
-#. type: Footnote
+#. type: Footnote yield
 #: ../_posts/2010-01-01-c.markdown:979
 #, fuzzy, no-wrap
 #| msgid ""
@@ -2700,7 +2700,7 @@ msgstr "[^yield]: そして`rb_yield_block()`という2つの使われない引�
 msgid "          never called by anything in Ruby. Odd.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote break
 #: ../_posts/2010-01-01-c.markdown:982
 #, no-wrap
 msgid "The documentation [mentions][control] `rb_iter_break()` and"
@@ -2718,7 +2718,7 @@ msgid ""
 "          just return early? I can't think of a use-case for these.\n"
 msgstr "[^break]: ドキュメントは`rb_iter_block()`とブロックを突破する用の`rb_iter_break_value()`について[言及][control]していますが、単に早期の返値はできないのでしょうか。筆者はこれらの使い途が思い付きません。\n"
 
-#. type: Footnote
+#. type: Footnote int
 #: ../_posts/2010-01-01-c.markdown:986
 #, no-wrap
 msgid "There is also the function `rb_thread_call_without_gvl2()`. The"
@@ -2740,7 +2740,7 @@ msgid ""
 "        thread to finish on its own before returning.\n"
 msgstr "[^int]: 関数`rb_thread_call_without_gvl2()`もあります。`thread.c`のドキュメントには「中断を検知すると直ちに返る」とありますが、どういう意味なのかよく分かりません。ブロック解除関数がスレッドをキルしなければ、返る前にひとりでにスレッドが終わるまで待ちぼうけるでしょうから。\n"
 
-#. type: Footnote
+#. type: Footnote ubf
 #: ../_posts/2010-01-01-c.markdown:992
 #, fuzzy, no-wrap
 #| msgid ""
@@ -2758,7 +2758,7 @@ msgstr "[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅�
 msgid "        from deprecated code and has the exact same effect.\n"
 msgstr "[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅れのコードの残滓のようなのでちょうど同じ効果があります。\n"
 
-#. type: Footnote
+#. type: Footnote oldwrap
 #: ../_posts/2010-01-01-c.markdown:995
 #, no-wrap
 msgid "The `TypedData*` macros are the preferred way to wrap data since"
@@ -2778,7 +2778,7 @@ msgid ""
 "            be done.\n"
 msgstr "[^oldwrap]: `TypedData*`マクロはRuby 1.9.2以降データを包む好ましいやり方です。古いバージョンのRubyを使っているならGithubで本手引きの古いバージョンを確認すればかつてどのように使われていたのかがわかります。\n"
 
-#. type: Footnote
+#. type: Footnote maybe
 #: ../_posts/2010-01-01-c.markdown:1000
 #, fuzzy, no-wrap
 #| msgid ""
@@ -2793,7 +2793,7 @@ msgstr "[^maybe]: 謎めいた名前の`rb_gc_mark_maybe()`もありますが、
 msgid "          sure when it is needed.\n"
 msgstr ""
 
-#. type: Footnote
+#. type: Footnote tdata
 #: ../_posts/2010-01-01-c.markdown:1003
 #, fuzzy, no-wrap
 #| msgid "[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data)."
@@ -3243,7 +3243,7 @@ msgstr ""
 "これでRubyとやりとりできました！\n"
 "[C API](../c)に戻りましょう。"
 
-#. type: Footnote
+#. type: Footnote err
 #: ../_posts/2012-01-01-embed.markdown:161
 #, fuzzy, no-wrap
 #| msgid ""
@@ -3269,7 +3269,7 @@ msgstr ""
 "        しかし、この関数はAPIとして出されていません。\n"
 "        これはよくあることなのでしょうか。\n"
 
-#. type: Footnote
+#. type: Footnote opt
 #: ../_posts/2012-01-01-embed.markdown:164
 #, no-wrap
 msgid "In my tests I couldn't get flags like `-w` and `-v` to do anything. This"
@@ -3290,7 +3290,7 @@ msgstr ""
 "        `ruby_prog_init()` がするのかもしれません。\n"
 "        きっとそれでコマンドラインオプションをパースすることなしに実現できるはずです。\n"
 
-#. type: Footnote
+#. type: Footnote load
 #: ../_posts/2012-01-01-embed.markdown:168
 #, fuzzy, no-wrap
 #| msgid ""
@@ -3646,14 +3646,14 @@ msgstr ""
 msgid "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 msgstr "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 
-#. type: Footnote
+#. type: Footnote glob
 #: ../_posts/2013-01-01-extend.markdown:130
 #, fuzzy, no-wrap
 #| msgid "[^glob]: Check the [official documentation][globals]."
 msgid "Check the [official documentation][globals]."
 msgstr "[^glob]: [公式文書][globals]をご確認ください。"
 
-#. type: Footnote
+#. type: Footnote argv
 #: ../_posts/2013-01-01-extend.markdown:132
 #, fuzzy, no-wrap
 #| msgid ""
@@ -3676,7 +3676,7 @@ msgid ""
 msgstr "[^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化されていないように見えます。\n"
 
 # 空白を入れていないのは意図的です
-#. type: Footnote
+#. type: Footnote rbg
 #: ../_posts/2013-01-01-extend.markdown:136
 #, fuzzy, no-wrap
 #| msgid "[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
