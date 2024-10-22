@@ -5,21 +5,63 @@ title: CでRubyを実行する
 
 ## コンパイルする ##
 
-Rubyを組込むには `ruby.h` という1つのヘッダファイルが必要です。このファイルはプラットフォーム固有のヘッダである
-`ruby/config.h`
-を含めます。場合によってはコンパイラにヘッダファイルの含めるファイルパスを指定する必要があります。Rubyライブラリとリンクする必要もあります。私の環境では、最小のコンパイラオプションは以下のようになります。
+Rubyを組込むには、`ruby.h`ヘッダが要ります。
+このファイルには、プラットフォーム固有の`ruby/config.h`ヘッダが含まれます。
+恐らく、これらのヘッダのincludeパスをコンパイラに伝える必要があるでしょう。
+Rubyライブラリともリンクする必要があります。
+私の環境では、最小限のコンパイラオプションは次の通りです。
 
 {% highlight shell_session %}
-$ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0
--I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby
+$ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby
 {% endhighlight %}
 
-しかしもし可能であれば、ぜひとも `pkg-config` を使って、
-各々のディストリビューションに適したオプションが得られるようにするべきです。
+しかしもし可能であれば、`pkg-config`を使うと良いでしょう。
+自分のOSに適したオプションが得られます。
 
 {% highlight shell_session %}
 $ pkg-config --cflags --libs ruby-{{ site.rbversion }}
 {% endhighlight %}
+
+こうしたやり方は、Rubyがマシン上の標準的でない場所にインストールされていたり、OSが標準的なヘッダないしライブラリを提供していないときは、うまくいかないかもしれません。
+より頑健なやり方は、どこにあるのかRuby自体に問い合わせて、実行時ライブラリパスを準備することです。
+
+{% highlight ruby %}
+#!/usr/bin/env ruby
+require 'shellwords'
+
+# ruby.hの場所
+hdrdir = Shellwords.escape RbConfig::CONFIG["rubyhdrdir"]
+# ruby/config.hの場所
+archhdrdir = Shellwords.escape RbConfig::CONFIG["rubyarchhdrdir"]
+# librubyの場所
+libdir = Shellwords.escape RbConfig::CONFIG["libdir"]
+
+# GCCの引数
+puts "-I#{hdrdir} -I#{archhdrdir} -L#{libdir} -Wl,-rpath,#{libdir}"
+{% endhighlight %}
+
+### Windows
+
+Windowsでは、[RubyInstaller](https://rubyinstaller.org/downloads/)を**Devkit**付きで使うことを強くお勧めします。
+このツールにより、WindowsのコマンドラインでGCCを使えるようになり、ビルドフラグの取得に`pkgconf`も使えます。
+
+{% highlight shell_session %}
+$ ridk enable # devkitを有効にします
+$ pkgconf.exe --cflags --libs C:\Ruby33-x64\lib\pkgconfig\ruby-3.3.pc # GCCの引数を表示
+$ gcc foo.c ...
+{% endhighlight %}
+
+なお、GCCの引数はPowerShellでは正しく解析されないことがあります。
+そのため、`cmd`を代わりに使ってください。
+また、Ruby 3.3のインストーラーは何らかの理由で`pkgconf`の出力からライブラリの場所が欠けています。
+そのため、手動で`-L`オプションを加える必要があります。
+前述のように、`RbConfig::CONFIG["libdir"]`で配置できます。
+筆者の場合、インストーラーにより、`C:\Ruby33-x64\lib`に置かれました。
+
+最後に、Windowsには`rpath`はありません。
+そのため、ビルドされた実行するプログラムが実行できるようにするため、リンクされたDLLをそのそばに複製する必要があるでしょう。
+これには、Ruby自体に必要なDLLも全て含まれます。
+筆者の場合、インストーラはこれらを`C:\Ruby33-x64\bin\ruby_builtin_dlls`に置いています。
 
 ## 起動と終了 ##
 
@@ -120,14 +162,12 @@ Rubyは今のところコードの他のコンパイル・実行を別々にす�
 
 ## 脚註 ##
 
-[^err]: `ruby_init()` はエラーメッセージを取得するために
-        `error_print()` を使います。
-        しかし、この関数はAPIとして出されていません。
-        これはよくあることなのでしょうか。
+[^err]: `ruby_init()`では、エラーメッセージを取得するために`error_print()` を使います。
+        しかし、この関数はAPIとして提供されていません。
+        これは普通に例外的なものなのでしょうか。
 
-[^opt]: 筆者の実験では、フラグ `-w` や `-v` で何もできませんでした。
-        `ruby_prog_init()` がするのかもしれません。
-        きっとそれでコマンドラインオプションをパースすることなしに実現できるはずです。
+[^opt]: 筆者の実験では、`-w` や `-v` といったフラグは得られませんでした。
+        `ruby_prog_init()` が関係するのかもしれません。
+        また、コマンドラインオプションを解析せず、これを実現できるはずです。
 
-[^load]: `rb_load_file()` 関数でこれができそうですが、
-         動かせた試しがありません。
+[^load]: `rb_load_file()` 関数でこれができそうですが、動かせた試しがありません。

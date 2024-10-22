@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: emberb VERSION\n"
-"POT-Creation-Date: 2024-02-24 12:23+0900\n"
+"POT-Creation-Date: 2024-10-23 08:25+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,10 +125,10 @@ msgstr ""
 msgid "The quick 'n' dirty way to run some Ruby code from C is to `eval` it"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:50
-#, markdown-text
-msgid "{% highlight c %} {% include c/eval.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:48
+#, no-wrap
+msgid "{% include c/eval.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -201,18 +201,18 @@ msgid ""
 "testing for e.g. `T_STRING`, `T_ARRAY`, etc."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:86
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:85
+#, no-wrap
 msgid ""
 "[datatypes]: "
 "https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:90
-#, markdown-text
-msgid "{% highlight c %} {% include c/checktype.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:88
+#, no-wrap
+msgid "{% include c/checktype.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -235,10 +235,10 @@ msgid ""
 "efficient than the previous:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:103
-#, markdown-text
-msgid "{% highlight c %} {% include c/check_p.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:101
+#, no-wrap
+msgid "{% include c/check_p.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -250,10 +250,10 @@ msgid ""
 "`TYPE()` macro to get the `T_` constant and handle your logic in a `switch`:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:111
-#, markdown-text
-msgid "{% highlight c %} {% include c/type.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:109
+#, no-wrap
+msgid "{% include c/type.h %}"
 msgstr ""
 
 #. type: Title ###
@@ -496,9 +496,9 @@ msgid ""
 "the previous sections as they skip the range checks."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:194
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:193
+#, no-wrap
 msgid "[bug]: https://bugs.ruby-lang.org/issues/9089"
 msgstr ""
 
@@ -545,10 +545,10 @@ msgid ""
 "result of `inspect` instead by adding the `+` flag."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:222
-#, markdown-text
-msgid "{% highlight c %} {% include c/printf.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:220
+#, no-wrap
+msgid "{% include c/printf.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -617,10 +617,10 @@ msgstr ""
 msgid "The easiest way to send an object a method looks like this:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:259
-#, markdown-text
-msgid "{% highlight c %} {% include c/funcall.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:257
+#, no-wrap
+msgid "{% include c/funcall.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -629,10 +629,10 @@ msgstr ""
 msgid "This is roughly equivalent to the Ruby code"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:265
-#, markdown-text
-msgid "{% highlight ruby %} {% include c/funcall.rb %} {% endhighlight %}"
+#. type: Liquid highlight ruby
+#: ../_posts/2010-01-01-c.markdown:263
+#, no-wrap
+msgid "{% include c/funcall.rb %}"
 msgstr ""
 
 #. type: Plain text
@@ -668,10 +668,10 @@ msgid ""
 "function is just like `rb_funcallv()` but with the proc on the end."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:283
-#, markdown-text
-msgid "{% highlight c %} {% include c/proc.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:281
+#, no-wrap
+msgid "{% include c/proc.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -683,10 +683,10 @@ msgid ""
 "`rb_funcallv()` but with a couple extra arguments for the block:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:291
-#, markdown-text
-msgid "{% highlight c %} {% include c/block.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:289
+#, no-wrap
+msgid "{% include c/block.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -741,10 +741,10 @@ msgid ""
 "`require`:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:318
-#, markdown-text
-msgid "{% highlight c %} {% include c/require.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:316
+#, no-wrap
+msgid "{% include c/require.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -763,10 +763,10 @@ msgid ""
 "times:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:327
-#, markdown-text
-msgid "{% highlight c %} {% include c/load.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:325
+#, no-wrap
+msgid "{% include c/load.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -778,9 +778,9 @@ msgid ""
 "value for the second argument."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:333
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:332
+#, no-wrap
 msgid "[rbload]: http://www.ruby-doc.org/core/Kernel.html#method-i-load"
 msgstr ""
 
@@ -802,10 +802,10 @@ msgstr ""
 msgid "To raise an exception, use:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:343
-#, markdown-text
-msgid "{% highlight c %} {% include c/raise.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:341
+#, no-wrap
+msgid "{% include c/raise.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -845,10 +845,10 @@ msgid ""
 "returns a single `VALUE`."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:365
-#, markdown-text
-msgid "{% highlight c %} {% include c/danger.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:363
+#, no-wrap
+msgid "{% include c/danger.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -861,10 +861,10 @@ msgid ""
 "the way it is rescued:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:373
-#, markdown-text
-msgid "{% highlight c %} {% include c/handle.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:371
+#, no-wrap
+msgid "{% include c/handle.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -902,10 +902,10 @@ msgid ""
 "is similar to Ruby's `rescue`."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:393
-#, markdown-text
-msgid "{% highlight c %} {% include c/rescue2.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:391
+#, no-wrap
+msgid "{% include c/rescue2.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -961,10 +961,10 @@ msgid ""
 "rescuing all exceptions:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:425
-#, markdown-text
-msgid "{% highlight c %} {% include c/protect.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:423
+#, no-wrap
+msgid "{% include c/protect.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -995,10 +995,10 @@ msgid ""
 "layer of wrapping:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:443
-#, markdown-text
-msgid "{% highlight c %} {% include c/ensure.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:441
+#, no-wrap
+msgid "{% include c/ensure.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1064,10 +1064,10 @@ msgstr ""
 msgid "The simplest way to deal with globals is:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:477
-#, markdown-text
-msgid "{% highlight c %} {% include c/global.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:475
+#, no-wrap
+msgid "{% include c/global.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1078,10 +1078,10 @@ msgid ""
 "which will be automatically synchronized with one."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:484
-#, markdown-text
-msgid "{% highlight c %} {% include c/global2.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:482
+#, no-wrap
+msgid "{% include c/global2.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1105,10 +1105,10 @@ msgid ""
 "prematurely cleaned up:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:499
-#, markdown-text
-msgid "{% highlight c %} {% include c/gc.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:497
+#, no-wrap
+msgid "{% include c/gc.h %}"
 msgstr ""
 
 #. type: Title ###
@@ -1125,10 +1125,10 @@ msgid ""
 "globals, but of course you need an object to get the variable from."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:508
-#, markdown-text
-msgid "{% highlight c %} {% include c/ivar.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:506
+#, no-wrap
+msgid "{% include c/ivar.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1165,10 +1165,10 @@ msgstr ""
 msgid "Constants are defined similarly, but with the module to define them under:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:524
-#, markdown-text
-msgid "{% highlight c %} {% include c/constant.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:522
+#, no-wrap
+msgid "{% include c/constant.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1180,10 +1180,10 @@ msgid ""
 "want to happen if the constant is _not_ defined in the module you specify:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:532
-#, markdown-text
-msgid "{% highlight c %} {% include c/const_get.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:530
+#, no-wrap
+msgid "{% include c/const_get.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1204,10 +1204,10 @@ msgstr ""
 msgid "Defining modules is super easy."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:542
-#, markdown-text
-msgid "{% highlight c %} {% include c/module.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:540
+#, no-wrap
+msgid "{% include c/module.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1216,10 +1216,10 @@ msgstr ""
 msgid "Classes work the same way but they also need a superclass."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:548
-#, markdown-text
-msgid "{% highlight c %} {% include c/class.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:546
+#, no-wrap
+msgid "{% include c/class.h %}"
 msgstr ""
 
 #. type: Title ###
@@ -1239,10 +1239,10 @@ msgid ""
 "can define its other arguments:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:559
-#, markdown-text
-msgid "{% highlight c %} {% include c/methodc.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:557
+#, no-wrap
+msgid "{% include c/methodc.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1272,10 +1272,10 @@ msgid ""
 "definition, then you can pass `argc` and `argv` along to:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:576
-#, markdown-text
-msgid "{% highlight c %} {% include c/scan.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:574
+#, no-wrap
+msgid "{% include c/scan.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1347,10 +1347,10 @@ msgid ""
 "raise a fitting exception if the wrong number of arguments were passed."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:605
-#, markdown-text
-msgid "{% highlight c %} {% include c/methodex.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:603
+#, no-wrap
+msgid "{% include c/methodex.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1374,10 +1374,10 @@ msgstr ""
 msgid "There are two ways to check if your C method has been called with a block:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:617
-#, markdown-text
-msgid "{% highlight c %} {% include c/checkblock.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:615
+#, no-wrap
+msgid "{% include c/checkblock.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1404,10 +1404,10 @@ msgstr ""
 msgid "If you don't want to capture the block, there are a few ways to yield to it:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:631
-#, markdown-text
-msgid "{% highlight c %} {% include c/yield.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:629
+#, no-wrap
+msgid "{% include c/yield.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1430,10 +1430,10 @@ msgstr ""
 msgid "You might want to call `super` in your method."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:642
-#, markdown-text
-msgid "{% highlight c %} {% include c/super.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:640
+#, no-wrap
+msgid "{% include c/super.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1489,10 +1489,10 @@ msgstr ""
 msgid "Everything is pretty self-explanatory from there:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:666
-#, markdown-text
-msgid "{% highlight c %} {% include c/methodr.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:664
+#, no-wrap
+msgid "{% include c/methodr.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1504,10 +1504,10 @@ msgid ""
 "`include Math` to avoid typing `Math.` before every method call."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:674
-#, markdown-text
-msgid "{% highlight c %} {% include c/modulefunc.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:672
+#, no-wrap
+msgid "{% include c/modulefunc.h %}"
 msgstr ""
 
 #. type: Title ###
@@ -1522,10 +1522,10 @@ msgstr ""
 msgid "Some simple API functions for class/method definitions:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:682
-#, markdown-text
-msgid "{% highlight c %} {% include c/etc.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:680
+#, no-wrap
+msgid "{% include c/etc.h %}"
 msgstr ""
 
 #. type: Title ##
@@ -1557,10 +1557,10 @@ msgid ""
 "happens when you tell Ruby to create an object using `new`? Basically this:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:701
-#, markdown-text
-msgid "{% highlight ruby %} {% include c/new.rb %} {% endhighlight %}"
+#. type: Liquid highlight ruby
+#: ../_posts/2010-01-01-c.markdown:699
+#, no-wrap
+msgid "{% include c/new.rb %}"
 msgstr ""
 
 #. type: Plain text
@@ -1574,10 +1574,10 @@ msgid ""
 "`int` that can be set by `initialize`:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:711
-#, markdown-text
-msgid "{% highlight c %} {% include c/wrap.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:709
+#, no-wrap
+msgid "{% include c/wrap.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1661,9 +1661,9 @@ msgid ""
 "you omit will be safely cleared by the compiler."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:743
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:742
+#, no-wrap
 msgid "[desinit]: https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html"
 msgstr ""
 
@@ -1697,12 +1697,16 @@ msgid ""
 "`struct` and do the _actual_ allocation in `initialize`."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:761
-#, markdown-text
-msgid ""
-"[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization "
-"[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:759
+#, no-wrap
+msgid "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization"
+msgstr ""
+
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:760
+#, no-wrap
+msgid "[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
 msgstr ""
 
 #. type: Plain text
@@ -1718,10 +1722,10 @@ msgid ""
 "could shorten the previous example as such:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:773
-#, markdown-text
-msgid "{% highlight c %} {% include c/makestruct.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:771
+#, no-wrap
+msgid "{% include c/makestruct.h %}"
 msgstr ""
 
 #. type: Title ###
@@ -1768,10 +1772,10 @@ msgid ""
 "all it has to do is mark any `VALUE`s in the `struct`:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:801
-#, markdown-text
-msgid "{% highlight c %} {% include c/mark.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:799
+#, no-wrap
+msgid "{% include c/mark.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1819,10 +1823,10 @@ msgid ""
 "that:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:826
-#, markdown-text
-msgid "{% highlight c %} {% include c/thread.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:824
+#, no-wrap
+msgid "{% include c/thread.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1878,10 +1882,10 @@ msgid ""
 "slightly simpler way to release the GVL:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:858
-#, markdown-text
-msgid "{% highlight c %} {% include c/gvl2.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:856
+#, no-wrap
+msgid "{% include c/gvl2.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1902,10 +1906,10 @@ msgid ""
 "arguments:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:870
-#, markdown-text
-msgid "{% highlight c %} {% include c/gvl.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:868
+#, no-wrap
+msgid "{% include c/gvl.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -1937,10 +1941,10 @@ msgid ""
 "temporarily reacquire the GVL:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:888
-#, markdown-text
-msgid "{% highlight c %} {% include c/with_gvl.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2010-01-01-c.markdown:886
+#, no-wrap
+msgid "{% include c/with_gvl.h %}"
 msgstr ""
 
 #. type: Title ##
@@ -1966,9 +1970,9 @@ msgid ""
 "elsewhere."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:899
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:898
+#, no-wrap
 msgid "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
 msgstr ""
 
@@ -2059,12 +2063,10 @@ msgid ""
 "next stop should be the Ruby source code."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:932
-#, markdown-text
-msgid ""
-"{% highlight shell_session %} $ git clone https://github.com/ruby/ruby.git "
-"{% endhighlight %}"
+#. type: Liquid highlight shell_session
+#: ../_posts/2010-01-01-c.markdown:930
+#, no-wrap
+msgid "$ git clone https://github.com/ruby/ruby.git"
 msgstr ""
 
 #. type: Plain text
@@ -2107,106 +2109,106 @@ msgid ""
 "requests, and download all of the code examples."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:951
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:950
+#, no-wrap
 msgid "[gh]: https://github.com/silverhammermba/emberb"
 msgstr ""
 
 #. type: Title ##
-#: ../_posts/2010-01-01-c.markdown:952 ../_posts/2012-01-01-embed.markdown:123
+#: ../_posts/2010-01-01-c.markdown:952 ../_posts/2012-01-01-embed.markdown:159
 #: ../_posts/2013-01-01-extend.markdown:128
 #, markdown-text, no-wrap
 msgid "Footnotes"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:958
-#, markdown-text, no-wrap
+#. type: Footnote intern
+#: ../_posts/2010-01-01-c.markdown:954
+#, no-wrap
 msgid ""
 "[^intern]: That's a blatant lie. The API _definitely_ lets you mess around\n"
 "           with the internal data structures of objects (look for things "
 "with\n"
 "           names starting with capital R). But it's generally not a good "
 "idea\n"
-"           and not necessary.\n"
+"           and not necessary."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:963
-#, markdown-text, no-wrap
+#. type: Footnote undef
+#: ../_posts/2010-01-01-c.markdown:959
+#, no-wrap
 msgid ""
 "[^undef]: There's also `Qundef` representing an undefined value, but\n"
 "          this has no Ruby equivalent and is [rarely](#handling-blocks)\n"
 "          [used](#constants-1). In fact, outside of those rare occasions,\n"
 "          `Qundef` can segfault the VM if Ruby was expecting a normal "
-"`VALUE`.\n"
+"`VALUE`."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:966
-#, markdown-text, no-wrap
+#. type: Footnote wrap
+#: ../_posts/2010-01-01-c.markdown:964
+#, no-wrap
 msgid ""
 "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but "
 "is\n"
 "         actually the same as `rb_eval_string_protect()` due to a "
-"[bug][bug2].\n"
+"[bug][bug2]."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:969
-#, markdown-text, no-wrap
+#. type: Footnote chr
+#: ../_posts/2010-01-01-c.markdown:967
+#, no-wrap
 msgid ""
 "[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave\n"
-"        unexpected results. `LONG2FIX()` should work.\n"
+"        unexpected results. `LONG2FIX()` should work."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:973
-#, markdown-text, no-wrap
+#. type: Footnote wchar
+#: ../_posts/2010-01-01-c.markdown:970
+#, no-wrap
 msgid ""
 "[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests "
 "I had\n"
 "          some success just treating them as `char`s, but I think that may "
 "have\n"
 "          been a happy accident, and could certainly fail on different "
-"platforms.\n"
+"platforms."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:978
-#, markdown-text, no-wrap
+#. type: Footnote clear
+#: ../_posts/2010-01-01-c.markdown:974
+#, no-wrap
 msgid ""
 "[^clear]: The documentation [states][control] that \"You have to clear the "
 "error\n"
 "          info... when ignoring the caught exception\" during "
 "`rb_protect`. But I\n"
 "          can't find any documentation of when it would be cleared for\n"
-"          you—it seems like you _always_ have to clear it.\n"
+"          you—it seems like you _always_ have to clear it."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:981
-#, markdown-text, no-wrap
+#. type: Footnote yield
+#: ../_posts/2010-01-01-c.markdown:979
+#, no-wrap
 msgid ""
 "[^yield]: And there's `rb_yield_block()` which takes two unused arguments "
 "and is\n"
-"          never called by anything in Ruby. Odd.\n"
+"          never called by anything in Ruby. Odd."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:985
-#, markdown-text, no-wrap
+#. type: Footnote break
+#: ../_posts/2010-01-01-c.markdown:982
+#, no-wrap
 msgid ""
 "[^break]: The documentation [mentions][control] `rb_iter_break()` and\n"
 "          `rb_iter_break_value()` for breaking out of a block, but can't "
 "you\n"
-"          just return early? I can't think of a use-case for these.\n"
+"          just return early? I can't think of a use-case for these."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:991
-#, markdown-text, no-wrap
+#. type: Footnote int
+#: ../_posts/2010-01-01-c.markdown:986
+#, no-wrap
 msgid ""
 "[^int]: There is also the function `rb_thread_call_without_gvl2()`. The\n"
 "        documentation in `thread.c` says that if it \"detects interrupt, "
@@ -2214,21 +2216,21 @@ msgid ""
 "        returns immediately,\" but I'm not sure what this means. If the\n"
 "        unblocking function doesn't kill the thread, it still waits for "
 "the\n"
-"        thread to finish on its own before returning.\n"
+"        thread to finish on its own before returning."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:994
-#, markdown-text, no-wrap
+#. type: Footnote ubf
+#: ../_posts/2010-01-01-c.markdown:992
+#, no-wrap
 msgid ""
 "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a "
 "leftover\n"
-"        from deprecated code and has the exact same effect.\n"
+"        from deprecated code and has the exact same effect."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:999
-#, markdown-text, no-wrap
+#. type: Footnote oldwrap
+#: ../_posts/2010-01-01-c.markdown:995
+#, no-wrap
 msgid ""
 "[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data "
 "since\n"
@@ -2236,31 +2238,36 @@ msgid ""
 "check\n"
 "            out an older version of this guide on Github to see how it used "
 "to\n"
-"            be done.\n"
+"            be done."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:1002
-#, markdown-text, no-wrap
+#. type: Footnote maybe
+#: ../_posts/2010-01-01-c.markdown:1000
+#, no-wrap
 msgid ""
 "[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm "
 "not\n"
-"          sure when it is needed.\n"
+"          sure when it is needed."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:1004
-#, markdown-text
+#. type: Footnote tdata
+#: ../_posts/2010-01-01-c.markdown:1003
+#, no-wrap
 msgid "[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data)."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:1006
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:1005
+#, no-wrap
 msgid ""
 "[control]: "
-"https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure "
-"[bug2]: https://bugs.ruby-lang.org/issues/10466"
+"https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure"
+msgstr ""
+
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:1006
+#, no-wrap
+msgid "[bug2]: https://bugs.ruby-lang.org/issues/10466"
 msgstr ""
 
 #. type: Title ##
@@ -2283,42 +2290,114 @@ msgid ""
 "Embedding Ruby requires one header `ruby.h`, which includes a "
 "platform-specific header `ruby/config.h`. You will probably need to tell "
 "your compiler about the include paths for these headers. You will also need "
-"to link with the Ruby lib.  On my machine, my minimal compiler options are"
+"to link with the Ruby lib.  On my machine, my minimal compiler options are:"
+msgstr ""
+
+#. type: Liquid highlight shell_session
+#: ../_posts/2012-01-01-embed.markdown:14
+#, no-wrap
+msgid ""
+"$ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0 "
+"-I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:16
+#: ../_posts/2012-01-01-embed.markdown:18
 #, markdown-text
 msgid ""
-"{% highlight shell_session %} $ gcc foo.c -I/usr/include/ruby-{{ "
-"site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux "
-"-lruby {% endhighlight %}"
+"If available, you can use `pkg-config` to get the appropriate options for "
+"your OS:"
+msgstr ""
+
+#. type: Liquid highlight shell_session
+#: ../_posts/2012-01-01-embed.markdown:20
+#, no-wrap
+msgid "$ pkg-config --cflags --libs ruby-{{ site.rbversion }}"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:19
+#: ../_posts/2012-01-01-embed.markdown:25
 #, markdown-text
 msgid ""
-"Though, if available, you should really use `pkg-config` to get the "
-"appropriate options for your distribution:"
+"Those approaches might not work if Ruby is installed in a nonstandard "
+"location on your machine or your OS does not provide standard header/library "
+"directories.  A more robust approach is to ask Ruby itself where things are "
+"and to set up the run-time library path:"
+msgstr ""
+
+#. type: Liquid highlight ruby
+#: ../_posts/2012-01-01-embed.markdown:27
+#, no-wrap
+msgid ""
+"#!/usr/bin/env ruby\n"
+"require 'shellwords'\n"
+"\n"
+"# location of ruby.h\n"
+"hdrdir = Shellwords.escape RbConfig::CONFIG[\"rubyhdrdir\"]\n"
+"# location of ruby/config.h\n"
+"archhdrdir = Shellwords.escape RbConfig::CONFIG[\"rubyarchhdrdir\"]\n"
+"# location of libruby\n"
+"libdir = Shellwords.escape RbConfig::CONFIG[\"libdir\"]\n"
+"\n"
+"# args for GCC\n"
+"puts \"-I#{hdrdir} -I#{archhdrdir} -L#{libdir} -Wl,-rpath,#{libdir}\""
+msgstr ""
+
+#. type: Title ###
+#: ../_posts/2012-01-01-embed.markdown:41
+#, markdown-text, no-wrap
+msgid "Windows"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:23
+#: ../_posts/2012-01-01-embed.markdown:45
 #, markdown-text
 msgid ""
-"{% highlight shell_session %} $ pkg-config --cflags --libs ruby-{{ "
-"site.rbversion }} {% endhighlight %}"
+"On Windows, I highly recommend using the "
+"[RubyInstaller](https://rubyinstaller.org/downloads/) **with Devkit**.  This "
+"gives you access to GCC on the Windows command line as well as `pkgconf` for "
+"getting the build flags."
+msgstr ""
+
+#. type: Liquid highlight shell_session
+#: ../_posts/2012-01-01-embed.markdown:47
+#, no-wrap
+msgid ""
+"$ ridk enable # enable devkit\n"
+"$ pkgconf.exe --cflags --libs C:\\Ruby33-x64\\lib\\pkgconfig\\ruby-3.3.pc # "
+"show GCC args\n"
+"$ gcc foo.c ..."
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:55
+#, markdown-text
+msgid ""
+"Note that the GCC args might not be parsed correctly by PowerShell, so use "
+"`cmd` instead.  Also the Ruby 3.3 installer is missing the lib location from "
+"its `pkgconf` output for some reason, so you'll need to add the `-L` option "
+"manually.  You can locate that with `RbConfig::CONFIG[\"libdir\"]` as above; "
+"the installer put it in `C:\\Ruby33-x64\\lib` for me."
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:59
+#, markdown-text
+msgid ""
+"Finally, Windows has no `rpath` so you will need to copy any linked DLLs "
+"alongside the built executable for it to run.  That includes any DLLs needed "
+"by Ruby itself.  The installer put those in "
+"`C:\\Ruby33-x64\\bin\\ruby_builtin_dlls` for me."
 msgstr ""
 
 #. type: Title ##
-#: ../_posts/2012-01-01-embed.markdown:24
+#: ../_posts/2012-01-01-embed.markdown:60
 #, markdown-text, no-wrap
 msgid "Startup, Teardown"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:29
+#: ../_posts/2012-01-01-embed.markdown:65
 #, markdown-text
 msgid ""
 "Including the Ruby interpreter in your C/C++ program is pretty simple. Just "
@@ -2326,14 +2405,14 @@ msgid ""
 "API, and a cleanup function after you're done:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:33
-#, markdown-text
-msgid "{% highlight c %} {% include embed/simple.c %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2012-01-01-embed.markdown:67
+#, no-wrap
+msgid "{% include embed/simple.c %}"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:38
+#: ../_posts/2012-01-01-embed.markdown:74
 #, markdown-text
 msgid ""
 "If the VM fails to start during `ruby_init()` it will print an error and "
@@ -2343,7 +2422,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:43
+#: ../_posts/2012-01-01-embed.markdown:79
 #, markdown-text
 msgid ""
 "If an error occurs during `rb_cleanup()`, it returns a nonzero "
@@ -2353,7 +2432,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:52
+#: ../_posts/2012-01-01-embed.markdown:88
 #, markdown-text
 msgid ""
 "_Technically_ you don't have to call `ruby_init`/`ruby_setup` in `main`, but "
@@ -2366,7 +2445,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:58
+#: ../_posts/2012-01-01-embed.markdown:94
 #, markdown-text
 msgid ""
 "During cleanup, the VM might evaluate more Ruby code (if you passed a block "
@@ -2377,25 +2456,25 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:60
+#: ../_posts/2012-01-01-embed.markdown:96
 #, markdown-text
 msgid "Here's an alternative example:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:64
-#, markdown-text
-msgid "{% highlight c %} {% include embed/advanced.c %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2012-01-01-embed.markdown:98
+#, no-wrap
+msgid "{% include embed/advanced.c %}"
 msgstr ""
 
 #. type: Title ###
-#: ../_posts/2012-01-01-embed.markdown:65
+#: ../_posts/2012-01-01-embed.markdown:101
 #, markdown-text, no-wrap
 msgid "Limitations"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:73
+#: ../_posts/2012-01-01-embed.markdown:109
 #, markdown-text
 msgid ""
 "Other than the stack frame warning above, there is another limitation: you "
@@ -2407,7 +2486,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:76
+#: ../_posts/2012-01-01-embed.markdown:112
 #, markdown-text
 msgid ""
 "If for some reason you need multiple Ruby VMs in your program, you will need "
@@ -2415,13 +2494,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../_posts/2012-01-01-embed.markdown:77
+#: ../_posts/2012-01-01-embed.markdown:113
 #, markdown-text, no-wrap
 msgid "Tweaking the VM"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:82
+#: ../_posts/2012-01-01-embed.markdown:118
 #, markdown-text
 msgid ""
 "You now have a bare-bones Ruby VM running, but you may want to set up a "
@@ -2429,26 +2508,26 @@ msgid ""
 "Ruby script (e.g. `$0`) for error messages and such, use"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:86
-#, markdown-text
-msgid "{% highlight c %} ruby_script(\"new name\")  {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2012-01-01-embed.markdown:120
+#, no-wrap
+msgid "ruby_script(\"new name\")"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:88
+#: ../_posts/2012-01-01-embed.markdown:124
 #, markdown-text
 msgid "To set up the load path so that gems can be loaded with `require`, use"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:92
-#, markdown-text
-msgid "{% highlight c %} ruby_init_loadpath()  {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2012-01-01-embed.markdown:126
+#, no-wrap
+msgid "ruby_init_loadpath()"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:96
+#: ../_posts/2012-01-01-embed.markdown:132
 #, markdown-text
 msgid ""
 "You can also pass options to the VM just like you would to `ruby` on the "
@@ -2456,14 +2535,14 @@ msgid ""
 "verbose mode[^opt]."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:100
-#, markdown-text
-msgid "{% highlight c %} {% include embed/options.c %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2012-01-01-embed.markdown:134
+#, no-wrap
+msgid "{% include embed/options.c %}"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:106
+#: ../_posts/2012-01-01-embed.markdown:142
 #, markdown-text
 msgid ""
 "The arguments to `ruby_options` are `argc` and `argv` just like a main "
@@ -2475,7 +2554,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:115
+#: ../_posts/2012-01-01-embed.markdown:151
 #, markdown-text
 msgid ""
 "`ruby_options()` returns a \"node\" that represents the compiled Ruby "
@@ -2489,7 +2568,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:118
+#: ../_posts/2012-01-01-embed.markdown:154
 #, markdown-text
 msgid ""
 "Ruby currently doesn't support any other way of compiling and running code "
@@ -2497,44 +2576,44 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../_posts/2012-01-01-embed.markdown:119
+#: ../_posts/2012-01-01-embed.markdown:155
 #: ../_posts/2013-01-01-extend.markdown:105
 #, markdown-text, no-wrap
 msgid "Success"
 msgstr ""
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:122
+#: ../_posts/2012-01-01-embed.markdown:158
 #, markdown-text
 msgid "Now you're ready to interact with Ruby! Go back to the [C API](../c)."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:127
-#, markdown-text, no-wrap
+#. type: Footnote err
+#: ../_posts/2012-01-01-embed.markdown:161
+#, no-wrap
 msgid ""
 "[^err]: `ruby_init()` uses `error_print()` to get an error message, but "
 "this\n"
-"        function isn't exposed to the API. Is this a normal exception?\n"
+"        function isn't exposed to the API. Is this a normal exception?"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:131
-#, markdown-text, no-wrap
+#. type: Footnote opt
+#: ../_posts/2012-01-01-embed.markdown:164
+#, no-wrap
 msgid ""
 "[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do "
 "anything. This\n"
 "        could be related to `ruby_prog_init()`. And really it should be "
 "possible\n"
-"        to do this without parsing command line options.\n"
+"        to do this without parsing command line options."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:133
-#, markdown-text, no-wrap
+#. type: Footnote load
+#: ../_posts/2012-01-01-embed.markdown:168
+#, no-wrap
 msgid ""
 "[^load]: It looks like the function `rb_load_file()` should do this, but I\n"
-"         haven't had any luck getting it to work.\n"
+"         haven't had any luck getting it to work."
 msgstr ""
 
 #. type: Title ##
@@ -2565,10 +2644,10 @@ msgstr ""
 msgid "First create the file `extconf.rb` in the same directory as your C code:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:19
-#, markdown-text
-msgid "{% highlight ruby %} {% include extend/ext/extconf.rb %} {% endhighlight %}"
+#. type: Liquid highlight ruby
+#: ../_posts/2013-01-01-extend.markdown:17
+#, no-wrap
+msgid "{% include extend/ext/extconf.rb %}"
 msgstr ""
 
 #. type: Plain text
@@ -2597,9 +2676,9 @@ msgstr ""
 msgid "Check for programs needed for building"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:28
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:27
+#, no-wrap
 msgid "[conf]: http://en.wikipedia.org/wiki/Configure_script"
 msgstr ""
 
@@ -2612,10 +2691,10 @@ msgid ""
 "SDL2 and needs to know how big `int`s are might call:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:36
-#, markdown-text
-msgid "{% highlight ruby %} {% include extend/ext/exex.rb %} {% endhighlight %}"
+#. type: Liquid highlight ruby
+#: ../_posts/2013-01-01-extend.markdown:34
+#, no-wrap
+msgid "{% include extend/ext/exex.rb %}"
 msgstr ""
 
 #. type: Plain text
@@ -2627,10 +2706,10 @@ msgid ""
 "previously. For this example, `extconf.h` might contain"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:44
-#, markdown-text
-msgid "{% highlight c %} {% include extend/ext/exh.h %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2013-01-01-extend.markdown:42
+#, no-wrap
+msgid "{% include extend/ext/exh.h %}"
 msgstr ""
 
 #. type: Plain text
@@ -2677,9 +2756,9 @@ msgid ""
 "different file dependencies, etc."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:70
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:69
+#, no-wrap
 msgid "[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html"
 msgstr ""
 
@@ -2695,10 +2774,12 @@ msgstr ""
 msgid "The rest couldn't be simpler"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:79
-#, markdown-text
-msgid "{% highlight shell_session %} $ ruby extconf.rb $ make {% endhighlight %}"
+#. type: Liquid highlight shell_session
+#: ../_posts/2013-01-01-extend.markdown:76
+#, no-wrap
+msgid ""
+"$ ruby extconf.rb\n"
+"$ make"
 msgstr ""
 
 #. type: Plain text
@@ -2724,10 +2805,10 @@ msgid ""
 "\"foobar\" in our example, so we'll create `foobar.c` containing"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:93
-#, markdown-text
-msgid "{% highlight c %} {% include extend/ext/foobar.c %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2013-01-01-extend.markdown:91
+#, no-wrap
+msgid "{% include extend/ext/foobar.c %}"
 msgstr ""
 
 #. type: Title ###
@@ -2782,10 +2863,10 @@ msgid ""
 "tell the spec about `extconf.rb`[^rbg]:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:122
-#, markdown-text
-msgid "{% highlight ruby %} {% include extend/foobar.gemspec %} {% endhighlight %}"
+#. type: Liquid highlight ruby
+#: ../_posts/2013-01-01-extend.markdown:120
+#, no-wrap
+msgid "{% include extend/foobar.gemspec %}"
 msgstr ""
 
 #. type: Plain text
@@ -2796,43 +2877,49 @@ msgid ""
 "in subdirectories of `ext/` and pass all of the `extconf.rb`s to the spec."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:127
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:126
+#, no-wrap
 msgid "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:131
-#, markdown-text
+#. type: Footnote glob
+#: ../_posts/2013-01-01-extend.markdown:130
+#, no-wrap
 msgid "[^glob]: Check the [official documentation][globals]."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:135
-#, markdown-text, no-wrap
+#. type: Footnote argv
+#: ../_posts/2013-01-01-extend.markdown:132
+#, no-wrap
 msgid ""
 "[^argv]: The official documentation [hints][makefile] that `mkmf` parses "
 "certain\n"
 "         command line flags e.g.  `--vendor`. But I can't find this "
 "documented\n"
-"         anywhere.\n"
+"         anywhere."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:137
-#, markdown-text
+#. type: Footnote rbg
+#: ../_posts/2013-01-01-extend.markdown:136
+#, no-wrap
 msgid ""
 "[^rbg]: "
 "[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:139
-#, markdown-text
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:138
+#, no-wrap
 msgid ""
 "[globals]: "
-"https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb "
+"https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb"
+msgstr ""
+
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:139
+#, no-wrap
+msgid ""
 "[makefile]: "
 "https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile"
 msgstr ""
@@ -2855,10 +2942,10 @@ msgstr ""
 msgid "The Ruby script can look something like this:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:20
-#, markdown-text
-msgid "{% highlight ruby %} {% include examples/ai.rb %} {% endhighlight %}"
+#. type: Liquid highlight ruby
+#: ../_posts/2014-01-01-examples.markdown:18
+#, no-wrap
+msgid "{% include examples/ai.rb %}"
 msgstr ""
 
 #. type: Plain text
@@ -2870,10 +2957,10 @@ msgid ""
 ". Here's `tag.c`:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:28
-#, markdown-text
-msgid "{% highlight c %} {% include examples/tag.c %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2014-01-01-examples.markdown:26
+#, no-wrap
+msgid "{% include examples/tag.c %}"
 msgstr ""
 
 #. type: Plain text
@@ -2882,10 +2969,10 @@ msgstr ""
 msgid "The Makefile is nothing special:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:34
-#, markdown-text
-msgid "{% highlight make %} {% include examples/Makefile %} {% endhighlight %}"
+#. type: Liquid highlight make
+#: ../_posts/2014-01-01-examples.markdown:32
+#, no-wrap
+msgid "{% include examples/Makefile %}"
 msgstr ""
 
 #. type: Plain text
@@ -2899,10 +2986,16 @@ msgid ""
 "types. If you want a _really_ full example, check out the [GMP gem][gem]."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:45
-#, markdown-text
-msgid "[gmp]: https://gmplib.org/ [gem]: https://github.com/srawlins/gmp"
+#. type: Link reference
+#: ../_posts/2014-01-01-examples.markdown:43
+#, no-wrap
+msgid "[gmp]: https://gmplib.org/"
+msgstr ""
+
+#. type: Link reference
+#: ../_posts/2014-01-01-examples.markdown:44
+#, no-wrap
+msgid "[gem]: https://github.com/srawlins/gmp"
 msgstr ""
 
 #. type: Plain text
@@ -2911,10 +3004,10 @@ msgstr ""
 msgid "Everything is in `gmp.c` where we define our `GMP::Integer` class:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:51
-#, markdown-text
-msgid "{% highlight c %} {% include examples/ext/gmp.c %} {% endhighlight %}"
+#. type: Liquid highlight c
+#: ../_posts/2014-01-01-examples.markdown:49
+#, no-wrap
+msgid "{% include examples/ext/gmp.c %}"
 msgstr ""
 
 #. type: Plain text
@@ -2923,12 +3016,10 @@ msgstr ""
 msgid "The `extconf.rb` is really simple."
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:57
-#, markdown-text
-msgid ""
-"{% highlight ruby %} {% include examples/ext/extconf.rb %} {% endhighlight "
-"%}"
+#. type: Liquid highlight ruby
+#: ../_posts/2014-01-01-examples.markdown:55
+#, no-wrap
+msgid "{% include examples/ext/extconf.rb %}"
 msgstr ""
 
 #. type: Plain text
@@ -2937,10 +3028,10 @@ msgstr ""
 msgid "And now you can finally find out what your name means in base 62:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:63
-#, markdown-text
-msgid "{% highlight ruby %} {% include examples/gmp_ex.rb %} {% endhighlight %}"
+#. type: Liquid highlight ruby
+#: ../_posts/2014-01-01-examples.markdown:61
+#, no-wrap
+msgid "{% include examples/gmp_ex.rb %}"
 msgstr ""
 
 #. type: Plain text
@@ -2965,10 +3056,10 @@ msgid ""
 "written a `gmp.rb` script to significantly simplify our extension:"
 msgstr ""
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:78
-#, markdown-text
-msgid "{% highlight ruby %} {% include examples/gmp.rb %} {% endhighlight %}"
+#. type: Liquid highlight ruby
+#: ../_posts/2014-01-01-examples.markdown:77
+#, no-wrap
+msgid "{% include examples/gmp.rb %}"
 msgstr ""
 
 #. type: Plain text
@@ -2979,9 +3070,9 @@ msgid ""
 "[here][io]."
 msgstr ""
 
-#. type: Plain text
-#: ../README.md:5
-#, markdown-text
+#. type: Link reference
+#: ../README.md:4
+#, no-wrap
 msgid "[io]: http://silverhammermba.github.io/emberb"
 msgstr ""
 
@@ -3046,18 +3137,50 @@ msgid ""
 "not suck."
 msgstr ""
 
-#. type: Plain text
-#: ../README.md:29
-#, markdown-text
+#. type: Link reference
+#: ../README.md:23
+#, no-wrap
 msgid ""
 "[a]: "
-"http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1.html "
-"[b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc "
-"[c]: http://blog.jacius.info/ruby-c-extension-cheat-sheet/ [d]: "
-"http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-application.html "
-"[e]: https://gist.github.com/jefftrull/1305431 [f]: "
-"http://metaeditor.sourceforge.net/embed/ [g]: "
-"http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
+"http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1.html"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:24
+#, no-wrap
+msgid "[b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:25
+#, no-wrap
+msgid "[c]: http://blog.jacius.info/ruby-c-extension-cheat-sheet/"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:26
+#, no-wrap
+msgid ""
+"[d]: "
+"http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-application.html"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:27
+#, no-wrap
+msgid "[e]: https://gist.github.com/jefftrull/1305431"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:28
+#, no-wrap
+msgid "[f]: http://metaeditor.sourceforge.net/embed/"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:29
+#, no-wrap
+msgid "[g]: http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
 msgstr ""
 
 #. type: Yaml Front Matter Hash Value: layout
@@ -3098,13 +3221,28 @@ msgid ""
 "</div>\n"
 msgstr ""
 
-#. type: Plain text
+#. type: Link reference
+#: ../index.markdown:18
+#, no-wrap
+msgid "[start]: c"
+msgstr ""
+
+#. type: Link reference
+#: ../index.markdown:19
+#, no-wrap
+msgid "[repo]: https://github.com/silverhammermba/emberb"
+msgstr ""
+
+#. type: Link reference
+#: ../index.markdown:20
+#, no-wrap
+msgid "[iss]: https://github.com/silverhammermba/emberb/issues/new"
+msgstr ""
+
+#. type: Link reference
 #: ../index.markdown:21
-#, markdown-text
-msgid ""
-"[start]: c [repo]: https://github.com/silverhammermba/emberb [iss]: "
-"https://github.com/silverhammermba/emberb/issues/new [pull]: "
-"https://github.com/silverhammermba/emberb/pulls"
+#, no-wrap
+msgid "[pull]: https://github.com/silverhammermba/emberb/pulls"
 msgstr ""
 
 #. type: comment

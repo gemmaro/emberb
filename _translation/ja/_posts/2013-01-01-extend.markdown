@@ -133,11 +133,12 @@ specに各々の `extconf.rb` を記します。
 
 ## 脚註 ##
 
-[^glob]: [公式文書][globals]をご確認ください。
+[^glob]: [公式の文書][globals]をご確認ください。
 
-[^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化されていないように見えます。
+[^argv]: 公式の文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。
+         でも、このことはどこにも文書化されていないようです。
 
-[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)
+[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)
 
-[globals]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb
-[makefile]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile
+[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb
+[makefile]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile
