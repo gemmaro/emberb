@@ -744,33 +744,56 @@ $ git clone https://github.com/ruby/ruby.git
 
 ## 脚註 ##
 
-[^intern]: 完膚なきまでの嘘です。
-           APIは*確実に*オブジェクトの内部データ構造を滅茶苦茶にできます（名前が大文字Rで始まるものを探してください）。
-           しかし一般には名案にはなりませんし必要でもないのです。
+[^intern]: That's a blatant lie. The API _definitely_ lets you mess around
+           with the internal data structures of objects (look for things with
+           names starting with capital R). But it's generally not a good idea
+           and not necessary.
 
-[^undef]: 未定義値を表す`Qundef`もありますが、Rubyで等価なものはなく[滅多に](#handling-blocks)[使われ](#constants-1)ないものです。実際、こうした稀な出現はさておき、Rubyで通常の`VALUE`が期待するところで`Qundef`があるとVMはセグフォします。
+[^undef]: There's also `Qundef` representing an undefined value, but
+          this has no Ruby equivalent and is [rarely](#handling-blocks)
+          [used](#constants-1). In fact, outside of those rare occasions,
+          `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.
 
-[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _でしょう_ が、実は[バグ][bug2]のために`rb_eval_string_protect()`と同じものになっています。
+[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is
+         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].
 
-[^chr]: `CHR2FIX()`マクロもありますが、筆者が試したところ時々思いがけない結果になりました。`LONG2FIX()`はうまくいきます。
+[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave
+        unexpected results. `LONG2FIX()` should work.
 
-[^wchar]: `wchar_t`を扱う一番の方法はわかりません。試したところ単なる`char`として扱うことに成功したことがありますが、それはたまたま運が良かっただけで、違うプラットフォームではきっと失敗することでしょう。
+[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had
+          some success just treating them as `char`s, but I think that may have
+          been a happy accident, and could certainly fail on different platforms.
 
-[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。どのような場合に消去すべきかについてのドキュメントは見付かっていません。*常に*消去しなければいけないように思われます。
+[^clear]: The documentation [states][control] that "You have to clear the error
+          info... when ignoring the caught exception" during `rb_protect`. But I
+          can't find any documentation of when it would be cleared for
+          you—it seems like you _always_ have to clear it.
 
-[^yield]: そして`rb_yield_block()`という2つの使われない引数を取るものがあり、Rubyではどこからも呼ばれないのです。妙です。
+[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is
+          never called by anything in Ruby. Odd.
 
-[^break]: ドキュメントは`rb_iter_block()`とブロックを突破する用の`rb_iter_break_value()`について[言及][control]していますが、単に早期の返値はできないのでしょうか。筆者はこれらの使い途が思い付きません。
+[^break]: The documentation [mentions][control] `rb_iter_break()` and
+          `rb_iter_break_value()` for breaking out of a block, but can't you
+          just return early? I can't think of a use-case for these.
 
-[^int]: 関数`rb_thread_call_without_gvl2()`もあります。`thread.c`のドキュメントには「中断を検知すると直ちに返る」とありますが、どういう意味なのかよく分かりません。ブロック解除関数がスレッドをキルしなければ、返る前にひとりでにスレッドが終わるまで待ちぼうけるでしょうから。
+[^int]: There is also the function `rb_thread_call_without_gvl2()`. The
+        documentation in `thread.c` says that if it "detects interrupt, it
+        returns immediately," but I'm not sure what this means. If the
+        unblocking function doesn't kill the thread, it still waits for the
+        thread to finish on its own before returning.
 
-[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅れのコードの残滓のようなのでちょうど同じ効果があります。
+[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover
+        from deprecated code and has the exact same effect.
 
-[^oldwrap]: `TypedData*`マクロはRuby 1.9.2以降データを包む好ましいやり方です。古いバージョンのRubyを使っているならGithubで本手引きの古いバージョンを確認すればかつてどのように使われていたのかがわかります。
+[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since
+            Ruby 1.9.2. If you're using an older version of Ruby you can check
+            out an older version of this guide on Github to see how it used to
+            be done.
 
-[^maybe]: 謎めいた名前の`rb_gc_mark_maybe()`もありますが、いつ必要になるのかよくわかりません。
+[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not
+          sure when it is needed.
 
 [^tdata]: あるいはオブジェクトが[Cのポインタを包む](#data)のなら`T_DATA`を使ってください。
 
-[control]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure
+[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure
 [bug2]: https://bugs.ruby-lang.org/issues/10466

@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: https://silverhammermba.github.io/emberb/\n"
-"POT-Creation-Date: 2024-02-24 12:23+0900\n"
+"POT-Creation-Date: 2024-10-22 09:11+0900\n"
 "PO-Revision-Date: 2024-02-24 12:24+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
@@ -262,14 +262,11 @@ msgstr ""
 "例えば `T_STRING` や `T_ARRAY` などです。"
 
 # 空白を空けないことによって意図しない改行を回避しています
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:86
-msgid ""
-"[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension."
-"rdoc#label-Data+Types"
-msgstr ""
-"[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension."
-"rdoc#label-Data+Types"
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:85
+#, no-wrap
+msgid "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+msgstr "[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:90
@@ -589,8 +586,9 @@ msgstr ""
 "前の節のマクロのほうを使うべきです。\n"
 "なぜなら範囲の確認を省けるためです。"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:194
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:193
+#, no-wrap
 msgid "[bug]: https://bugs.ruby-lang.org/issues/9089"
 msgstr "[bug]: https://bugs.ruby-lang.org/issues/9089"
 
@@ -942,8 +940,9 @@ msgstr ""
 "を匿名のモジュールに包んで大域名前空間を保護するのに使えます。単に非ゼロの値"
 "を2つ目の引数に渡せばよいのです。"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:333
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:332
+#, no-wrap
 msgid "[rbload]: http://www.ruby-doc.org/core/Kernel.html#method-i-load"
 msgstr "[rbload]: http://www.ruby-doc.org/core/Kernel.html#method-i-load"
 
@@ -2001,8 +2000,9 @@ msgstr ""
 "そのためです。どの要素を省いてもコンパイラによって安全に掃除された状態になっ"
 "ています"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:743
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:742
+#, no-wrap
 msgid "[desinit]: https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html"
 msgstr "[desinit]: https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html"
 
@@ -2045,14 +2045,19 @@ msgstr ""
 "アロケーションと初期化を分離するのが難しければデータを`struct`に包み*実際の*"
 "アロケーションを`initialize`ですることもできます。"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:761
-msgid ""
-"[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization "
-"[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
-msgstr ""
-"[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization "
-"[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:759
+#, fuzzy, no-wrap
+#| msgid "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization [place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+msgid "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization"
+msgstr "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization [place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:760
+#, fuzzy, no-wrap
+#| msgid "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization [place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+msgid "[place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
+msgstr "[raii]: http://wikipedia.org/wiki/Resource_Acquisition_Is_Initialization [place]: http://en.cppreference.com/w/cpp/language/new#Allocation"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:769
@@ -2397,8 +2402,9 @@ msgstr ""
 "が、それは有益と思われなかったりもっと良いドキュメントがどこかにあったりする"
 "からなのです。"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:899
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:898
+#, no-wrap
 msgid "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
 msgstr "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
 
@@ -2554,23 +2560,34 @@ msgstr ""
 "シューを報告したりプルリクエストを送ってください。\n"
 "またGithubから全てのコード例をダウンロードできます。"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:951
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:950
+#, no-wrap
 msgid "[gh]: https://github.com/silverhammermba/emberb"
 msgstr "[gh]: https://github.com/silverhammermba/emberb"
 
 #. type: Title ##
-#: ../_posts/2010-01-01-c.markdown:952 ../_posts/2012-01-01-embed.markdown:123
+#: ../_posts/2010-01-01-c.markdown:952 ../_posts/2012-01-01-embed.markdown:159
 #: ../_posts/2013-01-01-extend.markdown:128
 #, no-wrap
 msgid "Footnotes"
 msgstr "脚註"
 
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:954
+#, no-wrap
+msgid "[^intern]: That's a blatant lie. The API _definitely_ lets you mess around"
+msgstr ""
+
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:958
-#, no-wrap
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^intern]: That's a blatant lie. The API _definitely_ lets you mess around\n"
+#| "           with the internal data structures of objects (look for things with\n"
+#| "           names starting with capital R). But it's generally not a good idea\n"
+#| "           and not necessary.\n"
 msgid ""
-"[^intern]: That's a blatant lie. The API _definitely_ lets you mess around\n"
 "           with the internal data structures of objects (look for things with\n"
 "           names starting with capital R). But it's generally not a good idea\n"
 "           and not necessary.\n"
@@ -2579,124 +2596,225 @@ msgstr ""
 "           APIは*確実に*オブジェクトの内部データ構造を滅茶苦茶にできます（名前が大文字Rで始まるものを探してください）。\n"
 "           しかし一般には名案にはなりませんし必要でもないのです。\n"
 
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:959
+#, no-wrap
+msgid "[^undef]: There's also `Qundef` representing an undefined value, but"
+msgstr ""
+
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:963
-#, no-wrap
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^undef]: There's also `Qundef` representing an undefined value, but\n"
+#| "          this has no Ruby equivalent and is [rarely](#handling-blocks)\n"
+#| "          [used](#constants-1). In fact, outside of those rare occasions,\n"
+#| "          `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.\n"
 msgid ""
-"[^undef]: There's also `Qundef` representing an undefined value, but\n"
 "          this has no Ruby equivalent and is [rarely](#handling-blocks)\n"
 "          [used](#constants-1). In fact, outside of those rare occasions,\n"
 "          `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.\n"
 msgstr "[^undef]: 未定義値を表す`Qundef`もありますが、Rubyで等価なものはなく[滅多に](#handling-blocks)[使われ](#constants-1)ないものです。実際、こうした稀な出現はさておき、Rubyで通常の`VALUE`が期待するところで`Qundef`があるとVMはセグフォします。\n"
 
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:964
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is\n"
+#| "         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].\n"
+msgid "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is"
+msgstr "[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _でしょう_ が、実は[バグ][bug2]のために`rb_eval_string_protect()`と同じものになっています。\n"
+
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:966
-#, no-wrap
-msgid ""
-"[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is\n"
-"         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].\n"
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is\n"
+#| "         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].\n"
+msgid "         actually the same as `rb_eval_string_protect()` due to a [bug][bug2].\n"
 msgstr "[^wrap]: `rb_eval_string_wrap()`もあり、きっと便利なの _でしょう_ が、実は[バグ][bug2]のために`rb_eval_string_protect()`と同じものになっています。\n"
+
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:967
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave\n"
+#| "        unexpected results. `LONG2FIX()` should work.\n"
+msgid "[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave"
+msgstr "[^chr]: `CHR2FIX()`マクロもありますが、筆者が試したところ時々思いがけない結果になりました。`LONG2FIX()`はうまくいきます。\n"
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:969
 #, no-wrap
-msgid ""
-"[^chr]: There is a `CHR2FIX()` macro, but in my tests this sometimes gave\n"
-"        unexpected results. `LONG2FIX()` should work.\n"
-msgstr "[^chr]: `CHR2FIX()`マクロもありますが、筆者が試したところ時々思いがけない結果になりました。`LONG2FIX()`はうまくいきます。\n"
+msgid "        unexpected results. `LONG2FIX()` should work.\n"
+msgstr ""
+
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:970
+#, no-wrap
+msgid "[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had"
+msgstr ""
 
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:973
-#, no-wrap
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had\n"
+#| "          some success just treating them as `char`s, but I think that may have\n"
+#| "          been a happy accident, and could certainly fail on different platforms.\n"
 msgid ""
-"[^wchar]: I don't know what the best way is to handle `wchar_t`. In my tests I had\n"
 "          some success just treating them as `char`s, but I think that may have\n"
 "          been a happy accident, and could certainly fail on different platforms.\n"
 msgstr "[^wchar]: `wchar_t`を扱う一番の方法はわかりません。試したところ単なる`char`として扱うことに成功したことがありますが、それはたまたま運が良かっただけで、違うプラットフォームではきっと失敗することでしょう。\n"
 
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:974
+#, no-wrap
+msgid "[^clear]: The documentation [states][control] that \"You have to clear the error"
+msgstr ""
+
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:978
-#, no-wrap
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^clear]: The documentation [states][control] that \"You have to clear the error\n"
+#| "          info... when ignoring the caught exception\" during `rb_protect`. But I\n"
+#| "          can't find any documentation of when it would be cleared for\n"
+#| "          you—it seems like you _always_ have to clear it.\n"
 msgid ""
-"[^clear]: The documentation [states][control] that \"You have to clear the error\n"
 "          info... when ignoring the caught exception\" during `rb_protect`. But I\n"
 "          can't find any documentation of when it would be cleared for\n"
 "          you—it seems like you _always_ have to clear it.\n"
 msgstr "[^clear]: ドキュメントには、`rb_protect`の最中に「捕捉した例外を無視する[場合][when]はエラー情報を消去しなければいけない」と[記述][control]されています。どのような場合に消去すべきかについてのドキュメントは見付かっていません。*常に*消去しなければいけないように思われます。\n"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:981
-#, no-wrap
-msgid ""
-"[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is\n"
-"          never called by anything in Ruby. Odd.\n"
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:979
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is\n"
+#| "          never called by anything in Ruby. Odd.\n"
+msgid "[^yield]: And there's `rb_yield_block()` which takes two unused arguments and is"
 msgstr "[^yield]: そして`rb_yield_block()`という2つの使われない引数を取るものがあり、Rubyではどこからも呼ばれないのです。妙です。\n"
 
 #. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:985
+#: ../_posts/2010-01-01-c.markdown:981
 #, no-wrap
+msgid "          never called by anything in Ruby. Odd.\n"
+msgstr ""
+
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:982
+#, no-wrap
+msgid "[^break]: The documentation [mentions][control] `rb_iter_break()` and"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2010-01-01-c.markdown:985
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^break]: The documentation [mentions][control] `rb_iter_break()` and\n"
+#| "          `rb_iter_break_value()` for breaking out of a block, but can't you\n"
+#| "          just return early? I can't think of a use-case for these.\n"
 msgid ""
-"[^break]: The documentation [mentions][control] `rb_iter_break()` and\n"
 "          `rb_iter_break_value()` for breaking out of a block, but can't you\n"
 "          just return early? I can't think of a use-case for these.\n"
 msgstr "[^break]: ドキュメントは`rb_iter_block()`とブロックを突破する用の`rb_iter_break_value()`について[言及][control]していますが、単に早期の返値はできないのでしょうか。筆者はこれらの使い途が思い付きません。\n"
 
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:986
+#, no-wrap
+msgid "[^int]: There is also the function `rb_thread_call_without_gvl2()`. The"
+msgstr ""
+
 #. type: Plain text
 #: ../_posts/2010-01-01-c.markdown:991
-#, no-wrap
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^int]: There is also the function `rb_thread_call_without_gvl2()`. The\n"
+#| "        documentation in `thread.c` says that if it \"detects interrupt, it\n"
+#| "        returns immediately,\" but I'm not sure what this means. If the\n"
+#| "        unblocking function doesn't kill the thread, it still waits for the\n"
+#| "        thread to finish on its own before returning.\n"
 msgid ""
-"[^int]: There is also the function `rb_thread_call_without_gvl2()`. The\n"
 "        documentation in `thread.c` says that if it \"detects interrupt, it\n"
 "        returns immediately,\" but I'm not sure what this means. If the\n"
 "        unblocking function doesn't kill the thread, it still waits for the\n"
 "        thread to finish on its own before returning.\n"
 msgstr "[^int]: 関数`rb_thread_call_without_gvl2()`もあります。`thread.c`のドキュメントには「中断を検知すると直ちに返る」とありますが、どういう意味なのかよく分かりません。ブロック解除関数がスレッドをキルしなければ、返る前にひとりでにスレッドが終わるまで待ちぼうけるでしょうから。\n"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:994
-#, no-wrap
-msgid ""
-"[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover\n"
-"        from deprecated code and has the exact same effect.\n"
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:992
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover\n"
+#| "        from deprecated code and has the exact same effect.\n"
+msgid "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover"
 msgstr "[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅れのコードの残滓のようなのでちょうど同じ効果があります。\n"
 
 #. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:999
+#: ../_posts/2010-01-01-c.markdown:994
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^ubf]: You can also use `RUBY_UBF_PROCESS`, but this seems to be a leftover\n"
+#| "        from deprecated code and has the exact same effect.\n"
+msgid "        from deprecated code and has the exact same effect.\n"
+msgstr "[^ubf]: `RUBY_UBF_PROCESS`を使うこともできますが、時代遅れのコードの残滓のようなのでちょうど同じ効果があります。\n"
+
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:995
 #, no-wrap
+msgid "[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2010-01-01-c.markdown:999
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since\n"
+#| "            Ruby 1.9.2. If you're using an older version of Ruby you can check\n"
+#| "            out an older version of this guide on Github to see how it used to\n"
+#| "            be done.\n"
 msgid ""
-"[^oldwrap]: The `TypedData*` macros are the preferred way to wrap data since\n"
 "            Ruby 1.9.2. If you're using an older version of Ruby you can check\n"
 "            out an older version of this guide on Github to see how it used to\n"
 "            be done.\n"
 msgstr "[^oldwrap]: `TypedData*`マクロはRuby 1.9.2以降データを包む好ましいやり方です。古いバージョンのRubyを使っているならGithubで本手引きの古いバージョンを確認すればかつてどのように使われていたのかがわかります。\n"
 
-#. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:1002
-#, no-wrap
-msgid ""
-"[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not\n"
-"          sure when it is needed.\n"
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:1000
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not\n"
+#| "          sure when it is needed.\n"
+msgid "[^maybe]: There's also the enigmatically named `rb_gc_mark_maybe()`, but I'm not"
 msgstr "[^maybe]: 謎めいた名前の`rb_gc_mark_maybe()`もありますが、いつ必要になるのかよくわかりません。\n"
 
 #. type: Plain text
-#: ../_posts/2010-01-01-c.markdown:1004
-msgid "[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data)."
+#: ../_posts/2010-01-01-c.markdown:1002
+#, no-wrap
+msgid "          sure when it is needed.\n"
 msgstr ""
-"[^tdata]: あるいはオブジェクトが[Cのポインタを包む](#data)のなら`T_DATA`を"
-"使ってください。"
 
-# "[control]:"の直後で空白を入れていないのは意図的です。
-# これがないとここで改行が入ってしまうので正しいMarkdownの解釈になりません。
-# 解消するにはpo4aが正しくリンクの参照を構文解析できるようにする必要があります。
-#. type: Plain text
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:1003
+#, no-wrap
+msgid "[^tdata]: Or use `T_DATA` if the object [wraps a C pointer](#data)."
+msgstr "[^tdata]: あるいはオブジェクトが[Cのポインタを包む](#data)のなら`T_DATA`を使ってください。"
+
+# 空白を空けないことによって意図しない改行を回避しています
+#. type: Link reference
+#: ../_posts/2010-01-01-c.markdown:1005
+#, fuzzy, no-wrap
+#| msgid "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+msgid "[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Control+Structure"
+msgstr "[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+
+#. type: Link reference
 #: ../_posts/2010-01-01-c.markdown:1006
-msgid ""
-"[control]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
-"Control+Structure [bug2]: https://bugs.ruby-lang.org/issues/10466"
-msgstr ""
-"[control]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
-"Control+Structure\n"
-"[bug2]: https://bugs.ruby-lang.org/issues/10466"
+#, fuzzy, no-wrap
+#| msgid "[bug]: https://bugs.ruby-lang.org/issues/9089"
+msgid "[bug2]: https://bugs.ruby-lang.org/issues/10466"
+msgstr "[bug]: https://bugs.ruby-lang.org/issues/9089"
 
 #. type: Title ##
 #: ../_posts/2012-01-01-embed.markdown:1
@@ -2713,11 +2831,17 @@ msgstr "コンパイルする"
 
 #. type: Plain text
 #: ../_posts/2012-01-01-embed.markdown:12
+#, fuzzy
+#| msgid ""
+#| "Embedding Ruby requires one header `ruby.h`, which includes a platform-"
+#| "specific header `ruby/config.h`. You will probably need to tell your "
+#| "compiler about the include paths for these headers. You will also need to "
+#| "link with the Ruby lib.  On my machine, my minimal compiler options are"
 msgid ""
 "Embedding Ruby requires one header `ruby.h`, which includes a platform-"
 "specific header `ruby/config.h`. You will probably need to tell your "
 "compiler about the include paths for these headers. You will also need to "
-"link with the Ruby lib.  On my machine, my minimal compiler options are"
+"link with the Ruby lib.  On my machine, my minimal compiler options are:"
 msgstr ""
 "Rubyを組込むには `ruby.h` という1つのヘッダファイルが必要です。このファイルは"
 "プラットフォーム固有のヘッダである `ruby/config.h` を含めます。場合によっては"
@@ -2733,20 +2857,25 @@ msgid ""
 "lruby {% endhighlight %}"
 msgstr ""
 "{% highlight shell_session %}\n"
-"$ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby\n"
+"$ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0 -I/usr/include/ruby-"
+"{{ site.rbversion }}.0/x86_64-linux -lruby\n"
 "{% endhighlight %}"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:19
+#: ../_posts/2012-01-01-embed.markdown:18
+#, fuzzy
+#| msgid ""
+#| "Though, if available, you should really use `pkg-config` to get the "
+#| "appropriate options for your distribution:"
 msgid ""
-"Though, if available, you should really use `pkg-config` to get the "
-"appropriate options for your distribution:"
+"If available, you can use `pkg-config` to get the appropriate options for "
+"your OS:"
 msgstr ""
 "しかしもし可能であれば、ぜひとも `pkg-config` を使って、\n"
 "各々のディストリビューションに適したオプションが得られるようにするべきです。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:23
+#: ../_posts/2012-01-01-embed.markdown:22
 msgid ""
 "{% highlight shell_session %} $ pkg-config --cflags --libs ruby-{{ site."
 "rbversion }} {% endhighlight %}"
@@ -2755,14 +2884,122 @@ msgstr ""
 "$ pkg-config --cflags --libs ruby-{{ site.rbversion }}\n"
 "{% endhighlight %}"
 
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:25
+msgid ""
+"Those approaches might not work if Ruby is installed in a nonstandard "
+"location on your machine or your OS does not provide standard header/library "
+"directories.  A more robust approach is to ask Ruby itself where things are "
+"and to set up the run-time library path:"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:29
+msgid "{% highlight ruby %} #!/usr/bin/env ruby require 'shellwords'"
+msgstr ""
+
+#. type: Title #
+#: ../_posts/2012-01-01-embed.markdown:30
+#, no-wrap
+msgid "location of ruby.h"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:32
+msgid "hdrdir = Shellwords.escape RbConfig::CONFIG[\"rubyhdrdir\"]"
+msgstr ""
+
+#. type: Title #
+#: ../_posts/2012-01-01-embed.markdown:32
+#, no-wrap
+msgid "location of ruby/config.h"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:34
+msgid "archhdrdir = Shellwords.escape RbConfig::CONFIG[\"rubyarchhdrdir\"]"
+msgstr ""
+
+#. type: Title #
+#: ../_posts/2012-01-01-embed.markdown:34
+#, no-wrap
+msgid "location of libruby"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:36
+msgid "libdir = Shellwords.escape RbConfig::CONFIG[\"libdir\"]"
+msgstr ""
+
+#. type: Title #
+#: ../_posts/2012-01-01-embed.markdown:37
+#, no-wrap
+msgid "args for GCC"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:40
+msgid ""
+"puts \"-I#{hdrdir} -I#{archhdrdir} -L#{libdir} -Wl,-rpath,#{libdir}\" {% "
+"endhighlight %}"
+msgstr ""
+
+#. type: Title ###
+#: ../_posts/2012-01-01-embed.markdown:41
+#, no-wrap
+msgid "Windows"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:45
+msgid ""
+"On Windows, I highly recommend using the [RubyInstaller](https://"
+"rubyinstaller.org/downloads/) **with Devkit**.  This gives you access to GCC "
+"on the Windows command line as well as `pkgconf` for getting the build flags."
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:51
+#, fuzzy
+#| msgid ""
+#| "{% highlight shell_session %} $ pkg-config --cflags --libs ruby-{{ site."
+#| "rbversion }} {% endhighlight %}"
+msgid ""
+"{% highlight shell_session %} $ ridk enable # enable devkit $ pkgconf.exe --"
+"cflags --libs C:\\Ruby33-x64\\lib\\pkgconfig\\ruby-3.3.pc # show GCC args $ "
+"gcc foo.c ...  {% endhighlight %}"
+msgstr ""
+"{% highlight shell_session %}\n"
+"$ pkg-config --cflags --libs ruby-{{ site.rbversion }}\n"
+"{% endhighlight %}"
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:55
+msgid ""
+"Note that the GCC args might not be parsed correctly by PowerShell, so use "
+"`cmd` instead.  Also the Ruby 3.3 installer is missing the lib location from "
+"its `pkgconf` output for some reason, so you'll need to add the `-L` option "
+"manually.  You can locate that with `RbConfig::CONFIG[\"libdir\"]` as above; "
+"the installer put it in `C:\\Ruby33-x64\\lib` for me."
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:59
+msgid ""
+"Finally, Windows has no `rpath` so you will need to copy any linked DLLs "
+"alongside the built executable for it to run.  That includes any DLLs needed "
+"by Ruby itself.  The installer put those in `C:\\Ruby33-"
+"x64\\bin\\ruby_builtin_dlls` for me."
+msgstr ""
+
 #. type: Title ##
-#: ../_posts/2012-01-01-embed.markdown:24
+#: ../_posts/2012-01-01-embed.markdown:60
 #, no-wrap
 msgid "Startup, Teardown"
 msgstr "起動と終了"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:29
+#: ../_posts/2012-01-01-embed.markdown:65
 msgid ""
 "Including the Ruby interpreter in your C/C++ program is pretty simple. Just "
 "include the header, call a startup function in `main` before you use the "
@@ -2774,7 +3011,7 @@ msgstr ""
 "そして完了後に後片付けをする関数を呼べばよいのです。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:33
+#: ../_posts/2012-01-01-embed.markdown:69
 msgid "{% highlight c %} {% include embed/simple.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2782,7 +3019,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:38
+#: ../_posts/2012-01-01-embed.markdown:74
 msgid ""
 "If the VM fails to start during `ruby_init()` it will print an error and "
 "exit your program! If you would rather have a softer error, you can instead "
@@ -2795,7 +3032,7 @@ msgstr ""
 "メッセージの出しかたはよくわかっていません[^err]）。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:43
+#: ../_posts/2012-01-01-embed.markdown:79
 msgid ""
 "If an error occurs during `rb_cleanup()`, it returns a nonzero value—"
 "otherwise it returns the argument you passed it. This allows a little "
@@ -2808,7 +3045,7 @@ msgstr ""
 "書けます（先の例で実演したように）。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:52
+#: ../_posts/2012-01-01-embed.markdown:88
 msgid ""
 "_Technically_ you don't have to call `ruby_init`/`ruby_setup` in `main`, but "
 "the Ruby VM assumes that all future Ruby code will be run from the same "
@@ -2831,7 +3068,7 @@ msgstr ""
 "{: .alert .alert-danger}"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:58
+#: ../_posts/2012-01-01-embed.markdown:94
 msgid ""
 "During cleanup, the VM might evaluate more Ruby code (if you passed a block "
 "to `at_exit`, for example) which could raise an exception. `ruby_cleanup()` "
@@ -2848,12 +3085,12 @@ msgstr ""
 "（制御方法については[Exceptions](../c#rescue)節を参照）"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:60
+#: ../_posts/2012-01-01-embed.markdown:96
 msgid "Here's an alternative example:"
 msgstr "別の例はこちらです。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:64
+#: ../_posts/2012-01-01-embed.markdown:100
 msgid "{% highlight c %} {% include embed/advanced.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2861,13 +3098,13 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Title ###
-#: ../_posts/2012-01-01-embed.markdown:65
+#: ../_posts/2012-01-01-embed.markdown:101
 #, no-wrap
 msgid "Limitations"
 msgstr "制約"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:73
+#: ../_posts/2012-01-01-embed.markdown:109
 msgid ""
 "Other than the stack frame warning above, there is another limitation: you "
 "only get one Ruby VM per process. The startup/teardown might make it look "
@@ -2886,7 +3123,7 @@ msgstr ""
 "もう一度 `ruby_init` を呼び出すと、実行に失敗してしまうでしょう。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:76
+#: ../_posts/2012-01-01-embed.markdown:112
 msgid ""
 "If for some reason you need multiple Ruby VMs in your program, you will need "
 "to spin them off in multiple processes to bypass this limitation."
@@ -2895,13 +3132,13 @@ msgstr ""
 "この制約を回避するために複数のプロセスに小分けにしなければいけません。"
 
 #. type: Title ##
-#: ../_posts/2012-01-01-embed.markdown:77
+#: ../_posts/2012-01-01-embed.markdown:113
 #, no-wrap
 msgid "Tweaking the VM"
 msgstr "VMを設定する"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:82
+#: ../_posts/2012-01-01-embed.markdown:118
 msgid ""
 "You now have a bare-bones Ruby VM running, but you may want to set up a "
 "little more stuff before you start running Ruby code. To set the name of the "
@@ -2915,7 +3152,7 @@ msgstr ""
 "以下のようにします。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:86
+#: ../_posts/2012-01-01-embed.markdown:122
 msgid "{% highlight c %} ruby_script(\"new name\")  {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2923,14 +3160,14 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:88
+#: ../_posts/2012-01-01-embed.markdown:124
 msgid "To set up the load path so that gems can be loaded with `require`, use"
 msgstr ""
 "gemが `require` で呼び出せるようにするためにロードパスを設定するには、\n"
 "次のようにします。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:92
+#: ../_posts/2012-01-01-embed.markdown:128
 msgid "{% highlight c %} ruby_init_loadpath()  {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2938,7 +3175,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:96
+#: ../_posts/2012-01-01-embed.markdown:132
 msgid ""
 "You can also pass options to the VM just like you would to `ruby` on the "
 "command line. This is handy for stuff like setting the warning level or "
@@ -2948,7 +3185,7 @@ msgstr ""
 "警告水準や冗長モード[^opt]の設定に手頃です。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:100
+#: ../_posts/2012-01-01-embed.markdown:136
 msgid "{% highlight c %} {% include embed/options.c %} {% endhighlight %}"
 msgstr ""
 "{% highlight c %}\n"
@@ -2956,7 +3193,7 @@ msgstr ""
 "{% endhighlight %}"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:106
+#: ../_posts/2012-01-01-embed.markdown:142
 msgid ""
 "The arguments to `ruby_options` are `argc` and `argv` just like a main "
 "function.  And just like the main of the `ruby` program, the VM expects to "
@@ -2973,7 +3210,7 @@ msgstr ""
 "渡せばよいです。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:115
+#: ../_posts/2012-01-01-embed.markdown:151
 msgid ""
 "`ruby_options()` returns a \"node\" that represents the compiled Ruby code. "
 "In some cases (such as a syntax error) the node will be invalid and you "
@@ -2998,7 +3235,7 @@ msgstr ""
 "できます。"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:118
+#: ../_posts/2012-01-01-embed.markdown:154
 msgid ""
 "Ruby currently doesn't support any other way of compiling and running code "
 "separately[^load]."
@@ -3007,25 +3244,26 @@ msgstr ""
 "ん[^load]。"
 
 #. type: Title ##
-#: ../_posts/2012-01-01-embed.markdown:119
+#: ../_posts/2012-01-01-embed.markdown:155
 #: ../_posts/2013-01-01-extend.markdown:105
 #, no-wrap
 msgid "Success"
 msgstr "やったね"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:122
+#: ../_posts/2012-01-01-embed.markdown:158
 msgid "Now you're ready to interact with Ruby! Go back to the [C API](../c)."
 msgstr ""
 "これでRubyとやりとりできました！\n"
 "[C API](../c)に戻りましょう。"
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:127
-#, no-wrap
-msgid ""
-"[^err]: `ruby_init()` uses `error_print()` to get an error message, but this\n"
-"        function isn't exposed to the API. Is this a normal exception?\n"
+#. type: Link reference
+#: ../_posts/2012-01-01-embed.markdown:161
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this\n"
+#| "        function isn't exposed to the API. Is this a normal exception?\n"
+msgid "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this"
 msgstr ""
 "[^err]: `ruby_init()` はエラーメッセージを取得するために\n"
 "        `error_print()` を使います。\n"
@@ -3033,10 +3271,32 @@ msgstr ""
 "        これはよくあることなのでしょうか。\n"
 
 #. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:131
+#: ../_posts/2012-01-01-embed.markdown:163
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^err]: `ruby_init()` uses `error_print()` to get an error message, but this\n"
+#| "        function isn't exposed to the API. Is this a normal exception?\n"
+msgid "        function isn't exposed to the API. Is this a normal exception?\n"
+msgstr ""
+"[^err]: `ruby_init()` はエラーメッセージを取得するために\n"
+"        `error_print()` を使います。\n"
+"        しかし、この関数はAPIとして出されていません。\n"
+"        これはよくあることなのでしょうか。\n"
+
+#. type: Link reference
+#: ../_posts/2012-01-01-embed.markdown:164
 #, no-wrap
+msgid "[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This"
+msgstr ""
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:167
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This\n"
+#| "        could be related to `ruby_prog_init()`. And really it should be possible\n"
+#| "        to do this without parsing command line options.\n"
 msgid ""
-"[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This\n"
 "        could be related to `ruby_prog_init()`. And really it should be possible\n"
 "        to do this without parsing command line options.\n"
 msgstr ""
@@ -3044,15 +3304,22 @@ msgstr ""
 "        `ruby_prog_init()` がするのかもしれません。\n"
 "        きっとそれでコマンドラインオプションをパースすることなしに実現できるはずです。\n"
 
-#. type: Plain text
-#: ../_posts/2012-01-01-embed.markdown:133
-#, no-wrap
-msgid ""
-"[^load]: It looks like the function `rb_load_file()` should do this, but I\n"
-"         haven't had any luck getting it to work.\n"
+#. type: Link reference
+#: ../_posts/2012-01-01-embed.markdown:168
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^load]: It looks like the function `rb_load_file()` should do this, but I\n"
+#| "         haven't had any luck getting it to work.\n"
+msgid "[^load]: It looks like the function `rb_load_file()` should do this, but I"
 msgstr ""
 "[^load]: `rb_load_file()` 関数でこれができそうですが、\n"
 "         動かせた試しがありません。\n"
+
+#. type: Plain text
+#: ../_posts/2012-01-01-embed.markdown:169
+#, no-wrap
+msgid "         haven't had any luck getting it to work.\n"
+msgstr ""
 
 #. type: Title ##
 #: ../_posts/2013-01-01-extend.markdown:1
@@ -3122,8 +3389,9 @@ msgstr "必要なライブラリと関数があることを確認する"
 msgid "Check for programs needed for building"
 msgstr "ビルドするのに必要なプログラムがあることを確認する"
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:28
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:27
+#, no-wrap
 msgid "[conf]: http://en.wikipedia.org/wiki/Configure_script"
 msgstr "[conf]: http://en.wikipedia.org/wiki/Configure_script"
 
@@ -3235,12 +3503,11 @@ msgstr ""
 "`extconf.h` を生成する関数に加えて、\n"
 "また違ったソースファイルの配置や依存関係を制御する様々な関数があります。"
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:70
-msgid ""
-"[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html"
-msgstr ""
-"[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html"
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:69
+#, no-wrap
+msgid "[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html"
+msgstr "[mkmf]: http://www.ruby-doc.org/stdlib/libdoc/mkmf/rdoc/MakeMakefile.html"
 
 #. type: Title ###
 #: ../_posts/2013-01-01-extend.markdown:71
@@ -3387,47 +3654,62 @@ msgstr ""
 "`ext/` のサブディレクトリにそれぞれ固めて、\n"
 "specに各々の `extconf.rb` を記します。"
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:127
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:126
+#, no-wrap
 msgid "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 msgstr "[rbg]: http://guides.rubygems.org/make-your-own-gem/"
 
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:131
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:130
+#, no-wrap
 msgid "[^glob]: Check the [official documentation][globals]."
 msgstr "[^glob]: [公式文書][globals]をご確認ください。"
 
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:132
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain\n"
+#| "         command line flags e.g.  `--vendor`. But I can't find this documented\n"
+#| "         anywhere.\n"
+msgid "[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain"
+msgstr "[^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化されていないように見えます。\n"
+
 #. type: Plain text
 #: ../_posts/2013-01-01-extend.markdown:135
-#, no-wrap
+#, fuzzy, no-wrap
+#| msgid ""
+#| "[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain\n"
+#| "         command line flags e.g.  `--vendor`. But I can't find this documented\n"
+#| "         anywhere.\n"
 msgid ""
-"[^argv]: The official documentation [hints][makefile] that `mkmf` parses certain\n"
 "         command line flags e.g.  `--vendor`. But I can't find this documented\n"
 "         anywhere.\n"
 msgstr "[^argv]: 公式文書は、`--vendor` のようなコマンドライン引数を `mkmf` がパースできると[仄めかしている][makefile] ようです。でも、このことはどこにも文書化されていないように見えます。\n"
 
 # 空白を入れていないのは意図的です
-#. type: Plain text
-#: ../_posts/2013-01-01-extend.markdown:137
-msgid ""
-"[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides."
-"rubygems.org/gems-with-extensions/)"
-msgstr ""
-"[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides."
-"rubygems.org/gems-with-extensions/)"
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:136
+#, no-wrap
+msgid "[^rbg]: [http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
+msgstr "[^rbg]:[http://guides.rubygems.org/gems-with-extensions/](http://guides.rubygems.org/gems-with-extensions/)"
 
-# 空白を入れていないのは意図的です。
-#. type: Plain text
+# 空白を空けないことによって意図しない改行を回避しています
+#. type: Link reference
+#: ../_posts/2013-01-01-extend.markdown:138
+#, fuzzy, no-wrap
+#| msgid "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+msgid "[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Prepare+extconf.rb"
+msgstr "[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+
+# 空白を空けないことによって意図しない改行を回避しています
+#. type: Link reference
 #: ../_posts/2013-01-01-extend.markdown:139
-msgid ""
-"[globals]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
-"Prepare+extconf.rb [makefile]: https://github.com/ruby/ruby/blob/master/doc/"
-"extension.rdoc#label-Generate+Makefile"
-msgstr ""
-"[globals]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
-"Prepare+extconf.rb\n"
-"[makefile]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-"
-"Generate+Makefile"
+#, fuzzy, no-wrap
+#| msgid "[datatypes]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
+msgid "[makefile]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Generate+Makefile"
+msgstr "[datatypes]:https://github.com/ruby/ruby/blob/master/doc/extension.rdoc#label-Data+Types"
 
 #. type: Plain text
 #: ../_posts/2014-01-01-examples.markdown:14
@@ -3505,9 +3787,17 @@ msgstr ""
 "てはいません。もし _本当の_ 完全な例が欲しければ [GMP gem][gem]をご確認くださ"
 "い。"
 
-#. type: Plain text
-#: ../_posts/2014-01-01-examples.markdown:45
-msgid "[gmp]: https://gmplib.org/ [gem]: https://github.com/srawlins/gmp"
+#. type: Link reference
+#: ../_posts/2014-01-01-examples.markdown:43
+#, no-wrap
+msgid "[gmp]: https://gmplib.org/"
+msgstr ""
+
+#. type: Link reference
+#: ../_posts/2014-01-01-examples.markdown:44
+#, fuzzy, no-wrap
+#| msgid "[gmp]: https://gmplib.org/ [gem]: https://github.com/srawlins/gmp"
+msgid "[gem]: https://github.com/srawlins/gmp"
 msgstr ""
 "[gmp]: https://gmplib.org/\n"
 "[gem]: https://github.com/srawlins/gmp"
@@ -3598,8 +3888,9 @@ msgstr ""
 "これはRubyのC APIのオンラインの手引きのソースです。実際のサイトは[こちら][io]"
 "をご覧ください。"
 
-#. type: Plain text
-#: ../README.md:5
+#. type: Link reference
+#: ../README.md:4
+#, no-wrap
 msgid "[io]: http://silverhammermba.github.io/emberb"
 msgstr "[io]: http://silverhammermba.github.io/emberb"
 
@@ -3667,26 +3958,48 @@ msgstr ""
 "で、詰まらないことにならないよう読者のあなたが手助けできるようにしてあるので"
 "す。"
 
-#. type: Plain text
-#: ../README.md:29
-msgid ""
-"[a]: http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-"
-"part-1.html [b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/"
-"extension.rdoc [c]: http://blog.jacius.info/ruby-c-extension-cheat-sheet/ "
-"[d]: http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-"
-"application.html [e]: https://gist.github.com/jefftrull/1305431 [f]: http://"
-"metaeditor.sourceforge.net/embed/ [g]: http://ruby-doc.com/docs/"
-"ProgrammingRuby/html/ext_ruby.html"
+#. type: Link reference
+#: ../README.md:23
+#, no-wrap
+msgid "[a]: http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1.html"
 msgstr ""
-"[a]:http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1."
-"html\n"
-"[b]:https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc\n"
-"[c]:http://blog.jacius.info/ruby-c-extension-cheat-sheet/\n"
-"[d]:http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-"
-"application.html\n"
-"[e]:https://gist.github.com/jefftrull/1305431\n"
-"[f]:http://metaeditor.sourceforge.net/embed/\n"
-"[g]:http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
+
+#. type: Link reference
+#: ../README.md:24
+#, fuzzy, no-wrap
+#| msgid "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
+msgid "[b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc"
+msgstr "[readme]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc"
+
+#. type: Link reference
+#: ../README.md:25
+#, no-wrap
+msgid "[c]: http://blog.jacius.info/ruby-c-extension-cheat-sheet/"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:26
+#, no-wrap
+msgid "[d]: http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-application.html"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:27
+#, no-wrap
+msgid "[e]: https://gist.github.com/jefftrull/1305431"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:28
+#, no-wrap
+msgid "[f]: http://metaeditor.sourceforge.net/embed/"
+msgstr ""
+
+#. type: Link reference
+#: ../README.md:29
+#, no-wrap
+msgid "[g]: http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
+msgstr ""
 
 #. type: Yaml Front Matter Hash Value: layout
 #: ../index.markdown:1
@@ -3731,17 +4044,33 @@ msgstr ""
 "</div>\n"
 "</div>\n"
 
-#. type: Plain text
+#. type: Link reference
+#: ../index.markdown:18
+#, fuzzy, no-wrap
+#| msgid "start SDL"
+msgid "[start]: c"
+msgstr "SDLを開始"
+
+#. type: Link reference
+#: ../index.markdown:19
+#, fuzzy, no-wrap
+#| msgid "[gh]: https://github.com/silverhammermba/emberb"
+msgid "[repo]: https://github.com/silverhammermba/emberb"
+msgstr "[gh]: https://github.com/silverhammermba/emberb"
+
+#. type: Link reference
+#: ../index.markdown:20
+#, fuzzy, no-wrap
+#| msgid "[gh]: https://github.com/silverhammermba/emberb"
+msgid "[iss]: https://github.com/silverhammermba/emberb/issues/new"
+msgstr "[gh]: https://github.com/silverhammermba/emberb"
+
+#. type: Link reference
 #: ../index.markdown:21
-msgid ""
-"[start]: c [repo]: https://github.com/silverhammermba/emberb [iss]: https://"
-"github.com/silverhammermba/emberb/issues/new [pull]: https://github.com/"
-"silverhammermba/emberb/pulls"
-msgstr ""
-"[start]: c\n"
-"[repo]: https://github.com/silverhammermba/emberb\n"
-"[iss]: https://github.com/silverhammermba/emberb/issues/new\n"
-"[pull]: https://github.com/silverhammermba/emberb/pulls"
+#, fuzzy, no-wrap
+#| msgid "[gh]: https://github.com/silverhammermba/emberb"
+msgid "[pull]: https://github.com/silverhammermba/emberb/pulls"
+msgstr "[gh]: https://github.com/silverhammermba/emberb"
 
 #. type: comment
 #: ../_includes/embed/simple.c:5
@@ -4914,3 +5243,56 @@ msgstr "これは本手引きでのRubyのバージョンを得るための単�
 #, no-wrap
 msgid "you can just hard-code it e.g. RUBY=2.4"
 msgstr "単にハードコードできます 例：RUBY=2.4"
+
+# "[control]:"の直後で空白を入れていないのは意図的です。
+# これがないとここで改行が入ってしまうので正しいMarkdownの解釈になりません。
+# 解消するにはpo4aが正しくリンクの参照を構文解析できるようにする必要があります。
+#~ msgid ""
+#~ "[control]: https://github.com/ruby/ruby/blob/master/doc/extension."
+#~ "rdoc#label-Control+Structure [bug2]: https://bugs.ruby-lang.org/"
+#~ "issues/10466"
+#~ msgstr ""
+#~ "[control]:https://github.com/ruby/ruby/blob/master/doc/extension."
+#~ "rdoc#label-Control+Structure\n"
+#~ "[bug2]: https://bugs.ruby-lang.org/issues/10466"
+
+# 空白を入れていないのは意図的です。
+#~ msgid ""
+#~ "[globals]: https://github.com/ruby/ruby/blob/master/doc/extension."
+#~ "rdoc#label-Prepare+extconf.rb [makefile]: https://github.com/ruby/ruby/"
+#~ "blob/master/doc/extension.rdoc#label-Generate+Makefile"
+#~ msgstr ""
+#~ "[globals]:https://github.com/ruby/ruby/blob/master/doc/extension."
+#~ "rdoc#label-Prepare+extconf.rb\n"
+#~ "[makefile]:https://github.com/ruby/ruby/blob/master/doc/extension."
+#~ "rdoc#label-Generate+Makefile"
+
+#~ msgid ""
+#~ "[a]: http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-"
+#~ "part-1.html [b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/"
+#~ "extension.rdoc [c]: http://blog.jacius.info/ruby-c-extension-cheat-sheet/ "
+#~ "[d]: http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-"
+#~ "application.html [e]: https://gist.github.com/jefftrull/1305431 [f]: "
+#~ "http://metaeditor.sourceforge.net/embed/ [g]: http://ruby-doc.com/docs/"
+#~ "ProgrammingRuby/html/ext_ruby.html"
+#~ msgstr ""
+#~ "[a]:http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-"
+#~ "part-1.html\n"
+#~ "[b]:https://raw.githubusercontent.com/ruby/ruby/master/doc/extension."
+#~ "rdoc\n"
+#~ "[c]:http://blog.jacius.info/ruby-c-extension-cheat-sheet/\n"
+#~ "[d]:http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-"
+#~ "application.html\n"
+#~ "[e]:https://gist.github.com/jefftrull/1305431\n"
+#~ "[f]:http://metaeditor.sourceforge.net/embed/\n"
+#~ "[g]:http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html"
+
+#~ msgid ""
+#~ "[start]: c [repo]: https://github.com/silverhammermba/emberb [iss]: "
+#~ "https://github.com/silverhammermba/emberb/issues/new [pull]: https://"
+#~ "github.com/silverhammermba/emberb/pulls"
+#~ msgstr ""
+#~ "[start]: c\n"
+#~ "[repo]: https://github.com/silverhammermba/emberb\n"
+#~ "[iss]: https://github.com/silverhammermba/emberb/issues/new\n"
+#~ "[pull]: https://github.com/silverhammermba/emberb/pulls"

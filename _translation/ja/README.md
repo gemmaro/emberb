@@ -16,10 +16,10 @@
 そして筆者が衝撃を受けたのはこれらの手引きによるこうした問題の全ては、コミュニティ駆動の更新を推進しないメディアから出ていることが多いということでした。
 そのためこうした詰まらないことが起きない新しい手引きを書き、Githubに置くことで、詰まらないことにならないよう読者のあなたが手助けできるようにしてあるのです。
 
-[a]:http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1.html
-[b]:https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc
-[c]:http://blog.jacius.info/ruby-c-extension-cheat-sheet/
-[d]:http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-application.html
-[e]:https://gist.github.com/jefftrull/1305431
-[f]:http://metaeditor.sourceforge.net/embed/
-[g]:http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html
+[a]: http://clalance.blogspot.com/2011/01/writing-ruby-extensions-in-c-part-1.html
+[b]: https://raw.githubusercontent.com/ruby/ruby/master/doc/extension.rdoc
+[c]: http://blog.jacius.info/ruby-c-extension-cheat-sheet/
+[d]: http://hugopl.github.io/2014/04/09/Embedding-Ruby-2.1-into-a-Cpp-application.html
+[e]: https://gist.github.com/jefftrull/1305431
+[f]: http://metaeditor.sourceforge.net/embed/
+[g]: http://ruby-doc.com/docs/ProgrammingRuby/html/ext_ruby.html

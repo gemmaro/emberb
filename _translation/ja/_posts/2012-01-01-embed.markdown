@@ -5,21 +5,62 @@ title: CでRubyを実行する
 
 ## コンパイルする ##
 
-Rubyを組込むには `ruby.h` という1つのヘッダファイルが必要です。このファイルはプラットフォーム固有のヘッダである
-`ruby/config.h`
-を含めます。場合によってはコンパイラにヘッダファイルの含めるファイルパスを指定する必要があります。Rubyライブラリとリンクする必要もあります。私の環境では、最小のコンパイラオプションは以下のようになります。
+Embedding Ruby requires one header `ruby.h`, which includes a
+platform-specific header `ruby/config.h`. You will probably need to tell
+your compiler about the include paths for these headers. You will also need
+to link with the Ruby lib.  On my machine, my minimal compiler options are:
 
 {% highlight shell_session %}
 $ gcc foo.c -I/usr/include/ruby-{{ site.rbversion }}.0
 -I/usr/include/ruby-{{ site.rbversion }}.0/x86_64-linux -lruby
 {% endhighlight %}
 
-しかしもし可能であれば、ぜひとも `pkg-config` を使って、
-各々のディストリビューションに適したオプションが得られるようにするべきです。
+If available, you can use `pkg-config` to get the appropriate options for
+your OS:
 
 {% highlight shell_session %}
 $ pkg-config --cflags --libs ruby-{{ site.rbversion }}
 {% endhighlight %}
+
+Those approaches might not work if Ruby is installed in a nonstandard
+location on your machine or your OS does not provide standard header/library
+directories.  A more robust approach is to ask Ruby itself where things are
+and to set up the run-time library path:
+
+{% highlight ruby %} #!/usr/bin/env ruby require 'shellwords'
+
+# location of ruby.h
+hdrdir = Shellwords.escape RbConfig::CONFIG["rubyhdrdir"]
+# location of ruby/config.h
+archhdrdir = Shellwords.escape RbConfig::CONFIG["rubyarchhdrdir"]
+# location of libruby
+libdir = Shellwords.escape RbConfig::CONFIG["libdir"]
+
+# args for GCC
+puts "-I#{hdrdir} -I#{archhdrdir} -L#{libdir} -Wl,-rpath,#{libdir}" {%
+endhighlight %}
+
+### Windows
+
+On Windows, I highly recommend using the
+[RubyInstaller](https://rubyinstaller.org/downloads/) **with Devkit**.  This
+gives you access to GCC on the Windows command line as well as `pkgconf` for
+getting the build flags.
+
+{% highlight shell_session %} $ ridk enable # enable devkit $ pkgconf.exe
+--cflags --libs C:\Ruby33-x64\lib\pkgconfig\ruby-3.3.pc # show GCC args $
+gcc foo.c ...  {% endhighlight %}
+
+Note that the GCC args might not be parsed correctly by PowerShell, so use
+`cmd` instead.  Also the Ruby 3.3 installer is missing the lib location from
+its `pkgconf` output for some reason, so you'll need to add the `-L` option
+manually.  You can locate that with `RbConfig::CONFIG["libdir"]` as above;
+the installer put it in `C:\Ruby33-x64\lib` for me.
+
+Finally, Windows has no `rpath` so you will need to copy any linked DLLs
+alongside the built executable for it to run.  That includes any DLLs needed
+by Ruby itself.  The installer put those in
+`C:\Ruby33-x64\bin\ruby_builtin_dlls` for me.
 
 ## 起動と終了 ##
 
@@ -120,14 +161,12 @@ Rubyは今のところコードの他のコンパイル・実行を別々にす�
 
 ## 脚註 ##
 
-[^err]: `ruby_init()` はエラーメッセージを取得するために
-        `error_print()` を使います。
-        しかし、この関数はAPIとして出されていません。
-        これはよくあることなのでしょうか。
+[^err]: `ruby_init()` uses `error_print()` to get an error message, but this
+        function isn't exposed to the API. Is this a normal exception?
 
-[^opt]: 筆者の実験では、フラグ `-w` や `-v` で何もできませんでした。
-        `ruby_prog_init()` がするのかもしれません。
-        きっとそれでコマンドラインオプションをパースすることなしに実現できるはずです。
+[^opt]: In my tests I couldn't get flags like `-w` and `-v` to do anything. This
+        could be related to `ruby_prog_init()`. And really it should be possible
+        to do this without parsing command line options.
 
-[^load]: `rb_load_file()` 関数でこれができそうですが、
-         動かせた試しがありません。
+[^load]: It looks like the function `rb_load_file()` should do this, but I
+         haven't had any luck getting it to work.
