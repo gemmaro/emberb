@@ -100,7 +100,7 @@ VALUE think_wrapper(VALUE actors)
 {
 	rb_funcall(rb_mKernel, rb_intern("think"), 2, rb_ary_entry(actors, 0), rb_ary_entry(actors, 1));
 
-	return Qundef;
+	return RUBY_Qundef;
 }
 
 /* run the AI script if possible */

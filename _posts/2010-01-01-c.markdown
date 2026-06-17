@@ -522,9 +522,9 @@ Constants are defined similarly, but with the module to define them under:
 {% include c/constant.h %}
 {% endhighlight %}
 
-You undefine a constant by setting it to `Qundef`. Getting a constant's `VALUE`
-is a little nuanced. The API function you call depends on what you want to
-happen if the constant is _not_ defined in the module you specify:
+You undefine a constant by setting it to `RUBY_Qundef`. Getting a constant's
+`VALUE` is a little nuanced. The API function you call depends on what
+you want to happen if the constant is _not_ defined in the module you specify:
 
 {% highlight c %}
 {% include c/const_get.h %}
@@ -956,10 +956,10 @@ download all of the code examples.
            names starting with capital R). But it's generally not a good idea
            and not necessary.
 
-[^undef]: There's also `Qundef` representing an undefined value, but
+[^undef]: There's also `RUBY_Qundef` representing an undefined value, but
           this has no Ruby equivalent and is [rarely](#handling-blocks)
           [used](#constants-1). In fact, outside of those rare occasions,
-          `Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.
+          `RUBY_Qundef` can segfault the VM if Ruby was expecting a normal `VALUE`.
 
 [^wrap]: There's also `rb_eval_string_wrap()` which _should_ be useful, but is
          actually the same as `rb_eval_string_protect()` due to a [bug][bug2].
