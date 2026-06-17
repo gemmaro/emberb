@@ -408,8 +408,8 @@ The API also does not directly provide an equivalent to Ruby's `else` i.e. code
 to run when _no_ exception was raised. One way to do this is using the return
 value of `rb_rescue2()`. If no exception is raised, it returns the return value
 of the first (dangerous) function, otherwise the return value of the second
-(rescue) function. By having these return, say, `Qtrue` and `RUBY_Qfalse` you can
-detect which case you are in.
+(rescue) function. By having these return, say, `RUBY_Qtrue` and `RUBY_Qfalse`
+you can detect which case you are in.
 
 #### rb_protect ####
 

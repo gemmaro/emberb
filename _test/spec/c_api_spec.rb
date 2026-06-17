@@ -162,7 +162,7 @@ describe CAPI do
       expect("RB_FIXNUM_P(RUBY_Qnil)").not_to be_true_in_c
       expect("RB_FLOAT_TYPE_P(RUBY_Qnil)").not_to be_true_in_c
       expect("SYMBOL_P(RUBY_Qnil)").not_to be_true_in_c
-      expect("RB_NIL_P(Qtrue)").not_to be_true_in_c
+      expect("RB_NIL_P(RUBY_Qtrue)").not_to be_true_in_c
     end
   end
 end
