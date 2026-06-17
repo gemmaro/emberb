@@ -116,8 +116,8 @@ API so you don't need an API call to access them. Modules are prefixed with
 `rb_m` e.g. `rb_mKernel`; classes are prefixed with `rb_c` e.g. `rb_cObject`;
 subclasses of `Exception` are prefixed with `rb_e` e.g. `rb_eRuntimeError`; and
 the standard IO streams are prefixed with `rb_` e.g. `rb_stderr`. `nil`,
-`false`, and `true` are prefixed with `Q` e.g. `Qnil`.[^undef] As a convenience,
-`RUBY_Qfalse` is also false in C (`0`).
+`false`, and `true` are prefixed with `Q` e.g. `RUBY_Qnil`.[^undef]
+As a convenience, `RUBY_Qfalse` is also false in C (`0`).
 
 ### Translation ###
 
@@ -372,9 +372,9 @@ way to access a rescued exception is also independent of the way it is rescued:
 {% endhighlight %}
 
 `rb_errinfo()` essentially gives you the `VALUE` of Ruby's `$!` (which will be
-`Qnil` if no exception occurred). Unlike in Ruby, you must manually clear the
-exception after reading it[^clear]. Otherwise later API calls might read the old
-value and think another exception has occurred.
+`RUBY_Qnil` if no exception occurred). Unlike in Ruby, you must manually clear
+the exception after reading it[^clear]. Otherwise later API calls might read
+the old value and think another exception has occurred.
 
 Next we will go over several methods of rescuing; you can use whichever you
 like, but I think that generally the right choice is determined by your
@@ -425,7 +425,7 @@ all exceptions:
 
 Like `rb_rescue2()`, the first two arguments are for calling the function to
 protect. However, like `rb_eval_string_protect()`, if an exception is raised
-it returns `Qnil` and sets `state` to some nonzero value. If you want to
+it returns `RUBY_Qnil` and sets `state` to some nonzero value. If you want to
 re-raise the exception, pass `state` to `rb_jump_tag()` (this also works for the
 state from the other `*_protect()` functions).
 

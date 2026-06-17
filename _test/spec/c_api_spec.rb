@@ -90,7 +90,7 @@ describe CAPI do
         }
         void ruby_main() {
           int state;
-          rb_protect(should_raise, Qnil, &state);
+          rb_protect(should_raise, RUBY_Qnil, &state);
 
           if (state) { printf("#{message}"); }
         }
@@ -113,7 +113,7 @@ describe CAPI do
       expect(CAPI.run_c_blocks(<<-SOURCE
         VALUE raise_unless_true(VALUE obj) {
           Check_Type(obj, T_TRUE);
-          return Qnil;
+          return RUBY_Qnil;
         }
         void ruby_main() {
           int state;
@@ -156,12 +156,12 @@ describe CAPI do
       expect("RB_FIXNUM_P(INT2NUM(3))").to be_true_in_c
       expect("RB_FLOAT_TYPE_P(DBL2NUM(3.14))").to be_true_in_c
       expect("SYMBOL_P(ID2SYM(rb_intern(\"puts\")))").to be_true_in_c
-      expect("RB_NIL_P(Qnil)").to be_true_in_c
+      expect("RB_NIL_P(RUBY_Qnil)").to be_true_in_c
 
       # and now the negations of those
-      expect("RB_FIXNUM_P(Qnil)").not_to be_true_in_c
-      expect("RB_FLOAT_TYPE_P(Qnil)").not_to be_true_in_c
-      expect("SYMBOL_P(Qnil)").not_to be_true_in_c
+      expect("RB_FIXNUM_P(RUBY_Qnil)").not_to be_true_in_c
+      expect("RB_FLOAT_TYPE_P(RUBY_Qnil)").not_to be_true_in_c
+      expect("SYMBOL_P(RUBY_Qnil)").not_to be_true_in_c
       expect("RB_NIL_P(Qtrue)").not_to be_true_in_c
     end
   end

@@ -3,6 +3,6 @@ VALUE result;
 /* yield a value. To yield nothing, use Qundef */
 result = rb_yield(Qundef);
 /* yield several values */
-result = rb_yield_values(3, Qtrue, RUBY_Qfalse, Qnil);
+result = rb_yield_values(3, Qtrue, RUBY_Qfalse, RUBY_Qnil);
 /* splat a Ruby array and yield it */
 result = rb_yield_splat(ary);
