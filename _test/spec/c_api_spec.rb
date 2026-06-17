@@ -117,7 +117,7 @@ describe CAPI do
         }
         void ruby_main() {
           int state;
-          rb_protect(raise_unless_true, Qfalse, &state);
+          rb_protect(raise_unless_true, RUBY_Qfalse, &state);
 
           if (state) { printf("#{message}"); }
         }

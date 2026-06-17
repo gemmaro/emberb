@@ -16,7 +16,7 @@ VALUE my_method(int argc, VALUE* argv, VALUE self)
 
 	/* you must manually set the default values for optional arguments */
 	if (RB_NIL_P(opt1)) opt1 = Qtrue;
-	if (RB_NIL_P(opt2)) opt2 = Qfalse;
+	if (RB_NIL_P(opt2)) opt2 = RUBY_Qfalse;
 	/* opts will be nil (rather than {}) if no keyword arguments were passed */
 	if (RB_NIL_P(opts)) opts = rb_hash_new();
 
