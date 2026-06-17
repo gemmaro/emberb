@@ -1,4 +1,4 @@
-FIXNUM_P(obj);        /* like RB_TYPE_P(obj, T_FIXNUM) */
+RB_FIXNUM_P(obj);     /* like RB_TYPE_P(obj, T_FIXNUM) */
 RB_FLOAT_TYPE_P(obj); /* like RB_TYPE_P(obj, T_FLOAT) */
 SYMBOL_P(obj);        /* like RB_TYPE_P(obj, T_SYMBOL) */
 NIL_P(obj);           /* like RB_TYPE_P(obj, T_NIL) */
